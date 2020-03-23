@@ -38,7 +38,8 @@ class App extends Component {
                 `&client_secret=XgglLIZcB7qB3nNryc8y` +
                 `&redirect_uri=https://pixcollector.herokuapp.com` +
                 `&code=${code}`;
-            window.open(AUTH_URL_TOKEN,"_self");
+            console.log(AUTH_URL_TOKEN);
+            // window.open(AUTH_URL_TOKEN,"_self");
         }
     }
 
