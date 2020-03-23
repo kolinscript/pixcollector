@@ -44,7 +44,7 @@ class App extends Component {
     loginVk() {
         const AUTH_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
             '?client_id=7372433' +
-            '&display=popup' +
+            '&display=page' +
             '&redirect_uri=https://pixcollector.herokuapp.com' +
             '&scope=friends,photos,offline' +
             '&response_type=code' +
