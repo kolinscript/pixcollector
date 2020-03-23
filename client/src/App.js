@@ -36,7 +36,7 @@ class App extends Component {
                 '?client_id=7372433' +
                 '&client_secret=XgglLIZcB7qB3nNryc8y' +
                 '&redirect_uri=https://pixcollector.herokuapp.com' +
-                '&code=7${code}`;
+                '&code=${code}`;
             window.open(AUTH_URL_TOKEN,"_self");
         }
     }
@@ -55,7 +55,7 @@ class App extends Component {
     render() {
         return (
             <div className={'app'}>
-                <div class="auth-wrapper">
+                <div className="auth-wrapper">
                     <h1 className={'title'}>PIXCOLLECTOR</h1>
                     {this.state.showVkLogin && (
                         <div className="button login" onClick={this.loginVk}>
