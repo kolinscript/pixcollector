@@ -1,0 +1,119 @@
+/* Vars */
+$fontMain: 'Roboto', sans-serif;
+$firmColorVK: #4a76a8;;
+
+.app {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  h1.title {
+    width: 100%;
+    margin: 0;
+    padding: 40px 0 10px;
+    font: 400 62px/64px 'Orbitron', sans-serif;
+    text-align: center;
+  }
+
+  .auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: absolute;
+    width: 100vw;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    padding: 100px 0;
+    .button {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 20px;
+      background: $firmColorVK;
+      border: none;
+      outline: none;
+      border-radius: 3px;
+      cursor: pointer;
+      &:hover {
+        //transition: color 400ms ease-in-out;
+      }
+      .logo-vk {
+        margin-left: 10px;
+        svg {}
+      }
+      .label {
+        font: 14px/16px $fontMain;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.88);
+      }
+    }
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    background: #314569cc;
+    .social {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .link {
+        width: 22px;
+        height: 22px;
+        margin-right: 40px;
+        a {
+          display: block;
+          cursor: pointer;
+          width: 100%;
+          height: 100%;
+          &.github {
+            background: url("img/github.svg") no-repeat;
+            background-size: cover;
+          }
+          &.telega {
+            background: url("img/telega.svg") no-repeat;
+            background-size: cover;
+          }
+          &.vk {
+            background: url("img/vk.svg") no-repeat;
+            background-size: cover;
+          }
+          &.instagram {
+            background: url("img/instagram.svg") no-repeat;
+            background-size: cover;
+          }
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .app {
+    h1.title {
+      font: 400 40px/42px 'Orbitron', sans-serif;
+    }
+  }
+}
+
+@keyframes x-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
