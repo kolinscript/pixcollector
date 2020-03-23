@@ -6,15 +6,38 @@ class App extends Component {
         super(props);
         this.state = {};
         this.loginVk = this.loginVk.bind(this);
+        this.handleLoad = this.handleLoad.bind(this);
     }
 
-    loginVk(event) {}
+
+    componentDidMount() {
+        window.addEventListener('load', this.handleLoad);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('load', this.handleLoad)
+    }
+
+    handleLoad() {
+        console.log(window.location.href);
+    }
+
+    loginVk() {
+        const AUTH_URL = 'https://oauth.vk.com/authorize' +
+            '?client_id=7372433' +
+            '&display=popup' +
+            '&redirect_uri=https://pixcollector.herokuapp.com' +
+            '&scope=friends,photos,offline' +
+            '&response_type=code' +
+            '&v=5.103';
+        window.open(AUTH_URL,"_self")
+    }
 
     render() {
         return (
             <div className={'app'}>
-                <h1 className={'title'}>PIXCOLLECTOR</h1>
                 <div class="auth-wrapper">
+                    <h1 className={'title'}>PIXCOLLECTOR</h1>
                     <div className="button login" onClick={this.loginVk}>
                         <div className="label">Login with</div>
                         <div className="logo-vk">

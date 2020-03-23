@@ -10,25 +10,19 @@ $firmColorVK: #4a76a8;;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  h1.title {
-    width: 100%;
-    margin: 0;
-    padding: 40px 0 10px;
-    font: 400 62px/64px 'Orbitron', sans-serif;
-    text-align: center;
-  }
-
   .auth-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    position: absolute;
-    width: 100vw;
-    min-height: 100vh;
-    top: 0;
-    left: 0;
     padding: 100px 0;
+    h1.title {
+      width: 100%;
+      margin: 0;
+      padding: 40px 0;
+      font: 400 62px/64px $fontMain;
+      text-align: center;
+    }
     .button {
       display: flex;
       flex-direction: row;
@@ -40,11 +34,13 @@ $firmColorVK: #4a76a8;;
       outline: none;
       border-radius: 3px;
       cursor: pointer;
+      transition: background 200ms ease-in-out;
       &:hover {
-        //transition: color 400ms ease-in-out;
+        background: lighten($firmColorVK, 10%);
       }
       .logo-vk {
         margin-left: 10px;
+        margin-top: 5px;
         svg {}
       }
       .label {
