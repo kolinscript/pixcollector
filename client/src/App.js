@@ -32,11 +32,12 @@ class App extends Component {
                 showVkLogin: false
             }));
             const code = 'https://pixcollector.herokuapp.com/?code=9e6831f7ffe37fce1e'.split('code=')[1];
-            const AUTH_URL_TOKEN = `https://oauth.vk.com/access_token' +
-                '?client_id=7372433' +
-                '&client_secret=XgglLIZcB7qB3nNryc8y' +
-                '&redirect_uri=https://pixcollector.herokuapp.com' +
-                '&code=${code}`;
+            console.log(code);
+            const AUTH_URL_TOKEN = `https://oauth.vk.com/access_token` +
+                `?client_id=7372433` +
+                `&client_secret=XgglLIZcB7qB3nNryc8y` +
+                `&redirect_uri=https://pixcollector.herokuapp.com` +
+                `&code=${code}`;
             window.open(AUTH_URL_TOKEN,"_self");
         }
     }
