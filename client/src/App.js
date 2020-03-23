@@ -38,11 +38,9 @@ class App extends Component {
                 `&redirect_uri=https://pixcollector.herokuapp.com` +
                 `&code=${code}`;
             // window.open(AUTH_URL_TOKEN,"_self");
-            fetch(AUTH_URL_TOKEN, {
-                method: 'get'
-            }).then(res => res.json().then((data) => {
-                console.log(data);
-            }));
+            fetch(AUTH_URL_TOKEN)
+                .then(res => res.json())
+                .then((data) => {console.log(data)});
         }
     }
 
