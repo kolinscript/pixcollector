@@ -6,6 +6,7 @@ class App extends Component {
         super(props);
         this.state = {
             showVkLogin: true,
+            pixLinkArray: []
         };
         this.loginVk = this.loginVk.bind(this);
         this.getAlbums = this.getAlbums.bind(this);
@@ -73,7 +74,45 @@ class App extends Component {
             }
         })
             .then(res => res.json())
-            .then((data) => {console.log(data)})
+            .then((data) => {
+                console.log(data)
+                const arr = [];
+                data.body.response.items.forEach((item) => {
+                    item.sizes.forEach((size) => {
+                        switch (size.type) {
+                            case 'w': {
+                                arr.push(size.url);
+                                break;
+                            }
+                            case 'z': {
+                                arr.push(size.url);
+                                break;
+                            }
+                            case 'y': {
+                                arr.push(size.url);
+                                break;
+                            }
+                            case 'x': {
+                                arr.push(size.url);
+                                break;
+                            }
+                            case 'm': {
+                                arr.push(size.url);
+                                break;
+                            }
+                            case 's': {
+                                arr.push(size.url);
+                                break;
+                            }
+                        }
+                    });
+                });
+                this.setState(prevState => ({
+                    pixLinkArray: arr
+                }), () => {
+                    console.log(this.state.pixLinkArray);
+                });
+            })
             .catch(error => console.log(error));
     }
 
