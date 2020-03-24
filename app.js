@@ -9,8 +9,8 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var access_token;
-var user_id;
+var access_token = '';
+var user_id = '';
 const vkApiVersion = '5.103';
 
 app.post('/auth', (req, res, next) => {
