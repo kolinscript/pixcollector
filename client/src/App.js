@@ -37,15 +37,10 @@ class App extends Component {
                 `&client_secret=XgglLIZcB7qB3nNryc8y` +
                 `&redirect_uri=https://pixcollector.herokuapp.com` +
                 `&code=${code}`;
-            window.open(AUTH_URL_TOKEN,"_self");
-            // fetch(AUTH_URL_TOKEN, {
-            //     mode: 'cors',
-            //     headers: {
-            //         Origin: 'https://pixcollector.herokuapp.com'
-            //     }
-            // })
-            //     .then(res => res.json())
-            //     .then((data) => {console.log(data)});
+            // window.open(AUTH_URL_TOKEN,"_self");
+            fetch(AUTH_URL_TOKEN, {mode: 'cors', credentials: 'include'})
+                .then(res => res.json())
+                .then((data) => {console.log(data)});
         }
     }
 
