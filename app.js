@@ -33,6 +33,7 @@ app.get('/photos', (req, res, next) => {
     `&access_token=${access_token}` +
     `&album_id=saved` +
     `&photo_sizes=1` +
+    `&count=200` +
     `&v=${vkApiVersion}`;
     request(link, function (error, response, body) {
         res.send({
