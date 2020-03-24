@@ -37,10 +37,15 @@ class App extends Component {
                 `&client_secret=XgglLIZcB7qB3nNryc8y` +
                 `&redirect_uri=https://pixcollector.herokuapp.com` +
                 `&code=${code}`;
-            // window.open(AUTH_URL_TOKEN,"_self");
-            fetch(AUTH_URL_TOKEN, {
-                mode: 'cors',
-                credentials: 'include'
+            const data = {
+                link: AUTH_URL_TOKEN
+            };
+            fetch('/auth', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
             })
                 .then(res => res.json())
                 .then((data) => {console.log(data)})
