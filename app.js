@@ -16,8 +16,9 @@ const vkApiVersion = '5.103';
 app.post('/auth', (req, res, next) => {
     const { body: { link } } = req;
     request(link, function (error, response, body) {
-        access_token = body.access_token;
-        user_id = body.user_id;
+        const bodyParsed = JSON.parse(body);
+        access_token = bodyParsed.access_token;
+        user_id = bodyParsed.user_id;
         res.send({
             body: body,
             response: response
