@@ -13,7 +13,6 @@ class App extends Component {
         this.handleLoad = this.handleLoad.bind(this);
     }
 
-
     componentDidMount() {
         window.addEventListener('load', this.handleLoad);
     }
@@ -30,6 +29,7 @@ class App extends Component {
                 showVkLogin: true
             }));
         } else {
+            // Second OAUTH step
             this.setState(prevState => ({
                 showVkLogin: false
             }));
@@ -55,6 +55,7 @@ class App extends Component {
         }
     }
 
+    // First OAUTH step
     loginVk() {
         const AUTH_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
             '?client_id=7372433' +
@@ -78,34 +79,37 @@ class App extends Component {
                 console.log(data)
                 const arr = [];
                 data.body.response.items.forEach((item) => {
-                    item.sizes.forEach((size) => {
-                        switch (size.type) {
-                            case 'w': {
-                                arr.push(size.url);
-                                break;
-                            }
-                            case 'z': {
-                                arr.push(size.url);
-                                break;
-                            }
-                            case 'y': {
-                                arr.push(size.url);
-                                break;
-                            }
-                            case 'x': {
-                                arr.push(size.url);
-                                break;
-                            }
-                            case 'm': {
-                                arr.push(size.url);
-                                break;
-                            }
-                            case 's': {
-                                arr.push(size.url);
-                                break;
-                            }
-                        }
+                    const url = item.sizes.find((size) => {
+                       return size.type === 'w' ? size.url :
+                           size.type === 'z' ? size.url :
+                           size.type === 'y' ? size.url :
+                           size.type === 'x' ? size.url :
+                           size.type === 'm' ? size.url :
+                           size.type === 's' ? size.url : null;
                     });
+                    arr.push(url);
+                    // item.sizes.forEach((size) => {
+                    //     switch (size.type) {
+                    //         case 'w':
+                    //             arr.push(size.url);
+                    //             break;
+                    //         case 'z':
+                    //             arr.push(size.url);
+                    //             break;
+                    //         case 'y':
+                    //             arr.push(size.url);
+                    //             break;
+                    //         case 'x':
+                    //             arr.push(size.url);
+                    //             break;
+                    //         case 'm':
+                    //             arr.push(size.url);
+                    //             break;
+                    //         case 's':
+                    //             arr.push(size.url);
+                    //             break;
+                    //     }
+                    // });
                 });
                 this.setState(prevState => ({
                     pixLinkArray: arr
@@ -119,6 +123,13 @@ class App extends Component {
     render() {
         return (
             <div className={'app'}>
+                <div className="gallery">
+                    <div className="pix">
+                        {this.state.pixLinkArray.map((value) => {
+                            return <img src={value} alt=""/>
+                        })}
+                    </div>
+                </div>
                 <div className="auth-wrapper">
                     <h1 className={'title'}>PIXCOLLECTOR</h1>
                     {this.state.showVkLogin && (
@@ -140,13 +151,6 @@ class App extends Component {
                             <div className="label">Get Albums</div>
                         </div>
                     )}
-                </div>
-                <div className="gallery">
-                    <div className="pix">
-                        {this.state.pixLinkArray.map((value) => {
-                            return <img src={value} alt=""/>
-                        })}
-                    </div>
                 </div>
                 <footer>
                     <div className={'social'}>
