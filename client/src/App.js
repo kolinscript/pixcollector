@@ -141,6 +141,13 @@ class App extends Component {
                         </div>
                     )}
                 </div>
+                <div className="gallery">
+                    <div className="pix">
+                        {this.state.pixLinkArray.map((value) => {
+                            return <img src={value} alt=""/>
+                        })}
+                    </div>
+                </div>
                 <footer>
                     <div className={'social'}>
                         <div className="link"><a className="github" href="https://github.com/kolinscript" target="_blank" rel="noopener noreferrer"></a></div>
