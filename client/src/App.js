@@ -40,13 +40,11 @@ class App extends Component {
             // window.open(AUTH_URL_TOKEN,"_self");
             fetch(AUTH_URL_TOKEN, {
                 mode: 'cors',
-                credentials: 'include',
-                headers: {
-                    Accept: 'application/json', 'Content-Type': 'application/json',
-                }
+                credentials: 'include'
             })
                 .then(res => res.json())
-                .then((data) => {console.log(data)});
+                .then((data) => {console.log(data)})
+                .catch(error => console.log(error));
         }
     }
 
