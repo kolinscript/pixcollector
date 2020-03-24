@@ -25,7 +25,10 @@ app.post('/auth', (req, res, next) => {
 app.get('/photos', (req, res, next) => {
     const link = `https://api.vk.com/method/photos.getAlbums?owner_id=${user_id}&access_token=${access_token}&v=${vkApiVersion}`;
     request(link, function (error, response, body) {
-        res.send(body);
+        res.send({
+            ...body,
+            link: link
+        });
     });
 });
 
