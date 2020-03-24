@@ -27,10 +27,10 @@ app.post('/auth', (req, res, next) => {
 });
 
 app.get('/photos', (req, res, next) => {
-    const link = `https://api.vk.com/method/photos.getAll?owner_id=${user_id}&access_token=${access_token}&v=${vkApiVersion}`;
+    const link = `https://api.vk.com/method/photos.get?owner_id=${user_id}&access_token=${access_token}&album_id=saved&v=${vkApiVersion}`;
     request(link, function (error, response, body) {
         res.send({
-            body: body,
+            body: JSON.parse(body),
             link: link
         });
     });
