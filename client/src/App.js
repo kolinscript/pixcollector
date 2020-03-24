@@ -8,6 +8,7 @@ class App extends Component {
             showVkLogin: true,
         };
         this.loginVk = this.loginVk.bind(this);
+        this.getAlbums = this.getAlbums.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
     }
 
@@ -64,6 +65,18 @@ class App extends Component {
         window.open(AUTH_URL_AUTHORIZE,"_self")
     }
 
+    getAlbums() {
+        fetch('/photos', {
+            method: 'get',
+            headers: {
+                Accept: 'application/json', 'Content-Type': 'application/json',
+            }
+        })
+            .then(res => res.json())
+            .then((data) => {console.log(data)})
+            .catch(error => console.log(error));
+    }
+
     render() {
         return (
             <div className={'app'}>
@@ -81,6 +94,11 @@ class App extends Component {
                                     />
                                 </svg>
                             </div>
+                        </div>
+                    )}
+                    {!this.state.showVkLogin && (
+                        <div className="button login" onClick={this.getAlbums}>
+                            <div className="label">Get Albums</div>
                         </div>
                     )}
                 </div>
