@@ -20,7 +20,7 @@ app.post('/auth', (req, res, next) => {
     request(link, function (error, response, body) {
         data.access_token = body.access_token;
         data.user_id = body.user_id;
-        res.send(body);
+        res.send(body.access_token);
     });
 });
 
