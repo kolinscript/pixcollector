@@ -79,15 +79,15 @@ class App extends Component {
                 console.log(data)
                 const arr = [];
                 data.body.response.items.forEach((item) => {
-                    const url = item.sizes.find((size) => {
-                       return size.type === 'w' ? size.url :
-                           size.type === 'z' ? size.url :
-                           size.type === 'y' ? size.url :
-                           size.type === 'x' ? size.url :
+                    const maxItem = item.sizes.find((size) => {
+                       return size.type === 's' ? size.url :
                            size.type === 'm' ? size.url :
-                           size.type === 's' ? size.url : null;
+                           size.type === 'x' ? size.url :
+                           size.type === 'y' ? size.url :
+                           size.type === 'z' ? size.url :
+                           size.type === 'w' ? size.url : null;
                     });
-                    arr.push(url);
+                    arr.push(maxItem.url);
                     // item.sizes.forEach((size) => {
                     //     switch (size.type) {
                     //         case 'w':
