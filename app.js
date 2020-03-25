@@ -117,7 +117,7 @@ app.get('/download', (req, res) => {
     function addNextFile() {
         var elem = pixArray.shift();
         var stream = request(elem);
-        zip.entry(stream, { name: 'pix.name' }, err => {
+        zip.entry(stream, { name: `${elem}.png` }, err => {
             if (err)
                 throw err;
             if (pixArray.length > 0)

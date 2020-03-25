@@ -120,7 +120,7 @@ class App extends Component {
                         </div>
                     )}
                     {(this.state.done) && (
-                        <a className="button login" href={'/download'}>
+                        <a className="button login" href={'/download'} download>
                             <div className="label">Download</div>
                         </a>
                     )}
