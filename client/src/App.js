@@ -78,32 +78,8 @@ class App extends Component {
             .then(res => res.json())
             .then((data) => {
                 console.log(data);
-                // const arr = [];
-                // data.body.response.items.forEach((item) => {
-                //     // ascending flow
-                //     // S -> M -> X -> Y -> Z -> W
-                //     const sizeW = item.sizes.find(size => size.type === 'w');
-                //     const sizeZ = item.sizes.find(size => size.type === 'z');
-                //     const sizeY = item.sizes.find(size => size.type === 'y');
-                //     const sizeX = item.sizes.find(size => size.type === 'x');
-                //     const sizeM = item.sizes.find(size => size.type === 'm');
-                //     const sizeS = item.sizes.find(size => size.type === 's');
-                //     if (sizeW) {
-                //         arr.push(sizeW.url);
-                //     } else if (sizeZ) {
-                //         arr.push(sizeZ.url);
-                //     } else if (sizeY) {
-                //         arr.push(sizeY.url);
-                //     } else if (sizeX) {
-                //         arr.push(sizeX.url);
-                //     } else if (sizeM) {
-                //         arr.push(sizeM.url);
-                //     } else if (sizeS) {
-                //         arr.push(sizeS.url);
-                //     }
-                // });
                 this.setState(prevState => ({
-                    pixLinkArray: data,
+                    pixLinkArray: data.body,
                     done: true
                 }), () => {
                     console.log(this.state.pixLinkArray);
