@@ -1,6 +1,7 @@
 /* Vars */
 $fontMain: 'Roboto', sans-serif;
-$firmColorVK: #4a76a8;;
+$background: #314569cc;
+$firmColorVK: #4a76a8;
 
 .app {
   position: relative;
@@ -30,18 +31,19 @@ $firmColorVK: #4a76a8;;
   .auth-wrapper {
     position: absolute;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    padding: 100px 0;
+    flex-direction: column;
+    padding: 60px 0 100px;
+    height: 100%;
     h1.title {
       width: 100%;
-      margin: 30px 0;
-      padding: 5px 0;
+      margin: 0;
+      padding: 5px 25px;
       border-radius: 50px;
       font: 400 62px/64px $fontMain;
       text-align: center;
-      background-color: rgba(49,69,105,.8);
+      background-color: $background;
       color: #FFFFFFFF;
     }
     .button {
@@ -49,16 +51,17 @@ $firmColorVK: #4a76a8;;
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      width: 180px;
       height: 44px;
       padding: 8px 20px;
-      background: $firmColorVK;
+      background: $background;
       border: none;
       outline: none;
-      border-radius: 3px;
+      border-radius: 25px;
       cursor: pointer;
       transition: background 200ms ease-in-out;
       &:hover {
-        background: lighten($firmColorVK, 10%);
+        background: lighten($background, 10%);
       }
       .logo-vk {
         margin-left: 10px;
@@ -66,7 +69,7 @@ $firmColorVK: #4a76a8;;
         svg {}
       }
       .label {
-        font: 14px/16px $fontMain;
+        font: 500 16px/18px $fontMain;
         text-align: center;
         color: rgba(255, 255, 255, 0.88);
       }
@@ -78,7 +81,7 @@ $firmColorVK: #4a76a8;;
     bottom: 0;
     height: 40px;
     width: 100%;
-    background: #314569cc;
+    background: $background;
     .social {
       height: 100%;
       width: 100%;

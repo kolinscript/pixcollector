@@ -79,37 +79,27 @@ class App extends Component {
                 console.log(data)
                 const arr = [];
                 data.body.response.items.forEach((item) => {
-                    const maxItem = item.sizes.find((size) => {
-                       return size.type === 'w' ? size.url :
-                           size.type === 'z' ? size.url :
-                           size.type === 'y' ? size.url :
-                           size.type === 'x' ? size.url :
-                           size.type === 'm' ? size.url :
-                           size.type === 's' ? size.url : null;
-                    });
-                    arr.push(maxItem.url);
-                    // item.sizes.forEach((size) => {
-                    //     switch (size.type) {
-                    //         case 'w':
-                    //             arr.push(size.url);
-                    //             break;
-                    //         case 'z':
-                    //             arr.push(size.url);
-                    //             break;
-                    //         case 'y':
-                    //             arr.push(size.url);
-                    //             break;
-                    //         case 'x':
-                    //             arr.push(size.url);
-                    //             break;
-                    //         case 'm':
-                    //             arr.push(size.url);
-                    //             break;
-                    //         case 's':
-                    //             arr.push(size.url);
-                    //             break;
-                    //     }
-                    // });
+                    // ascending flow
+                    // S -> M -> X -> Y -> Z -> W
+                    const sizeW = item.sizes.find(size => size.type === 'w');
+                    const sizeZ = item.sizes.find(size => size.type === 'z');
+                    const sizeY = item.sizes.find(size => size.type === 'y');
+                    const sizeX = item.sizes.find(size => size.type === 'x');
+                    const sizeM = item.sizes.find(size => size.type === 'm');
+                    const sizeS = item.sizes.find(size => size.type === 's');
+                    if (sizeW) {
+                        arr.push(sizeW);
+                    } else if (sizeZ) {
+                        arr.push(sizeZ);
+                    } else if (sizeY) {
+                        arr.push(sizeY);
+                    } else if (sizeX) {
+                        arr.push(sizeX);
+                    } else if (sizeM) {
+                        arr.push(sizeM);
+                    } else if (sizeS) {
+                        arr.push(sizeS);
+                    }
                 });
                 this.setState(prevState => ({
                     pixLinkArray: arr
@@ -148,7 +138,7 @@ class App extends Component {
                     )}
                     {!this.state.showVkLogin && (
                         <div className="button login" onClick={this.getAlbums}>
-                            <div className="label">Get Albums</div>
+                            <div className="label">Get photos</div>
                         </div>
                     )}
                 </div>
