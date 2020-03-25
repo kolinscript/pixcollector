@@ -47,6 +47,10 @@ app.get('/photos', (req, res, next) => {
 app.post('/download', (req, res) => {
     const { body: { linkArr } } = req;
     var zip = new ZipStream();
+    res.writeHead(200, {
+        'Content-Type': 'application/zip',
+        'Content-disposition': 'attachment; filename=myFile.zip'
+    });
     zip.pipe(res);
 
     var queue = [
