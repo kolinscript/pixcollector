@@ -44,39 +44,65 @@ app.get('/photos', (req, res, next) => {
     });
 });
 
-app.post('/download', (req, res) => {
-    const { body: { linkArr } } = req;
-    var zip = new ZipStream();
-    res.writeHead(200, {
-        'Content-Type': 'application/zip',
-        'Content-disposition': 'attachment; filename=myFile.zip'
-    });
+// app.post('/download', (req, res) => {
+//     const { body: { linkArr } } = req;
+//     var zip = new ZipStream();
+//     res.writeHead(200, {
+//         'Content-Type': 'application/zip',
+//         'Content-disposition': 'attachment; filename=myFile.zip'
+//     });
+//     zip.pipe(res);
+//
+//     var queue = [
+//         { name: 'one.jpg', url: 'https://loremflickr.com/640/480' },
+//         { name: 'two.jpg', url: 'https://loremflickr.com/640/480' },
+//         { name: 'three.jpg', url: 'https://loremflickr.com/640/480' }
+//     ];
+//
+//     function addNextFile() {
+//         var elem = queue.shift();
+//         var stream = request(elem.url);
+//         zip.entry(stream, { name: elem.name }, (err) => {
+//             if (err) {
+//                 throw err;
+//             }
+//             if (linkArr.length > 0) {
+//                 addNextFile();
+//             }
+//             else {
+//                 zip.finalize();
+//             }
+//         });
+//     }
+//
+//     addNextFile();
+// });
+
+app.get('/download', (req, res) => {
+    var zip = new ZipStream()
     zip.pipe(res);
 
     var queue = [
         { name: 'one.jpg', url: 'https://loremflickr.com/640/480' },
         { name: 'two.jpg', url: 'https://loremflickr.com/640/480' },
         { name: 'three.jpg', url: 'https://loremflickr.com/640/480' }
-    ];
+    ]
 
     function addNextFile() {
-        var elem = queue.shift();
-        var stream = request(elem.url);
-        zip.entry(stream, { name: elem.name }, (err) => {
-            if (err) {
+        var elem = queue.shift()
+        var stream = request(elem.url)
+        zip.entry(stream, { name: elem.name }, err => {
+            if(err)
                 throw err;
-            }
-            if (linkArr.length > 0) {
-                addNextFile();
-            }
-            else {
-                zip.finalize();
-            }
-        });
+            if(queue.length > 0)
+                addNextFile()
+            else
+                zip.finalize()
+        })
     }
 
-    addNextFile();
-});
+    addNextFile()
+})
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
