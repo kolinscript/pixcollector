@@ -44,7 +44,7 @@ app.get('/photos', (req, res, next) => {
     });
 });
 
-app.get('/download', (req, res) => {
+app.post('/download', (req, res) => {
     const { body: { linkArr } } = req;
     var zip = new ZipStream();
     zip.pipe(res);
