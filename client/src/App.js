@@ -6,7 +6,7 @@ class App extends Component {
         super(props);
         this.state = {
             showVkLogin: true,
-            pixLinkArray: [],
+            pixArray: [],
             done: false
         };
         this.loginVk = this.loginVk.bind(this);
@@ -79,10 +79,10 @@ class App extends Component {
             .then((data) => {
                 console.log(data);
                 this.setState(prevState => ({
-                    pixLinkArray: data.body,
+                    pixArray: data.body,
                     done: true
                 }), () => {
-                    console.log(this.state.pixLinkArray);
+                    console.log(this.state.pixArray);
                 });
             })
             .catch(error => console.log(error));
@@ -93,8 +93,8 @@ class App extends Component {
             <div className={'app'}>
                 <div className="gallery">
                     <div className="pix">
-                        {this.state.pixLinkArray.map((value) => {
-                            return <img src={value} alt=""/>
+                        {this.state.pixArray.map((value) => {
+                            return <img src={value.url} alt=""/>
                         })}
                     </div>
                 </div>

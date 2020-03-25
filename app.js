@@ -50,17 +50,17 @@ app.get('/photos', (req, res, next) => {
             const sizeM = item.sizes.find(size => size.type === 'm');
             const sizeS = item.sizes.find(size => size.type === 's');
             if (sizeW) {
-                arr.push(sizeW.url);
+                arr.push(sizeW);
             } else if (sizeZ) {
-                arr.push(sizeZ.url);
+                arr.push(sizeZ);
             } else if (sizeY) {
-                arr.push(sizeY.url);
+                arr.push(sizeY);
             } else if (sizeX) {
-                arr.push(sizeX.url);
+                arr.push(sizeX);
             } else if (sizeM) {
-                arr.push(sizeM.url);
+                arr.push(sizeM);
             } else if (sizeS) {
-                arr.push(sizeS.url);
+                arr.push(sizeS);
             }
             pixArray = arr;
         });
@@ -108,16 +108,10 @@ app.get('/download', (req, res) => {
     var zip = new ZipStream();
     zip.pipe(res);
 
-    // var queue = [
-    //     { name: 'one.jpg', url: 'https://loremflickr.com/640/480' },
-    //     { name: 'two.jpg', url: 'https://loremflickr.com/640/480' },
-    //     { name: 'three.jpg', url: 'https://loremflickr.com/640/480' }
-    // ]
-
     function addNextFile() {
         var elem = pixArray.shift();
-        var stream = request(elem);
-        zip.entry(stream, { name: `${elem}.png` }, err => {
+        var stream = request(elem.url);
+        zip.entry(stream, { name: elem.name }, err => {
             if (err)
                 throw err;
             if (pixArray.length > 0)
