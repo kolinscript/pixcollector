@@ -10,17 +10,19 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var access_token;
-var user_id;
-var pixArray;
-const vkApiVersion = '5.103';
+const state = {
+    vkApiVersion: '5.103',
+    access_token: null,
+    user_id: null,
+    pixArray: null,
+};
 
 app.post('/auth', (req, res, next) => {
     const { body: { link } } = req;
     request(link, function (error, response, body) {
         const bodyParsed = JSON.parse(body);
-        access_token = bodyParsed.access_token;
-        user_id = bodyParsed.user_id;
+        state.access_token = bodyParsed.access_token;
+        state.user_id = bodyParsed.user_id;
         res.send({
             body: body,
             response: response
@@ -31,12 +33,12 @@ app.post('/auth', (req, res, next) => {
 app.get('/photos', (req, res, next) => {
     const link = `https://api.vk.com/` +
     `method/photos.get` +
-    `?owner_id=${user_id}` +
-    `&access_token=${access_token}` +
+    `?owner_id=${state.user_id}` +
+    `&access_token=${state.access_token}` +
     `&album_id=saved` +
     `&photo_sizes=1` +
-    `&count=20` +
-    `&v=${vkApiVersion}`;
+    `&count=100` +
+    `&v=${state.vkApiVersion}`;
     request(link, function (error, response, body) {
         const bodyParsed = JSON.parse(body);
         const arr = [];
@@ -62,7 +64,7 @@ app.get('/photos', (req, res, next) => {
             } else if (sizeS) {
                 arr.push(sizeS);
             }
-            pixArray = arr;
+            state.pixArray = arr;
         });
         res.send({
             body: arr
@@ -70,57 +72,22 @@ app.get('/photos', (req, res, next) => {
     });
 });
 
-// app.post('/download', (req, res) => {
-//     const { body: { linkArr } } = req;
-//     var zip = new ZipStream();
-//     res.writeHead(200, {
-//         'Content-Type': 'application/zip',
-//         'Content-disposition': 'attachment; filename=myFile.zip'
-//     });
-//     zip.pipe(res);
-//
-//     var queue = [
-//         { name: 'one.jpg', url: 'https://loremflickr.com/640/480' },
-//         { name: 'two.jpg', url: 'https://loremflickr.com/640/480' },
-//         { name: 'three.jpg', url: 'https://loremflickr.com/640/480' }
-//     ];
-//
-//     function addNextFile() {
-//         var elem = queue.shift();
-//         var stream = request(elem.url);
-//         zip.entry(stream, { name: elem.name }, (err) => {
-//             if (err) {
-//                 throw err;
-//             }
-//             if (linkArr.length > 0) {
-//                 addNextFile();
-//             }
-//             else {
-//                 zip.finalize();
-//             }
-//         });
-//     }
-//
-//     addNextFile();
-// });
-
-app.get('/download', (req, res) => {
-    var zip = new ZipStream();
+app.get('/pixcollector.zip', (req, res) => {
+    const zip = new ZipStream();
     zip.pipe(res);
-
     function addNextFile() {
-        var elem = pixArray.shift();
-        var stream = request(elem.url);
-        zip.entry(stream, { name: elem.url }, err => {
+        const elem = state.pixArray.shift();
+        const stream = request(elem.url);
+        const name = elem.url.slice(elem.url.lastIndexOf('/'));
+        zip.entry(stream, { name: name }, err => {
             if (err)
                 throw err;
-            if (pixArray.length > 0)
+            if (state.pixArray.length > 0)
                 addNextFile();
             else
                 zip.finalize();
         });
     }
-
     addNextFile();
 });
 
