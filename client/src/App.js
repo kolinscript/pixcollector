@@ -88,17 +88,17 @@ class App extends Component {
                     const sizeM = item.sizes.find(size => size.type === 'm');
                     const sizeS = item.sizes.find(size => size.type === 's');
                     if (sizeW) {
-                        arr.push(sizeW);
+                        arr.push(sizeW.url);
                     } else if (sizeZ) {
-                        arr.push(sizeZ);
+                        arr.push(sizeZ.url);
                     } else if (sizeY) {
-                        arr.push(sizeY);
+                        arr.push(sizeY.url);
                     } else if (sizeX) {
-                        arr.push(sizeX);
+                        arr.push(sizeX.url);
                     } else if (sizeM) {
-                        arr.push(sizeM);
+                        arr.push(sizeM.url);
                     } else if (sizeS) {
-                        arr.push(sizeS);
+                        arr.push(sizeS.url);
                     }
                 });
                 this.setState(prevState => ({
