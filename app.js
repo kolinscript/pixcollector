@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 
 var access_token;
 var user_id;
+var pixArray;
 const vkApiVersion = '5.103';
 
 app.post('/auth', (req, res, next) => {
@@ -20,9 +21,33 @@ app.post('/auth', (req, res, next) => {
         const bodyParsed = JSON.parse(body);
         access_token = bodyParsed.access_token;
         user_id = bodyParsed.user_id;
+        const arr = [];
+        body.response.items.forEach((item) => {
+            // ascending flow
+            // S -> M -> X -> Y -> Z -> W
+            const sizeW = item.sizes.find(size => size.type === 'w');
+            const sizeZ = item.sizes.find(size => size.type === 'z');
+            const sizeY = item.sizes.find(size => size.type === 'y');
+            const sizeX = item.sizes.find(size => size.type === 'x');
+            const sizeM = item.sizes.find(size => size.type === 'm');
+            const sizeS = item.sizes.find(size => size.type === 's');
+            if (sizeW) {
+                arr.push(sizeW.url);
+            } else if (sizeZ) {
+                arr.push(sizeZ.url);
+            } else if (sizeY) {
+                arr.push(sizeY.url);
+            } else if (sizeX) {
+                arr.push(sizeX.url);
+            } else if (sizeM) {
+                arr.push(sizeM.url);
+            } else if (sizeS) {
+                arr.push(sizeS.url);
+            }
+            pixArray = arr;
+        });
         res.send({
-            body: body,
-            response: response
+            body: arr
         });
     });
 });
@@ -79,30 +104,30 @@ app.get('/photos', (req, res, next) => {
 // });
 
 app.get('/download', (req, res) => {
-    var zip = new ZipStream()
+    var zip = new ZipStream();
     zip.pipe(res);
 
-    var queue = [
-        { name: 'one.jpg', url: 'https://loremflickr.com/640/480' },
-        { name: 'two.jpg', url: 'https://loremflickr.com/640/480' },
-        { name: 'three.jpg', url: 'https://loremflickr.com/640/480' }
-    ]
+    // var queue = [
+    //     { name: 'one.jpg', url: 'https://loremflickr.com/640/480' },
+    //     { name: 'two.jpg', url: 'https://loremflickr.com/640/480' },
+    //     { name: 'three.jpg', url: 'https://loremflickr.com/640/480' }
+    // ]
 
     function addNextFile() {
-        var elem = queue.shift()
-        var stream = request(elem.url)
-        zip.entry(stream, { name: elem.name }, err => {
-            if(err)
+        var elem = pixArray.shift();
+        var stream = request(elem);
+        zip.entry(stream, { name: 'pix.name' }, err => {
+            if (err)
                 throw err;
-            if(queue.length > 0)
-                addNextFile()
+            if (pixArray.length > 0)
+                addNextFile();
             else
-                zip.finalize()
-        })
+                zip.finalize();
+        });
     }
 
-    addNextFile()
-})
+    addNextFile();
+});
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));

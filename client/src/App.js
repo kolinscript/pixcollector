@@ -79,51 +79,38 @@ class App extends Component {
             .then(res => res.json())
             .then((data) => {
                 console.log(data);
-                const arr = [];
-                data.body.response.items.forEach((item) => {
-                    // ascending flow
-                    // S -> M -> X -> Y -> Z -> W
-                    const sizeW = item.sizes.find(size => size.type === 'w');
-                    const sizeZ = item.sizes.find(size => size.type === 'z');
-                    const sizeY = item.sizes.find(size => size.type === 'y');
-                    const sizeX = item.sizes.find(size => size.type === 'x');
-                    const sizeM = item.sizes.find(size => size.type === 'm');
-                    const sizeS = item.sizes.find(size => size.type === 's');
-                    if (sizeW) {
-                        arr.push(sizeW.url);
-                    } else if (sizeZ) {
-                        arr.push(sizeZ.url);
-                    } else if (sizeY) {
-                        arr.push(sizeY.url);
-                    } else if (sizeX) {
-                        arr.push(sizeX.url);
-                    } else if (sizeM) {
-                        arr.push(sizeM.url);
-                    } else if (sizeS) {
-                        arr.push(sizeS.url);
-                    }
-                });
+                // const arr = [];
+                // data.body.response.items.forEach((item) => {
+                //     // ascending flow
+                //     // S -> M -> X -> Y -> Z -> W
+                //     const sizeW = item.sizes.find(size => size.type === 'w');
+                //     const sizeZ = item.sizes.find(size => size.type === 'z');
+                //     const sizeY = item.sizes.find(size => size.type === 'y');
+                //     const sizeX = item.sizes.find(size => size.type === 'x');
+                //     const sizeM = item.sizes.find(size => size.type === 'm');
+                //     const sizeS = item.sizes.find(size => size.type === 's');
+                //     if (sizeW) {
+                //         arr.push(sizeW.url);
+                //     } else if (sizeZ) {
+                //         arr.push(sizeZ.url);
+                //     } else if (sizeY) {
+                //         arr.push(sizeY.url);
+                //     } else if (sizeX) {
+                //         arr.push(sizeX.url);
+                //     } else if (sizeM) {
+                //         arr.push(sizeM.url);
+                //     } else if (sizeS) {
+                //         arr.push(sizeS.url);
+                //     }
+                // });
                 this.setState(prevState => ({
-                    pixLinkArray: arr,
+                    pixLinkArray: data,
                     done: true
                 }), () => {
                     console.log(this.state.pixLinkArray);
                 });
             })
             .catch(error => console.log(error));
-    }
-
-    download() {
-        fetch('/download', {
-            method: 'GET',
-            headers: {
-                Accept: 'application/zip, application/octet-stream ', 'Content-Type': 'application/zip, application/octet-stream '
-            }
-        })
-            // .then(res => res.json())
-            .then((data) => {console.log(data)})
-            .catch(error => console.log(error));
-
     }
 
     render() {
@@ -158,9 +145,9 @@ class App extends Component {
                         </div>
                     )}
                     {(this.state.done) && (
-                        <div className="button login" onClick={this.download}>
+                        <a className="button login" href={'/download'}>
                             <div className="label">Download</div>
-                        </div>
+                        </a>
                     )}
                 </div>
                 <footer>

@@ -63,6 +63,7 @@ $firmColorVK: #4a76a8;
       outline: none;
       border-radius: 25px;
       cursor: pointer;
+      text-decoration: none;
       transition: background 200ms ease-in-out;
       &:hover {
         background: lighten($background, 10%);
