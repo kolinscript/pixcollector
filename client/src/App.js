@@ -6,7 +6,8 @@ class App extends Component {
         super(props);
         this.state = {
             showVkLogin: true,
-            pixLinkArray: []
+            pixLinkArray: [],
+            done: false
         };
         this.loginVk = this.loginVk.bind(this);
         this.getAlbums = this.getAlbums.bind(this);
@@ -102,7 +103,8 @@ class App extends Component {
                     }
                 });
                 this.setState(prevState => ({
-                    pixLinkArray: arr
+                    pixLinkArray: arr,
+                    done: true
                 }), () => {
                     console.log(this.state.pixLinkArray);
                 });
@@ -136,7 +138,7 @@ class App extends Component {
                             </div>
                         </div>
                     )}
-                    {!this.state.showVkLogin && (
+                    {(!this.state.showVkLogin && !this.state.done) && (
                         <div className="button login" onClick={this.getAlbums}>
                             <div className="label">Get photos</div>
                         </div>
