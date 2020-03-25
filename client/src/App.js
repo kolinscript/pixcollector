@@ -117,10 +117,10 @@ class App extends Component {
         fetch('/download', {
             method: 'GET',
             headers: {
-                Accept: 'application/zip', 'Content-Type': 'application/zip',
+                Accept: 'application/zip, application/octet-stream ', 'Content-Type': 'application/zip, application/octet-stream '
             }
         })
-            .then(res => res.json())
+            // .then(res => res.json())
             .then((data) => {console.log(data)})
             .catch(error => console.log(error));
 
