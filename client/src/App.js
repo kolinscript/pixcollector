@@ -115,7 +115,10 @@ class App extends Component {
 
     download() {
         fetch('/download', {
-            method: 'get'
+            method: 'GET',
+            headers: {
+                Accept: 'application/zip', 'Content-Type': 'application/zip',
+            }
         })
             .then(res => res.json())
             .then((data) => {console.log(data)})
