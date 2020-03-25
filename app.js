@@ -2,6 +2,7 @@ const express            = require('express');
 const path               = require('path');
 const bodyParser         = require('body-parser');
 const request            = require('request');
+const ZipStream          = require('zip-stream');
 const port               = process.env.PORT || 5000;
 const app                = express();
 
@@ -33,7 +34,7 @@ app.get('/photos', (req, res, next) => {
     `&access_token=${access_token}` +
     `&album_id=saved` +
     `&photo_sizes=1` +
-    `&count=420` +
+    `&count=20` +
     `&v=${vkApiVersion}`;
     request(link, function (error, response, body) {
         res.send({
@@ -41,6 +42,27 @@ app.get('/photos', (req, res, next) => {
             link: link
         });
     });
+});
+
+app.get('/download', (req, res) => {
+    const { body: { linkArr } } = req;
+    var zip = new ZipStream();
+    zip.pipe(res);
+
+    function addNextFile() {
+        var elem = linkArr.shift();
+        var stream = request(elem);
+        zip.entry(stream, { name: 'name' }, err => {
+            if(err)
+                throw err;
+            if(linkArr.length > 0)
+                addNextFile();
+            else
+                zip.finalize()
+        })
+    }
+
+    addNextFile();
 });
 
 app.get('*', (req, res) => {
