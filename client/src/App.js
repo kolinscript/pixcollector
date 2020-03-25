@@ -12,6 +12,7 @@ class App extends Component {
         this.loginVk = this.loginVk.bind(this);
         this.getAlbums = this.getAlbums.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
+        this.download = this.download.bind(this);
     }
 
     componentDidMount() {
@@ -70,14 +71,14 @@ class App extends Component {
 
     getAlbums() {
         fetch('/photos', {
-            method: 'get',
+            method: 'GET',
             headers: {
                 Accept: 'application/json', 'Content-Type': 'application/json',
             }
         })
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
+                console.log(data);
                 const arr = [];
                 data.body.response.items.forEach((item) => {
                     // ascending flow
@@ -112,6 +113,20 @@ class App extends Component {
             .catch(error => console.log(error));
     }
 
+    download() {
+        fetch('/download', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/zip', 'Content-Type': 'application/zip',
+            },
+            body: this.state.pixLinkArray
+        })
+            .then(res => res.json())
+            .then((data) => {console.log(data)})
+            .catch(error => console.log(error));
+
+    }
+
     render() {
         return (
             <div className={'app'}>
@@ -141,6 +156,11 @@ class App extends Component {
                     {(!this.state.showVkLogin && !this.state.done) && (
                         <div className="button login" onClick={this.getAlbums}>
                             <div className="label">Get photos</div>
+                        </div>
+                    )}
+                    {(this.state.done) && (
+                        <div className="button login" onClick={this.download}>
+                            <div className="label">Download</div>
                         </div>
                     )}
                 </div>
