@@ -115,11 +115,7 @@ class App extends Component {
 
     download() {
         fetch('/download', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/zip', 'Content-Type': 'application/zip',
-            },
-            body: JSON.stringify(this.state.pixLinkArray),
+            method: 'get'
         })
             .then(res => res.json())
             .then((data) => {console.log(data)})
