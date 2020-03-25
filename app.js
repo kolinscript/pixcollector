@@ -49,17 +49,26 @@ app.post('/download', (req, res) => {
     var zip = new ZipStream();
     zip.pipe(res);
 
+    var queue = [
+        { name: 'one.jpg', url: 'https://loremflickr.com/640/480' },
+        { name: 'two.jpg', url: 'https://loremflickr.com/640/480' },
+        { name: 'three.jpg', url: 'https://loremflickr.com/640/480' }
+    ];
+
     function addNextFile() {
-        var elem = linkArr.shift();
-        var stream = request(elem);
-        zip.entry(stream, { name: 'name' }, err => {
-            if(err)
+        var elem = queue.shift();
+        var stream = request(elem.url);
+        zip.entry(stream, { name: elem.name }, (err) => {
+            if (err) {
                 throw err;
-            if(linkArr.length > 0)
+            }
+            if (linkArr.length > 0) {
                 addNextFile();
-            else
-                zip.finalize()
-        })
+            }
+            else {
+                zip.finalize();
+            }
+        });
     }
 
     addNextFile();
