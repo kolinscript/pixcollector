@@ -119,7 +119,7 @@ class App extends Component {
             headers: {
                 Accept: 'application/zip', 'Content-Type': 'application/zip',
             },
-            body: this.state.pixLinkArray
+            body: JSON.stringify(this.state.pixLinkArray),
         })
             .then(res => res.json())
             .then((data) => {console.log(data)})
