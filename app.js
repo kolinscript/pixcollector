@@ -38,8 +38,9 @@ app.get('/photos', (req, res, next) => {
     `&count=20` +
     `&v=${vkApiVersion}`;
     request(link, function (error, response, body) {
+        const bodyParsed = JSON.parse(body);
         const arr = [];
-        body.response.items.forEach((item) => {
+        bodyParsed.response.items.forEach((item) => {
             // ascending flow
             // S -> M -> X -> Y -> Z -> W
             const sizeW = item.sizes.find(size => size.type === 'w');
