@@ -14,7 +14,8 @@ const state = {
     vkApiVersion: '5.103',
     access_token: null,
     user_id: null,
-    pixArray: null,
+    count: 100,
+    pixArray: null
 };
 
 app.post('/auth', (req, res, next) => {
@@ -37,7 +38,7 @@ app.get('/photos', (req, res, next) => {
     `&access_token=${state.access_token}` +
     `&album_id=saved` +
     `&photo_sizes=1` +
-    `&count=100` +
+    `&count=${state.count}` +
     `&v=${state.vkApiVersion}`;
     request(link, function (error, response, body) {
         const bodyParsed = JSON.parse(body);
