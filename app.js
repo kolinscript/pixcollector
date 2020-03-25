@@ -21,6 +21,23 @@ app.post('/auth', (req, res, next) => {
         const bodyParsed = JSON.parse(body);
         access_token = bodyParsed.access_token;
         user_id = bodyParsed.user_id;
+        res.send({
+            body: body,
+            response: response
+        });
+    });
+});
+
+app.get('/photos', (req, res, next) => {
+    const link = `https://api.vk.com/` +
+    `method/photos.get` +
+    `?owner_id=${user_id}` +
+    `&access_token=${access_token}` +
+    `&album_id=saved` +
+    `&photo_sizes=1` +
+    `&count=20` +
+    `&v=${vkApiVersion}`;
+    request(link, function (error, response, body) {
         const arr = [];
         body.response.items.forEach((item) => {
             // ascending flow
@@ -48,23 +65,6 @@ app.post('/auth', (req, res, next) => {
         });
         res.send({
             body: arr
-        });
-    });
-});
-
-app.get('/photos', (req, res, next) => {
-    const link = `https://api.vk.com/` +
-    `method/photos.get` +
-    `?owner_id=${user_id}` +
-    `&access_token=${access_token}` +
-    `&album_id=saved` +
-    `&photo_sizes=1` +
-    `&count=20` +
-    `&v=${vkApiVersion}`;
-    request(link, function (error, response, body) {
-        res.send({
-            body: JSON.parse(body),
-            link: link
         });
     });
 });
