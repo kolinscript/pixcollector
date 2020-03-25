@@ -12,7 +12,6 @@ class App extends Component {
         this.loginVk = this.loginVk.bind(this);
         this.getAlbums = this.getAlbums.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
-        this.download = this.download.bind(this);
     }
 
     componentDidMount() {
