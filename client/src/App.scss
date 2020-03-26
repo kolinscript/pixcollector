@@ -60,6 +60,11 @@ $white: rgba(255, 255, 255, 0.88);
           font: 500 16px/20px $fontMain;
           text-align: center;
           color: $blue;
+          &.albumSize {
+            display: inline-block;
+            font-weight: 900;
+            font-size: 18px;
+          }
         }
       }
       .inputs {
@@ -91,6 +96,7 @@ $white: rgba(255, 255, 255, 0.88);
             display: none;
           }
           label {
+            cursor: pointer;
             position: relative;
             display: inline-block;
             padding-left: 34px;
@@ -114,21 +120,23 @@ $white: rgba(255, 255, 255, 0.88);
             border: 2px solid $blue;
           }
           label::after {
-            height: 12px;
-            width: 12px;
-            left: 10px;
+            transition: transform .2s ease-in-out;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 8px;
             top: 50%;
-            margin-top: -6px;
-            border-radius: 6px;
+            margin-top: -8px;
+            border-radius: 8px;
             background: $blue;
           }
 
           input[type="checkbox"] + label::after {
-            content: none;
+            transform: scale(0);
           }
 
           input[type="checkbox"]:checked + label::after {
-            content: "";
+            transform: scale(1);
           }
         }
       }
