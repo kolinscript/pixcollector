@@ -14,18 +14,17 @@ const state = {
     vkApiVersion: '5.103',
     access_token: null,
     user_id: null,
-    album: null,
+    albumSize: null,
     count: 100,
     pixArray: null
 };
 
 app.post('/auth', (req, res, next) => {
     const { body: { link } } = req;
-    request(link, function (error, response, body) {
-        const bodyParsed = JSON.parse(body);
+    request(link, function (error0, response0, body0) {
+        const bodyParsed = JSON.parse(body0);
         state.access_token = bodyParsed.access_token;
         state.user_id = bodyParsed.user_id;
-
         const albumLink = `https://api.vk.com/` +
             `method/photos.getAlbums` +
             `?owner_id=${state.user_id}` +
@@ -33,12 +32,11 @@ app.post('/auth', (req, res, next) => {
             `&need_system=1` +
             `&v=${state.vkApiVersion}`;
         request(albumLink, function (error1, response1, body1) {
-            // state.album = JSON.parse(body);
-            // state.album.response.items.find((item) => {return item.id === -15}).size
+            state.albumSize = JSON.parse(body1).response.items.find((item) => {return item.id === -15}).size;
             res.send({
                 body: {
                     auth: 'Successfully authorized.',
-                    size: body1
+                    size: state.albumSize
                 }
             });
         });
