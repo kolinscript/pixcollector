@@ -26,21 +26,20 @@ app.post('/auth', (req, res, next) => {
         state.access_token = bodyParsed.access_token;
         state.user_id = bodyParsed.user_id;
 
-    }, () => {
-        const albumLink = `https://api.vk.com/` +
-            `method/photos.getAlbums` +
-            `?owner_id=${state.user_id}` +
-            `&access_token=${state.access_token}` +
-            `&album_ids=saved` +
-            `&v=${state.vkApiVersion}`;
-        request(albumLink, function (error, response, body) {
-            state.album = JSON.parse(body);
-            res.send({
-                body: {
-                    auth: 'Successfully authorized.',
-                    album: state.album
-                }
-            });
+    });
+    const albumLink = `https://api.vk.com/` +
+        `method/photos.getAlbums` +
+        `?owner_id=${state.user_id}` +
+        `&access_token=${state.access_token}` +
+        `&album_ids=saved` +
+        `&v=${state.vkApiVersion}`;
+    request(albumLink, function (error, response, body) {
+        state.album = JSON.parse(body);
+        res.send({
+            body: {
+                auth: 'Successfully authorized.',
+                album: state.album
+            }
         });
     });
 });
