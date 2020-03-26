@@ -33,12 +33,12 @@ app.post('/auth', (req, res, next) => {
             `&need_system=1` +
             `&v=${state.vkApiVersion}`;
         request(albumLink, function (error, response, body) {
-            state.album = JSON.parse(body);
+            // state.album = JSON.parse(body);
             // state.album.response.items.find((item) => {return item.id === -15}).size
             res.send({
                 body: {
                     auth: 'Successfully authorized.',
-                    size: state.album
+                    size: body
                 }
             });
         });
