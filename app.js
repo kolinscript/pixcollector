@@ -14,19 +14,32 @@ const state = {
     vkApiVersion: '5.103',
     access_token: null,
     user_id: null,
+    album: null,
     count: 100,
     pixArray: null
 };
 
 app.post('/auth', (req, res, next) => {
     const { body: { link } } = req;
-    request(link, function (error, response, body) {
-        const bodyParsed = JSON.parse(body);
-        state.access_token = bodyParsed.access_token;
-        state.user_id = bodyParsed.user_id;
-        res.send({
-            body: body,
-            response: response
+    const albumLink = `https://api.vk.com/` +
+        `method/photos.getAlbums` +
+        `?owner_id=${state.user_id}` +
+        `&access_token=${state.access_token}` +
+        `&album_ids=saved` +
+        `&v=${state.vkApiVersion}`;
+    request(albumLink, function (error, response, body) {
+        state.album = JSON.parse(body);
+    }, () => {
+        request(link, function (error, response, body) {
+            const bodyParsed = JSON.parse(body);
+            state.access_token = bodyParsed.access_token;
+            state.user_id = bodyParsed.user_id;
+            res.send({
+                body: {
+                    auth: 'Successfully authorized.',
+                    album: state.album
+                }
+            });
         });
     });
 });
@@ -38,7 +51,7 @@ app.get('/photos', (req, res, next) => {
     `&access_token=${state.access_token}` +
     `&album_id=saved` +
     `&photo_sizes=1` +
-    `&count=${state.count}` +
+    `&count=${req.query.count}` +
     `&v=${state.vkApiVersion}`;
     request(link, function (error, response, body) {
         const bodyParsed = JSON.parse(body);

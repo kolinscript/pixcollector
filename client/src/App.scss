@@ -1,7 +1,7 @@
 /* Vars */
 $fontMain: 'Roboto', sans-serif;
-$background: #314569cc;
-$firmColorVK: #4a76a8;
+$blue: #314569cc;
+$white: rgba(255, 255, 255, 0.88);
 
 .app {
   position: relative;
@@ -25,14 +25,16 @@ $firmColorVK: #4a76a8;
       width: 100%;
       height: 100%;
       img {
-        object-fit: cover;
+        object-fit: contain;
+        padding: 10px;
         width: 25%;
         height: 50%;
+
       }
     }
   }
 
-  .auth-wrapper {
+  .main {
     position: fixed;
     display: flex;
     justify-content: space-between;
@@ -47,8 +49,89 @@ $firmColorVK: #4a76a8;
       border-radius: 50px;
       font: 400 62px/64px $fontMain;
       text-align: center;
-      background-color: $background;
-      color: #FFFFFFFF;
+      background-color: $blue;
+      color: $white;
+    }
+    form {
+      .title {
+        margin-bottom: 10px;
+        span {
+          display: block;
+          font: 500 16px/20px $fontMain;
+          text-align: center;
+          color: $blue;
+        }
+      }
+      .inputs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        input[type=number] {
+          width: 80px;
+          height: 32px;
+          padding: 8px 0;
+          background: $blue;
+          border: none;
+          outline: none;
+          border-radius: 25px;
+          font: 500 16px/18px $fontMain;
+          text-align: center;
+          color: $white;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        .checkbox {
+          margin-left: 10px;
+          height: 32px;
+          input[type=checkbox] {
+            display: none;
+          }
+          label {
+            position: relative;
+            display: inline-block;
+            padding-left: 34px;
+            height: 32px;
+            font: 500 16px/32px $fontMain;
+            color: $blue;
+          }
+          label::before,
+          label::after {
+            position: absolute;
+            display: block;
+            box-sizing: border-box;
+            content: "";
+          }
+          label::before{
+            height: 32px;
+            width: 32px;
+            left: 0;
+            top: 0;
+            border-radius: 16px;
+            border: 2px solid $blue;
+          }
+          label::after {
+            height: 12px;
+            width: 12px;
+            left: 10px;
+            top: 50%;
+            margin-top: -6px;
+            border-radius: 6px;
+            background: $blue;
+          }
+
+          input[type="checkbox"] + label::after {
+            content: none;
+          }
+
+          input[type="checkbox"]:checked + label::after {
+            content: "";
+          }
+        }
+      }
     }
     .button {
       display: flex;
@@ -58,7 +141,7 @@ $firmColorVK: #4a76a8;
       width: 180px;
       height: 44px;
       padding: 8px 20px;
-      background: $background;
+      background: $blue;
       border: none;
       outline: none;
       border-radius: 25px;
@@ -66,7 +149,7 @@ $firmColorVK: #4a76a8;
       text-decoration: none;
       transition: background 200ms ease-in-out;
       &:hover {
-        background: lighten($background, 10%);
+        background: lighten($blue, 10%);
       }
       .logo-vk {
         margin-left: 10px;
@@ -76,7 +159,7 @@ $firmColorVK: #4a76a8;
       .label {
         font: 500 16px/18px $fontMain;
         text-align: center;
-        color: rgba(255, 255, 255, 0.88);
+        color: $white;
       }
     }
   }
@@ -86,7 +169,7 @@ $firmColorVK: #4a76a8;
     bottom: 0;
     height: 40px;
     width: 100%;
-    background: $background;
+    background: $blue;
     .social {
       height: 100%;
       width: 100%;

@@ -7,11 +7,14 @@ class App extends Component {
         this.state = {
             showVkLogin: true,
             pixArray: [],
-            done: false
+            done: false,
+            count: 100,
+            all: false,
         };
         this.loginVk = this.loginVk.bind(this);
-        this.getAlbums = this.getAlbums.bind(this);
+        this.getPhotos = this.getPhotos.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -68,8 +71,8 @@ class App extends Component {
         window.open(AUTH_URL_AUTHORIZE,"_self")
     }
 
-    getAlbums() {
-        fetch('/photos', {
+    getPhotos() {
+        fetch(`/photos?count=${this.state.count}`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json', 'Content-Type': 'application/json',
@@ -81,16 +84,24 @@ class App extends Component {
                 this.setState(prevState => ({
                     pixArray: data.body,
                     done: true
-                }), () => {
-                    console.log(this.state.pixArray);
-                });
+                }));
             })
             .catch(error => console.log(error));
     }
 
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState( {
+            [name]: value
+        }, () => {
+            console.log(this.state);
+        });
+    }
+
     render() {
         return (
-            <div className={'app'}>
+            <div className="app">
                 <div className="gallery">
                     <div className="pix">
                         {this.state.pixArray.map((value) => {
@@ -98,8 +109,21 @@ class App extends Component {
                         })}
                     </div>
                 </div>
-                <div className="auth-wrapper">
-                    <h1 className={'title'}>PIXCOLLECTOR</h1>
+                <div className="main">
+                    <h1 className="title">PIXCOLLECTOR</h1>
+                    <form>
+                        <div className="title">
+                            <span>Enter the number of photos you want to collect </span>
+                            <span>or check the box to grab the whole thing</span>
+                        </div>
+                        <div className="inputs">
+                            <input type="number" name="count" value={this.state.count} onChange={this.handleChange}/>
+                            <div className="checkbox">
+                                <input type="checkbox" name="all" id="checkbox" value={this.state.all} onChange={this.handleChange}/>
+                                <label htmlFor="checkbox"></label>
+                            </div>
+                        </div>
+                    </form>
                     {this.state.showVkLogin && (
                         <div className="button login" onClick={this.loginVk}>
                             <div className="label">Login with</div>
@@ -115,18 +139,18 @@ class App extends Component {
                         </div>
                     )}
                     {(!this.state.showVkLogin && !this.state.done) && (
-                        <div className="button login" onClick={this.getAlbums}>
+                        <div className="button login" onClick={this.getPhotos}>
                             <div className="label">Get photos</div>
                         </div>
                     )}
                     {(this.state.done) && (
-                        <a className="button login" href={'/pixcollector.zip'} download>
+                        <a className="button login" href="/pixcollector.zip" download>
                             <div className="label">Download</div>
                         </a>
                     )}
                 </div>
                 <footer>
-                    <div className={'social'}>
+                    <div className="social">
                         <div className="link"><a className="github" href="https://github.com/kolinscript" target="_blank" rel="noopener noreferrer"></a></div>
                         <div className="link"><a className="telega" href="https://t.me/nkoshkarov" target="_blank" rel="noopener noreferrer"></a></div>
                         <div className="link"><a className="vk" href="https://vk.com/koshkarovnik" target="_blank" rel="noopener noreferrer"></a></div>
