@@ -25,7 +25,7 @@ app.post('/auth', (req, res, next) => {
         const bodyParsed = JSON.parse(body);
         state.access_token = bodyParsed.access_token;
         state.user_id = bodyParsed.user_id;
-    }, () => {
+
         const albumLink = `https://api.vk.com/` +
             `method/photos.getAlbums` +
             `?owner_id=${state.user_id}` +
