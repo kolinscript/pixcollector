@@ -28,7 +28,7 @@ class App extends Component {
     handleLoad() {
         const url_current = window.location.href;
         console.log(url_current);
-        if (url_current === 'https://pixcollector.herokuapp.com/' || url_current === 'http://localhost:3000/') {
+        if (url_current === 'https://pixcollector.herokuapp.com/') {
             this.setState(prevState => ({
                 showVkLogin: true
             }));
@@ -111,19 +111,21 @@ class App extends Component {
                 </div>
                 <div className="main">
                     <h1 className="title">PIXCOLLECTOR</h1>
-                    <form>
-                        <div className="title">
-                            <span>Enter the number of photos you want to collect </span>
-                            <span>or check the box to grab the whole thing</span>
-                        </div>
-                        <div className="inputs">
-                            <input type="number" name="count" value={this.state.count} onChange={this.handleChange}/>
-                            <div className="checkbox">
-                                <input type="checkbox" name="all" id="checkbox" value={this.state.all} onChange={this.handleChange}/>
-                                <label htmlFor="checkbox"></label>
+                    {(!this.state.showVkLogin && !this.state.done) && (
+                        <form>
+                            <div className="title">
+                                <span>Enter the number of photos you want to collect </span>
+                                <span>or check the box to grab the whole thing</span>
                             </div>
-                        </div>
-                    </form>
+                            <div className="inputs">
+                                <input type="number" name="count" value={this.state.count} onChange={this.handleChange}/>
+                                <div className="checkbox">
+                                    <input type="checkbox" name="all" id="checkbox" value={this.state.all} onChange={this.handleChange}/>
+                                    <label htmlFor="checkbox"></label>
+                                </div>
+                            </div>
+                        </form>
+                    )}
                     {this.state.showVkLogin && (
                         <div className="button login" onClick={this.loginVk}>
                             <div className="label">Login with</div>
