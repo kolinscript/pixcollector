@@ -8,14 +8,16 @@ class App extends Component {
             showVkLogin: true,
             pixArray: [],
             done: false,
-            albumSize: null,
-            count: 100,
+            readOnly: false,
+            albumSize: 0,
+            count: '',
             all: false,
         };
         this.loginVk = this.loginVk.bind(this);
         this.getPhotos = this.getPhotos.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleCheckbox = this.handleCheckbox.bind(this);
     }
 
     componentDidMount() {
@@ -105,6 +107,28 @@ class App extends Component {
         });
     }
 
+    handleCheckbox(event) {
+        const name = event.target.name;
+        const value = event.target.checked;
+        console.log(value);
+        if (value) {
+            this.setState(prevState => ({
+                count: this.state.albumSize,
+                readOnly: true
+            }));
+        } else {
+            this.setState(prevState => ({
+                count: '',
+                readOnly: false
+            }));
+        }
+        this.setState({
+            [name]: value
+        }, () => {
+            console.log(this.state);
+        });
+    }
+
     render() {
         return (
             <div className="app">
@@ -122,16 +146,21 @@ class App extends Component {
                             <div className="title">
                                 <span>You've got <span className="albumSize">{this.state.albumSize}</span> saved photos. </span>
                                 <span>Enter the number of photos you want to collect </span>
-                                <span>or check the box to grab the whole thing</span>
+                                <span>or check the box to grab the whole thing. </span>
                             </div>
                             <div className="inputs">
-                                <input type="number" name="count" value={this.state.count} onChange={this.handleChange}/>
+                                <input type="number"
+                                       name="count"
+                                       value={this.state.count}
+                                       readOnly={this.state.readOnly}
+                                       onChange={this.handleChange}
+                                />
                                 <div className="checkbox">
                                     <input type="checkbox"
                                            name="all"
                                            id="checkbox"
                                            checked={this.state.all}
-                                           onChange={(e) => {this.handleChange({target: {name: e.target.name, value: e.target.checked}})}}
+                                           onChange={this.handleCheckbox}
                                     />
                                     <label htmlFor="checkbox"></label>
                                 </div>

@@ -83,6 +83,9 @@ $white: rgba(255, 255, 255, 0.88);
           font: 500 16px/18px $fontMain;
           text-align: center;
           color: $white;
+          &:read-only {
+            background: lighten($blue, 10%)
+          }
         }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
