@@ -1,4 +1,5 @@
-const router        = require('express').Router();
+const router             = require('express').Router();
+const ZipStream          = require('zip-stream');
 
 router.get('/pixcollector.zip', (req, res) => {
     const state = req.app.get('state').state;

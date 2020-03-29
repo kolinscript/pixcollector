@@ -1,7 +1,6 @@
 const express            = require('express');
 const path               = require('path');
 const bodyParser         = require('body-parser');
-const ZipStream          = require('zip-stream');
 const state              = require('./state');
 const apiV1              = require('./routes/v1');
 const port               = process.env.PORT || 5000;
