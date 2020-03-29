@@ -2,7 +2,7 @@ const router             = require('express').Router();
 const request            = require('request');
 
 router.post('/', (req, res, next) => {
-    const state = req.app.get('state');
+    const state = req.app.get('state').state;
     const { body: { link } } = req;
     request(link, function (error0, response0, body0) {
         const bodyParsed = JSON.parse(body0);
