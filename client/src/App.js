@@ -40,30 +40,30 @@ class App extends Component {
             this.setState(prevState => ({
                 showVkLogin: false
             }));
-            const code = url_current.split('code=')[1];
-            const AUTH_URL_TOKEN = `https://oauth.vk.com/access_token` +
-                `?client_id=7372433` +
-                `&client_secret=XgglLIZcB7qB3nNryc8y` +
-                `&redirect_uri=https://pixcollector.herokuapp.com` +
-                `&code=${code}`;
-            const data = {
-                link: AUTH_URL_TOKEN
-            };
-            fetch('/api/v1/auth', {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json', 'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    console.log(data);
-                    this.setState(prevState => ({
-                        albumSize: data.body.size
-                    }));
-                })
-                .catch(error => console.log(error));
+            // const code = url_current.split('code=')[1];
+            // const AUTH_URL_TOKEN = `https://oauth.vk.com/access_token` +
+            //     `?client_id=7372433` +
+            //     `&client_secret=XgglLIZcB7qB3nNryc8y` +
+            //     `&redirect_uri=https://pixcollector.herokuapp.com` +
+            //     `&code=${code}`;
+            // const data = {
+            //     link: AUTH_URL_TOKEN
+            // };
+            // fetch('/api/v1/auth', {
+            //     method: 'POST',
+            //     headers: {
+            //         Accept: 'application/json', 'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(data),
+            // })
+            //     .then(res => res.json())
+            //     .then((data) => {
+            //         console.log(data);
+            //         this.setState(prevState => ({
+            //             albumSize: data.body.size
+            //         }));
+            //     })
+            //     .catch(error => console.log(error));
         }
     }
 
