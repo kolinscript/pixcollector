@@ -37,7 +37,7 @@ router.get('/', (req, res, next) => {
                 arr.push(sizeS);
             }
             state.pixArray = arr;
-            req.app.set('state', state);
+            req.app.set('state', {state: {state}});
         });
         res.send({
             body: arr
