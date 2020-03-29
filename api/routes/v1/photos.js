@@ -2,7 +2,7 @@ const router             = require('express').Router();
 const request            = require('request');
 
 router.get('/', (req, res, next) => {
-    const state = req.app.get('state');
+    const state = req.app.get('state').state;
     const link = `https://api.vk.com/` +
         `method/photos.get` +
         `?owner_id=${state.user_id}` +
