@@ -3,10 +3,10 @@ const path               = require('path');
 const bodyParser         = require('body-parser');
 const request            = require('request');
 const ZipStream          = require('zip-stream');
+const state              = require('./state');
+const apiV1              = require('./routes/v1');
 const port               = process.env.PORT || 5000;
 const app                = express();
-const state              = require('state');
-const apiV1              = require('./routes/v1');
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,6 +17,5 @@ app.set('state', state);
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname+'../client/build/index.html'));
 });
-
 
 app.listen(port, () => console.log('Api live on port', + port));

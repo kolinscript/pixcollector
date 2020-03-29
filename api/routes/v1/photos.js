@@ -1,7 +1,7 @@
 const router        = require('express').Router();
-const state         = req.app.get('state');
 
-app.get('/', (req, res, next) => {
+router.get('/', (req, res, next) => {
+    const state = req.app.get('state');
     const link = `https://api.vk.com/` +
         `method/photos.get` +
         `?owner_id=${state.user_id}` +
@@ -36,6 +36,7 @@ app.get('/', (req, res, next) => {
                 arr.push(sizeS);
             }
             state.pixArray = arr;
+            req.app.set('state', state);
         });
         res.send({
             body: arr

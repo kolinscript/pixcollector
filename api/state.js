@@ -7,4 +7,4 @@ const state = {
     pixArray: null
 };
 
-module.exports = state;
+module.exports.state = state;
