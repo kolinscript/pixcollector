@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
     const link = `https://oauth.vk.com/access_token` +
         `?client_id=7372433` +
         `&client_secret=XgglLIZcB7qB3nNryc8y` +
-        `&redirect_uri=https://pixcollector.herokuapp.com` +
+        `&redirect_uri=https://pixcollector.herokuapp.com/api/vi/auth` +
         `&code=${code}`;
     request(link, function (error0, response0, body0) {
         const bodyParsed = JSON.parse(body0);
