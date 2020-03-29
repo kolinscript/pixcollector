@@ -49,7 +49,7 @@ class App extends Component {
             const data = {
                 link: AUTH_URL_TOKEN
             };
-            fetch('/auth', {
+            fetch('/api/v1/auth', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json', 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ class App extends Component {
     }
 
     getPhotos() {
-        fetch(`/photos?count=${this.state.count}`, {
+        fetch(`/api/v1/photos?count=${this.state.count}`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json', 'Content-Type': 'application/json',
@@ -187,7 +187,7 @@ class App extends Component {
                         </div>
                     )}
                     {(this.state.done) && (
-                        <a className="button login" href="/download/pixcollector.zip" download>
+                        <a className="button login" href="/api/v1/download/pixcollector.zip" download>
                             <div className="label">Download</div>
                         </a>
                     )}
