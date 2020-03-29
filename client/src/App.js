@@ -72,7 +72,7 @@ class App extends Component {
         const AUTH_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
             '?client_id=7372433' +
             '&display=page' +
-            '&redirect_uri=https://pixcollector.herokuapp.com/api/vi/auth' +
+            '&redirect_uri=https://pixcollector.herokuapp.com/api/v1/auth' +
             '&scope=friends,photos,offline' +
             '&response_type=code' +
             '&v=5.103';
