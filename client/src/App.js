@@ -144,7 +144,7 @@ class App extends Component {
                     {(!this.state.showVkLogin && !this.state.done) && (
                         <form>
                             <div className="title">
-                                <span>You've got <span className="albumSize">{this.state.albumSize}</span> saved photos. </span>
+                                <span>You've got <span className="albumSize">{this.state.albumSize}</span> pix collected. </span>
                                 <span>Enter the number of photos you want to collect </span>
                                 <span>or check the box to grab the whole thing. </span>
                             </div>
