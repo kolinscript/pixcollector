@@ -14,6 +14,7 @@ router.get('/', (req, res, next) => {
     request(link, function (error, response, body) {
         const bodyParsed = JSON.parse(body);
         const arr = [];
+        console.log(bodyParsed);
         bodyParsed.response.items.forEach((item) => {
             // ascending flow
             // S -> M -> X -> Y -> Z -> W
