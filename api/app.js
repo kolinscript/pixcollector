@@ -1,7 +1,6 @@
 const express            = require('express');
 const path               = require('path');
 const bodyParser         = require('body-parser');
-const request            = require('request');
 const ZipStream          = require('zip-stream');
 const state              = require('./state');
 const apiV1              = require('./routes/v1');
