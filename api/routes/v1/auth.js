@@ -8,7 +8,7 @@ router.post('/', (req, res, next) => {
         const bodyParsed = JSON.parse(body0);
         state.access_token = bodyParsed.access_token;
         state.user_id = bodyParsed.user_id;
-        req.app.set('state', state);
+        req.app.set('state', {state: {state}});
         const albumLink = `https://api.vk.com/` +
             `method/photos.getAlbums` +
             `?owner_id=${state.user_id}` +
