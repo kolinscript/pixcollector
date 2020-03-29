@@ -9,6 +9,7 @@ router.post('/', (req, res, next) => {
         state.access_token = bodyParsed.access_token;
         state.user_id = bodyParsed.user_id;
         req.app.set('state', state);
+        console.log(state);
         const albumLink = `https://api.vk.com/` +
             `method/photos.getAlbums` +
             `?owner_id=${state.user_id}` +
@@ -18,6 +19,7 @@ router.post('/', (req, res, next) => {
         request(albumLink, function (error1, response1, body1) {
             state.albumSize = JSON.parse(body1).response.items.find((item) => {return item.id === -15}).size;
             req.app.set('state', state);
+            console.log(state);
             res.send({
                 body: {
                     auth: 'Successfully authorized.',
