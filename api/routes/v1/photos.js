@@ -11,6 +11,7 @@ router.get('/', (req, res, next) => {
         `&photo_sizes=1` +
         `&count=${req.query.count}` +
         `&v=${state.vkApiVersion}`;
+    console.log(state);
     request(link, function (error, response, body) {
         const bodyParsed = JSON.parse(body);
         const arr = [];
