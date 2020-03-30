@@ -162,6 +162,7 @@ class App extends Component {
     render() {
         return (
             <Router>
+                <span>{this.state.showVkLogin.toString()}</span>
                 <div className="app">
                     <Switch>
                         <Route path="/auth">
