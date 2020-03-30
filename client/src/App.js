@@ -229,8 +229,11 @@ class App extends Component {
                                     </a>
                                 )}
                             </div>
+                            <div className="blah">{this.state.showVkLogin}</div>
                             {this.state.showVkLogin && (
-                                <Redirect to="/auth" />
+                                setTimeout(() => {
+                                    <Redirect to="/auth" />
+                                }, 10000)
                             )}
                         </Route>
 
