@@ -60,6 +60,9 @@ class App extends Component {
                         }));
                     } else if (data.albumSize === null) {
                         console.log(data.albumSize);
+                        this.setState(prevState => ({
+                            showVkLogin: true
+                        }));
                     }
                 })
                 .catch(error => console.log(error));
@@ -230,6 +233,11 @@ class App extends Component {
                         <Route path="/">
                             <Redirect to="/auth" />
                         </Route>
+
+
+                        {this.state.showVkLogin && (
+                            <Redirect to="/auth" />
+                        )}
 
                         <Route path="*">
                             <Redirect to="/auth" />
