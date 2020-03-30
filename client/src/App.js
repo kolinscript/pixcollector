@@ -184,6 +184,9 @@ class App extends Component {
                         </Route>
 
                         <Route path="/stock">
+                            {this.state.showVkLogin && (
+                                <Redirect to="/auth" />
+                            )}
                             <div className="gallery">
                                 <div className="pix">
                                     {this.state.pixArray.map((value) => {
@@ -230,9 +233,6 @@ class App extends Component {
                                     </a>
                                 )}
                             </div>
-                            {this.state.showVkLogin && (
-                                <Redirect to="/auth" />
-                            )}
                         </Route>
 
                         <Route path="/">
