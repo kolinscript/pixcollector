@@ -3,8 +3,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect,
-    useHistory
+    Redirect
 } from "react-router-dom";
 import './App.scss';
 
@@ -60,12 +59,7 @@ class App extends Component {
                             albumSize: data.body.albumSize
                         }));
                     } else if (data.albumSize === null) {
-                        let history = useHistory();
-                        React.useEffect(() => {
-                            setTimeout(() => {
-                                history.push('/auth');
-                            }, 400);
-                        }, [history]);
+                        console.log(data.albumSize);
                     }
                 })
                 .catch(error => console.log(error));
