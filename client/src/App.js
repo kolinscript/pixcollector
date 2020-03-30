@@ -56,7 +56,7 @@ class App extends Component {
                     console.log(data);
                     if (data.albumSize) {
                         this.setState(prevState => ({
-                            albumSize: data.body.albumSize
+                            albumSize: data.albumSize
                         }));
                     } else if (data.albumSize === null) {
                         console.log(data.albumSize);
