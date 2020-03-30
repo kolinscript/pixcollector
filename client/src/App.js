@@ -58,6 +58,7 @@ class App extends Component {
                         this.setState(prevState => ({
                             albumSize: data.albumSize
                         }));
+                        console.log(this.state.showVkLogin);
                     }
                     if (!data.albumSize) {
                         this.setState( {
