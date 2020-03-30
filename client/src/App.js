@@ -60,8 +60,7 @@ class App extends Component {
                             showVkLogin: false
                         }));
                         console.log(this.state.showVkLogin);
-                    }
-                    if (!data.albumSize) {
+                    } else if (!data.albumSize) {
                         this.setState( {
                             showVkLogin: true
                         }, () => {
