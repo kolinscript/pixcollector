@@ -3,7 +3,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect
+    Redirect,
+    useHistory
 } from "react-router-dom";
 import './App.scss';
 
@@ -66,6 +67,8 @@ class App extends Component {
                         }, () => {
                             console.log(this.state);
                         });
+                        const history = useHistory();
+                        history.push("/path/to/push");
                     }
                 })
                 .catch(error => console.log(error));
