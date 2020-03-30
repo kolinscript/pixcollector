@@ -159,6 +159,7 @@ class App extends Component {
                                 )}
                             </div>
                         </Route>
+
                         <Route path="/stock">
                             <div className="gallery">
                                 <div className="pix">
@@ -207,7 +208,8 @@ class App extends Component {
                                 )}
                             </div>
                         </Route>
-                        <Route exact path="/">
+
+                        <Route path="/">
                             <div className="main">
                                 <h1 className="title">PIXCOLLECTOR</h1>
                                 {this.state.showVkLogin && (
@@ -226,6 +228,7 @@ class App extends Component {
                                 )}
                             </div>
                         </Route>
+
                         <Route path="*">
                             <Redirect to="/auth" />
                         </Route>
