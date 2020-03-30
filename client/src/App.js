@@ -58,7 +58,8 @@ class App extends Component {
                         this.setState(prevState => ({
                             albumSize: data.albumSize
                         }));
-                    } else if (data.albumSize === null) {
+                    }
+                    if (!data.albumSize) {
                         console.log(data.albumSize);
                         this.setState(prevState => ({
                             showVkLogin: true
@@ -229,11 +230,8 @@ class App extends Component {
                                     </a>
                                 )}
                             </div>
-                            <div className="blah">{this.state.showVkLogin}</div>
                             {this.state.showVkLogin && (
-                                setTimeout(() => {
-                                    <Redirect to="/auth" />
-                                }, 10000)
+                                <Redirect to="/auth" />
                             )}
                         </Route>
 
