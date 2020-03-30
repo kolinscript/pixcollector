@@ -4,7 +4,7 @@ const request            = require('request');
 router.get('/', (req, res, next) => {
     console.log('REQ', req);
     const state = req.app.get('state').state;
-    const { code: { code } } = req;
+    const { code: { code } } = req.query.code;
     console.log('CODE', code);
     const link = `https://oauth.vk.com/access_token` +
         `?client_id=7372433` +
