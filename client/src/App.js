@@ -162,7 +162,10 @@ class App extends Component {
             <Router>
                 <div className="app">
                     <Switch>
-                        {this.state.showVkLogin ? <Redirect to="/auth" /> :  <Redirect to="/stock" />}
+
+                        <Route exact path="/">
+                            {this.state.showVkLogin ? <Redirect to="/auth" /> :  <Redirect to="/stock" />}
+                        </Route>
 
                         <Route path="/auth">
                             <div className="main">
