@@ -241,8 +241,14 @@ class App extends Component {
                             {/*) :  <Redirect to="/auth" />}*/}
                         </Route>
 
+                        {/*<Route path="*">*/}
+                        {/*    <Redirect to="/auth" />*/}
+                        {/*</Route>*/}
                         <Route path="*">
-                            <Redirect to="/auth" />
+                            {!this.state.showVkLogin ?
+                                (<Redirect to="/stock" />) :
+                                (<Redirect to="/auth" />)
+                            }
                         </Route>
                     </Switch>
                     <footer>
