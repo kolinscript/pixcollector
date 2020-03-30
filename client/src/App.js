@@ -67,8 +67,7 @@ class App extends Component {
                         }, () => {
                             console.log(this.state);
                         });
-                        const history = useHistory();
-                        history.push("/auth");
+                        this.navigate();
                     }
                 })
                 .catch(error => console.log(error));
@@ -98,6 +97,11 @@ class App extends Component {
             //     })
             //     .catch(error => console.log(error));
         }
+    }
+
+    navigate() {
+        const history = useHistory();
+        history.push('/auth');
     }
 
     // First OAUTH step
