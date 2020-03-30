@@ -233,9 +233,10 @@ class App extends Component {
                         </Route>
 
                         <Route path="*">
-                            {!this.state.showVkLogin ? (
-                                <Redirect to="/stock" />
-                            ) :  <Redirect to="/auth" />}
+                            {!this.state.showVkLogin ?
+                                (<Redirect to="/stock" />) :
+                                (<Redirect to="/auth" />)
+                            }
                         </Route>
                     <footer>
                         <div className="social">
