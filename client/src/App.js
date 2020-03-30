@@ -207,10 +207,7 @@ class App extends Component {
                                 )}
                             </div>
                         </Route>
-                        <Route path="/">
-                            <Redirect to="/auth" />
-                        </Route>
-                        <Route path="*">
+                        <Route exact path="/">
                             <Redirect to="/auth" />
                         </Route>
                     </Switch>
