@@ -40,7 +40,7 @@ class App extends Component {
             this.setState(prevState => ({
                 showVkLogin: true
             }));
-        } else if (url_current === 'https://pixcollector.herokuapp.com/stock') {
+        } else {
             this.setState(prevState => ({
                 showVkLogin: false
             }));
@@ -60,11 +60,12 @@ class App extends Component {
                             console.log(this.state);
                         });
                     } else if (data.albumSize) {
-                        this.setState(prevState => ({
+                        this.setState(  {
                             albumSize: data.albumSize,
                             showVkLogin: false
-                        }));
-                        console.log(this.state.showVkLogin);
+                        }, () => {
+                            console.log(this.state);
+                        });
                     }
                 })
                 .catch(error => console.log(error));
@@ -163,32 +164,26 @@ class App extends Component {
             <Router>
                 <div className="app">
                     <Switch>
-                        <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk} /></Route>
-
+                        <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
                         <Route path="/stock">
-                            {!this.state.showVkLogin ? (
-                                <div className="blah">
-                                    <Gallery pixArray={this.state.pixArray} />
-                                    <Form
-                                        showVkLogin={this.state.showVkLogin}
-                                        done={this.state.done}
-                                        albumSize={this.state.albumSize}
-                                        count={this.state.count}
-                                        realonly={this.state.realonly}
-                                        handleChange={this.handleChange}
-                                        all={this.state.all}
-                                        handleCheckbox={this.handleCheckbox}
-                                        getPhotos={this.getPhotos}
-                                    />
-                                </div>
-                            ) :  <Redirect to="/auth" />}
+                            <Gallery pixArray={this.state.pixArray}/>
+                            <Form
+                                showVkLogin={this.state.showVkLogin}
+                                done={this.state.done}
+                                albumSize={this.state.albumSize}
+                                count={this.state.count}
+                                realonly={this.state.realonly}
+                                handleChange={this.handleChange}
+                                all={this.state.all}
+                                handleCheckbox={this.handleCheckbox}
+                                getPhotos={this.getPhotos}
+                            />
                         </Route>
-
                         <Route path="*">
-                            <Redirect to="/auth" />
+                            <Redirect to="/auth"/>
                         </Route>
                     </Switch>
-                    <Footer />
+                    <Footer/>
                 </div>
             </Router>
         );
