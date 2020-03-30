@@ -42,10 +42,24 @@ class App extends Component {
                 showVkLogin: true
             }));
         } else {
-            // Second OAUTH step
             this.setState(prevState => ({
                 showVkLogin: false
             }));
+            fetch(`/api/v1/photos/albumSize`, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json',
+                }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                    this.setState(prevState => ({
+                        albumSize: data.body.size
+                    }));
+                })
+                .catch(error => console.log(error));
+            // Second OAUTH step
             // const code = url_current.split('code=')[1];
             // const AUTH_URL_TOKEN = `https://oauth.vk.com/access_token` +
             //     `?client_id=7372433` +

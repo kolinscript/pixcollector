@@ -45,4 +45,11 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/albumSize', (req, res, next) => {
+    const state = req.app.get('state').state;
+    res.send({
+        albumSize: state.albumSize
+    });
+});
+
 module.exports = router;
