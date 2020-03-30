@@ -162,11 +162,6 @@ class App extends Component {
             <Router>
                 <div className="app">
                     <Switch>
-
-                        <Route exact path="/">
-                            {this.state.showVkLogin ? <Redirect to="/auth" /> :  <Redirect to="/stock" />}
-                        </Route>
-
                         <Route path="/auth">
                             <div className="main">
                                 <h1 className="title">PIXCOLLECTOR</h1>
@@ -236,8 +231,12 @@ class App extends Component {
                             </div>
                         </Route>
 
-                        <Route path="*">
-                            <Redirect to="/auth" />
+                        {/*<Route path="*">*/}
+                        {/*    <Redirect to="/auth" />*/}
+                        {/*</Route>*/}
+
+                        <Route exact path="*">
+                            {this.state.showVkLogin ? <Redirect to="/auth" /> :  <Redirect to="/stock" />}
                         </Route>
                     </Switch>
                     <footer>
