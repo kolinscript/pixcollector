@@ -41,7 +41,7 @@ class App extends Component {
             this.setState(prevState => ({
                 showVkLogin: true
             }));
-        } else {
+        } else if (url_current === 'https://pixcollector.herokuapp.com/stock') {
             this.setState(prevState => ({
                 showVkLogin: false
             }));
@@ -54,18 +54,18 @@ class App extends Component {
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data);
-                    if (data.albumSize) {
-                        this.setState(prevState => ({
-                            albumSize: data.albumSize,
-                            showVkLogin: false
-                        }));
-                        console.log(this.state.showVkLogin);
-                    } else if (!data.albumSize) {
+                    if (!data.albumSize) {
                         this.setState( {
                             showVkLogin: true
                         }, () => {
                             console.log(this.state);
                         });
+                    } else if (data.albumSize) {
+                        this.setState(prevState => ({
+                            albumSize: data.albumSize,
+                            showVkLogin: false
+                        }));
+                        console.log(this.state.showVkLogin);
                     }
                 })
                 .catch(error => console.log(error));
