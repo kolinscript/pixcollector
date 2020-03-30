@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {
     BrowserRouter as Router,
-    Route,
     Switch,
+    Route,
     Redirect
 } from "react-router-dom";
 import './App.scss';
@@ -182,6 +182,9 @@ class App extends Component {
                                     </div>
                                 )}
                             </div>
+                            {/*{this.state.showVkLogin ? (*/}
+                            {/*    */}
+                            {/*) :  <Redirect to="/stock" />}*/}
                         </Route>
 
                         <Route path="/stock">
@@ -231,14 +234,17 @@ class App extends Component {
                                     </a>
                                 )}
                             </div>
+                            {/*{!this.state.showVkLogin ? (*/}
+                            {/*    <div className="blah">*/}
+                            {/*        */}
+                            {/*    </div>*/}
+                            {/*) :  <Redirect to="/auth" />}*/}
                         </Route>
 
                         <Route path="*">
-                            {!this.state.showVkLogin ?
-                                (<Redirect to="/stock" />) :
-                                (<Redirect to="/auth" />)
-                            }
+                            <Redirect to="/auth" />
                         </Route>
+                    </Switch>
                     <footer>
                         <div className="social">
                             <div className="link"><a className="github" href="https://github.com/kolinscript" target="_blank" rel="noopener noreferrer"> </a></div>
@@ -247,7 +253,6 @@ class App extends Component {
                             <div className="link"><a className="instagram" href="http://instagram.com/kolinvision" target="_blank" rel="noopener noreferrer"> </a></div>
                         </div>
                     </footer>
-                    </Switch>
                 </div>
             </Router>
         );
