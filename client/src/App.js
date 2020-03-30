@@ -61,7 +61,11 @@ class App extends Component {
                         }));
                     } else if (data.albumSize === null) {
                         let history = useHistory();
-                        history.push('/auth');
+                        React.useEffect(() => {
+                            setTimeout(() => {
+                                history.push('/auth');
+                            }, 400);
+                        }, [history]);
                     }
                 })
                 .catch(error => console.log(error));
