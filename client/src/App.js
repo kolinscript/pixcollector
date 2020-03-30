@@ -59,7 +59,7 @@ class App extends Component {
                         this.setState(prevState => ({
                             albumSize: data.body.albumSize
                         }));
-                    } else {
+                    } else if (data.albumSize === null) {
                         let history = useHistory();
                         history.push('/auth');
                     }
