@@ -180,7 +180,6 @@ class App extends Component {
                                     </div>
                                 )}
                             </div>
-
                         </Route>
 
                         <Route path="/stock">
