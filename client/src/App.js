@@ -229,11 +229,10 @@ class App extends Component {
                                     </a>
                                 )}
                             </div>
+                            {this.state.showVkLogin && (
+                                <Redirect to="/auth" />
+                            )}
                         </Route>
-
-                        {this.state.showVkLogin && (
-                            <Redirect to="/auth" />
-                        )}
 
                         <Route path="/">
                             <Redirect to="/auth" />
