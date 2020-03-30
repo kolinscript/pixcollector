@@ -2,9 +2,10 @@ const router             = require('express').Router();
 const request            = require('request');
 
 router.get('/', (req, res, next) => {
+    console.log('REQ', req);
     const state = req.app.get('state').state;
-    // const { code: { code } } = req;
-    console.log(req);
+    const { code: { code } } = req;
+    console.log('CODE', code);
     const link = `https://oauth.vk.com/access_token` +
         `?client_id=7372433` +
         `&client_secret=XgglLIZcB7qB3nNryc8y` +
