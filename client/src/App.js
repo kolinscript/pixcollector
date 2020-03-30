@@ -3,8 +3,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect,
-    useHistory
+    Redirect
 } from "react-router-dom";
 import './App.scss';
 
@@ -161,10 +160,10 @@ class App extends Component {
     }
 
     render() {
-        if (this.state.showVkLogin) return <Redirect to="/auth" />
         return (
             <Router>
                 <div className="app">
+                    {(this.state.showVkLogin) ? <Redirect to="/auth" /> : (
                     <Switch>
                         <Route path="/auth">
                             <div className="main">
@@ -247,6 +246,7 @@ class App extends Component {
                             <Redirect to="/auth" />
                         </Route>
                     </Switch>
+                    )}
                     <footer>
                         <div className="social">
                             <div className="link"><a className="github" href="https://github.com/kolinscript" target="_blank" rel="noopener noreferrer"> </a></div>
