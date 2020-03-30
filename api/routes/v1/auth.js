@@ -23,7 +23,7 @@ router.get('/', (req, res, next) => {
         request(albumLink, function (error1, response1, body1) {
             state.albumSize = JSON.parse(body1).response.items.find((item) => {return item.id === -15}).size;
             req.app.set('state', {state});
-            res.redirect(req.baseUrl + '/stock');
+            res.redirect('/stock');
         });
     });
 });
