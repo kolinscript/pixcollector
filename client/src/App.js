@@ -3,7 +3,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect
+    Redirect,
+    useHistory
 } from "react-router-dom";
 import './App.scss';
 
@@ -54,9 +55,14 @@ class App extends Component {
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data);
-                    this.setState(prevState => ({
-                        albumSize: data.body.size
-                    }));
+                    if (data.body.albumSize) {
+                        this.setState(prevState => ({
+                            albumSize: data.body.albumSize
+                        }));
+                    } else {
+                        let history = useHistory();
+                        history.push('/auth');
+                    }
                 })
                 .catch(error => console.log(error));
             // Second OAUTH step
