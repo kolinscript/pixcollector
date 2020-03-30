@@ -140,7 +140,7 @@ class App extends Component {
             <Router>
                 <div className="app">
                     <Switch>
-                        <Route exact path="/auth">
+                        <Route path="/auth">
                             <div className="main">
                                 <h1 className="title">PIXCOLLECTOR</h1>
                                 {this.state.showVkLogin && (
