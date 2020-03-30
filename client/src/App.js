@@ -162,6 +162,7 @@ class App extends Component {
         return (
             <Router>
                 <div className="app">
+                    <Switch>
                         <Route path="/auth">
                             <div className="main">
                                 <h1 className="title">PIXCOLLECTOR</h1>
@@ -245,6 +246,7 @@ class App extends Component {
                             <div className="link"><a className="instagram" href="http://instagram.com/kolinvision" target="_blank" rel="noopener noreferrer"> </a></div>
                         </div>
                     </footer>
+                    </Switch>
                 </div>
             </Router>
         );
