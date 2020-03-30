@@ -68,7 +68,7 @@ class App extends Component {
                             console.log(this.state);
                         });
                         const history = useHistory();
-                        history.push("/path/to/push");
+                        history.push("/auth");
                     }
                 })
                 .catch(error => console.log(error));
