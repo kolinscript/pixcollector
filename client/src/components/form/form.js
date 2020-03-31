@@ -4,7 +4,7 @@ export const Form = (props) => (
     <div className="main">
         <h1 className="title">PIXCOLLECTOR</h1>
         {(!props.showVkLogin && !props.done) && (
-            <form>
+            <form onSubmit={props.getPhotos}>
                 <div className="title">
                     <span>You've got <span className="albumSize">{props.albumSize}</span> pix collected. </span>
                     <span>Enter the number of photos you want to collect </span>

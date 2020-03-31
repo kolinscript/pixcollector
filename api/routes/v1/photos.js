@@ -2,15 +2,14 @@ const router             = require('express').Router();
 const request            = require('request');
 
 router.get('/', (req, res, next) => {
-    const state = req.app.get('state').state;
     const link = `https://api.vk.com/` +
         `method/photos.get` +
-        `?owner_id=${state.user_id}` +
-        `&access_token=${state.access_token}` +
+        `?owner_id=${req.session.state.user_id}` +
+        `&access_token=${req.session.state.access_token}` +
         `&album_id=saved` +
         `&photo_sizes=1` +
         `&count=${req.query.count}` +
-        `&v=${state.vkApiVersion}`;
+        `&v=5.103`;
     request(link, function (error, response, body) {
         const bodyParsed = JSON.parse(body);
         const arr = [];
@@ -37,7 +36,7 @@ router.get('/', (req, res, next) => {
                 } else if (sizeS) {
                     arr.push(sizeS);
                 }
-                state.pixArray = arr;
+                req.session.state.pixArray = arr;
                 req.app.set('state', {state});
             });
         }
@@ -48,9 +47,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/albumSize', (req, res, next) => {
-    const state = req.app.get('state').state;
     res.send({
-        albumSize: state.albumSize
+        albumSize: req.session.state.albumSize
     });
 });
 
