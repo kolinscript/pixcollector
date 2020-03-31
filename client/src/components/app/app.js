@@ -166,27 +166,20 @@ class App extends Component {
                 <div className="app">
                     <Switch>
                         <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
-                        <Route path="/stock">
-                            {!this.state.showVkLogin ? (
-                                <div>
-                                    <Gallery pixArray={this.state.pixArray}/>
-                                    <Form
-                                        showVkLogin={this.state.showVkLogin}
-                                        done={this.state.done}
-                                        albumSize={this.state.albumSize}
-                                        count={this.state.count}
-                                        realonly={this.state.realonly}
-                                        handleChange={this.handleChange}
-                                        all={this.state.all}
-                                        handleCheckbox={this.handleCheckbox}
-                                        getPhotos={this.getPhotos}
-                                    />
-                                </div>
-                            ) : (
-                                <Redirect to="/auth"/>
-                            )}
-
-                        </Route>
+                        {!this.state.showVkLogin && <Route path="/stock">
+                            <Gallery pixArray={this.state.pixArray}/>
+                            <Form
+                                showVkLogin={this.state.showVkLogin}
+                                done={this.state.done}
+                                albumSize={this.state.albumSize}
+                                count={this.state.count}
+                                realonly={this.state.realonly}
+                                handleChange={this.handleChange}
+                                all={this.state.all}
+                                handleCheckbox={this.handleCheckbox}
+                                getPhotos={this.getPhotos}
+                            />
+                        </Route>}
                         <Route path="*">
                             <Redirect to="/auth"/>
                         </Route>
