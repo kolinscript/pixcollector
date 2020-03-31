@@ -56,6 +56,7 @@ class App extends Component {
                         }, () => {
                             console.log(this.state);
                         });
+                        window.location = 'https://pixcollector.herokuapp.com/auth';
                     } else if (data.albumSize) {
                         this.setState(  {
                             albumSize: data.albumSize,
