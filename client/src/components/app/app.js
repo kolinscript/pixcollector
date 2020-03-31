@@ -157,7 +157,7 @@ class App extends Component {
     }
 
     goToLogin() {
-        let router = Router;
+        let router = Router();
         router.push('/auth')
     }
 
