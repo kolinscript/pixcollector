@@ -10,13 +10,7 @@ app.use('/', express.static(path.join(__dirname, '../client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api/v1', apiV1);
-app.use(session({
-    secret: 'pixcoll',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-    store: { state }
-}));
+app.use(session({ secret: 'pixcoll', resave: false, saveUninitialized: true, cookie: { secure: true } }));
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
