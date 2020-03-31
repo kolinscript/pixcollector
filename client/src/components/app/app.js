@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
 import './app.scss';
 import { Footer } from "../footer/footer";
 import { Auth } from "../auth/auth";
@@ -23,6 +23,7 @@ class App extends Component {
         this.handleLoad = this.handleLoad.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
+        this.goToLogin = this.goToLogin.bind(this);
     }
 
     componentDidMount() { window.addEventListener('load', this.handleLoad); }
@@ -155,6 +156,11 @@ class App extends Component {
         });
     }
 
+    goToLogin() {
+        let history = useHistory();
+        history.push('/auth')
+    }
+
     render() {
         return (
             <Router>
@@ -172,6 +178,7 @@ class App extends Component {
                             all={this.state.all}
                             handleCheckbox={this.handleCheckbox}
                             getPhotos={this.getPhotos}
+                            goToLogin={this.goToLogin}
                         />
                     </Route>
                     <Route path="*">

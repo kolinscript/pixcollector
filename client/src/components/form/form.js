@@ -39,5 +39,10 @@ export const Form = (props) => (
                 <div className="label">Download</div>
             </a>
         )}
+        {(props.showVkLogin) && (
+            <div className="button login" onClick={props.goToLogin}>
+                <div className="label">Go to login page</div>
+            </div>
+        )}
     </div>
 );
