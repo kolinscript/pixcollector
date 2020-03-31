@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import './app.scss';
 import { Footer } from "../footer/footer";
 import { Auth } from "../auth/auth";
-import { Protected } from "../protected/protected";
+import { Gallery } from "../gallery/gallery";
+import { Form } from "../form/form";
 
 class App extends Component {
     constructor(props) {
@@ -24,14 +25,9 @@ class App extends Component {
         this.handleCheckbox = this.handleCheckbox.bind(this);
     }
 
-    componentDidMount() {
-        this.handleLoad();
-        // window.addEventListener('load', this.handleLoad);
-    }
+    componentDidMount() { window.addEventListener('load', this.handleLoad); }
 
-    // componentWillUnmount() {
-    //     window.removeEventListener('load', this.handleLoad)
-    // }
+    componentWillUnmount() { window.removeEventListener('load', this.handleLoad) }
 
     handleLoad() {
         const url_current = window.location.href;
@@ -165,18 +161,22 @@ class App extends Component {
                 <div className="app">
                     <Switch>
                         <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
-                        <Route path="/">
-                            <Protected
-                                showVkLogin={this.state.showVkLogin}
-                                done={this.state.done}
-                                albumSize={this.state.albumSize}
-                                count={this.state.count}
-                                realonly={this.state.readOnly}
+                        <Route path="/stock">
+                            <Gallery pixArray={this.props.pixArray}/>
+                            <Form
+                                showVkLogin={this.props.showVkLogin}
+                                done={this.props.done}
+                                albumSize={this.props.albumSize}
+                                count={this.props.count}
+                                realonly={this.props.readOnly}
                                 handleChange={this.handleChange}
-                                all={this.state.all}
+                                all={this.props.all}
                                 handleCheckbox={this.handleCheckbox}
                                 getPhotos={this.getPhotos}
                             />
+                        </Route>
+                        <Route path="*">
+                            <Redirect to="/auth"/>
                         </Route>
                     </Switch>
                     <Footer/>
