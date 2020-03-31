@@ -1,7 +1,8 @@
 const express            = require('express');
 const path               = require('path');
 const bodyParser         = require('body-parser');
-const session         = require('express-session');
+const session            = require('express-session');
+const MongoStore         = require('connect-mongo')(session);
 const apiV1              = require('./routes/v1');
 const port               = process.env.PORT || 5000;
 const app                = express();

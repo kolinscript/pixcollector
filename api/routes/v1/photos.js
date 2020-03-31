@@ -2,11 +2,10 @@ const router             = require('express').Router();
 const request            = require('request');
 
 router.get('/', (req, res, next) => {
-    const sess = req.session;
     const link = `https://api.vk.com/` +
         `method/photos.get` +
-        `?owner_id=${sess.user_id}` +
-        `&access_token=${sess.access_token}` +
+        `?owner_id=${req.session.user_id}` +
+        `&access_token=${req.session.access_token}` +
         `&album_id=saved` +
         `&photo_sizes=1` +
         `&count=${req.query.count}` +
@@ -37,7 +36,7 @@ router.get('/', (req, res, next) => {
                 } else if (sizeS) {
                     arr.push(sizeS);
                 }
-                sess.pixArray = arr;
+                req.session.pixArray = arr;
             });
         }
         res.send({
@@ -47,9 +46,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/albumSize', (req, res, next) => {
-    const sess = req.session;
     res.send({
-        albumSize: sess.albumSize
+        albumSize: req.session.albumSize
     });
 });
 
