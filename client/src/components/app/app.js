@@ -34,13 +34,13 @@ class App extends Component {
         const url_current = window.location.href;
         console.log(url_current);
         if (url_current === 'https://pixcollector.herokuapp.com/auth' || url_current === 'http://localhost:3000/auth') {
-            this.setState(prevState => ({
+            this.setState( {
                 showVkLogin: true
-            }));
+            });
         } else {
-            this.setState(prevState => ({
+            this.setState( {
                 showVkLogin: false
-            }));
+            });
             fetch(`/api/v1/photos/albumSize`, {
                 method: 'GET',
                 headers: {
@@ -53,49 +53,19 @@ class App extends Component {
                     if (!data.albumSize) {
                         this.setState( {
                             showVkLogin: true
-                        }, () => {
-                            console.log(this.state);
                         });
                         window.location = 'https://pixcollector.herokuapp.com/auth';
                     } else if (data.albumSize) {
                         this.setState(  {
                             albumSize: data.albumSize,
                             showVkLogin: false
-                        }, () => {
-                            console.log(this.state);
                         });
                     }
                 })
                 .catch(error => console.log(error));
-            // Second OAUTH step
-            // const code = url_current.split('code=')[1];
-            // const AUTH_URL_TOKEN = `https://oauth.vk.com/access_token` +
-            //     `?client_id=7372433` +
-            //     `&client_secret=XgglLIZcB7qB3nNryc8y` +
-            //     `&redirect_uri=https://pixcollector.herokuapp.com` +
-            //     `&code=${code}`;
-            // const data = {
-            //     link: AUTH_URL_TOKEN
-            // };
-            // fetch('/api/v1/auth', {
-            //     method: 'POST',
-            //     headers: {
-            //         Accept: 'application/json', 'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(data),
-            // })
-            //     .then(res => res.json())
-            //     .then((data) => {
-            //         console.log(data);
-            //         this.setState(prevState => ({
-            //             albumSize: data.body.size
-            //         }));
-            //     })
-            //     .catch(error => console.log(error));
         }
     }
 
-    // First OAUTH step
     loginVk() {
         const AUTH_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
             '?client_id=7372433' +
