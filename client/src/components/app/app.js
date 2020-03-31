@@ -178,7 +178,6 @@ class App extends Component {
                                 getPhotos={this.getPhotos}
                             />
                         </Route>
-                        <Route path="*"><Redirect to="/auth"/></Route>
                     </Switch>
                     <Footer/>
                 </div>
