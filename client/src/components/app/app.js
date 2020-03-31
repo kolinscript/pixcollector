@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import './app.scss';
 import { Footer } from "../footer/footer";
 import { Auth } from "../auth/auth";
@@ -157,8 +157,7 @@ class App extends Component {
     }
 
     goToLogin() {
-        let history = useHistory();
-        history.push('/auth');
+        this.context.history.push('/auth');
     }
 
     render() {
