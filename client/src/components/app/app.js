@@ -157,7 +157,7 @@ class App extends Component {
     }
 
     goToLogin() {
-        location = 'https://pixcollector.herokuapp.com/auth';
+        window.location = 'https://pixcollector.herokuapp.com/auth';
     }
 
     render() {
