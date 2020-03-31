@@ -10,16 +10,17 @@ router.get('/', (req, res, next) => {
         `&code=${code}`;
     request(link, function (error0, response0, body0) {
         const bodyParsed = JSON.parse(body0);
-        req.session.state.access_token = bodyParsed.access_token;
-        req.session.state.user_id = bodyParsed.user_id;
+        const sess = req.session;
+        sess.access_token = bodyParsed.access_token;
+        sess.user_id = bodyParsed.user_id;
         const albumLink = `https://api.vk.com/` +
             `method/photos.getAlbums` +
-            `?owner_id=${state.user_id}` +
-            `&access_token=${state.access_token}` +
+            `?owner_id=${sess.user_id}` +
+            `&access_token=${sess.access_token}` +
             `&need_system=1` +
-            `&v=${state.vkApiVersion}`;
+            `&v=5.103`;
         request(albumLink, function (error1, response1, body1) {
-            req.session.state.albumSize = JSON.parse(body1).response.items.find((item) => {return item.id === -15}).size;
+            sess.albumSize = JSON.parse(body1).response.items.find((item) => {return item.id === -15}).size;
             res.redirect('/stock');
         });
     });

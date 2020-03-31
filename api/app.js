@@ -14,7 +14,8 @@ app.use(session({
     secret: 'pixcoll',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: { secure: true },
+    store: { state }
 }));
 
 app.get('/*', function(req, res) {
