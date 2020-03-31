@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import './app.scss';
 import { Footer } from "../footer/footer";
 import { Auth } from "../auth/auth";
-import { Gallery } from "../gallery/gallery";
-import { Form } from "../form/form";
+import { Protected } from "../protected/protected";
 
 class App extends Component {
     constructor(props) {
@@ -166,23 +165,20 @@ class App extends Component {
                 <div className="app">
                     <Switch>
                         <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
-                        {!this.state.showVkLogin && <Route path="/stock">
-                            <Gallery pixArray={this.state.pixArray}/>
-                            <Form
+                        <Route path="/">
+                            <Protected
                                 showVkLogin={this.state.showVkLogin}
                                 done={this.state.done}
                                 albumSize={this.state.albumSize}
                                 count={this.state.count}
-                                realonly={this.state.realonly}
+                                realonly={this.state.readOnly}
                                 handleChange={this.handleChange}
                                 all={this.state.all}
                                 handleCheckbox={this.handleCheckbox}
                                 getPhotos={this.getPhotos}
                             />
-                        </Route>}
-                        <Route path="*">
-                            <Redirect to="/auth"/>
                         </Route>
+                        <Route path="*"><Redirect to="/auth"/></Route>
                     </Switch>
                     <Footer/>
                 </div>
