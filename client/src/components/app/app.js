@@ -157,7 +157,7 @@ class App extends Component {
     }
 
     goToLogin() {
-        this.props.history.push('auth');
+        location = 'https://pixcollector.herokuapp.com/auth';
     }
 
     render() {
