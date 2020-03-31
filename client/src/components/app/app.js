@@ -157,7 +157,7 @@ class App extends Component {
     }
 
     goToLogin() {
-        this.context.history.push('/auth');
+        this.props.history.push('auth');
     }
 
     render() {
