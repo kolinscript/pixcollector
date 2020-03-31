@@ -161,15 +161,15 @@ class App extends Component {
                 <Switch>
                     <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
                     <Route path="/stock">
-                        <Gallery pixArray={this.props.pixArray}/>
+                        <Gallery pixArray={this.state.pixArray}/>
                         <Form
-                            showVkLogin={this.props.showVkLogin}
-                            done={this.props.done}
-                            albumSize={this.props.albumSize}
-                            count={this.props.count}
-                            realonly={this.props.readOnly}
+                            showVkLogin={this.state.showVkLogin}
+                            done={this.state.done}
+                            albumSize={this.state.albumSize}
+                            count={this.state.count}
+                            realonly={this.state.readOnly}
                             handleChange={this.handleChange}
-                            all={this.props.all}
+                            all={this.state.all}
                             handleCheckbox={this.handleCheckbox}
                             getPhotos={this.getPhotos}
                         />
