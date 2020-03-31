@@ -158,29 +158,27 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <div className="app">
-                    <Switch>
-                        <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
-                        <Route path="/stock">
-                            <Gallery pixArray={this.props.pixArray}/>
-                            <Form
-                                showVkLogin={this.props.showVkLogin}
-                                done={this.props.done}
-                                albumSize={this.props.albumSize}
-                                count={this.props.count}
-                                realonly={this.props.readOnly}
-                                handleChange={this.handleChange}
-                                all={this.props.all}
-                                handleCheckbox={this.handleCheckbox}
-                                getPhotos={this.getPhotos}
-                            />
-                        </Route>
-                        <Route path="*">
-                            <Redirect to="/auth"/>
-                        </Route>
-                    </Switch>
-                    <Footer/>
-                </div>
+                <Switch>
+                    <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
+                    <Route path="/stock">
+                        <Gallery pixArray={this.props.pixArray}/>
+                        <Form
+                            showVkLogin={this.props.showVkLogin}
+                            done={this.props.done}
+                            albumSize={this.props.albumSize}
+                            count={this.props.count}
+                            realonly={this.props.readOnly}
+                            handleChange={this.handleChange}
+                            all={this.props.all}
+                            handleCheckbox={this.handleCheckbox}
+                            getPhotos={this.getPhotos}
+                        />
+                    </Route>
+                    <Route path="*">
+                        <Redirect to="/auth"/>
+                    </Route>
+                </Switch>
+                <Footer/>
             </Router>
         );
     }

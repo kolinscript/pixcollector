@@ -1,233 +1,225 @@
-/* Vars */
 $fontMain: 'Roboto', sans-serif;
 $blue: #314569cc;
 $white: rgba(255, 255, 255, 0.88);
 
-.app {
-  position: relative;
+.gallery {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   width: 100%;
   height: 100%;
-  .gallery {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  top: 0;
+  left: 0;
+  padding-bottom: 40px;
+  .pix {
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
-    padding-bottom: 40px;
-    .pix {
-      width: 100%;
-      height: 100%;
-      img {
-        object-fit: contain;
-        padding: 10px;
-        width: 25%;
-        height: 50%;
+    img {
+      object-fit: contain;
+      padding: 10px;
+      width: 25%;
+      height: 50%;
 
-      }
     }
   }
+}
 
-  .main {
-    position: fixed;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    padding: 60px 0 100px;
-    height: 100%;
-    h1.title {
-      width: 100%;
-      margin: 0;
-      padding: 5px 25px;
-      border-radius: 50px;
-      font: 400 42px/44px $fontMain;
-      text-align: center;
-      background-color: $blue;
-      color: $white;
-    }
-    form {
-      .title {
-        margin-bottom: 10px;
-        span {
-          display: block;
-          font: 500 16px/20px $fontMain;
-          text-align: center;
-          color: $blue;
-          &.albumSize {
-            display: inline-block;
-            font-weight: 900;
-            font-size: 18px;
-          }
-        }
-      }
-      .inputs {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+.main {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 60px 0 100px;
+  height: 100%;
+  h1.title {
+    width: 100%;
+    margin: 0;
+    padding: 5px 25px;
+    border-radius: 50px;
+    font: 400 42px/44px $fontMain;
+    text-align: center;
+    background-color: $blue;
+    color: $white;
+  }
+  form {
+    .title {
+      margin-bottom: 10px;
+      span {
+        display: block;
+        font: 500 16px/20px $fontMain;
         text-align: center;
-        input[type=number] {
-          width: 80px;
-          height: 32px;
-          padding: 8px 0;
-          background: $blue;
-          border: none;
-          outline: none;
-          border-radius: 25px;
-          font: 500 16px/18px $fontMain;
-          text-align: center;
-          color: $white;
-          &:read-only {
-            background: lighten($blue, 10%)
-          }
-        }
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-        .checkbox {
-          margin-left: 10px;
-          height: 32px;
-          input[type=checkbox] {
-            display: none;
-          }
-          label {
-            cursor: pointer;
-            position: relative;
-            display: inline-block;
-            padding-left: 34px;
-            height: 32px;
-            font: 500 16px/32px $fontMain;
-            color: $blue;
-          }
-          label::before,
-          label::after {
-            position: absolute;
-            display: block;
-            box-sizing: border-box;
-            content: "";
-          }
-          label::before{
-            height: 32px;
-            width: 32px;
-            left: 0;
-            top: 0;
-            border-radius: 16px;
-            border: 2px solid $blue;
-          }
-          label::after {
-            transition: transform .2s ease-in-out;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 8px;
-            top: 50%;
-            margin-top: -8px;
-            border-radius: 8px;
-            background: $blue;
-          }
-
-          input[type="checkbox"] + label::after {
-            transform: scale(0);
-          }
-
-          input[type="checkbox"]:checked + label::after {
-            transform: scale(1);
-          }
+        color: $blue;
+        &.albumSize {
+          display: inline-block;
+          font-weight: 900;
+          font-size: 18px;
         }
       }
     }
-    .button {
+    .inputs {
       display: flex;
-      flex-direction: row;
       justify-content: center;
       align-items: center;
-      width: 180px;
-      height: 44px;
-      padding: 8px 20px;
-      background: $blue;
-      border: none;
-      outline: none;
-      border-radius: 25px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 200ms ease-in-out;
-      &:hover {
-        background: lighten($blue, 10%);
-      }
-      .logo-vk {
-        margin-left: 10px;
-        margin-top: 5px;
-        svg {}
-      }
-      .label {
+      text-align: center;
+      input[type=number] {
+        width: 80px;
+        height: 32px;
+        padding: 8px 0;
+        background: $blue;
+        border: none;
+        outline: none;
+        border-radius: 25px;
         font: 500 16px/18px $fontMain;
         text-align: center;
         color: $white;
+        &:read-only {
+          background: lighten($blue, 10%)
+        }
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      .checkbox {
+        margin-left: 10px;
+        height: 32px;
+        input[type=checkbox] {
+          display: none;
+        }
+        label {
+          cursor: pointer;
+          position: relative;
+          display: inline-block;
+          padding-left: 34px;
+          height: 32px;
+          font: 500 16px/32px $fontMain;
+          color: $blue;
+        }
+        label::before,
+        label::after {
+          position: absolute;
+          display: block;
+          box-sizing: border-box;
+          content: "";
+        }
+        label::before{
+          height: 32px;
+          width: 32px;
+          left: 0;
+          top: 0;
+          border-radius: 16px;
+          border: 2px solid $blue;
+        }
+        label::after {
+          transition: transform .2s ease-in-out;
+          content: "";
+          height: 16px;
+          width: 16px;
+          left: 8px;
+          top: 50%;
+          margin-top: -8px;
+          border-radius: 8px;
+          background: $blue;
+        }
+
+        input[type="checkbox"] + label::after {
+          transform: scale(0);
+        }
+
+        input[type="checkbox"]:checked + label::after {
+          transform: scale(1);
+        }
       }
     }
   }
-
-  footer {
-    position: fixed;
-    bottom: 0;
-    height: 40px;
-    width: 100%;
+  .button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 44px;
+    padding: 8px 20px;
     background: $blue;
-    .social {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .link {
-        width: 22px;
-        height: 22px;
-        margin-right: 40px;
-        a {
-          display: block;
-          cursor: pointer;
-          width: 100%;
-          height: 100%;
-          &.github {
-            background: url("../../images/github.svg") no-repeat;
-            background-size: cover;
-          }
-          &.telega {
-            background: url("../../images/telega.svg") no-repeat;
-            background-size: cover;
-          }
-          &.vk {
-            background: url("../../images/vk.svg") no-repeat;
-            background-size: cover;
-          }
-          &.instagram {
-            background: url("../../images/instagram.svg") no-repeat;
-            background-size: cover;
-          }
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 200ms ease-in-out;
+    &:hover {
+      background: lighten($blue, 10%);
+    }
+    .logo-vk {
+      margin-left: 10px;
+      margin-top: 5px;
+      svg {}
+    }
+    .label {
+      font: 500 16px/18px $fontMain;
+      text-align: center;
+      color: $white;
+    }
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  background: $blue;
+  .social {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .link {
+      width: 22px;
+      height: 22px;
+      margin-right: 40px;
+      a {
+        display: block;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        &.github {
+          background: url("../../images/github.svg") no-repeat;
+          background-size: cover;
         }
-        &:last-child {
-          margin-right: 0;
+        &.telega {
+          background: url("../../images/telega.svg") no-repeat;
+          background-size: cover;
         }
+        &.vk {
+          background: url("../../images/vk.svg") no-repeat;
+          background-size: cover;
+        }
+        &.instagram {
+          background: url("../../images/instagram.svg") no-repeat;
+          background-size: cover;
+        }
+      }
+      &:last-child {
+        margin-right: 0;
       }
     }
   }
 }
+
 
 @media screen and (max-width: 750px) {
-  .app {
+  .main {
     h1.title {
-      font: 400 40px/42px 'Orbitron', sans-serif;
+      font: 400 32px/34px $fontMain;
     }
   }
 }
+
 
 @keyframes x-spin {
   0% {
