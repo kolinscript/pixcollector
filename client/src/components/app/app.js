@@ -26,12 +26,13 @@ class App extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('load', this.handleLoad);
+        this.handleLoad();
+        // window.addEventListener('load', this.handleLoad);
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('load', this.handleLoad)
-    }
+    // componentWillUnmount() {
+    //     window.removeEventListener('load', this.handleLoad)
+    // }
 
     handleLoad() {
         const url_current = window.location.href;
@@ -166,18 +167,25 @@ class App extends Component {
                     <Switch>
                         <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
                         <Route path="/stock">
-                            <Gallery pixArray={this.state.pixArray}/>
-                            <Form
-                                showVkLogin={this.state.showVkLogin}
-                                done={this.state.done}
-                                albumSize={this.state.albumSize}
-                                count={this.state.count}
-                                realonly={this.state.realonly}
-                                handleChange={this.handleChange}
-                                all={this.state.all}
-                                handleCheckbox={this.handleCheckbox}
-                                getPhotos={this.getPhotos}
-                            />
+                            {!this.state.showVkLogin ? (
+                                <div>
+                                    <Gallery pixArray={this.state.pixArray}/>
+                                    <Form
+                                        showVkLogin={this.state.showVkLogin}
+                                        done={this.state.done}
+                                        albumSize={this.state.albumSize}
+                                        count={this.state.count}
+                                        realonly={this.state.realonly}
+                                        handleChange={this.handleChange}
+                                        all={this.state.all}
+                                        handleCheckbox={this.handleCheckbox}
+                                        getPhotos={this.getPhotos}
+                                    />
+                                </div>
+                            ) : (
+                                <Redirect to="/auth"/>
+                            )}
+
                         </Route>
                         <Route path="*">
                             <Redirect to="/auth"/>
