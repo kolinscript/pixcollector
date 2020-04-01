@@ -17,8 +17,6 @@ router.get('/', (req, res, next) => {
     const totalFloat = totalCount / 1000;   // 0.003
     const integerPart = Math.floor(totalFloat); // 0
     const floatPart = integerPart === 0 ? totalCount : (Math.abs(+(totalFloat - Math.floor(totalFloat)).toFixed(3))); // 3
-
-
     const reqIntegerPart = integerPart * 1000; // 0
     const reqFloatPart = integerPart === 0 ? floatPart : floatPart * 1000; // 3
     const reqOffset = 0;
@@ -126,8 +124,10 @@ router.get('/', (req, res, next) => {
                 }
             });
         }
-        res.send({
-            body: pixArray
+        setTimeout(() => {
+            res.send({
+                body: pixArray
+            });
         });
     }
 
