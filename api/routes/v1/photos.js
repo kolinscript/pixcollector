@@ -13,9 +13,9 @@ router.get('/', (req, res, next) => {
 
     const totalCount = req.query.count;
     let pixArray = [];
-    const totalFloat = totalCount / 1000;   // 2.7
-    const integerPart = Math.floor(totalFloat); // 2
-    const floatPart = (integerPart - Math.floor(integerPart)).toFixed(3); // 0.700
+    const totalFloat = totalCount / 1000;   // 0.7
+    const integerPart = Math.floor(totalFloat); // 0
+    const floatPart = Math.abs(+(integerPart - Math.floor(integerPart)).toFixed(3)); // 0.700
     const reqIntegerPart = integerPart * 1000; // 2000
     const reqFloatPart = floatPart * 1000; // 700
     const reqOffset = 0;
