@@ -7,7 +7,7 @@ const mongoose           = require('mongoose');
 const MongoStore         = require('connect-mongo')(session);
 const apiV1              = require('./routes/v1');
 const port               = process.env.PORT || 5000;
-const db                 = process.env.MONGO;
+const db                 = process.env.MONGO || 'mongodb://127.0.0.1:27017/pixcollector';
 const app                = express();
 
 mongoose
@@ -19,7 +19,7 @@ mongoose
 
 app.use(cors());
 app.use(session({
-    secret: "SOME_SECRET_KEY",
+    secret: "PIX",
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 app.use('/', express.static(path.join(__dirname, '../client/build')));
