@@ -75,10 +75,14 @@ router.get('/', (req, res, next) => {
                     });
                 }
             });
+            req.session.pixArray = pixArray;
+            res.send({
+                body: pixArray
+            });
         } else {
             // multiple requests
             // handling integerPart
-            for (let offset = reqOffset, count = 1000; count <= reqIntegerPart; offset = offset + 1000, count = count + 1000) {
+            for await (let offset = reqOffset, count = 1000; count <= reqIntegerPart; offset = offset + 1000, count = count + 1000) {
                 const link = `https://api.vk.com/` +
                     `method/photos.get` +
                     `?owner_id=${req.session.user_id}` +
@@ -119,11 +123,11 @@ router.get('/', (req, res, next) => {
                     }
                 });
             }
+            req.session.pixArray = pixArray;
+            res.send({
+                body: pixArray
+            });
         }
-        req.session.pixArray = pixArray;
-        res.send({
-            body: pixArray
-        });
     }
 });
 
