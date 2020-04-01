@@ -7,24 +7,28 @@ router.get('/', (req, res, next) => {
     // integerPart = 2
     // floatPart = 0.700;
 
-    // totalFloat = 0.7
+    // totalCount = 3
+    // totalFloat = 0.003
     // integerPart = 0
-    // floatPart = 0.700;
+    // floatPart = 0.003;
 
-    const totalCount = req.query.count;
+    const totalCount = req.query.count; // 3
     let pixArray = [];
-    const totalFloat = totalCount / 1000;   // 0.7
-    const integerPart = Math.floor(totalFloat); // 2
-    const floatPart = Math.abs(+(integerPart - Math.floor(integerPart)).toFixed(3)); // 0.700
-    const reqIntegerPart = integerPart * 1000; // 2000
-    const reqFloatPart = floatPart * 1000; // 700
+    const totalFloat = totalCount / 1000;   // 0.003
+    const integerPart = Math.floor(totalFloat); // 0
+    const floatPart = integerPart === 0 ? totalCount : (Math.abs(+(totalFloat - Math.floor(totalFloat)).toFixed(3))); // 3
+
+
+    const reqIntegerPart = integerPart * 1000; // 0
+    const reqFloatPart = integerPart === 0 ? floatPart : floatPart * 1000; // 3
     const reqOffset = 0;
 
+    console.log('totalCount:', totalCount);
     console.log('totalFloat:', totalFloat);
     console.log('integerPart:', integerPart);
     console.log('floatPart:', floatPart);
-    console.log('reqIntegerPart:', reqIntegerPart);
     console.log('reqFloatPart:', reqFloatPart);
+    console.log('reqIntegerPart:', reqIntegerPart);
 
     if (integerPart === 0) {
         // single request
