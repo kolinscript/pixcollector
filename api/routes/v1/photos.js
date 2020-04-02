@@ -113,12 +113,12 @@ router.get('/', (req, res, next) => {
         urlArray.push(linkLast);
 
         axios.all(urlArray)
-            .then(function(responses) {
-                let temp = responses.map(r => r.data);
-                console.log('temp: ', temp);
+            .then(axios.spread((...responses) => {
+                let resArr = responses.map(r => r.data);
+                console.log('resArr: ', resArr);
                 const arr = [];
-                if (temp.response) {
-                    temp.response.items.forEach((item) => {
+                if (resArr.response) {
+                    resArr.response.items.forEach((item) => {
                         // ascending flow
                         // S -> M -> X -> Y -> Z -> W
                         const sizeW = item.sizes.find(size => size.type === 'w');
