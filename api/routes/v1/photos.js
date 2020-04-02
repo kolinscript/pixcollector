@@ -116,42 +116,51 @@ router.get('/', (req, res, next) => {
 
         console.log('urlArray: ', urlArray);
 
+        function sleeper(ms) {
+            return function(x) {
+                return new Promise(resolve => setTimeout(() => resolve(x), ms));
+            };
+        }
+
+    .then(axios.spread(function (acct, perms) {
+            // Both requests are now complete
+        }))
 
         axios.all(urlArray)
             .then(axios.spread((...responses) => {
                 console.log('responses: ', responses);
-                let resArr = responses.map(r => r.data);
-                console.log('resArr: ', resArr);
-                const arr = [];
-                if (resArr.response) {
-                    resArr.response.items.forEach((item) => {
-                        // ascending flow
-                        // S -> M -> X -> Y -> Z -> W
-                        const sizeW = item.sizes.find(size => size.type === 'w');
-                        const sizeZ = item.sizes.find(size => size.type === 'z');
-                        const sizeY = item.sizes.find(size => size.type === 'y');
-                        const sizeX = item.sizes.find(size => size.type === 'x');
-                        const sizeM = item.sizes.find(size => size.type === 'm');
-                        const sizeS = item.sizes.find(size => size.type === 's');
-                        if (sizeW) {
-                            arr.push(sizeW);
-                        } else if (sizeZ) {
-                            arr.push(sizeZ);
-                        } else if (sizeY) {
-                            arr.push(sizeY);
-                        } else if (sizeX) {
-                            arr.push(sizeX);
-                        } else if (sizeM) {
-                            arr.push(sizeM);
-                        } else if (sizeS) {
-                            arr.push(sizeS);
-                        }
-                        pixArray = arr;
-                        req.session.pixArray = pixArray;
-                    });
-                }
+                // let resArr = responses.map(r => r.data);
+                // console.log('resArr: ', resArr);
+                // const arr = [];
+                // if (resArr.response) {
+                //     resArr.response.items.forEach((item) => {
+                //         // ascending flow
+                //         // S -> M -> X -> Y -> Z -> W
+                //         const sizeW = item.sizes.find(size => size.type === 'w');
+                //         const sizeZ = item.sizes.find(size => size.type === 'z');
+                //         const sizeY = item.sizes.find(size => size.type === 'y');
+                //         const sizeX = item.sizes.find(size => size.type === 'x');
+                //         const sizeM = item.sizes.find(size => size.type === 'm');
+                //         const sizeS = item.sizes.find(size => size.type === 's');
+                //         if (sizeW) {
+                //             arr.push(sizeW);
+                //         } else if (sizeZ) {
+                //             arr.push(sizeZ);
+                //         } else if (sizeY) {
+                //             arr.push(sizeY);
+                //         } else if (sizeX) {
+                //             arr.push(sizeX);
+                //         } else if (sizeM) {
+                //             arr.push(sizeM);
+                //         } else if (sizeS) {
+                //             arr.push(sizeS);
+                //         }
+                //         pixArray = arr;
+                //         req.session.pixArray = pixArray;
+                //     });
+                // }
                 res.send({
-                    body: pixArray
+                    body: responses
                 });
             }))
             .catch(function (error) {
