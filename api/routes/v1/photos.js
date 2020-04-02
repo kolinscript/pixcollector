@@ -125,7 +125,7 @@ router.get('/', (req, res, next) => {
                             pixArray = pixArray.concat(arr);
                         });
                     }
-                    return new Promise(pixArray);
+                    return new Promise.resolve(pixArray);
                 }
             }
 
