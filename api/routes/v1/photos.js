@@ -116,6 +116,7 @@ router.get('/', (req, res, next) => {
 
         console.log('urlArray: ', urlArray);
 
+
         axios.all(urlArray)
             .then(axios.spread((...responses) => {
                 console.log('responses: ', responses);
