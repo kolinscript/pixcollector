@@ -125,9 +125,14 @@ router.get('/', (req, res, next) => {
                             pixArray = pixArray.concat(arr);
                         });
                     }
-                    return new Promise.resolve(pixArray);
+                    return pixArray;
                 }
             }
+
+            req.session.pixArray = pixArray;
+            res.send({
+                body: pixArray
+            });
 
             // for (let offset = reqOffset, count = 1000; count <= reqIntegerPart; offset = offset + 1000, count = count + 1000) {
             //     const link = `https://api.vk.com/` +
@@ -172,11 +177,6 @@ router.get('/', (req, res, next) => {
             //         }
             //     });
             // }
-
-            req.session.pixArray = pixArray;
-            res.send({
-                body: pixArray
-            });
         }
 
         fetchPhotos();
