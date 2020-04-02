@@ -43,10 +43,10 @@ router.get('/', (req, res, next) => {
             `&v=5.103`;
         axios.get(link)
             .then(function (response) {
-                console.log(response);
+                console.log('response: ', response);
                 const arr = [];
-                if (response.response) {
-                    response.response.items.forEach((item) => {
+                if (response.data.response) {
+                    response.data.response.items.forEach((item) => {
                         // ascending flow
                         // S -> M -> X -> Y -> Z -> W
                         const sizeW = item.sizes.find(size => size.type === 'w');
@@ -114,11 +114,11 @@ router.get('/', (req, res, next) => {
 
         axios.all(urlArray)
             .then(function(responses) {
-                let temp = responses.map(r => r.response);
-                console.log(response);
+                let temp = responses.map(r => r.data);
+                console.log('temp: ', temp);
                 const arr = [];
-                if (temp) {
-                    temp.items.forEach((item) => {
+                if (temp.response) {
+                    temp.response.items.forEach((item) => {
                         // ascending flow
                         // S -> M -> X -> Y -> Z -> W
                         const sizeW = item.sizes.find(size => size.type === 'w');
