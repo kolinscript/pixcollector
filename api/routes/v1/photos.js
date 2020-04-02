@@ -125,48 +125,48 @@ router.get('/', (req, res, next) => {
     // .then(axios.spread(function (acct, perms) {
     //         // Both requests are now complete
     //     }))
-
-        axios.all(urlArray)
-            .then(axios.spread((one, two) => {
-                console.log('ONE : ', one);
-                console.log('TWO : ', two);
-                // let resArr = responses.map(r => r.data);
-                // console.log('resArr: ', resArr);
-                // const arr = [];
-                // if (resArr.response) {
-                //     resArr.response.items.forEach((item) => {
-                //         // ascending flow
-                //         // S -> M -> X -> Y -> Z -> W
-                //         const sizeW = item.sizes.find(size => size.type === 'w');
-                //         const sizeZ = item.sizes.find(size => size.type === 'z');
-                //         const sizeY = item.sizes.find(size => size.type === 'y');
-                //         const sizeX = item.sizes.find(size => size.type === 'x');
-                //         const sizeM = item.sizes.find(size => size.type === 'm');
-                //         const sizeS = item.sizes.find(size => size.type === 's');
-                //         if (sizeW) {
-                //             arr.push(sizeW);
-                //         } else if (sizeZ) {
-                //             arr.push(sizeZ);
-                //         } else if (sizeY) {
-                //             arr.push(sizeY);
-                //         } else if (sizeX) {
-                //             arr.push(sizeX);
-                //         } else if (sizeM) {
-                //             arr.push(sizeM);
-                //         } else if (sizeS) {
-                //             arr.push(sizeS);
-                //         }
-                //         pixArray = arr;
-                //         req.session.pixArray = pixArray;
-                //     });
-                // }
-                res.send({
-                    body: {one, two}
-                });
-            }))
-            .catch(function (error) {
-                console.log(error);
-            });
+    //
+    //     axios.all(urlArray)
+    //         .then(axios.spread((one, two) => {
+    //             console.log('ONE : ', one);
+    //             console.log('TWO : ', two);
+    //             // let resArr = responses.map(r => r.data);
+    //             // console.log('resArr: ', resArr);
+    //             // const arr = [];
+    //             // if (resArr.response) {
+    //             //     resArr.response.items.forEach((item) => {
+    //             //         // ascending flow
+    //             //         // S -> M -> X -> Y -> Z -> W
+    //             //         const sizeW = item.sizes.find(size => size.type === 'w');
+    //             //         const sizeZ = item.sizes.find(size => size.type === 'z');
+    //             //         const sizeY = item.sizes.find(size => size.type === 'y');
+    //             //         const sizeX = item.sizes.find(size => size.type === 'x');
+    //             //         const sizeM = item.sizes.find(size => size.type === 'm');
+    //             //         const sizeS = item.sizes.find(size => size.type === 's');
+    //             //         if (sizeW) {
+    //             //             arr.push(sizeW);
+    //             //         } else if (sizeZ) {
+    //             //             arr.push(sizeZ);
+    //             //         } else if (sizeY) {
+    //             //             arr.push(sizeY);
+    //             //         } else if (sizeX) {
+    //             //             arr.push(sizeX);
+    //             //         } else if (sizeM) {
+    //             //             arr.push(sizeM);
+    //             //         } else if (sizeS) {
+    //             //             arr.push(sizeS);
+    //             //         }
+    //             //         pixArray = arr;
+    //             //         req.session.pixArray = pixArray;
+    //             //     });
+    //             // }
+    //             res.send({
+    //                 body: {one, two}
+    //             });
+    //         }))
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
     }
 });
 
