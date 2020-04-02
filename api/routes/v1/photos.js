@@ -108,6 +108,7 @@ router.get('/', (req, res, next) => {
             `&offset=${offsetLast}` +
             `&count=${reqFloatPart}` +
             `&v=5.103`;
+
         urlArray.push(linkLast);
 
         // urlArray = urlArray.map((url) => {
@@ -115,6 +116,10 @@ router.get('/', (req, res, next) => {
         // });
 
         console.log('urlArray: ', urlArray);
+
+        res.send({
+            body: urlArray
+        });
 
         function sleeper(ms) {
             return function(x) {
