@@ -95,7 +95,7 @@ router.get('/', (req, res, next) => {
                 request(link, async function (error, response, body) {
                     const bodyParsed = JSON.parse(body);
                     const arr = [];
-                    await photosIterator(bodyParsed, arr);
+                    pixArray = pixArray.concat(await photosIterator(bodyParsed, arr));
                 });
 
                 function photosIterator(bodyParsed, arr) {
@@ -122,7 +122,7 @@ router.get('/', (req, res, next) => {
                             } else if (sizeS) {
                                 arr.push(sizeS);
                             }
-                            pixArray = pixArray.concat(arr);
+                            pixArray = arr;
                         });
                     }
                     return pixArray;
