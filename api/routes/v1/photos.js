@@ -110,9 +110,9 @@ router.get('/', (req, res, next) => {
             `&v=5.103`;
         urlArray.push(linkLast);
 
-        urlArray = urlArray.map((url) => {
-            return axios.get(url);
-        });
+        // urlArray = urlArray.map((url) => {
+        //     return axios.get(url);
+        // });
 
         console.log('urlArray: ', urlArray);
 
