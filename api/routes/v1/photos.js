@@ -78,7 +78,7 @@ router.get('/', (req, res, next) => {
         // handling integerPart
         const photoFetcher = new Promise((resolve, reject) => {
             let offset = reqOffset;
-            for (offset, count = 1000; count <= reqIntegerPart; offset = offset + 1000, count = count + 1000) {
+            for (let offset = offset, count = 1000; count <= reqIntegerPart; offset = offset + 1000, count = count + 1000) {
                 const link = `https://api.vk.com/` +
                     `method/photos.get` +
                     `?owner_id=${req.session.user_id}` +
@@ -115,11 +115,11 @@ router.get('/', (req, res, next) => {
                                 arr.push(sizeS);
                             }
                             pixArray = pixArray.concat(arr);
-                            req.session.pixArray = pixArray;
                         });
                     }
                 });
             }
+            console.log(offset);
             const link = `https://api.vk.com/` +
                 `method/photos.get` +
                 `?owner_id=${req.session.user_id}` +
@@ -156,7 +156,6 @@ router.get('/', (req, res, next) => {
                             arr.push(sizeS);
                         }
                         pixArray = pixArray.concat(arr);
-                        req.session.pixArray = pixArray;
                     });
                 }
             });
@@ -164,6 +163,7 @@ router.get('/', (req, res, next) => {
         });
 
         photoFetcher.then(() => {
+            req.session.pixArray = pixArray;
             console.log(pixArray);
             res.send({
                 body: pixArray
