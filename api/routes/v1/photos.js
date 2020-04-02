@@ -122,9 +122,9 @@ router.get('/', (req, res, next) => {
             };
         }
 
-    .then(axios.spread(function (acct, perms) {
-            // Both requests are now complete
-        }))
+    // .then(axios.spread(function (acct, perms) {
+    //         // Both requests are now complete
+    //     }))
 
         axios.all(urlArray)
             .then(axios.spread((...responses) => {
