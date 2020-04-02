@@ -127,8 +127,9 @@ router.get('/', (req, res, next) => {
     //     }))
 
         axios.all(urlArray)
-            .then(axios.spread((...responses) => {
-                console.log('responses: ', responses);
+            .then(axios.spread((one, two) => {
+                console.log('ONE : ', one);
+                console.log('TWO : ', two);
                 // let resArr = responses.map(r => r.data);
                 // console.log('resArr: ', resArr);
                 // const arr = [];
