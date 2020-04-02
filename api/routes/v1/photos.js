@@ -153,7 +153,10 @@ router.get('/', (req, res, next) => {
                 res.send({
                     body: pixArray
                 });
-            }));
+            }))
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 });
 
