@@ -1,8 +1,6 @@
 const router             = require('express').Router();
 const axios              = require('axios');
 
-const request = require('request');
-
 router.get('/', (req, res, next) => {
     // totalCount = 2700
     // totalFloat = 2.7
@@ -111,6 +109,10 @@ router.get('/', (req, res, next) => {
             `&count=${reqFloatPart}` +
             `&v=5.103`;
         urlArray.push(linkLast);
+
+        urlArray = urlArray.map((url) => {
+            return axios.get(url);
+        });
 
         axios.all(urlArray)
             .then(axios.spread((...responses) => {
