@@ -147,7 +147,7 @@ router.get('/', (req, res, next) => {
                 res.send({
                     body: pixArray
                 });
-            });
+            }));
     }
 });
 
