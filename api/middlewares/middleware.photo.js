@@ -1,3 +1,5 @@
+const request = require('request');
+
 module.exports = {
     photosFetcher: function(user_id, access_token, offset, count) {
         const link = `https://api.vk.com/` +
