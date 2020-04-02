@@ -86,7 +86,7 @@ router.get('/', (req, res, next) => {
         // handling integerPart
         let offsetLast;
         let urlArray = [];
-        for (let offset = reqOffset, count = 1000; count <= reqIntegerPart; offset = offset + 1000, count = count + 1000) {
+        for (let offset = reqOffset, count = 1000; count <= reqIntegerPart; offset = offset + 1000) {
             const link = `https://api.vk.com/` +
                 `method/photos.get` +
                 `?owner_id=${req.session.user_id}` +
