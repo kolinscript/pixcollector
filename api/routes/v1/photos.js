@@ -117,10 +117,6 @@ router.get('/', (req, res, next) => {
 
         console.log('urlArray: ', urlArray);
 
-        res.send({
-            body: urlArray
-        });
-
         // function sleeper(ms) {
         //     return function(x) {
         //         return new Promise(resolve => setTimeout(() => resolve(x), ms));
