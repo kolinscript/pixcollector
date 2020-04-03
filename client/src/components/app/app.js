@@ -55,7 +55,7 @@ class App extends Component {
                         this.setState( {
                             showVkLogin: true
                         });
-                        window.location = 'https://pixcollector.herokuapp.com/auth';
+                        // window.location = 'https://pixcollector.herokuapp.com/auth';
                     } else if (data.albumSize) {
                         this.setState(  {
                             albumSize: data.albumSize,
@@ -65,17 +65,17 @@ class App extends Component {
                 })
                 .catch(error => console.log(error));
             // fetch USER
-            fetch(`/api/v1/user`, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json', 'Content-Type': 'application/json',
-                }
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    console.log(data);
-                })
-                .catch(error => console.log(error));
+            // fetch(`/api/v1/user`, {
+            //     method: 'GET',
+            //     headers: {
+            //         Accept: 'application/json', 'Content-Type': 'application/json',
+            //     }
+            // })
+            //     .then(res => res.json())
+            //     .then((data) => {
+            //         console.log(data);
+            //     })
+            //     .catch(error => console.log(error));
 
         }
     }
