@@ -36,7 +36,7 @@ router.get('/', secure.optional, (req, res, next) => {
             `&v=5.103`;
         axios.get(albumLink)
             .then(function (response) {
-                const albumSize = response.data.items.find((item) => {return item.id === -15}).size;
+                const albumSize = response.data.response.items.find((item) => {return item.id === -15}).size;
                 req.session.albumSize = albumSize;
                 console.log('axiosResponse: ', albumSize);
                 res.redirect('/stock');
