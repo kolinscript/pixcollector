@@ -86,46 +86,46 @@ router.get('/', (req, res, next) => {
         // handling integerPart
         let offsetLast;
         let urlArray = [];
-        for (let offset = reqOffset, count = 1000; count <= reqIntegerPart; offset = offset + 1000) {
-            const link = `https://api.vk.com/` +
-                `method/photos.get` +
-                `?owner_id=${req.session.user_id}` +
-                `&access_token=${req.session.access_token}` +
-                `&album_id=saved` +
-                `&photo_sizes=1` +
-                `&offset=${offset}` +
-                `&count=${count}` +
-                `&v=5.103`;
-            urlArray.push(link);
-            offsetLast = offset + 1000;
-        }
-        const linkLast = `https://api.vk.com/` +
-            `method/photos.get` +
-            `?owner_id=${req.session.user_id}` +
-            `&access_token=${req.session.access_token}` +
-            `&album_id=saved` +
-            `&photo_sizes=1` +
-            `&offset=${offsetLast}` +
-            `&count=${reqFloatPart}` +
-            `&v=5.103`;
-
-        urlArray.push(linkLast);
-
-        // urlArray = urlArray.map((url) => {
-        //     return axios.get(url);
-        // });
-
-        console.log('urlArray: ', urlArray);
+        // for (let offset = reqOffset, count = 1000; count <= reqIntegerPart; offset = offset + 1000) {
+        //     const link = `https://api.vk.com/` +
+        //         `method/photos.get` +
+        //         `?owner_id=${req.session.user_id}` +
+        //         `&access_token=${req.session.access_token}` +
+        //         `&album_id=saved` +
+        //         `&photo_sizes=1` +
+        //         `&offset=${offset}` +
+        //         `&count=${count}` +
+        //         `&v=5.103`;
+        //     urlArray.push(link);
+        //     offsetLast = offset + 1000;
+        // }
+        // const linkLast = `https://api.vk.com/` +
+        //     `method/photos.get` +
+        //     `?owner_id=${req.session.user_id}` +
+        //     `&access_token=${req.session.access_token}` +
+        //     `&album_id=saved` +
+        //     `&photo_sizes=1` +
+        //     `&offset=${offsetLast}` +
+        //     `&count=${reqFloatPart}` +
+        //     `&v=5.103`;
+        //
+        // urlArray.push(linkLast);
+        //
+        // // urlArray = urlArray.map((url) => {
+        // //     return axios.get(url);
+        // // });
+        //
+        // console.log('urlArray: ', urlArray);
 
         res.send({
             body: urlArray
         });
 
-        function sleeper(ms) {
-            return function(x) {
-                return new Promise(resolve => setTimeout(() => resolve(x), ms));
-            };
-        }
+        // function sleeper(ms) {
+        //     return function(x) {
+        //         return new Promise(resolve => setTimeout(() => resolve(x), ms));
+        //     };
+        // }
 
     // .then(axios.spread(function (acct, perms) {
     //         // Both requests are now complete
