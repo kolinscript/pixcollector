@@ -86,36 +86,36 @@ router.get('/', (req, res, next) => {
         // handling integerPart
         let offsetLast;
         let urlArray = [];
-        // for (let offset = reqOffset, count = 1000; count <= reqIntegerPart; offset = offset + 1000) {
-        //     const link = `https://api.vk.com/` +
-        //         `method/photos.get` +
-        //         `?owner_id=${req.session.user_id}` +
-        //         `&access_token=${req.session.access_token}` +
-        //         `&album_id=saved` +
-        //         `&photo_sizes=1` +
-        //         `&offset=${offset}` +
-        //         `&count=${count}` +
-        //         `&v=5.103`;
-        //     urlArray.push(link);
-        //     offsetLast = offset + 1000;
-        // }
-        // const linkLast = `https://api.vk.com/` +
-        //     `method/photos.get` +
-        //     `?owner_id=${req.session.user_id}` +
-        //     `&access_token=${req.session.access_token}` +
-        //     `&album_id=saved` +
-        //     `&photo_sizes=1` +
-        //     `&offset=${offsetLast}` +
-        //     `&count=${reqFloatPart}` +
-        //     `&v=5.103`;
-        //
-        // urlArray.push(linkLast);
-        //
-        // // urlArray = urlArray.map((url) => {
-        // //     return axios.get(url);
-        // // });
-        //
-        // console.log('urlArray: ', urlArray);
+        for (let offset = reqOffset, count = 1000; offset < reqIntegerPart; offset = offset + 1000) {
+            const link = `https://api.vk.com/` +
+                `method/photos.get` +
+                `?owner_id=${req.session.user_id}` +
+                `&access_token=${req.session.access_token}` +
+                `&album_id=saved` +
+                `&photo_sizes=1` +
+                `&offset=${offset}` +
+                `&count=${count}` +
+                `&v=5.103`;
+            urlArray.push(link);
+            offsetLast = offset + 1000;
+        }
+        const linkLast = `https://api.vk.com/` +
+            `method/photos.get` +
+            `?owner_id=${req.session.user_id}` +
+            `&access_token=${req.session.access_token}` +
+            `&album_id=saved` +
+            `&photo_sizes=1` +
+            `&offset=${offsetLast}` +
+            `&count=${reqFloatPart}` +
+            `&v=5.103`;
+
+        urlArray.push(linkLast);
+
+        urlArray = urlArray.map((url) => {
+            return axios.get(url);
+        });
+
+        console.log('urlArray: ', urlArray);
 
         res.send({
             body: urlArray
@@ -127,51 +127,46 @@ router.get('/', (req, res, next) => {
         //     };
         // }
 
-    // .then(axios.spread(function (acct, perms) {
-    //         // Both requests are now complete
-    //     }))
-    //
-    //     axios.all(urlArray)
-    //         .then(axios.spread((one, two) => {
-    //             console.log('ONE : ', one);
-    //             console.log('TWO : ', two);
-    //             // let resArr = responses.map(r => r.data);
-    //             // console.log('resArr: ', resArr);
-    //             // const arr = [];
-    //             // if (resArr.response) {
-    //             //     resArr.response.items.forEach((item) => {
-    //             //         // ascending flow
-    //             //         // S -> M -> X -> Y -> Z -> W
-    //             //         const sizeW = item.sizes.find(size => size.type === 'w');
-    //             //         const sizeZ = item.sizes.find(size => size.type === 'z');
-    //             //         const sizeY = item.sizes.find(size => size.type === 'y');
-    //             //         const sizeX = item.sizes.find(size => size.type === 'x');
-    //             //         const sizeM = item.sizes.find(size => size.type === 'm');
-    //             //         const sizeS = item.sizes.find(size => size.type === 's');
-    //             //         if (sizeW) {
-    //             //             arr.push(sizeW);
-    //             //         } else if (sizeZ) {
-    //             //             arr.push(sizeZ);
-    //             //         } else if (sizeY) {
-    //             //             arr.push(sizeY);
-    //             //         } else if (sizeX) {
-    //             //             arr.push(sizeX);
-    //             //         } else if (sizeM) {
-    //             //             arr.push(sizeM);
-    //             //         } else if (sizeS) {
-    //             //             arr.push(sizeS);
-    //             //         }
-    //             //         pixArray = arr;
-    //             //         req.session.pixArray = pixArray;
-    //             //     });
-    //             // }
-    //             res.send({
-    //                 body: {one, two}
-    //             });
-    //         }))
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
+        axios.all(urlArray)
+            .then(function (response) {
+                console.log('response: ', response);
+                // let resArr = responses.map(r => r.data);
+                // console.log('resArr: ', resArr);
+                // const arr = [];
+                // if (resArr.response) {
+                //     resArr.response.items.forEach((item) => {
+                //         // ascending flow
+                //         // S -> M -> X -> Y -> Z -> W
+                //         const sizeW = item.sizes.find(size => size.type === 'w');
+                //         const sizeZ = item.sizes.find(size => size.type === 'z');
+                //         const sizeY = item.sizes.find(size => size.type === 'y');
+                //         const sizeX = item.sizes.find(size => size.type === 'x');
+                //         const sizeM = item.sizes.find(size => size.type === 'm');
+                //         const sizeS = item.sizes.find(size => size.type === 's');
+                //         if (sizeW) {
+                //             arr.push(sizeW);
+                //         } else if (sizeZ) {
+                //             arr.push(sizeZ);
+                //         } else if (sizeY) {
+                //             arr.push(sizeY);
+                //         } else if (sizeX) {
+                //             arr.push(sizeX);
+                //         } else if (sizeM) {
+                //             arr.push(sizeM);
+                //         } else if (sizeS) {
+                //             arr.push(sizeS);
+                //         }
+                //         pixArray = arr;
+                //         req.session.pixArray = pixArray;
+                //     });
+                // }
+                res.send({
+                    body: {response}
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 });
 
