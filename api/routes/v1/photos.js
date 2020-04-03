@@ -119,10 +119,11 @@ router.get('/', (req, res, next) => {
                 const result = await axios.all(urlArrayPromises);
                 const resDataArray = result.map(r => r.data);
                 const responseArray = resDataArray.map(r => r.response);
+                const itemsArray = responseArray.map(r => r.items);
                 console.log('responseArray: ', responseArray);
                 const arr = [];
                 if (responseArray) {
-                    responseArray.items.forEach((item) => {
+                    itemsArray.forEach((item) => {
                         // ascending flow
                         // S -> M -> X -> Y -> Z -> W
                         const sizeW = item.sizes.find(size => size.type === 'w');
