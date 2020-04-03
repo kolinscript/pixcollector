@@ -9,17 +9,11 @@ router.get('/', secure.optional, (req, res, next) => {
     });
 });
 
-// router.get('/testDB', secure.optional, (req, res, next) => {
-//     const { payload: { id } } = req;
-//
-//     return Users.findById(id)
-//         .then((user) => {
-//             if(!user) {
-//                 return res.sendStatus(400);
-//             }
-//
-//             return res.json({ user: user.toAuthJSON() });
-//         });
-// });
+router.get('/testDB', secure.optional, (req, res, next) => {
+    Users.find(function (err, sensors) {
+        if (err) return console.error(err);
+        return res.status(200).json( { OK: { sensors: sensors } } );
+    });
+});
 
 module.exports = router;
