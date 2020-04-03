@@ -120,9 +120,9 @@ router.get('/', (req, res, next) => {
                 const resDataArray = result.map(r => r.data);
                 const responseArray = resDataArray.map(r => r.response);
                 let items = [];
-                responseArray.forEach((array) => {
-                    items.concat(...array);
-                });
+                // responseArray.forEach((array) => {
+                //     items.concat(...array);
+                // });
                 const check = result.map(r => r.data).map(r => r.response).map(r => r.items);
                 const arr = [];
                 // if (responseArray) {
