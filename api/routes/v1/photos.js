@@ -129,7 +129,7 @@ router.get('/', (req, res, next) => {
 
         axios.all(urlArray)
             .then(function (response) {
-                console.log('response: ', response);
+                console.log('response: ', response.data.response);
                 // let resArr = responses.map(r => r.data);
                 // console.log('resArr: ', resArr);
                 // const arr = [];
@@ -161,7 +161,7 @@ router.get('/', (req, res, next) => {
                 //     });
                 // }
                 res.send({
-                    body: {response}
+                    body: {response.data.response}
                 });
             })
             .catch(function (error) {
