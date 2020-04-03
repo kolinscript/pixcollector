@@ -118,42 +118,40 @@ router.get('/', (req, res, next) => {
             try {
                 const result = await axios.all(urlArrayPromises);
                 const arrays = result.map(r => r.data).map(r => r.response).map(r => r.items);
-                let all = [];
+                let photos = [];
                 arrays.forEach((array) => {
-                    all = all.concat(array)
+                    photos = photos.concat(array)
                 });
                 const arr = [];
-                // if (responseArray) {
-                //     itemsArray.forEach((item) => {
-                //         // ascending flow
-                //         // S -> M -> X -> Y -> Z -> W
-                //         const sizeW = item.sizes.find(size => size.type === 'w');
-                //         const sizeZ = item.sizes.find(size => size.type === 'z');
-                //         const sizeY = item.sizes.find(size => size.type === 'y');
-                //         const sizeX = item.sizes.find(size => size.type === 'x');
-                //         const sizeM = item.sizes.find(size => size.type === 'm');
-                //         const sizeS = item.sizes.find(size => size.type === 's');
-                //         if (sizeW) {
-                //             arr.push(sizeW);
-                //         } else if (sizeZ) {
-                //             arr.push(sizeZ);
-                //         } else if (sizeY) {
-                //             arr.push(sizeY);
-                //         } else if (sizeX) {
-                //             arr.push(sizeX);
-                //         } else if (sizeM) {
-                //             arr.push(sizeM);
-                //         } else if (sizeS) {
-                //             arr.push(sizeS);
-                //         }
-                //         pixArray = arr;
-                //         req.session.pixArray = pixArray;
-                //     });
-                // }
+                if (photos) {
+                    photos.forEach((item) => {
+                        // ascending flow
+                        // S -> M -> X -> Y -> Z -> W
+                        const sizeW = item.sizes.find(size => size.type === 'w');
+                        const sizeZ = item.sizes.find(size => size.type === 'z');
+                        const sizeY = item.sizes.find(size => size.type === 'y');
+                        const sizeX = item.sizes.find(size => size.type === 'x');
+                        const sizeM = item.sizes.find(size => size.type === 'm');
+                        const sizeS = item.sizes.find(size => size.type === 's');
+                        if (sizeW) {
+                            arr.push(sizeW);
+                        } else if (sizeZ) {
+                            arr.push(sizeZ);
+                        } else if (sizeY) {
+                            arr.push(sizeY);
+                        } else if (sizeX) {
+                            arr.push(sizeX);
+                        } else if (sizeM) {
+                            arr.push(sizeM);
+                        } else if (sizeS) {
+                            arr.push(sizeS);
+                        }
+                        pixArray = arr;
+                        req.session.pixArray = pixArray;
+                    });
+                }
                 res.send({
-                    body: {
-                        all: all
-                    }
+                    body: pixArray
                 });
             } catch (error) {
                 console.error(error);
