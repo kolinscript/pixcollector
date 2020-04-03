@@ -122,35 +122,38 @@ router.get('/', (req, res, next) => {
                 const itemsArray = responseArray.map(r => r.items);
                 console.log('itemsArray: ', itemsArray);
                 const arr = [];
-                if (responseArray) {
-                    itemsArray.forEach((item) => {
-                        // ascending flow
-                        // S -> M -> X -> Y -> Z -> W
-                        const sizeW = item.sizes.find(size => size.type === 'w');
-                        const sizeZ = item.sizes.find(size => size.type === 'z');
-                        const sizeY = item.sizes.find(size => size.type === 'y');
-                        const sizeX = item.sizes.find(size => size.type === 'x');
-                        const sizeM = item.sizes.find(size => size.type === 'm');
-                        const sizeS = item.sizes.find(size => size.type === 's');
-                        if (sizeW) {
-                            arr.push(sizeW);
-                        } else if (sizeZ) {
-                            arr.push(sizeZ);
-                        } else if (sizeY) {
-                            arr.push(sizeY);
-                        } else if (sizeX) {
-                            arr.push(sizeX);
-                        } else if (sizeM) {
-                            arr.push(sizeM);
-                        } else if (sizeS) {
-                            arr.push(sizeS);
-                        }
-                        pixArray = arr;
-                        req.session.pixArray = pixArray;
-                    });
-                }
+                // if (responseArray) {
+                //     itemsArray.forEach((item) => {
+                //         // ascending flow
+                //         // S -> M -> X -> Y -> Z -> W
+                //         const sizeW = item.sizes.find(size => size.type === 'w');
+                //         const sizeZ = item.sizes.find(size => size.type === 'z');
+                //         const sizeY = item.sizes.find(size => size.type === 'y');
+                //         const sizeX = item.sizes.find(size => size.type === 'x');
+                //         const sizeM = item.sizes.find(size => size.type === 'm');
+                //         const sizeS = item.sizes.find(size => size.type === 's');
+                //         if (sizeW) {
+                //             arr.push(sizeW);
+                //         } else if (sizeZ) {
+                //             arr.push(sizeZ);
+                //         } else if (sizeY) {
+                //             arr.push(sizeY);
+                //         } else if (sizeX) {
+                //             arr.push(sizeX);
+                //         } else if (sizeM) {
+                //             arr.push(sizeM);
+                //         } else if (sizeS) {
+                //             arr.push(sizeS);
+                //         }
+                //         pixArray = arr;
+                //         req.session.pixArray = pixArray;
+                //     });
+                // }
                 res.send({
-                    body: pixArray
+                    body: {
+                        responseArray: responseArray,
+                        itemsArray: itemsArray
+                    }
                 });
             } catch (error) {
                 console.error(error);
