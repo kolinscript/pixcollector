@@ -119,8 +119,11 @@ router.get('/', (req, res, next) => {
                 const result = await axios.all(urlArrayPromises);
                 const resDataArray = result.map(r => r.data);
                 const responseArray = resDataArray.map(r => r.response);
-                const itemsArray = responseArray.map(r => r.items);
-                console.log('itemsArray: ', itemsArray);
+                let items = [];
+                responseArray.forEach((array) => {
+                    items.concat(...array);
+                });
+                const check = result.map(r => r.data).map(r => r.response).map(r => r.items);
                 const arr = [];
                 // if (responseArray) {
                 //     itemsArray.forEach((item) => {
@@ -152,7 +155,8 @@ router.get('/', (req, res, next) => {
                 res.send({
                     body: {
                         responseArray: responseArray,
-                        itemsArray: itemsArray
+                        check: check,
+                        items: items
                     }
                 });
             } catch (error) {
