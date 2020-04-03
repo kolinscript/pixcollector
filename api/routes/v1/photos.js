@@ -120,7 +120,7 @@ router.get('/', (req, res, next) => {
                 const resDataArray = result.map(r => r.data);
                 const responseArray = resDataArray.map(r => r.response);
                 const itemsArray = responseArray.map(r => r.items);
-                console.log('responseArray: ', responseArray);
+                console.log('itemsArray: ', itemsArray);
                 const arr = [];
                 if (responseArray) {
                     itemsArray.forEach((item) => {
