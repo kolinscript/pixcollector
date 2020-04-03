@@ -117,11 +117,12 @@ router.get('/', (req, res, next) => {
         async function photosFetcher() {
             try {
                 const result = await axios.all(urlArrayPromises);
-                let resArr = result.map(r => r.data);
-                console.log('resArr: ', resArr);
+                const resDataArray = result.map(r => r.data);
+                const responseArray = resDataArray.map(r => r.response);
+                console.log('responseArray: ', responseArray);
                 const arr = [];
-                if (resArr.response) {
-                    resArr.response.items.forEach((item) => {
+                if (responseArray) {
+                    responseArray.items.forEach((item) => {
                         // ascending flow
                         // S -> M -> X -> Y -> Z -> W
                         const sizeW = item.sizes.find(size => size.type === 'w');
