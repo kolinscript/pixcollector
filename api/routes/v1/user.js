@@ -1,5 +1,6 @@
 const router             = require('express').Router();
 const secure             = require('./secure');
+const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
 router.get('/', secure.optional, (req, res, next) => {
