@@ -1,5 +1,5 @@
-const router             = require('express').Router();
-const axios              = require('axios');
+const router = require('express').Router();
+const axios = require('axios');
 
 router.get('/', (req, res, next) => {
     // totalCount = 2700
@@ -80,8 +80,7 @@ router.get('/', (req, res, next) => {
             .finally(function () {
                 // always executed
             });
-    }
-    else if (integerPart > 0) {
+    } else if (integerPart > 0) {
         // multiple requests
         // handling integerPart
         let offsetLast;
@@ -111,73 +110,52 @@ router.get('/', (req, res, next) => {
 
         urlArray.push(linkLast);
 
-        urlArray = urlArray.map((url) => {
+        const urlArrayPromises = urlArray.map((url) => {
             return axios.get(url);
         });
 
-        console.log('urlArray: ', urlArray);
-
-        // function sleeper(ms) {
-        //     return function(x) {
-        //         return new Promise(resolve => setTimeout(() => resolve(x), ms));
-        //     };
-        // }
-
         async function photosFetcher() {
             try {
-                const result = await axios.all(urlArray);
-                console.log('RESULLT', result);
+                const result = await axios.all(urlArrayPromises);
+                let resArr = result.map(r => r.data);
+                console.log('resArr: ', resArr);
+                const arr = [];
+                if (resArr.response) {
+                    resArr.response.items.forEach((item) => {
+                        // ascending flow
+                        // S -> M -> X -> Y -> Z -> W
+                        const sizeW = item.sizes.find(size => size.type === 'w');
+                        const sizeZ = item.sizes.find(size => size.type === 'z');
+                        const sizeY = item.sizes.find(size => size.type === 'y');
+                        const sizeX = item.sizes.find(size => size.type === 'x');
+                        const sizeM = item.sizes.find(size => size.type === 'm');
+                        const sizeS = item.sizes.find(size => size.type === 's');
+                        if (sizeW) {
+                            arr.push(sizeW);
+                        } else if (sizeZ) {
+                            arr.push(sizeZ);
+                        } else if (sizeY) {
+                            arr.push(sizeY);
+                        } else if (sizeX) {
+                            arr.push(sizeX);
+                        } else if (sizeM) {
+                            arr.push(sizeM);
+                        } else if (sizeS) {
+                            arr.push(sizeS);
+                        }
+                        pixArray = arr;
+                        req.session.pixArray = pixArray;
+                    });
+                }
+                res.send({
+                    body: pixArray
+                });
             } catch (error) {
                 console.error(error);
             }
         }
 
-        photosFetcher().then(promise => {
-            console.log('PROMISE', promise);
-        });
-
-
-        //
-        // axios.all(urlArray)
-        //     .then(function (response) {
-        //         console.log('response: ', );
-        //         // let resArr = responses.map(r => r.data);
-        //         // console.log('resArr: ', resArr);
-        //         // const arr = [];
-        //         // if (resArr.response) {
-        //         //     resArr.response.items.forEach((item) => {
-        //         //         // ascending flow
-        //         //         // S -> M -> X -> Y -> Z -> W
-        //         //         const sizeW = item.sizes.find(size => size.type === 'w');
-        //         //         const sizeZ = item.sizes.find(size => size.type === 'z');
-        //         //         const sizeY = item.sizes.find(size => size.type === 'y');
-        //         //         const sizeX = item.sizes.find(size => size.type === 'x');
-        //         //         const sizeM = item.sizes.find(size => size.type === 'm');
-        //         //         const sizeS = item.sizes.find(size => size.type === 's');
-        //         //         if (sizeW) {
-        //         //             arr.push(sizeW);
-        //         //         } else if (sizeZ) {
-        //         //             arr.push(sizeZ);
-        //         //         } else if (sizeY) {
-        //         //             arr.push(sizeY);
-        //         //         } else if (sizeX) {
-        //         //             arr.push(sizeX);
-        //         //         } else if (sizeM) {
-        //         //             arr.push(sizeM);
-        //         //         } else if (sizeS) {
-        //         //             arr.push(sizeS);
-        //         //         }
-        //         //         pixArray = arr;
-        //         //         req.session.pixArray = pixArray;
-        //         //     });
-        //         // }
-        //         res.send({
-        //             body: response.data.response
-        //         });
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+        photosFetcher();
     }
 });
 
