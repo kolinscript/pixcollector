@@ -117,13 +117,11 @@ router.get('/', (req, res, next) => {
         async function photosFetcher() {
             try {
                 const result = await axios.all(urlArrayPromises);
-                const resDataArray = result.map(r => r.data);
-                const responseArray = resDataArray.map(r => r.response);
-                let items = [];
-                // responseArray.forEach((array) => {
-                //     items.concat(...array);
-                // });
-                const check = result.map(r => r.data).map(r => r.response).map(r => r.items);
+                const arrays = result.map(r => r.data).map(r => r.response).map(r => r.items);
+                let all = [];
+                arrays.forEach((array) => {
+                    all = all.concat(array)
+                });
                 const arr = [];
                 // if (responseArray) {
                 //     itemsArray.forEach((item) => {
@@ -154,9 +152,7 @@ router.get('/', (req, res, next) => {
                 // }
                 res.send({
                     body: {
-                        responseArray: responseArray,
-                        check: check,
-                        items: items
+                        all: all
                     }
                 });
             } catch (error) {
