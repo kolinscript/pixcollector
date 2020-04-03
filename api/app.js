@@ -4,6 +4,7 @@ const bodyParser         = require('body-parser');
 const cors               = require('cors');
 const session            = require('express-session');
 const mongoose           = require('mongoose');
+const Users              = require('./models/Users');
 const MongoStore         = require('connect-mongo')(session);
 const apiV1              = require('./routes/v1');
 const port               = process.env.PORT || 5000;
