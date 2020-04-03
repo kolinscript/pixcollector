@@ -1,5 +1,6 @@
 const router             = require('express').Router();
 const request            = require('request');
+const axios              = require('axios');
 const secure             = require('./secure');
 const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
@@ -33,8 +34,16 @@ router.get('/', secure.optional, (req, res, next) => {
             `&access_token=${req.session.access_token}` +
             `&need_system=1` +
             `&v=5.103`;
+        axios.get(albumLink)
+            .then(function (response) {
+                console.log('axiosResponse: ', response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         request(albumLink, function (error1, response1, body1) {
             req.session.albumSize = JSON.parse(body1).response.items.find((item) => {return item.id === -15}).size;
+            console.log(req.session.albumSize);
             res.redirect('/stock');
         });
     });
