@@ -41,6 +41,20 @@ class App extends Component {
             this.setState( {
                 showVkLogin: false
             });
+            // fetch USER
+            fetch(`/api/v1/user`, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json',
+                }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch(error => console.log(error));
+
+            // fetch ALBUM SIZE
             fetch(`/api/v1/photos/albumSize`, {
                 method: 'GET',
                 headers: {

@@ -16,17 +16,21 @@ mongoose
         () => { console.log('Database is connected'); },
         (err) => { console.log('Can not connect to the database' + err); }
     );
+mongoose.set('debug', true);
+mongoose.model('Users');
 
 app.use(cors());
 app.use(session({
-    secret: "PIX",
+    resave: false,
+    saveUninitialized: true,
+    secret: "pix",
+    cookie: { secure: true },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 app.use('/', express.static(path.join(__dirname, '../client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api/v1', apiV1);
-app.use(session({ secret: 'pixcoll', resave: false, saveUninitialized: true, cookie: { secure: true } }));
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
