@@ -161,7 +161,7 @@ router.get('/', (req, res, next) => {
                 //     });
                 // }
                 res.send({
-                    body: {response.data.response}
+                    body: response.data.response
                 });
             })
             .catch(function (error) {
