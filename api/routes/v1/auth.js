@@ -36,17 +36,14 @@ router.get('/', secure.optional, (req, res, next) => {
             `&v=5.103`;
         axios.get(albumLink)
             .then(function (response) {
-                console.log('axiosResponse: ', response.data);
+                const albumSize = response.response.data.items.find((item) => {return item.id === -15}).size;
+                req.session.albumSize = albumSize;
+                console.log('axiosResponse: ', albumSize);
+                res.redirect('/stock');
             })
             .catch(function (error) {
                 console.log(error);
             });
-        request(albumLink, function (error1, response1, body1) {
-            req.session.albumSize = JSON.parse(body1).response.items.find((item) => {return item.id === -15}).size;
-            console.log(req.session.albumSize);
-            console.log('requestResponse: ', JSON.parse(body1).response.items);
-            res.redirect('/stock');
-        });
     });
 });
 
