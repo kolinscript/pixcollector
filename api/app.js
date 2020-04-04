@@ -23,7 +23,7 @@ mongoose.model('Users');
 app.use(session({
     resave: false,
     saveUninitialized: true,
-    secret: "pix",
+    secret: 'pix',
     cookie: { secure: true },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 

@@ -32,8 +32,8 @@ router.get('/', (req, res, next) => {
         // single request
         const link = `https://api.vk.com/` +
             `method/photos.get` +
-            `?owner_id=${req.session.user_id}` +
-            `&access_token=${req.session.access_token}` +
+            `?owner_id=${req.session.user.user_id}` +
+            `&access_token=${req.session.user.access_token}` +
             `&album_id=saved` +
             `&photo_sizes=1` +
             `&offset=${reqOffset}` +
@@ -67,7 +67,7 @@ router.get('/', (req, res, next) => {
                             arr.push(sizeS);
                         }
                         pixArray = arr;
-                        req.session.pixArray = pixArray;
+                        req.session.user.pixArray = pixArray;
                     });
                 }
                 res.send({
@@ -88,8 +88,8 @@ router.get('/', (req, res, next) => {
         for (let offset = reqOffset, count = 1000; offset < reqIntegerPart; offset = offset + 1000) {
             const link = `https://api.vk.com/` +
                 `method/photos.get` +
-                `?owner_id=${req.session.user_id}` +
-                `&access_token=${req.session.access_token}` +
+                `?owner_id=${req.session.user.user_id}` +
+                `&access_token=${req.session.user.access_token}` +
                 `&album_id=saved` +
                 `&photo_sizes=1` +
                 `&offset=${offset}` +
@@ -100,8 +100,8 @@ router.get('/', (req, res, next) => {
         }
         const linkLast = `https://api.vk.com/` +
             `method/photos.get` +
-            `?owner_id=${req.session.user_id}` +
-            `&access_token=${req.session.access_token}` +
+            `?owner_id=${req.session.user.user_id}` +
+            `&access_token=${req.session.user.access_token}` +
             `&album_id=saved` +
             `&photo_sizes=1` +
             `&offset=${offsetLast}` +
@@ -147,7 +147,7 @@ router.get('/', (req, res, next) => {
                             arr.push(sizeS);
                         }
                         pixArray = arr;
-                        req.session.pixArray = pixArray;
+                        req.session.user.pixArray = pixArray;
                     });
                 }
                 res.send({
