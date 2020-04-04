@@ -30,6 +30,7 @@ router.get('/', secure.optional, (req, res, next) => {
                     // save user to db
                     user.save()
                         .then(() => {
+                                req.session.user = {};
                                 req.session.user.albumSize = albumSize;
                                 req.session.user = user.toAuthJSON();
                                 console.log('req.session.user.albumSize', req.session.user.albumSize);
