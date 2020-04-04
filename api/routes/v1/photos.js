@@ -32,8 +32,8 @@ router.get('/', (req, res, next) => {
         // single request
         const link = `https://api.vk.com/` +
             `method/photos.get` +
-            `?owner_id=${req.session.user.user_id}` +
-            `&access_token=${req.session.user.access_token}` +
+            `?owner_id=${req.session.user.vkId}` +
+            `&access_token=${req.session.user.vkToken}` +
             `&album_id=saved` +
             `&photo_sizes=1` +
             `&offset=${reqOffset}` +
@@ -88,8 +88,8 @@ router.get('/', (req, res, next) => {
         for (let offset = reqOffset, count = 1000; offset < reqIntegerPart; offset = offset + 1000) {
             const link = `https://api.vk.com/` +
                 `method/photos.get` +
-                `?owner_id=${req.session.user.user_id}` +
-                `&access_token=${req.session.user.access_token}` +
+                `?owner_id=${req.session.user.vkId}` +
+                `&access_token=${req.session.user.vkToken}` +
                 `&album_id=saved` +
                 `&photo_sizes=1` +
                 `&offset=${offset}` +
@@ -100,8 +100,8 @@ router.get('/', (req, res, next) => {
         }
         const linkLast = `https://api.vk.com/` +
             `method/photos.get` +
-            `?owner_id=${req.session.user.user_id}` +
-            `&access_token=${req.session.user.access_token}` +
+            `?owner_id=${req.session.user.vkId}` +
+            `&access_token=${req.session.user.vkToken}` +
             `&album_id=saved` +
             `&photo_sizes=1` +
             `&offset=${offsetLast}` +
@@ -164,7 +164,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/albumSize', (req, res, next) => {
     res.send({
-        album_size: req.session.user.album_size
+        album_size: req.session.user.albumSize
     });
 });
 

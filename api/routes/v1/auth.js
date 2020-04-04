@@ -13,6 +13,7 @@ router.get('/', secure.optional, (req, res, next) => {
         `&code=${code}`;
     axios.get(authLink)
         .then(function (response) {
+            console.log('axiosResponse', response.data);
             const albumLink = `https://api.vk.com/` +
                 `method/photos.getAlbums` +
                 `?owner_id=${response.data.response.user_id}` +
@@ -21,17 +22,16 @@ router.get('/', secure.optional, (req, res, next) => {
                 `&v=5.103`;
             axios.get(albumLink)
                 .then(function (response) {
-                    const album_size = response.data.response.items.find(item => item.id === -15).size;
-                    console.log('axiosResponse: ', album_size);
+                    const albumSize = response.data.response.items.find(item => item.id === -15).size;
                     const user = new Users({
                         vkId: response.data.response.user_id,
                         vkToken: response.data.response.access_token,
-                        albumSize: album_size
+                        albumSize: albumSize
                     });
                     // save user to db
                     user.save()
                         .then(() => {
-                                console.log(user.toAuthJSON());
+                                console.log('toAuthJSON', user.toAuthJSON());
                                 req.session.user = user.toAuthJSON();
                             }
                         );

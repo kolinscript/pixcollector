@@ -7,8 +7,6 @@ const UsersSchema = new Schema({
     vkId: String,
     vkToken: String,
     albumSize: String,
-    hash: String,
-    salt: String,
 });
 
 UsersSchema.methods.generateJWT = function() {
