@@ -13,11 +13,10 @@ router.get('/', secure.optional, (req, res, next) => {
         `&code=${code}`;
     axios.get(authLink)
         .then(function (response) {
-            console.log('axiosResponse', response.data);
             const albumLink = `https://api.vk.com/` +
                 `method/photos.getAlbums` +
-                `?owner_id=${response.data.response.user_id}` +
-                `&access_token=${response.data.response.access_token}` +
+                `?owner_id=${response.data.user_id}` +
+                `&access_token=${response.data.access_token}` +
                 `&need_system=1` +
                 `&v=5.103`;
             axios.get(albumLink)
