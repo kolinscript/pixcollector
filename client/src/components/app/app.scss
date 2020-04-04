@@ -2,6 +2,8 @@ $fontMain: 'Roboto', sans-serif;
 $background: #252525;
 $blue: #314569cc;
 $white: rgba(255, 255, 255, 0.88);
+$dark: #4D4D4D;
+$gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3DC9 41.15%, #FFEA29 85.42%);
 
 .gallery {
   position: absolute;
@@ -35,13 +37,15 @@ $white: rgba(255, 255, 255, 0.88);
   padding: 60px 0 100px;
   height: 100%;
   h1.title {
+    opacity: .9;
     margin: 0;
     padding: 5px 25px;
     border-radius: 50px;
     font: 400 42px/44px $fontMain;
     text-align: center;
-    background-color: $blue;
-    color: $white;
+    background: $gradient;
+    color: $dark;
+    border: 4px solid $dark;
   }
   form {
     .title {
@@ -143,15 +147,14 @@ $white: rgba(255, 255, 255, 0.88);
     width: 180px;
     height: 44px;
     padding: 8px 20px;
-    background: $blue;
-    border: none;
+    background: $dark;
     outline: none;
     border-radius: 25px;
     cursor: pointer;
     text-decoration: none;
     transition: background 200ms ease-in-out;
     &:hover {
-      background: lighten($blue, 10%);
+      background: lighten($dark, 10%);
     }
     .logo-vk {
       margin-left: 10px;
@@ -171,7 +174,8 @@ footer {
   bottom: 0;
   height: 40px;
   width: 100%;
-  background: $blue;
+  background: $dark;
+  opacity: .9;
   .social {
     height: 100%;
     width: 100%;
