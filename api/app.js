@@ -11,14 +11,6 @@ const port               = process.env.PORT || 5000;
 const db                 = process.env.MONGO || 'mongodb://127.0.0.1:27017/pixcollector';
 const app                = express();
 
-const options            = {
-    resave: false,
-    saveUninitialized: true,
-    secret: 'pix',
-    cookie: { secure: true },
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-};
-
 mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(
@@ -27,6 +19,15 @@ mongoose
     );
 mongoose.set('debug', true);
 mongoose.model('Users');
+
+const options = {
+    resave: false,
+    saveUninitialized: true,
+    secret: 'pix',
+    cookie: { secure: true },
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+
+};
 
 app.use(cors());
 app.use(session(options));
