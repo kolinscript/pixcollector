@@ -20,11 +20,6 @@ mongoose
 mongoose.set('debug', true);
 mongoose.model('Users');
 
-app.use(cors());
-app.use('/', express.static(path.join(__dirname, '../client/build')));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use('/api/v1', apiV1);
 app.use(session({
     resave: false,
     saveUninitialized: true,
@@ -33,6 +28,11 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 
 }));
+app.use(cors());
+app.use('/', express.static(path.join(__dirname, '../client/build')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use('/api/v1', apiV1);
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
