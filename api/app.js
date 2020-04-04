@@ -10,13 +10,13 @@ const apiV1              = require('./routes/v1');
 const port               = process.env.PORT || 5000;
 const db                 = process.env.MONGO || 'mongodb://127.0.0.1:27017/pixcollector';
 const app                = express();
+
 const options            = {
     resave: false,
     saveUninitialized: true,
     secret: 'pix',
     cookie: { secure: true },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
-
 };
 
 mongoose
