@@ -29,6 +29,10 @@ mongoose.model('Users');
 //
 // }));
 app.use(cors());
+app.use(session({
+    secret: "PIX",
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
 app.use('/', express.static(path.join(__dirname, '../client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
