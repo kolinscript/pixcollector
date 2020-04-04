@@ -4,15 +4,11 @@ const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
 router.get('/', secure.optional, (req, res, next) => {
-    res.send({
-        user: req.session.user
-    });
-});
-
-router.get('/testDB', secure.optional, (req, res, next) => {
-    Users.find(function (err, sensors) {
+    Users.find({
+        "vkId": req.session.user.vkId
+    }, (err, user) => {
         if (err) return console.error(err);
-        return res.status(200).json( { OK: { sensors: sensors } } );
+        return res.status(200).json( { body: { user: user } });
     });
 });
 
