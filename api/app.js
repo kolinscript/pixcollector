@@ -10,6 +10,14 @@ const apiV1              = require('./routes/v1');
 const port               = process.env.PORT || 5000;
 const db                 = process.env.MONGO || 'mongodb://127.0.0.1:27017/pixcollector';
 const app                = express();
+const options            = {
+    resave: false,
+    saveUninitialized: true,
+    secret: 'pix',
+    cookie: { secure: true },
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+
+};
 
 mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -20,24 +28,12 @@ mongoose
 mongoose.set('debug', true);
 mongoose.model('Users');
 
-// app.use(session({
-//     resave: false,
-//     saveUninitialized: true,
-//     secret: 'pix',
-//     cookie: { secure: true },
-//     store: new MongoStore({ mongooseConnection: mongoose.connection })
-//
-// }));
 app.use(cors());
-app.use(session({
-    secret: "PIX",
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-}));
+app.use(session(options));
 app.use('/', express.static(path.join(__dirname, '../client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api/v1', apiV1);
-app.use(session({ secret: 'pixcoll', resave: false, saveUninitialized: true, cookie: { secure: true } }));
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
