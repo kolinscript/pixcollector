@@ -23,15 +23,16 @@ router.get('/', secure.optional, (req, res, next) => {
                 .then(function (response) {
                     const albumSize = response.data.response.items.find(item => item.id === -15).size;
                     const user = new Users({
-                        vkId: response.data.response.user_id,
-                        vkToken: response.data.response.access_token,
+                        vkId: response.data.user_id,
+                        vkToken: response.data.access_token,
                         albumSize: albumSize
                     });
                     // save user to db
                     user.save()
                         .then(() => {
-                                console.log('toAuthJSON', user.toAuthJSON());
                                 req.session.user = user.toAuthJSON();
+                                console.log('toAuthJSON', user.toAuthJSON());
+                                console.log('req.session.user', req.session.user);
                             }
                         );
                     res.redirect('/stock');
