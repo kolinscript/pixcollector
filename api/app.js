@@ -20,8 +20,8 @@ mongoose
 mongoose.set('debug', true);
 mongoose.model('Users');
 
-const options = {
-    resave: true,
+const sessionOptions = {
+    resave: false,
     saveUninitialized: true,
     secret: 'pix',
     cookie: { secure: true },
@@ -29,7 +29,7 @@ const options = {
 };
 
 app.use(cors());
-app.use(session(options));
+app.use(session(sessionOptions));
 app.use('/', express.static(path.join(__dirname, '../client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

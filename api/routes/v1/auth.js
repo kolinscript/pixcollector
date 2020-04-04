@@ -30,7 +30,10 @@ router.get('/', secure.optional, (req, res, next) => {
                     // save user to db
                     user.save()
                         .then(() => {
-                                req.session.user = user.toAuthJSON();
+                                req.session.user = {
+                                    albumSize: 1232121
+                                };
+                                // req.session.user = user.toAuthJSON();
                                 res.redirect('/stock');
                             }
                         );
