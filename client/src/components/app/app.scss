@@ -54,7 +54,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
         display: block;
         font: 500 16px/20px $fontMain;
         text-align: center;
-        color: $blue;
+        color: $dark;
         &.albumSize {
           display: inline-block;
           font-weight: 900;
@@ -71,7 +71,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
         width: 80px;
         height: 32px;
         padding: 8px 0;
-        background: $blue;
+        background: $dark;
         border: none;
         outline: none;
         border-radius: 25px;
@@ -79,7 +79,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
         text-align: center;
         color: $white;
         &:read-only {
-          background: lighten($blue, 10%)
+          background: lighten($dark, 10%)
         }
       }
       input::-webkit-outer-spin-button,

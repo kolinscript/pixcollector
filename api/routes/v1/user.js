@@ -5,7 +5,7 @@ const Users              = mongoose.model('Users');
 
 router.get('/', secure.optional, (req, res, next) => {
     console.log('req.session.user.vkId', req.session.user.vkId);
-    Users.find({
+    Users.findOne({
         vkId: req.session.user.vkId
     }, (err, user) => {
         if (err) return console.error(err);

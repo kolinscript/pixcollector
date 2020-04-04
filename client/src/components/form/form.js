@@ -7,7 +7,7 @@ export const Form = (props) => (
             <form onSubmit={props.getPhotos}>
                 <div className="title">
                     <span>You've got <span className="albumSize">{props.albumSize}</span> pix collected. </span>
-                    <span>Enter the number of photos you want to collect </span>
+                    <span>Enter the number of pixies you want to collect </span>
                     <span>or check the box to grab the whole thing. </span>
                 </div>
                 <div className="inputs">
