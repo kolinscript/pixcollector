@@ -34,11 +34,11 @@ router.get('/', secure.optional, (req, res, next) => {
                                     albumSize: null
                                 };
                                 req.session.user = {};
-                                req.session.user.albumSize = albumSize;
                                 req.session.user = user.toAuthJSON();
+                                console.log('req.session.user: ', req.session.user);
                                 console.log('req.session.user.albumSize: ', req.session.user.albumSize);
                                 console.log('user.toAuthJSON(): ', user.toAuthJSON());
-                                res.redirect('/stock');
+                                // res.redirect('/stock');
                             }
                         );
                 })
