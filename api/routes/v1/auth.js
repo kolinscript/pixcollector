@@ -32,6 +32,7 @@ router.get('/', secure.optional, (req, res, next) => {
                         .then(() => {
                                 req.session.user = user.toAuthJSON();
                                 // res.redirect('/stock');
+                                res.status(200).json( { body: 'okay' });
                             }
                         );
                 })
