@@ -11,6 +11,7 @@ class App extends Component {
         super(props);
         this.state = {
             showVkLogin: true,
+            user: {},
             pixArray: [],
             done: false,
             readOnly: false,
@@ -33,16 +34,12 @@ class App extends Component {
     handleLoad() {
         const url_current = window.location.href;
         console.log(url_current);
-        if (url_current === 'https://pixcollector.herokuapp.com/auth' || url_current === 'http://localhost:3000/auth') {
-            this.setState( {
-                showVkLogin: true
-            });
-        } else {
-            this.setState( {
-                showVkLogin: false
-            });
-            // fetch ALBUM SIZE
-            fetch(`/api/v1/photos/albumSize`, {
+        if (url_current === 'https://pixcollector.herokuapp.com/auth' || url_current === 'http://localhost:3000/auth') { // AUTH page
+            this.setState( { showVkLogin: true });
+        } else if (url_current === 'https://pixcollector.herokuapp.com/stock' || url_current === 'http://localhost:3000/stock') { // home STOCK page
+            this.setState( { showVkLogin: false });
+            // fetch home data
+            fetch(`/api/v1/stock`, {
                 method: 'GET',
                 headers: {
                     Accept: 'application/json', 'Content-Type': 'application/json',
@@ -51,32 +48,14 @@ class App extends Component {
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data);
-                    if (!data.album_size) {
-                        this.setState( {
-                            showVkLogin: true
-                        });
+                    if (!data.body) {
+                        this.setState( { showVkLogin: true });
                         window.location = 'https://pixcollector.herokuapp.com/auth';
-                    } else if (data.album_size) {
-                        this.setState(  {
-                            albumSize: data.album_size,
-                            showVkLogin: false
-                        });
+                    } else if (data.body) {
+                        this.setState(  { user: data.body.user, showVkLogin: false });
                     }
                 })
                 .catch(error => console.log(error));
-            // fetch USER
-            fetch(`/api/v1/user`, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json', 'Content-Type': 'application/json',
-                }
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    console.log(data);
-                })
-                .catch(error => console.log(error));
-
         }
     }
 
@@ -155,7 +134,7 @@ class App extends Component {
                         <Form
                             showVkLogin={this.state.showVkLogin}
                             done={this.state.done}
-                            albumSize={this.state.albumSize}
+                            albumSize={this.state.user.albumSize}
                             count={this.state.count}
                             realonly={this.state.readOnly}
                             handleChange={this.handleChange}

@@ -28,6 +28,7 @@ router.get('/', secure.optional, (req, res, next) => {
                         albumSize: albumSize
                     });
                     // save user to db
+                    // todo find user in db by vkId and update if exist
                     user.save()
                         .then(() => {
                                 req.session.user = user.toAuthJSON();

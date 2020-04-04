@@ -1,6 +1,5 @@
 $fontMain: 'Roboto', sans-serif;
 $background: #252525;
-$blue: #314569cc;
 $white: rgba(255, 255, 255, 0.88);
 $dark: #4D4D4D;
 $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3DC9 41.15%, #FFEA29 85.42%);
@@ -34,18 +33,20 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  padding: 60px 0 100px;
+  padding: 30px 0 100px;
   height: 100%;
+  width: 100%;
   h1.title {
     opacity: .9;
-    margin: 0;
+    margin: 0 auto;
+    width: 340px;
     padding: 5px 25px;
     border-radius: 50px;
     font: 400 42px/44px $fontMain;
     text-align: center;
     background: $gradient;
     color: $dark;
-    border: 4px solid $dark;
+    border: 8px solid $dark;
   }
   form {
     .title {
@@ -75,7 +76,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
         border: none;
         outline: none;
         border-radius: 25px;
-        font: 500 16px/18px $fontMain;
+        font: 900 16px/18px $fontMain;
         text-align: center;
         color: $white;
         &:read-only {
@@ -100,7 +101,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
           padding-left: 34px;
           height: 32px;
           font: 500 16px/32px $fontMain;
-          color: $blue;
+          color: $dark;
         }
         label::before,
         label::after {
@@ -115,7 +116,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
           left: 0;
           top: 0;
           border-radius: 16px;
-          border: 2px solid $blue;
+          border: 2px solid $dark;
         }
         label::after {
           transition: transform .2s ease-in-out;
@@ -126,7 +127,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
           top: 50%;
           margin-top: -8px;
           border-radius: 8px;
-          background: $blue;
+          background: $dark;
         }
 
         input[type="checkbox"] + label::after {
@@ -146,6 +147,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
     align-items: center;
     width: 180px;
     height: 44px;
+    margin: 0 auto;
     padding: 8px 20px;
     background: $dark;
     outline: none;
