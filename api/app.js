@@ -21,12 +21,11 @@ mongoose.set('debug', true);
 mongoose.model('Users');
 
 const options = {
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     secret: 'pix',
     cookie: { secure: true },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
-
 };
 
 app.use(cors());
