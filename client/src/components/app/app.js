@@ -51,14 +51,14 @@ class App extends Component {
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data);
-                    if (!data.albumSize) {
+                    if (!data.album_size) {
                         this.setState( {
                             showVkLogin: true
                         });
                         // window.location = 'https://pixcollector.herokuapp.com/auth';
-                    } else if (data.albumSize) {
+                    } else if (data.album_size) {
                         this.setState(  {
-                            albumSize: data.albumSize,
+                            albumSize: data.album_size,
                             showVkLogin: false
                         });
                     }

@@ -164,7 +164,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/albumSize', (req, res, next) => {
     res.send({
-        albumSize: req.session.albumSize
+        album_size: req.session.user.album_size
     });
 });
 

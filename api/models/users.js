@@ -5,6 +5,7 @@ const { Schema }         = mongoose;
 
 const UsersSchema = new Schema({
     vkId: String,
+    albumSize: String,
     hash: String,
     salt: String,
 });
@@ -24,6 +25,7 @@ UsersSchema.methods.generateJWT = function() {
     const expirationDate = new Date(today);
     expirationDate.setDate(today.getDate() + 60);
 
+    // информация которую мы храним в токене и можем из него получать
     return jwt.sign({
         vkId: this.vkId,
         id: this._id,
@@ -35,6 +37,7 @@ UsersSchema.methods.toAuthJSON = function() {
     return {
         _id: this._id,
         vkId: this.vkId,
+        albumSize: this.albumSize,
         token: this.generateJWT(),
     };
 };

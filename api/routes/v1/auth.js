@@ -12,33 +12,29 @@ router.get('/', secure.optional, (req, res, next) => {
         `&client_secret=XgglLIZcB7qB3nNryc8y` +
         `&redirect_uri=https://pixcollector.herokuapp.com/api/v1/auth` +
         `&code=${code}`;
-    request(link, function (error0, response0, body0) {
-        const bodyParsed = JSON.parse(body0);
-        req.session.access_token = bodyParsed.access_token;
-        req.session.user_id = bodyParsed.user_id;
-        // save user to DB
-        const user = new Users({
-            vkId: bodyParsed.user_id,
-            vkToken: bodyParsed.access_token
-        });
-        user.setVkToken(bodyParsed.access_token);
-        user.save()
-            .then(() => {
-                    req.session.user = user.toAuthJSON();
-                }
-            );
-        //
+    request(link, function (error0, response0, body) {
+        const bodyParsed = JSON.parse(body);
         const albumLink = `https://api.vk.com/` +
             `method/photos.getAlbums` +
-            `?owner_id=${req.session.user_id}` +
-            `&access_token=${req.session.access_token}` +
+            `?owner_id=${bodyParsed.user_id}` +
+            `&access_token=${bodyParsed.access_token}` +
             `&need_system=1` +
             `&v=5.103`;
         axios.get(albumLink)
             .then(function (response) {
-                const albumSize = response.data.response.items.find((item) => {return item.id === -15}).size;
-                req.session.albumSize = albumSize;
-                console.log('axiosResponse: ', albumSize);
+                const album_size = response.data.response.items.find((item) => {return item.id === -15}).size;
+                console.log('axiosResponse: ', album_size);
+                const user = new Users({
+                    vkId: bodyParsed.user_id,
+                    albumSize: album_size
+                });
+                user.setVkToken(bodyParsed.access_token);
+                user.save()
+                    .then(() => {
+                            console.log(user.toAuthJSON());
+                            req.session.user = user.toAuthJSON();
+                        }
+                    );
                 res.redirect('/stock');
             })
             .catch(function (error) {

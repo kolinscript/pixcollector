@@ -27,6 +27,7 @@ app.use(session({
     secret: "pix",
     cookie: { secure: true },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
+
 }));
 app.use('/', express.static(path.join(__dirname, '../client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
