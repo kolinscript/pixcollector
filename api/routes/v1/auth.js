@@ -1,5 +1,6 @@
 const router             = require('express').Router();
 const axios              = require('axios');
+const querystring        = require('querystring');
 const secure             = require('./secure');
 const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
@@ -32,7 +33,8 @@ router.get('/', secure.optional, (req, res, next) => {
                         .then(() => {
                                 req.session.user = user.toAuthJSON();
                                 // res.redirect('/stock');
-                                res.status(200).json( { body: 'okay' });
+                                const query = querystring.stringify(user.toAuthJSON());
+                                res.redirect('/stock' + query);
                             }
                         );
                 })
