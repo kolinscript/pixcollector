@@ -21,10 +21,9 @@ mongoose.set('debug', true);
 mongoose.model('Users');
 
 const sessionOptions = {
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     secret: 'pix',
-    cookie: { secure: true },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 };
 
