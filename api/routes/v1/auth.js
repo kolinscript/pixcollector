@@ -33,6 +33,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                 req.session.user = {
                                     albumSize: 1232121
                                 };
+                                console.log('req.session.user',req.session.user);
                                 // req.session.user = user.toAuthJSON();
                                 res.redirect('/stock');
                             }
