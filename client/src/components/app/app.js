@@ -55,7 +55,7 @@ class App extends Component {
                         this.setState( {
                             showVkLogin: true
                         });
-                        window.location = 'https://pixcollector.herokuapp.com/auth';
+                        // window.location = 'https://pixcollector.herokuapp.com/auth';
                     } else if (data.album_size) {
                         this.setState(  {
                             albumSize: data.album_size,
