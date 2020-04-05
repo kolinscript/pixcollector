@@ -1,8 +1,7 @@
 const router             = require('express').Router();
 const secure             = require('./secure');
 
-router.get('/', secure.optional, (req, res, next) => {
-    // todo secure.optional?
+router.get('/', secure.required, (req, res, next) => {
     // todo запрос новой информации из вк (альбом, токен) на основании текущего токена, обновление в базе (аналог auth)
     if (req.session.user) {
         const user = req.session.user;

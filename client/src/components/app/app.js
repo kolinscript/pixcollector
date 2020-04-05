@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import './app.scss';
 import { Footer } from "../footer/footer";
 import { Auth } from "../auth/auth";
-import { AuthSuccess } from "../auth/success";
 import { Gallery } from "../gallery/gallery";
 import { Form } from "../form/form";
 import {unregister} from "./../../interceptor"
@@ -42,7 +41,7 @@ class App extends Component {
             this.setState( { showVkLogin: true });
         }
         else if (url_current === 'https://pixcollector.herokuapp.com/auth/success' || url_current === 'http://localhost:3000/auth/success') {
-            this.setState( { showVkLogin: false });
+            this.setState( { showVkLogin: true });
             fetch(`/api/v1/auth/success`, {
                 method: 'GET',
                 headers: {
@@ -158,8 +157,7 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
-                    <Route path="/auth/success"><AuthSuccess goToStock={this.goToStock}/></Route>
+                    <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} goToStock={this.goToStock} loginVk={this.loginVk}/></Route>
                     <Route path="/stock">
                         <Gallery pixArray={this.state.pixArray}/>
                         <Form

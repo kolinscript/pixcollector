@@ -1,7 +1,8 @@
 const router             = require('express').Router();
 const axios              = require('axios');
+const secure             = require('./secure');
 
-router.get('/', (req, res, next) => {
+router.get('/', secure.required, (req, res, next) => {
     // totalCount = 2700
     // totalFloat = 2.7
     // integerPart = 2
