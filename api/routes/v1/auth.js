@@ -65,10 +65,10 @@ router.get('/', secure.optional, (req, res, next) => {
 router.get('/success', secure.optional, (req, res, next) => {
     console.log('req.session: ', req.session);
     console.log('req.session.user: ', req.session.user);
-    if (req.session.user) {
-        res.status(200).json( { body: { token: req.session.user.token } });
-    } else {
+    if (req.session.user === undefined) {
         res.redirect('/auth');
+    } else {
+        res.status(200).json( { body: { token: req.session.user.token } });
     }
 });
 
