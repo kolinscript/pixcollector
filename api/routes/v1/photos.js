@@ -44,6 +44,7 @@ router.get('/', (req, res, next) => {
                 console.log('response: ', response);
                 const arr = [];
                 if (response.data.response) {
+                    // todo move to helper function (middleware)
                     response.data.response.items.forEach((item) => {
                         // ascending flow
                         // S -> M -> X -> Y -> Z -> W
@@ -82,7 +83,6 @@ router.get('/', (req, res, next) => {
             });
     } else if (integerPart > 0) {
         // multiple requests
-        // handling integerPart
         let offsetLast;
         let urlArray = [];
         for (let offset = reqOffset, count = 1000; offset < reqIntegerPart; offset = offset + 1000) {

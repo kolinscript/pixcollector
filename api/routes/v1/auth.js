@@ -46,6 +46,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                 .then(() => {
                                         req.session.user = userNew.toAuthJSON();
                                         res.redirect('/stock');
+                                        // todo редирект на secure optional маршрут для получения токена
                                     }
                                 );
                         }

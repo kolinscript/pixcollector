@@ -46,7 +46,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
     text-align: center;
     background: $gradient;
     color: $dark;
-    border: 8px solid $dark;
+    border: 4px solid $dark;
   }
   form {
     .title {
@@ -55,7 +55,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
         display: block;
         font: 500 16px/20px $fontMain;
         text-align: center;
-        color: $dark;
+        color: $light;
         &.albumSize {
           display: inline-block;
           font-weight: 900;
@@ -127,7 +127,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
           top: 50%;
           margin-top: -8px;
           border-radius: 8px;
-          background: $dark;
+          background: $light;
         }
 
         input[type="checkbox"] + label::after {
@@ -166,7 +166,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
     .label {
       font: 500 16px/18px $fontMain;
       text-align: center;
-      color: #light;
+      color: $light;
     }
   }
 }
