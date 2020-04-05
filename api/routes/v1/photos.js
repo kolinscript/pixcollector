@@ -162,10 +162,4 @@ router.get('/', (req, res, next) => {
     }
 });
 
-router.get('/albumSize', (req, res, next) => {
-    res.send({
-        album_size: req.session.user.albumSize
-    });
-});
-
 module.exports = router;

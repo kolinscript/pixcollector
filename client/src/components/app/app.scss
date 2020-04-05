@@ -1,6 +1,6 @@
 $fontMain: 'Roboto', sans-serif;
 $background: #252525;
-$white: rgba(255, 255, 255, 0.88);
+$light: #949494;
 $dark: #4D4D4D;
 $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3DC9 41.15%, #FFEA29 85.42%);
 
@@ -40,7 +40,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
     opacity: .9;
     margin: 0 auto;
     width: 340px;
-    padding: 5px 25px;
+    padding: 5px 0;
     border-radius: 50px;
     font: 400 42px/44px $fontMain;
     text-align: center;
@@ -78,7 +78,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
         border-radius: 25px;
         font: 900 16px/18px $fontMain;
         text-align: center;
-        color: $white;
+        color: $light;
         &:read-only {
           background: lighten($dark, 10%)
         }
@@ -166,7 +166,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
     .label {
       font: 500 16px/18px $fontMain;
       text-align: center;
-      color: $white;
+      color: #light;
     }
   }
 }

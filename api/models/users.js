@@ -13,7 +13,6 @@ UsersSchema.methods.generateJWT = function() {
     const today = new Date();
     const expirationDate = new Date(today);
     expirationDate.setDate(today.getDate() + 60);
-
     // information stored in the token, can be fetched with jwt.verify(token, secret)
     return jwt.sign({
         vkId: this.vkId,

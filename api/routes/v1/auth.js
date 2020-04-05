@@ -22,19 +22,35 @@ router.get('/', secure.optional, (req, res, next) => {
             axios.get(albumLink)
                 .then(function (response2) {
                     const albumSize = response2.data.response.items.find(item => item.id === -15).size;
-                    const user = new Users({
+                    const userNew = new Users({
                         vkId: response1.data.user_id,
                         vkToken: response1.data.access_token,
                         albumSize: albumSize
                     });
-                    // save user to db
-                    // todo find user in db by vkId and update if exist
-                    user.save()
-                        .then(() => {
-                                req.session.user = user.toAuthJSON();
-                                res.redirect('/stock');
-                            }
-                        );
+                    // save new or update existed user to db
+                    Users.findOne({vkId: response1.data.user_id}, (err, user) => {
+                        if (user) {
+                            user.vkToken = userNew.vkToken;
+                            user.albumSize = userNew.albumSize;
+                            user.markModified('vkToken');
+                            user.markModified('albumSize');
+                            user.save()
+                                .then(() => {
+                                        req.session.user = user.toAuthJSON();
+                                        res.redirect('/stock');
+                                    }
+                                );
+                        }
+                        if (!user) {
+                            userNew.save()
+                                .then(() => {
+                                        req.session.user = userNew.toAuthJSON();
+                                        res.redirect('/stock');
+                                    }
+                                );
+                        }
+                        if (err) return console.error(err);
+                    });
                 })
                 .catch(function (error) {
                     console.log(error);

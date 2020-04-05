@@ -50,7 +50,7 @@ class App extends Component {
                     console.log(data);
                     if (!data.body) {
                         this.setState( { showVkLogin: true });
-                        window.location = 'https://pixcollector.herokuapp.com/auth';
+                        window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
                     } else if (data.body) {
                         this.setState(  { user: data.body.user, showVkLogin: false });
                     }
@@ -104,7 +104,7 @@ class App extends Component {
         console.log(value);
         if (value) {
             this.setState(prevState => ({
-                count: this.state.albumSize,
+                count: this.state.user.albumSize,
                 readOnly: true
             }));
         } else {
