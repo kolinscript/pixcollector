@@ -1,14 +1,13 @@
 import fetchIntercept from 'fetch-intercept';
 
-export const token = () => {
+const getToken = () => {
     const token = localStorage.getItem('token');
     return token;
 };
 
 export const unregister = fetchIntercept.register({
     request: function (url, config) {
-        // Modify the url or config here
-        config.headers.token = token();
+        config.headers.set('Authorization', `x-csrf-token ${getToken}`);
         return [url, config];
     },
 
