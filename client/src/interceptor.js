@@ -18,8 +18,8 @@ export const interceptor = fetchInterceptor.register({
     onRequestFailure(response, request) {
         console.log('** interceptor ** error response: ', response);
         if (response.status === 401) {
-            localStorage.clear();
-            window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+            // localStorage.clear();
+            // window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
         }
     }
 });
