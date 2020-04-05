@@ -7,7 +7,9 @@ const getToken = () => {
 
 export const unregister = fetchIntercept.register({
     request: function (url, config) {
-        config.headers.Authorization = `x-csrf-token ${getToken()}`;
+        if (getToken()) {
+            config.headers.Authorization = `x-csrf-token ${getToken()}`;
+        }
         return [url, config];
     },
 

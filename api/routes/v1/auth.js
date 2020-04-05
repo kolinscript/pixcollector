@@ -47,7 +47,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                 .then(() => {
                                         req.session.user = userNew.toAuthJSON();
                                         res.redirect('/auth/success');
-                                        // todo редирект на secure optional маршрут для сохранения токена на клиенте
                                     }
                                 );
                         }
