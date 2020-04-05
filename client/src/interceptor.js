@@ -10,7 +10,7 @@ export const interceptorError = fetchIntercept.register({
         // Handle an fetch error
         console.log('responseError: ', error);
         localStorage.clear();
-        window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+        // window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
         return Promise.reject(error);
     }
 });
@@ -24,7 +24,7 @@ export const interceptor = fetchIntercept.register({
     },
 
     requestError: function (error) {
-        // Called when an error occured during another 'request' interceptor call
+        // Called when an error occurred during another 'request' interceptor call
         // Handle an fetch error
         console.log('requestError: ', error);
         return Promise.reject(error);
