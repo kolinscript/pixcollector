@@ -16,6 +16,14 @@ export const interceptorError = fetchIntercept.register({
 });
 
 export const interceptor = fetchIntercept.register({
+    responseError: function (error) {
+        // Handle an fetch error
+        console.log('responseError: ', error);
+        localStorage.clear();
+        // window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+        return Promise.reject(error);
+    },
+
     request: function (url, config) {
         if (getToken()) {
             config.headers.Authorization = `x-csrf-token ${getToken()}`;
