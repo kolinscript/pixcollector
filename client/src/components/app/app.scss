@@ -199,20 +199,24 @@ footer {
         width: 100%;
         height: 100%;
         &.github {
-          background: url("../../images/github.svg") no-repeat;
-          background-size: cover;
+          background-color: $background;
+          mask-image: url("../../images/github.svg");
+          mask-size: cover;
         }
         &.telega {
-          background: url("../../images/telega.svg") no-repeat;
-          background-size: cover;
+          background-color: $background;
+          mask-image: url("../../images/telega.svg");
+          mask-size: cover;
         }
         &.vk {
-          background: url("../../images/vk.svg") no-repeat;
-          background-size: cover;
+          background-color: $background;
+          mask-image: url("../../images/vk.svg");
+          mask-size: cover;
         }
         &.instagram {
-          background: url("../../images/instagram.svg") no-repeat;
-          background-size: cover;
+          background-color: $background;
+          mask-image: url("../../images/instagram.svg");
+          mask-size: cover;
         }
       }
       &:last-child {
