@@ -5,7 +5,7 @@ import {Footer} from "../footer/footer";
 import {Auth} from "../auth/auth";
 import {Gallery} from "../gallery/gallery";
 import {Form} from "../form/form";
-import {interceptorErr, interceptor} from "./../../interceptor"
+import {interceptor} from "./../../interceptor"
 
 class App extends Component {
     constructor(props) {
