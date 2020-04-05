@@ -13,6 +13,8 @@ export const unregister = fetchIntercept.register({
 
     requestError: function (error) {
         // Called when an error occured during another 'request' interceptor call
+        // Handle an fetch error
+        console.log('requestError: ', error);
         return Promise.reject(error);
     },
 
@@ -23,6 +25,7 @@ export const unregister = fetchIntercept.register({
 
     responseError: function (error) {
         // Handle an fetch error
+        console.log('responseError: ', error);
         return Promise.reject(error);
     }
 });
