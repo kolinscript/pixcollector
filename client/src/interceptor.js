@@ -28,18 +28,18 @@ const getToken = () => {
 // });
 
 export const interceptor = fetchIntercept.register({
+    requestError: function (error) {
+        // Called when an error occured during another 'request' interceptor call
+        console.log('** interceptor ** requestError: ', error);
+        return Promise.reject(error);
+    },
+
     request: function (url, config) {
         // Modify the url or config here
         if (getToken()) {
             config.headers.Authorization = `x-csrf-token ${getToken()}`;
         }
         return [url, config];
-    },
-
-    requestError: function (error) {
-        // Called when an error occured during another 'request' interceptor call
-        console.log('** interceptor ** requestError: ', error);
-        return Promise.reject(error);
     },
 
     response: function (response) {
