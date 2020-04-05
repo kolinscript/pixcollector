@@ -26,6 +26,13 @@ const getToken = () => {
 //         }
 //     }
 // });
+export const interceptorErr = fetchIntercept.register({
+    requestError: function (error) {
+        // Called when an error occured during another 'request' interceptor call
+        console.log('** interceptor ** requestError: ', error);
+        return Promise.reject(error);
+    },
+});
 
 export const interceptor = fetchIntercept.register({
     requestError: function (error) {
