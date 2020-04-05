@@ -63,7 +63,11 @@ router.get('/', secure.optional, (req, res, next) => {
 });
 
 router.get('/success', secure.optional, (req, res, next) => {
-    res.status(200).json( { body: { token: req.session.user.token } });
+    if (req.session.user.token) {
+        res.status(200).json( { body: { token: req.session.user.token } });
+    } else {
+        res.redirect('/auth');
+    }
 });
 
 module.exports = router;
