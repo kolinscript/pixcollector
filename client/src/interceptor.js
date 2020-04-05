@@ -8,6 +8,7 @@ const getToken = () => {
 // Register interceptor hooks
 export const interceptor = fetchInterceptor.register({
     onBeforeRequest(request, controller) {
+        console.log('** interceptor ** request: ', request);
         if (getToken()) {
             request.headers.Authorization = `x-csrf-token ${getToken()}`;
         }
