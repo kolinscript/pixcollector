@@ -21,13 +21,17 @@ export const unregister = fetchIntercept.register({
     },
 
     response: function (response) {
-        // Modify the reponse object
+        if (response.code >= 400) throw new Error('Request error');
         return response;
     },
 
     responseError: function (error) {
         // Handle an fetch error
         console.log('responseError: ', error);
+        if (getToken()) {
+            localStorage.clear();
+            window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+        }
         return Promise.reject(error);
     }
 });
