@@ -16,8 +16,10 @@ export const interceptor = fetchInterceptor.register({
         // Hook on response success
     },
     onRequestFailure(response, request) {
-        console.log('response: ', response);
-        localStorage.clear();
-        // window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+        console.log('** interceptor ** error response: ', response);
+        if (response.status === 401) {
+            localStorage.clear();
+            window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+        }
     }
 });
