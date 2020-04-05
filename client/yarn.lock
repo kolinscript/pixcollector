@@ -3840,6 +3840,10 @@ fetch-intercept@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/fetch-intercept/-/fetch-intercept-2.3.1.tgz#1f37ac57d7f0742aae5e3ae11ed18c2acbc43f61"
 
+fetch-interceptor@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/fetch-interceptor/-/fetch-interceptor-1.1.0.tgz#62364d3158a125f5e16e6eaa0cd6f94367180797"
+
 figgy-pudding@^3.5.1:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/figgy-pudding/-/figgy-pudding-3.5.2.tgz#b4eee8148abb01dcf1d1ac34367d59e12fa61d6e"
