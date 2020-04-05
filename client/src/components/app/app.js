@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import './app.scss';
 import { Footer } from "../footer/footer";
 import { Auth } from "../auth/auth";
+import { AuthSuccess } from "../auth/success";
 import { Gallery } from "../gallery/gallery";
 import { Form } from "../form/form";
+import {unregister} from "./../../interceptor"
 
 class App extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class App extends Component {
         this.state = {
             showVkLogin: true,
             user: {},
+            token: '',
             pixArray: [],
             done: false,
             readOnly: false,
@@ -25,6 +28,7 @@ class App extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
+        this.goToStock = this.goToStock.bind(this);
     }
 
     componentDidMount() { window.addEventListener('load', this.handleLoad); }
@@ -36,7 +40,29 @@ class App extends Component {
         console.log(url_current);
         if (url_current === 'https://pixcollector.herokuapp.com/auth' || url_current === 'http://localhost:3000/auth') { // AUTH page
             this.setState( { showVkLogin: true });
-        } else if (url_current === 'https://pixcollector.herokuapp.com/stock' || url_current === 'http://localhost:3000/stock') { // home STOCK page
+        }
+        else if (url_current === 'https://pixcollector.herokuapp.com/auth/success' || url_current === 'http://localhost:3000/auth/success') {
+            this.setState( { showVkLogin: false });
+            fetch(`/api/v1/auth/success`, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json',
+                }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                    if (!data.body.token) {
+                        this.setState( { showVkLogin: true });
+                        window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+                    } else if (data.body.token) {
+                        localStorage.setItem('token', data.body.token);
+                        this.setState(  { token: data.body.token, showVkLogin: false });
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+        else if (url_current === 'https://pixcollector.herokuapp.com/stock' || url_current === 'http://localhost:3000/stock') { // home STOCK page
             this.setState( { showVkLogin: false });
             // fetch home data
             fetch(`/api/v1/stock`, {
@@ -124,11 +150,16 @@ class App extends Component {
         window.location = 'https://pixcollector.herokuapp.com/auth';
     }
 
+    goToStock() {
+        window.location = 'https://pixcollector.herokuapp.com/stock';
+    }
+
     render() {
         return (
             <Router>
                 <Switch>
                     <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} loginVk={this.loginVk}/></Route>
+                    <Route path="/auth/success"><AuthSuccess goToStock={this.goToStock}/></Route>
                     <Route path="/stock">
                         <Gallery pixArray={this.state.pixArray}/>
                         <Form

@@ -19,6 +19,7 @@ router.get('/', secure.optional, (req, res, next) => {
                 `&access_token=${response1.data.access_token}` +
                 `&need_system=1` +
                 `&v=5.103`;
+            // todo вынести на роут стока
             axios.get(albumLink)
                 .then(function (response2) {
                     const albumSize = response2.data.response.items.find(item => item.id === -15).size;
@@ -37,7 +38,7 @@ router.get('/', secure.optional, (req, res, next) => {
                             user.save()
                                 .then(() => {
                                         req.session.user = user.toAuthJSON();
-                                        res.redirect('/stock');
+                                        res.redirect('/auth/success');
                                     }
                                 );
                         }
@@ -45,8 +46,8 @@ router.get('/', secure.optional, (req, res, next) => {
                             userNew.save()
                                 .then(() => {
                                         req.session.user = userNew.toAuthJSON();
-                                        res.redirect('/stock');
-                                        // todo редирект на secure optional маршрут для получения токена
+                                        res.redirect('/auth/success');
+                                        // todo редирект на secure optional маршрут для сохранения токена на клиенте
                                     }
                                 );
                         }
@@ -60,6 +61,10 @@ router.get('/', secure.optional, (req, res, next) => {
         .catch(function (error) {
             console.log(error);
         });
+});
+
+router.get('/success', secure.optional, (req, res, next) => {
+    res.status(200).json( { body: { token: req.session.user.token } });
 });
 
 module.exports = router;
