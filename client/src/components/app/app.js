@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import './app.scss';
-import { Footer } from "../footer/footer";
-import { Auth } from "../auth/auth";
-import { Gallery } from "../gallery/gallery";
-import { Form } from "../form/form";
-import { interceptor } from "./../../interceptor"
+import {Footer} from "../footer/footer";
+import {Auth} from "../auth/auth";
+import {Gallery} from "../gallery/gallery";
+import {Form} from "../form/form";
+import {interceptor} from "./../../interceptor"
 
 class App extends Component {
     constructor(props) {
@@ -30,18 +30,21 @@ class App extends Component {
         this.goToStock = this.goToStock.bind(this);
     }
 
-    componentDidMount() { window.addEventListener('load', this.handleLoad); }
+    componentDidMount() {
+        window.addEventListener('load', this.handleLoad);
+    }
 
-    componentWillUnmount() { window.removeEventListener('load', this.handleLoad) }
+    componentWillUnmount() {
+        window.removeEventListener('load', this.handleLoad)
+    }
 
     handleLoad() {
         const url_current = window.location.href;
         console.log(url_current);
         if (url_current === 'https://pixcollector.herokuapp.com/auth' || url_current === 'http://localhost:3000/auth') { // AUTH page
-            this.setState( { showVkLogin: true });
-        }
-        else if (url_current === 'https://pixcollector.herokuapp.com/auth/success' || url_current === 'http://localhost:3000/auth/success') {
-            this.setState( { showVkLogin: true });
+            this.setState({showVkLogin: true});
+        } else if (url_current === 'https://pixcollector.herokuapp.com/auth/success' || url_current === 'http://localhost:3000/auth/success') {
+            this.setState({showVkLogin: true});
             fetch(`/api/v1/auth/success`, {
                 method: 'GET',
                 headers: {
@@ -52,17 +55,16 @@ class App extends Component {
                 .then((data) => {
                     console.log(data);
                     if (!data.body.token) {
-                        this.setState( { showVkLogin: true });
+                        this.setState({showVkLogin: true});
                         window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
                     } else if (data.body.token) {
                         localStorage.setItem('token', data.body.token);
-                        this.setState(  { token: data.body.token, showVkLogin: false });
+                        this.setState({token: data.body.token, showVkLogin: false});
                     }
                 })
                 .catch(error => console.log(error));
-        }
-        else if (url_current === 'https://pixcollector.herokuapp.com/stock' || url_current === 'http://localhost:3000/stock') { // home STOCK page
-            this.setState( { showVkLogin: false });
+        } else if (url_current === 'https://pixcollector.herokuapp.com/stock' || url_current === 'http://localhost:3000/stock') { // home STOCK page
+            this.setState({showVkLogin: false});
             // fetch home data
             fetch(`/api/v1/stock`, {
                 method: 'GET',
@@ -74,10 +76,10 @@ class App extends Component {
                 .then((data) => {
                     console.log(data);
                     if (!data.body.user) {
-                        this.setState( { showVkLogin: true });
+                        this.setState({showVkLogin: true});
                         window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
                     } else if (data.body.user) {
-                        this.setState(  { user: data.body.user, showVkLogin: false });
+                        this.setState({user: data.body.user, showVkLogin: false});
                     }
                 })
                 .catch(error => console.log(error));
@@ -92,7 +94,7 @@ class App extends Component {
             '&scope=friends,photos,offline' +
             '&response_type=code' +
             '&v=5.103';
-        window.open(AUTH_URL_AUTHORIZE,"_self")
+        window.open(AUTH_URL_AUTHORIZE, "_self")
     }
 
     getPhotos() {
@@ -116,7 +118,7 @@ class App extends Component {
     handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
-        this.setState( {
+        this.setState({
             [name]: value
         }, () => {
             console.log(this.state);
@@ -157,7 +159,13 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route path="/auth"><Auth showVkLogin={this.state.showVkLogin} goToStock={this.goToStock} loginVk={this.loginVk}/></Route>
+                    <Route path="/auth">
+                        <Auth
+                            showVkLogin={this.state.showVkLogin}
+                            goToStock={this.goToStock}
+                            loginVk={this.loginVk}
+                        />
+                    </Route>
                     <Route path="/stock">
                         <Gallery pixArray={this.state.pixArray}/>
                         <Form
