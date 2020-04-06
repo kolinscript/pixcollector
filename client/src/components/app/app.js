@@ -6,8 +6,7 @@ import {Footer} from "../footer/footer";
 import {Auth} from "../auth/auth";
 import {Gallery} from "../gallery/gallery";
 import {Form} from "../form/form";
-// import {interceptor} from "./../../interceptor";
-import httpService from "./../../interceptor";
+import httpService from "../../http-service";
 
 httpService.setupInterceptors();
 
@@ -49,6 +48,7 @@ class App extends Component {
             this.setState({showVkLogin: true});
         } else if (url_current === 'https://pixcollector.herokuapp.com/auth/success' || url_current === 'http://localhost:3000/auth/success') {
             this.setState({showVkLogin: true});
+            // fetch AUTH token on success authentication
             axios.get(`/api/v1/auth/success`)
                 .then((response) => {
                     if (!response.data.body.token) {
@@ -60,25 +60,6 @@ class App extends Component {
                     }
                 })
                 .catch(err => console.log(err));
-
-            // fetch(`/api/v1/auth/success`, {
-            //     method: 'GET',
-            //     headers: {
-            //         Accept: 'application/json', 'Content-Type': 'application/json',
-            //     }
-            // })
-            //     .then(res => res.json())
-            //     .then((data) => {
-            //         console.log(data);
-            //         if (!data.body.token) {
-            //             this.setState({showVkLogin: true});
-            //             window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
-            //         } else if (data.body.token) {
-            //             localStorage.setItem('token', data.body.token);
-            //             this.setState({token: data.body.token, showVkLogin: false});
-            //         }
-            //     })
-            //     .catch(error => console.log(error));
         } else if (url_current === 'https://pixcollector.herokuapp.com/stock' || url_current === 'http://localhost:3000/stock') { // home STOCK page
             this.setState({showVkLogin: false});
             // fetch home data
@@ -92,24 +73,6 @@ class App extends Component {
                     }
                 })
                 .catch(err => console.log(err));
-
-            // fetch(`/api/v1/stock`, {
-            //     method: 'GET',
-            //     headers: {
-            //         Accept: 'application/json', 'Content-Type': 'application/json',
-            //     }
-            // })
-            //     .then(res => res.json())
-            //     .then((data) => {
-            //         console.log(data);
-            //         if (!data.body.user) {
-            //             this.setState({showVkLogin: true});
-            //             window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
-            //         } else if (data.body.user) {
-            //             this.setState({user: data.body.user, showVkLogin: false});
-            //         }
-            //     })
-            //     .catch(error => console.log(error));
         }
     }
 
@@ -125,21 +88,17 @@ class App extends Component {
     }
 
     getPhotos() {
-        fetch(`/api/v1/photos?count=${this.state.count}`, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json', 'Content-Type': 'application/json',
-            }
-        })
-            .then(res => res.json())
-            .then((data) => {
-                console.log(data);
-                this.setState(prevState => ({
-                    pixArray: data.body,
-                    done: true
-                }));
+        // fetch array with pixies links
+        axios.get(`/api/v1/photos?count=${this.state.count}`)
+            .then((response) => {
+                if (response.data.body.pixArray) {
+                    this.setState(prevState => ({
+                        pixArray: response.data.body.pixArray,
+                        done: true
+                    }));
+                }
             })
-            .catch(error => console.log(error));
+            .catch(err => console.log(err));
     }
 
     handleChange(event) {

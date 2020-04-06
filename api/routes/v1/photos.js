@@ -2,6 +2,8 @@ const router             = require('express').Router();
 const axios              = require('axios');
 const secure             = require('./secure');
 
+// todo create route for selective downloads (ex: from pix 42 to 4200)
+
 router.get('/', secure.required, (req, res, next) => {
     // totalCount = 2700
     // totalFloat = 2.7
@@ -72,9 +74,7 @@ router.get('/', secure.required, (req, res, next) => {
                         req.session.user.pixArray = pixArray;
                     });
                 }
-                res.send({
-                    body: pixArray
-                });
+                res.status(200).json( { body: { pixArray: pixArray } });
             })
             .catch(function (error) {
                 console.log(error);
@@ -151,9 +151,7 @@ router.get('/', secure.required, (req, res, next) => {
                         req.session.user.pixArray = pixArray;
                     });
                 }
-                res.send({
-                    body: pixArray
-                });
+                res.status(200).json( { body: { pixArray: pixArray } });
             } catch (error) {
                 console.error(error);
             }
