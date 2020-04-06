@@ -9,10 +9,14 @@ export const Auth = (props) => {
             <Route exact path={`${path}`}>
                 <div className="main">
                     <h1 className="title">PIXCOLLECTOR</h1>
+                    <h2 className="subtitle">
+                        Pixcollector provide VK users ability to view their pictures from the saved folder and download it all as one .ZIP file
+                    </h2>
                     <div className="button login" onClick={props.loginVk}>
                         <div className="label">Login with</div>
                         <div className="logo-vk"></div>
                     </div>
+                    <h3 className="made-by">Made by Nikolai Koshkarov with ❤</h3>
                 </div>
             </Route>
             <Route path={`${path}/success`}>

@@ -48,10 +48,23 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
     color: $background;
     border: 4px solid $background;
   }
+  h2.subtitle {
+    width: 360px;
+    font: 500 18px/24px $fontMain;
+    color: $background;
+    text-align: center;
+  }
+  h3.made-by {
+    width: 360px;
+    font: 500 12px/16px $fontMain;
+    color: $background;
+    text-align: center;
+  }
   .description {
     margin: 0 auto;
     font: 400 42px/44px $fontMain;
     color: $background;
+    text-align: center;
   }
   form {
     .title {
@@ -238,7 +251,12 @@ footer {
 @media screen and (max-width: 750px) {
   .main {
     h1.title {
+      width: 300px;
       font: 400 32px/34px $fontMain;
+    }
+    h2.subtitle {
+      width: 300px;
+      font: 500 16px/20px $fontMain;
     }
   }
 }
