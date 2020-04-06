@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import './app.scss';
+import axios from 'axios';
 import {Footer} from "../footer/footer";
 import {Auth} from "../auth/auth";
 import {Gallery} from "../gallery/gallery";
 import {Form} from "../form/form";
-import {interceptor} from "./../../interceptor"
+// import {interceptor} from "./../../interceptor";
+import httpService from "./../../interceptor";
+
+httpService.setupInterceptors();
 
 class App extends Component {
     constructor(props) {
@@ -45,24 +49,36 @@ class App extends Component {
             this.setState({showVkLogin: true});
         } else if (url_current === 'https://pixcollector.herokuapp.com/auth/success' || url_current === 'http://localhost:3000/auth/success') {
             this.setState({showVkLogin: true});
-            fetch(`/api/v1/auth/success`, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json', 'Content-Type': 'application/json',
-                }
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    console.log(data);
-                    if (!data.body.token) {
+            axios.get(`/api/v1/auth/success`)
+                .then((response) => {
+                    if (!response.data.body.token) {
                         this.setState({showVkLogin: true});
                         window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
-                    } else if (data.body.token) {
+                    } else if (response.data.body.token) {
                         localStorage.setItem('token', data.body.token);
                         this.setState({token: data.body.token, showVkLogin: false});
                     }
                 })
-                .catch(error => console.log(error));
+                .catch(err => console.log(err));
+
+            // fetch(`/api/v1/auth/success`, {
+            //     method: 'GET',
+            //     headers: {
+            //         Accept: 'application/json', 'Content-Type': 'application/json',
+            //     }
+            // })
+            //     .then(res => res.json())
+            //     .then((data) => {
+            //         console.log(data);
+            //         if (!data.body.token) {
+            //             this.setState({showVkLogin: true});
+            //             window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+            //         } else if (data.body.token) {
+            //             localStorage.setItem('token', data.body.token);
+            //             this.setState({token: data.body.token, showVkLogin: false});
+            //         }
+            //     })
+            //     .catch(error => console.log(error));
         } else if (url_current === 'https://pixcollector.herokuapp.com/stock' || url_current === 'http://localhost:3000/stock') { // home STOCK page
             this.setState({showVkLogin: false});
             // fetch home data
