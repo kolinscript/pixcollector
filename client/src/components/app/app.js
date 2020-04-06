@@ -88,7 +88,7 @@ class App extends Component {
     }
 
     getPhotos() {
-        // fetch array with pixies links
+        // fetch array with the pixies links
         axios.get(`/api/v1/photos?count=${this.state.count}`)
             .then((response) => {
                 if (response.data.body.pixArray) {
