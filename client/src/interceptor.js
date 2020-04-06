@@ -28,10 +28,6 @@ export default {
 //             // window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
             }
 
-            if (error.response.status === 404) {
-                history.push('/not-found');
-            }
-
             return Promise.reject(error);
         });
     },
