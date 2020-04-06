@@ -82,23 +82,34 @@ class App extends Component {
         } else if (url_current === 'https://pixcollector.herokuapp.com/stock' || url_current === 'http://localhost:3000/stock') { // home STOCK page
             this.setState({showVkLogin: false});
             // fetch home data
-            fetch(`/api/v1/stock`, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json', 'Content-Type': 'application/json',
-                }
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    console.log(data);
-                    if (!data.body.user) {
+            axios.get(`/api/v1/stock`)
+                .then((response) => {
+                    if (!response.data.body.user) {
                         this.setState({showVkLogin: true});
                         window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
-                    } else if (data.body.user) {
-                        this.setState({user: data.body.user, showVkLogin: false});
+                    } else if (response.data.body.user) {
+                        this.setState({user: response.data.body.user, showVkLogin: false});
                     }
                 })
-                .catch(error => console.log(error));
+                .catch(err => console.log(err));
+
+            // fetch(`/api/v1/stock`, {
+            //     method: 'GET',
+            //     headers: {
+            //         Accept: 'application/json', 'Content-Type': 'application/json',
+            //     }
+            // })
+            //     .then(res => res.json())
+            //     .then((data) => {
+            //         console.log(data);
+            //         if (!data.body.user) {
+            //             this.setState({showVkLogin: true});
+            //             window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+            //         } else if (data.body.user) {
+            //             this.setState({user: data.body.user, showVkLogin: false});
+            //         }
+            //     })
+            //     .catch(error => console.log(error));
         }
     }
 

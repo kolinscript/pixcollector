@@ -17,7 +17,11 @@ const getToken = () => {
 
 export default {
     setupInterceptors: () => {
-        axios.defaults.headers.Authorization = `x-csrf-token ${getToken()}`;
+        axios.interceptors.request.use(request => {
+            if (getToken()) {
+                request.headers.Authorization = `x-csrf-token ${getToken()}`;
+            }
+        });
         axios.interceptors.response.use(response => {
             return response;
         }, error => {
