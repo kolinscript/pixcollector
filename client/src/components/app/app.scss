@@ -27,133 +27,234 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
   }
 }
 
+header {
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  height: 60px;
+  width: 100%;
+  .player , .profile, .settings  {
+    cursor: pointer;
+    width: auto;
+    height: 100%;
+    padding: 0 20px;
+    font-size: 26px;
+    text-align: center;
+    line-height: 60px;
+    font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji",
+    Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
+  }
+
+  .player, .settings {
+    width: 100px;
+  }
+
+  .profile {
+    .user-avatar {
+      display: none;
+      margin-right: 10px;
+    }
+    .user-name {
+      font: 600 16px/60px $fontMain;
+      color: $background;
+    }
+  }
+  .player, .settings {
+    .icon {
+      display: none;
+      margin-right: 10px;
+    }
+    .label {
+      font: 600 16px/60px $fontMain;
+      color: $background;
+    }
+  }
+}
+
 .main {
   position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  padding: 30px 0 100px;
+  padding: 60px 0 40px;
   height: 100%;
   width: 100%;
-  h1.title {
-    opacity: .9;
-    margin: 0 auto;
-    width: 360px;
-    padding: 5px 0;
-    border-radius: 50px;
-    font: 400 42px/44px $fontMain;
-    text-align: center;
-    background: $gradient;
-    color: $background;
-    border: 4px solid $background;
+  .logo {
+    width: 100%;
+    height: 300px;
+    background: url("../../images/logo.svg");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: contain;
+    h1.title {
+      display: none;
+      opacity: .9;
+      margin: 0 auto;
+      width: 360px;
+      padding: 5px 0;
+      border-radius: 50px;
+      font: 400 42px/44px $fontMain;
+      text-align: center;
+      background: $gradient;
+      color: $background;
+      border: 4px solid $background;
+    }
   }
   h2.subtitle {
-    width: 360px;
+    width: 340px;
     font: 500 18px/24px $fontMain;
     color: $background;
     text-align: center;
   }
   h3.made-by {
     width: 360px;
+    margin: 20px 0;
     font: 500 12px/16px $fontMain;
     color: $background;
     text-align: center;
+    .code, .love {
+      font-size: 14px;
+      opacity: .75;
+      font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji",
+      Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
+    }
+    .love {
+      margin-left: 4px;
+    }
   }
   .description {
     margin: 0 auto;
-    font: 400 42px/44px $fontMain;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    font: 500 18px/24px $fontMain;
     color: $background;
     text-align: center;
   }
-  form {
-    .title {
-      margin-bottom: 10px;
-      span {
-        display: block;
-        font: 500 16px/20px $fontMain;
-        text-align: center;
-        color: $background;
-        &.albumSize {
-          display: inline-block;
-          font-weight: 900;
-          font-size: 18px;
-        }
-      }
-    }
-    .inputs {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      input[type=number] {
-        width: 80px;
-        height: 32px;
-        padding: 8px 0;
-        background: $background;
-        border: none;
-        outline: none;
-        border-radius: 25px;
-        font: 900 16px/18px $fontMain;
-        text-align: center;
-        color: $dark;
-        &:read-only {
-          background: lighten($dark, 10%)
-        }
-      }
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-      .checkbox {
-        margin-left: 10px;
-        height: 32px;
-        input[type=checkbox] {
-          display: none;
-        }
-        label {
-          cursor: pointer;
-          position: relative;
-          display: inline-block;
-          padding-left: 34px;
-          height: 32px;
-          font: 500 16px/32px $fontMain;
-          color: $background;
-        }
-        label::before,
-        label::after {
-          position: absolute;
+  .form {
+    margin: 40px 0;
+    form {
+      .title {
+        margin-bottom: 10px;
+        span {
           display: block;
-          box-sizing: border-box;
-          content: "";
+          font: 500 16px/20px $fontMain;
+          text-align: center;
+          color: $background;
+          &.albumSize {
+            display: inline-block;
+            font-weight: 900;
+            font-size: 18px;
+          }
         }
-        label::before{
+      }
+      .inputs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 40px;
+        .input {
+          position: relative;
+          &:first-child {
+            margin-right: 10px;
+          }
+          input[type=number] {
+            width: 80px;
+            height: 32px;
+            padding: 8px 0;
+            background: $background;
+            border: none;
+            outline: none;
+            border-radius: 25px;
+            font: 900 16px/18px $fontMain;
+            text-align: center;
+            color: $dark;
+            box-shadow: 2px 2px 0 0px #1d1d1d;
+            &:read-only {
+              background: lighten($dark, 10%)
+            }
+          }
+          span {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            font: 500 16px/20px $fontMain;
+            color: $background;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        .checkbox {
+          position: relative;
+          margin-left: 10px;
           height: 32px;
           width: 32px;
-          left: 0;
-          top: 0;
-          border-radius: 16px;
-          border: 2px solid $background;
-        }
-        label::after {
-          transition: transform .2s ease-in-out;
-          content: "";
-          height: 16px;
-          width: 16px;
-          left: 8px;
-          top: 50%;
-          margin-top: -8px;
-          border-radius: 8px;
-          background: $background;
-        }
+          input[type=checkbox] {
+            display: none;
+          }
+          label {
+            cursor: pointer;
+            position: absolute;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            bottom: 0;
+            padding-top: 32px;
+            font: 500 16px/32px $fontMain;
+            color: $background;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+          label::before,
+          label::after {
+            position: absolute;
+            display: block;
+            box-sizing: border-box;
+            content: "";
+          }
+          label::before{
+            height: 32px;
+            width: 32px;
+            left: 0;
+            top: 0;
+            border-radius: 16px;
+            border: 2px solid $background;
+            box-shadow: 2px 2px 0 0px #1d1d1d;
+          }
+          label::after {
+            transition: transform .2s ease-in-out;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 8px;
+            top: 50%;
+            margin-top: -8px;
+            border-radius: 8px;
+            background: $background;
+            box-shadow: 2px 2px 0 0px #1d1d1d;
+          }
 
-        input[type="checkbox"] + label::after {
-          transform: scale(0);
-        }
+          input[type="checkbox"] + label::after {
+            transform: scale(0);
+          }
 
-        input[type="checkbox"]:checked + label::after {
-          transform: scale(1);
+          input[type="checkbox"]:checked + label::after {
+            transform: scale(1);
+          }
         }
       }
     }
@@ -163,16 +264,19 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
     width: 180px;
     height: 44px;
-    margin: 0 auto;
+    margin: 40px auto;
     padding: 8px 20px;
     background: $background;
     outline: none;
-    border-radius: 25px;
+    border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
     transition: background 200ms ease-in-out;
+
+    box-shadow: -12px -20px 56px rgba(232, 237, 243, 0.05), 36px 12px 64px #4B4B4B, inset -16px -6px 80px rgba(248, 249, 249, 0.03);
     &:hover {
       background: lighten($dark, 10%);
     }
@@ -215,6 +319,7 @@ footer {
         cursor: pointer;
         width: 100%;
         height: 100%;
+        transition: background-color 200ms ease-in-out;
         &.github {
           background-color: $dark;
           mask-image: url("../../images/github.svg");
@@ -239,6 +344,9 @@ footer {
           mask-size: cover;
           -webkit-mask-size: cover;
         }
+        &:hover {
+          background-color: darken($dark, 4%);
+        }
       }
       &:last-child {
         margin-right: 0;
@@ -250,9 +358,12 @@ footer {
 
 @media screen and (max-width: 750px) {
   .main {
-    h1.title {
-      width: 300px;
-      font: 400 32px/34px $fontMain;
+    .logo {
+      height: 200px;
+      h1.title {
+        width: 300px;
+        font: 400 32px/34px $fontMain;
+      }
     }
     h2.subtitle {
       width: 300px;

@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom
 import './app.scss';
 import axios from 'axios';
 import {Footer} from "../footer/footer";
+import {Header} from "../header/header";
 import {Auth} from "../auth/auth";
 import {Gallery} from "../gallery/gallery";
 import {Form} from "../form/form";
@@ -10,18 +11,23 @@ import httpService from "../../http-service";
 
 httpService.setupInterceptors();
 
+// TODO create sliders to manage pixies size in album view
+// TODO create new view type - table (which provide selectivity pix download)
+
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             showVkLogin: true,
-            user: {},
+            user: {
+                albumSize: 0
+            },
             token: '',
             pixArray: [],
             done: false,
             readOnly: false,
-            albumSize: 0,
-            count: '',
+            countFrom: '',
+            countTo: '',
             all: false,
         };
         this.loginVk = this.loginVk.bind(this);
@@ -89,7 +95,7 @@ class App extends Component {
 
     getPhotos() {
         // fetch array with the pixies links
-        axios.get(`/api/v1/photos?count=${this.state.count}`)
+        axios.get(`/api/v1/photos?countFrom=${this.state.countFrom}&countTo=${this.state.countTo}`)
             .then((response) => {
                 if (response.data.body.pixArray) {
                     this.setState(prevState => ({
@@ -106,30 +112,27 @@ class App extends Component {
         const value = event.target.value;
         this.setState({
             [name]: value
-        }, () => {
-            console.log(this.state);
         });
     }
 
     handleCheckbox(event) {
         const name = event.target.name;
         const value = event.target.checked;
-        console.log(value);
         if (value) {
             this.setState(prevState => ({
-                count: this.state.user.albumSize,
+                countFrom: 0,
+                countTo: this.state.user.albumSize,
                 readOnly: true
             }));
         } else {
             this.setState(prevState => ({
-                count: '',
+                countFrom: '',
+                countTo: '',
                 readOnly: false
             }));
         }
         this.setState({
             [name]: value
-        }, () => {
-            console.log(this.state);
         });
     }
 
@@ -153,13 +156,15 @@ class App extends Component {
                         />
                     </Route>
                     <Route path="/stock">
+                        <Header/>
                         <Gallery pixArray={this.state.pixArray}/>
                         <Form
                             showVkLogin={this.state.showVkLogin}
                             done={this.state.done}
                             albumSize={this.state.user.albumSize}
-                            count={this.state.count}
-                            realonly={this.state.readOnly}
+                            countFrom={this.state.countFrom}
+                            countTo={this.state.countTo}
+                            readOnly={this.state.readOnly}
                             handleChange={this.handleChange}
                             all={this.state.all}
                             handleCheckbox={this.handleCheckbox}
@@ -171,7 +176,6 @@ class App extends Component {
                         <Redirect to="/auth"/>
                     </Route>
                 </Switch>
-                <Footer/>
             </Router>
         );
     }
