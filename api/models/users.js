@@ -6,6 +6,8 @@ const { Schema }         = mongoose;
 const UsersSchema = new Schema({
     vkId: String,
     vkToken: String,
+    name: String,
+    avatar: String,
     albumSize: String,
 });
 

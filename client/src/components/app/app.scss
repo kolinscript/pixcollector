@@ -262,49 +262,6 @@ header {
       }
     }
   }
-  .button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    width: 180px;
-    height: 44px;
-    margin: 40px auto;
-    padding: 8px 20px;
-    background: $background;
-    outline: none;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 200ms ease-in-out;
-    box-shadow: -12px -20px 56px rgba(232, 237, 243, 0.05), 36px 12px 64px #4B4B4B, inset -16px -6px 80px rgba(248, 249, 249, 0.03);
-    &:hover {
-      background: lighten($dark, 10%);
-    }
-    .logo-vk {
-      margin-left: 10px;
-      width: 34px;
-      height: 19px;
-      background-color: $dark;
-      mask-image: url("../../images/vk-login.svg");
-      mask-size: cover;
-      -webkit-mask-size: cover;
-    }
-    .label {
-      font: 500 16px/18px $fontMain;
-      text-align: center;
-      color: $dark;
-    }
-    &.down {
-      position: absolute;
-      bottom: 20px;
-    }
-    &.bottomed {
-      position: absolute;
-      bottom: 40px;
-    }
-  }
 }
 
 footer {
@@ -362,6 +319,47 @@ footer {
         margin-right: 0;
       }
     }
+  }
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 180px;
+  height: 44px;
+  margin: 40px auto;
+  padding: 8px 20px;
+  background: $background;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 200ms ease-in-out;
+  box-shadow: -12px -20px 56px rgba(232, 237, 243, 0.05), 36px 12px 64px #4B4B4B, inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+  &:hover {
+    background: lighten($dark, 10%);
+  }
+  .logo-vk {
+    margin-left: 10px;
+    width: 34px;
+    height: 19px;
+    background-color: $dark;
+    mask-image: url("../../images/vk-login.svg");
+    mask-size: cover;
+    -webkit-mask-size: cover;
+  }
+  .label {
+    font: 500 16px/18px $fontMain;
+    text-align: center;
+    color: $dark;
+  }
+  &.bottomed {
+    opacity: .94;
+    position: fixed;
+    bottom: 40px;
   }
 }
 

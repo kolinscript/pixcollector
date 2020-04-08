@@ -11,8 +11,10 @@ import httpService from "../../http-service";
 
 httpService.setupInterceptors();
 
-// TODO create sliders to manage pixies size in album view
-// TODO create new view type - table (which provide selectivity pix download)
+// TODO sliders to manage pixies size in album view
+// TODO fullscreen pop-up component for single pix
+// TODO paginator for  album view
+// TODO new view type - table (which provide selectivity pix download)
 
 class App extends Component {
     constructor(props) {
@@ -164,6 +166,7 @@ class App extends Component {
                         <Header/>
                         <Gallery
                             pixArray={this.state.pixArray}
+                            done={this.state.done}
                             showPixFullscreen={this.showPixFullscreen}
                         />
                         <Form

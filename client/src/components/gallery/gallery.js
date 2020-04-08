@@ -7,5 +7,10 @@ export const Gallery = (props) => (
                 return <img src={value.url} alt="" onClick={props.showPixFullscreen(value.url)}/>
             })}
         </div>
+        {(props.done) && (
+            <a className="button bottomed" href="/api/v1/download/pixcollector.zip" download>
+                <div className="label">Download</div>
+            </a>
+        )}
     </div>
 );
