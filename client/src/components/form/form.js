@@ -48,7 +48,7 @@ export const Form = (props) => (
         )}
         {(!props.done) && (
             <div className="button" onClick={props.getPhotos}>
-                <div className="label">Get photos</div>
+                <div className="label">See pixies</div>
             </div>
         )}
         {(props.done) && (

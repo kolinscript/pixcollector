@@ -37,6 +37,7 @@ class App extends Component {
         this.handleCheckbox = this.handleCheckbox.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.goToStock = this.goToStock.bind(this);
+        this.showPixFullscreen = this.showPixFullscreen.bind(this);
     }
 
     componentDidMount() {
@@ -144,6 +145,10 @@ class App extends Component {
         window.location = 'https://pixcollector.herokuapp.com/stock';
     }
 
+    showPixFullscreen(pixUrl) {
+        console.log('showPixFullscreen pixUrl', pixUrl);
+    }
+
     render() {
         return (
             <Router>
@@ -157,7 +162,10 @@ class App extends Component {
                     </Route>
                     <Route path="/stock">
                         <Header/>
-                        <Gallery pixArray={this.state.pixArray}/>
+                        <Gallery
+                            pixArray={this.state.pixArray}
+                            showPixFullscreen={this.showPixFullscreen}
+                        />
                         <Form
                             showVkLogin={this.state.showVkLogin}
                             done={this.state.done}
@@ -173,7 +181,7 @@ class App extends Component {
                         />
                     </Route>
                     <Route path="*">
-                        <Redirect to="/auth"/>
+                        <Redirect to="/auth" />
                     </Route>
                 </Switch>
             </Router>
