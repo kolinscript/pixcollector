@@ -297,6 +297,10 @@ header {
       text-align: center;
       color: $dark;
     }
+    &.down {
+      position: absolute;
+      bottom: 20px;
+    }
   }
 }
 
