@@ -52,7 +52,7 @@ export const Form = (props) => (
             </div>
         )}
         {(props.done) && (
-            <a className="button" href="/api/v1/download/pixcollector.zip" download>
+            <a className="button bottomed" href="/api/v1/download/pixcollector.zip" download>
                 <div className="label">Download</div>
             </a>
         )}
