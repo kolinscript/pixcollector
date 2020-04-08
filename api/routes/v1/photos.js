@@ -46,7 +46,7 @@ router.get('/', secure.required, (req, res, next) => {
                 console.log('response: ', response);
                 const arr = [];
                 if (response.data.response) {
-                    // todo move to helper function (middleware)
+                    // todo move to middleware
                     response.data.response.items.forEach((item) => {
                         // ascending flow
                         // S -> M -> X -> Y -> Z -> W
