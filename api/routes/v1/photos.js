@@ -4,21 +4,7 @@ const secure             = require('./secure');
 // todo create route to selective downloads (ex:  42, 43, 50)
 
 router.get('/', secure.required, (req, res, next) => {
-    // todo rework for range downloads (ex: from pix 42 to 4200)
-
-    // totalCount = 2700
-    // totalFloat = 2.7
-    // integerPart = 2
-    // floatPart = 0.700;
-
-    // totalCount = 300
-    // totalFloat = 0.300
-    // integerPart = 0
-    // floatPart = 0.003;
-
-    // const totalCount = req.query.count; // 2700
-
-    const countFrom = req.query.countFrom; // 42 // 200
+    const countFrom = req.query.countFrom - 1; // 42 // 200
     const countTo = req.query.countTo; // 420 // 3500
 
     const countTotal = countTo - countFrom; // 378 // 3300
@@ -27,21 +13,12 @@ router.get('/', secure.required, (req, res, next) => {
     const floatPart = integerPart === 0
         ? countTotal
         : (Math.abs(+(countTotalFloat - (Math.floor(countTotalFloat)).toFixed(3))) * 1000); // 378 // 300
+
     const reqFloatPart = floatPart; // 378 // 300
     const reqIntegerPart = integerPart * 1000; //  0 // 3000
     const reqOffset = countFrom;
 
-
     let pixArray = [];
-
-    // totalCount = 2700;
-    // const totalFloat = totalCount / 1000;   // 2.7
-    // const integerPart = Math.floor(totalFloat); // 2
-    // const floatPart = integerPart === 0 ? totalCount : (Math.abs(+(totalFloat - Math.floor(totalFloat)).toFixed(3)) * 1000); // 0.7
-    // const reqFloatPart = integerPart === 0 ? floatPart : floatPart * 1000; // 700
-    // const reqIntegerPart = integerPart * 1000; // 2000
-    // const reqOffset = 0;
-
     console.log('countFrom:', countFrom);
     console.log('countTo:', countTo);
     console.log('countTotal:', countTotal);

@@ -120,7 +120,7 @@ class App extends Component {
         const value = event.target.checked;
         if (value) {
             this.setState(prevState => ({
-                countFrom: 0,
+                countFrom: 1,
                 countTo: this.state.user.albumSize,
                 readOnly: true
             }));

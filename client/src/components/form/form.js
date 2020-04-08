@@ -2,8 +2,10 @@ import React from "react";
 
 export const Form = (props) => (
     <div className="main">
-        <div className="logo"><h1 className="title">PIXCOLLECTOR</h1></div>
-        {(!props.showVkLogin && !props.done) && (
+        {(!props.done) && (
+            <div className="logo"><h1 className="title">PIXCOLLECTOR</h1></div>
+        )}
+        {(!props.done) && (
             <div className="form">
                 <form onSubmit={props.getPhotos}>
                     <div className="title">
@@ -44,7 +46,7 @@ export const Form = (props) => (
                 </form>
             </div>
         )}
-        {(!props.showVkLogin && !props.done) && (
+        {(!props.done) && (
             <div className="button" onClick={props.getPhotos}>
                 <div className="label">Get photos</div>
             </div>
@@ -53,11 +55,6 @@ export const Form = (props) => (
             <a className="button" href="/api/v1/download/pixcollector.zip" download>
                 <div className="label">Download</div>
             </a>
-        )}
-        {(props.showVkLogin) && (
-            <div className="button" onClick={props.goToLogin}>
-                <div className="label">Go to login page</div>
-            </div>
         )}
     </div>
 );
