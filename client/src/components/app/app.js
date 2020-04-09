@@ -8,6 +8,7 @@ import {Auth} from "../auth/auth";
 import {Gallery} from "../gallery/gallery";
 import {Form} from "../form/form";
 import httpService from "../../http-service";
+import userEvent from "@testing-library/user-event";
 
 httpService.setupInterceptors();
 
@@ -167,7 +168,7 @@ class App extends Component {
                         <Gallery
                             pixArray={this.state.pixArray}
                             done={this.state.done}
-                            showPixFullscreen={this.showPixFullscreen}
+                            showPixFullscreen={this.showPixFullscreen()}
                         />
                         <Form
                             showVkLogin={this.state.showVkLogin}

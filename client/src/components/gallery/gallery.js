@@ -4,7 +4,12 @@ export const Gallery = (props) => (
     <div className="gallery">
         <div className="pixies">
             {props.pixArray.map((value) => {
-                return <img src={value.url} alt="" onClick={props.showPixFullscreen(value.url)}/>
+                return (
+                    <div className="pix">
+                        <img src={value.url} alt="" onClick={props.showPixFullscreen(value.url)}/>
+                        <div className="selector"></div>
+                    </div>
+                )
             })}
         </div>
         {(props.done) && (
