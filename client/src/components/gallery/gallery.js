@@ -6,8 +6,10 @@ export const Gallery = (props) => (
             {props.pixArray.map((value) => {
                 return (
                     <div className="pix">
-                        <img src={value.url} alt="" onClick={() => props.showPixFullscreen(value.url)}/>
-                        <div className="selector"></div>
+                        <div className="pix-container">
+                            <img className="pix-img" src={value.url} alt="" onClick={() => props.showPixFullscreen(value.url)}/>
+                            <div className="pix-selector"></div>
+                        </div>
                     </div>
                 )
             })}
