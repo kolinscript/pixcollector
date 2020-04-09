@@ -168,7 +168,7 @@ class App extends Component {
                         <Gallery
                             pixArray={this.state.pixArray}
                             done={this.state.done}
-                            showPixFullscreen={this.showPixFullscreen()}
+                            showPixFullscreen={this.showPixFullscreen}
                         />
                         <Form
                             showVkLogin={this.state.showVkLogin}
