@@ -4,7 +4,7 @@ export const Viewer = (props) => (
     <div className="fullScreen">
         <div className="pix">
             <img src={props.url} alt=""/>
-            <div className="close" onClick={() => props.fullScreenClose()}>X</div>
+            <div className="close" onClick={() => props.fullScreenClose()}></div>
         </div>
     </div>
 );
