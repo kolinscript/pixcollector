@@ -2,13 +2,12 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import './app.scss';
 import axios from 'axios';
-import {Footer} from "../footer/footer";
 import {Header} from "../header/header";
 import {Auth} from "../auth/auth";
 import {Gallery} from "../gallery/gallery";
 import {Form} from "../form/form";
+import {Viewer} from "../viewer/viewer";
 import httpService from "../../http-service";
-import userEvent from "@testing-library/user-event";
 
 httpService.setupInterceptors();
 
@@ -32,6 +31,8 @@ class App extends Component {
             countFrom: '',
             countTo: '',
             all: false,
+            fullScreen: false,
+            pixUrl: ''
         };
         this.loginVk = this.loginVk.bind(this);
         this.getPhotos = this.getPhotos.bind(this);
@@ -150,6 +151,17 @@ class App extends Component {
 
     showPixFullscreen(pixUrl) {
         console.log('showPixFullscreen pixUrl', pixUrl);
+        if (pixUrl) {
+            this.setState(() => ({
+                fullScreen: true,
+                pixUrl: pixUrl
+            }));
+        } else {
+            this.setState(() => ({
+                fullScreen: false,
+                pixUrl: ''
+            }));
+        }
     }
 
     render() {
@@ -183,6 +195,9 @@ class App extends Component {
                             getPhotos={this.getPhotos}
                             goToLogin={this.goToLogin}
                         />
+                        {(this.state.fullScreen) && (
+                            <Viewer url={this.state.pixUrl}/>
+                        )}
                     </Route>
                     <Route path="*">
                         <Redirect to="/auth" />
