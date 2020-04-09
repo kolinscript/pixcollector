@@ -42,6 +42,7 @@ class App extends Component {
         this.goToLogin = this.goToLogin.bind(this);
         this.goToStock = this.goToStock.bind(this);
         this.showPixFullscreen = this.showPixFullscreen.bind(this);
+        this.fullScreenClose = this.fullScreenClose.bind(this);
     }
 
     componentDidMount() {
@@ -164,6 +165,13 @@ class App extends Component {
         }
     }
 
+    fullScreenClose() {
+        this.setState(() => ({
+            fullScreen: false,
+            pixUrl: ''
+        }));
+    }
+
     render() {
         return (
             <Router>
@@ -196,7 +204,10 @@ class App extends Component {
                             goToLogin={this.goToLogin}
                         />
                         {(this.state.fullScreen) && (
-                            <Viewer url={this.state.pixUrl}/>
+                            <Viewer
+                                url={this.state.pixUrl}
+                                fullScreenClose={this.fullScreenClose}
+                            />
                         )}
                     </Route>
                     <Route path="*">
