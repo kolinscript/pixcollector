@@ -10,29 +10,37 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
   left: 0;
   width: 100%;
   height: 100%;
-  padding-top: 60px;
+  padding-top: 40px;
+
   .pixies {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+
     .pix {
-      cursor: pointer;
       width: 25%;
       height: 20%;
-      padding: 2px 5px;
-      .pix-container  {
+      padding: 4px;
+
+      .pix-container {
+        cursor: pointer;
         width: 100%;
         height: 100%;
-        border-radius: 20px;
+        border-radius: 8px;
         overflow: hidden;
+
         .pix-img {
           cursor: pointer;
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-        .pix-selector {}
+
+        .pix-selector {
+        }
       }
     }
   }
@@ -50,29 +58,31 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
   align-items: center;
   padding: 18px;
   background: #252525;
+
   .pix {
     width: 100%;
     height: 100%;
     border-radius: 20px;
     overflow: hidden;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: scale-down;
       object-position: 50%;
     }
+
     .close {
-      position: absolute;
-      top: 40px;
-      right: 40px;
-      width: 20px;
-      height: 20px;
-      border-radius: 20px;
-      background: $background;
       cursor: pointer;
-      font: 500 16px/18px $fontMain;
-      text-align: center;
-      color: $dark;
+      width: 40px;
+      height: 40px;
+      mask-image: url('../../images/close.svg');
+      mask-size: 100%;
+      transition: background 200ms;
+      background: $background;
+      &:hover {
+        background: lighten($dark, 10%);
+      }
     }
   }
 }
@@ -88,7 +98,8 @@ header {
   width: 100%;
   background: #252525e8;
   padding: 10px 0;
-  .player , .profile, .settings  {
+
+  .player, .profile, .settings {
     cursor: pointer;
     width: auto;
     height: 100%;
@@ -108,17 +119,20 @@ header {
       display: none;
       margin-right: 10px;
     }
+
     .user-name {
       cursor: auto;
       font: 600 16px/20px $fontMain;
       color: $background;
     }
   }
+
   .player, .settings {
     .icon {
       display: none;
       margin-right: 10px;
     }
+
     .label {
       font: 600 16px/20px $fontMain;
       color: $background;
@@ -135,6 +149,7 @@ header {
   padding: 60px 0 40px;
   height: 100%;
   width: 100%;
+
   .logo {
     width: 100%;
     height: 300px;
@@ -142,6 +157,7 @@ header {
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: contain;
+
     h1.title {
       display: none;
       opacity: .9;
@@ -156,28 +172,33 @@ header {
       border: 4px solid $background;
     }
   }
+
   h2.subtitle {
     width: 340px;
     font: 500 18px/24px $fontMain;
     color: $background;
     text-align: center;
   }
+
   h3.made-by {
     width: 360px;
     margin: 20px 0;
     font: 500 12px/16px $fontMain;
     color: $background;
     text-align: center;
+
     .code, .love {
       font-size: 14px;
       opacity: .75;
       font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji",
       Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
     }
+
     .love {
       margin-left: 4px;
     }
   }
+
   .description {
     margin: 0 auto;
     margin-block-start: 0.83em;
@@ -186,16 +207,20 @@ header {
     color: $background;
     text-align: center;
   }
+
   .form {
     margin: 40px 0;
+
     form {
       .title {
         margin-bottom: 10px;
+
         span {
           display: block;
           font: 500 16px/20px $fontMain;
           text-align: center;
           color: $background;
+
           &.albumSize {
             display: inline-block;
             font-weight: 900;
@@ -203,17 +228,21 @@ header {
           }
         }
       }
+
       .inputs {
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
         margin-top: 40px;
+
         .input {
           position: relative;
+
           &:first-child {
             margin-right: 10px;
           }
+
           input[type=number] {
             width: 80px;
             height: 32px;
@@ -226,10 +255,12 @@ header {
             text-align: center;
             color: $dark;
             box-shadow: 2px 2px 0 0px #1d1d1d;
+
             &:read-only {
               background: lighten($dark, 10%)
             }
           }
+
           span {
             position: absolute;
             bottom: -25px;
@@ -242,19 +273,23 @@ header {
             user-select: none;
           }
         }
+
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
           -webkit-appearance: none;
           margin: 0;
         }
+
         .checkbox {
           position: relative;
           margin-left: 10px;
           height: 32px;
           width: 32px;
+
           input[type=checkbox] {
             display: none;
           }
+
           label {
             cursor: pointer;
             position: absolute;
@@ -271,6 +306,7 @@ header {
             -ms-user-select: none;
             user-select: none;
           }
+
           label::before,
           label::after {
             position: absolute;
@@ -278,7 +314,8 @@ header {
             box-sizing: border-box;
             content: "";
           }
-          label::before{
+
+          label::before {
             height: 32px;
             width: 32px;
             left: 0;
@@ -287,6 +324,7 @@ header {
             border: 2px solid $background;
             box-shadow: 2px 2px 0 0px #1d1d1d;
           }
+
           label::after {
             transition: transform .2s ease-in-out;
             content: "";
@@ -320,50 +358,59 @@ footer {
   width: 100%;
   background: $background;
   opacity: .9;
+
   .social {
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+
     .link {
       width: 22px;
       height: 22px;
       margin-right: 40px;
+
       a {
         display: block;
         cursor: pointer;
         width: 100%;
         height: 100%;
         transition: background-color 200ms ease-in-out;
+
         &.github {
           background-color: $dark;
           mask-image: url("../../images/github.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
         }
+
         &.telega {
           background-color: $dark;
           mask-image: url("../../images/telega.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
         }
+
         &.vk {
           background-color: $dark;
           mask-image: url("../../images/vk.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
         }
+
         &.instagram {
           background-color: $dark;
           mask-image: url("../../images/instagram.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
         }
+
         &:hover {
           background-color: darken($dark, 4%);
         }
       }
+
       &:last-child {
         margin-right: 0;
       }
@@ -388,9 +435,11 @@ footer {
   text-decoration: none;
   transition: background 200ms ease-in-out;
   box-shadow: -12px -20px 56px rgba(232, 237, 243, 0.05), 36px 12px 64px #4B4B4B, inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+
   &:hover {
     background: lighten($dark, 10%);
   }
+
   .logo-vk {
     margin-left: 10px;
     width: 34px;
@@ -400,11 +449,13 @@ footer {
     mask-size: cover;
     -webkit-mask-size: cover;
   }
+
   .label {
     font: 500 16px/18px $fontMain;
     text-align: center;
     color: $dark;
   }
+
   &.bottomed {
     opacity: .94;
     position: fixed;
@@ -419,11 +470,13 @@ footer {
   .main {
     .logo {
       height: 200px;
+
       h1.title {
         width: 300px;
         font: 400 32px/34px $fontMain;
       }
     }
+
     h2.subtitle {
       width: 300px;
       font: 500 16px/20px $fontMain;
