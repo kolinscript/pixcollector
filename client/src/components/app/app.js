@@ -2,19 +2,23 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import './app.scss';
 import axios from 'axios';
+import Slider from "@material-ui/core/Slider";
 import {Header} from "../header/header";
 import {Auth} from "../auth/auth";
 import {Gallery} from "../gallery/gallery";
 import {Form} from "../form/form";
 import {Viewer} from "../viewer/viewer";
 import httpService from "../../http-service";
+import Tooltip from "@material-ui/core/Tooltip";
 
 httpService.setupInterceptors();
 
 // TODO sliders to manage pixies size in album view
-// TODO fullscreen pop-up component for single pix
-// TODO paginator for  album view
-// TODO new view type - table (which provide selectivity pix download)
+//      fullscreen pop-up component for single pix
+//      paginator for  album view
+//      new view type - table (which provide selectivity pix download)
+//      save actual pix links array on back-end -> create clients galleries available by links
+//      (pixcollector.com/gallery/1) to share with
 
 class App extends Component {
     constructor(props) {
@@ -22,7 +26,7 @@ class App extends Component {
         this.state = {
             showVkLogin: true,
             user: {
-                albumSize: 0
+                albumSize: 100
             },
             token: '',
             pixArray: [],
@@ -172,7 +176,16 @@ class App extends Component {
         }));
     }
 
+
     render() {
+        const handleChangeRange = (event, newValue) => {
+            if (newValue) {
+                this.setState(prevState => ({
+                    countFrom: newValue[0],
+                    countTo: newValue[1],
+                }));
+            }
+        };
         return (
             <Router>
                 <Switch>
@@ -209,6 +222,18 @@ class App extends Component {
                                 fullScreenClose={this.fullScreenClose}
                             />
                         )}
+                        <div  className={`gallery-range-slider ${this.state.readOnly ? "readOnly" : ""}`}>
+                            <Slider
+                                defaultValue={[0, this.state.user.albumSize]}
+                                min={1}
+                                step={1}
+                                max={this.state.user.albumSize}
+                                value={[+this.state.countFrom, +this.state.countTo]}
+                                valueLabelDisplay="auto"
+                                ValueLabelComponent={ValueLabelComponent}
+                                onChange={handleChangeRange}
+                            />
+                        </div>
                     </Route>
                     <Route path="*">
                         <Redirect to="/auth" />
@@ -217,6 +242,15 @@ class App extends Component {
             </Router>
         );
     }
+}
+
+function ValueLabelComponent(props) {
+    const { children, open, value } = props;
+    return (
+        <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
+            {children}
+        </Tooltip>
+    );
 }
 
 export default App;

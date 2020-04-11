@@ -7,8 +7,8 @@ export const Gallery = (props) => (
                 return (
                     <div className="pix">
                         <div className="pix-container">
-                            <img className="pix-img" src={value.url} alt="" onClick={() => props.showPixFullscreen(value.url)}/>
-                            <div className="pix-selector"></div>
+                            <img className="pix-img" src={value.url} alt=""/>
+                            <div className="pix-selector" onClick={() => props.showPixFullscreen(value.url)}></div>
                         </div>
                     </div>
                 )

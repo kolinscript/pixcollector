@@ -10,7 +10,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
   left: 0;
   width: 100%;
   height: 100%;
-  padding-top: 40px;
+  padding-top: 20px;
 
   .pixies {
     display: flex;
@@ -26,6 +26,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
       padding: 4px;
 
       .pix-container {
+        position: relative;
         cursor: pointer;
         width: 100%;
         height: 100%;
@@ -40,6 +41,17 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
         }
 
         .pix-selector {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          transition: background 200ms;
+          background: transparent;
+
+          &:hover {
+            background: fade-out($background, .5);
+          }
         }
       }
     }
@@ -83,6 +95,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
       mask-size: 100%;
       transition: background 200ms;
       background: $background;
+
       &:hover {
         background: lighten($dark, 10%);
       }
@@ -97,27 +110,47 @@ header {
   justify-content: space-between;
   align-items: center;
   top: 0;
-  height: 40px;
   width: 100%;
+  height: 20px;
+  padding: 1px 0;
   background: #252525e8;
-  padding: 10px 0;
+  transition: height 200ms ease-in-out;
+
+  &:hover {
+    height: 40px;
+    padding: 8px 0;
+    .player, .profile, .settings {
+      .label, .user-name {
+        font-size: 18px;
+        line-height: 20px;
+      }
+    }
+  }
 
   .player, .profile, .settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    width: auto;
+    width: 100px;
     height: 100%;
     padding: 0 20px;
-    font-size: 20px;
-    line-height: 20px;
     font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji",
     Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
-  }
+    text-align: center;
 
-  .player, .settings {
-    width: 100px;
-  }
+    .label, .user-name {
+      transition: font 200ms ease-in-out;
+      margin-top: 1px;
+      font: 600 10px/14px $fontMain;
+      color: $background;
+    }
 
-  .profile {
+    .icon {
+      display: none;
+      margin-right: 10px;
+    }
+
     .user-avatar {
       display: none;
       margin-right: 10px;
@@ -125,21 +158,11 @@ header {
 
     .user-name {
       cursor: auto;
-      font: 600 16px/20px $fontMain;
-      color: $background;
     }
   }
 
-  .player, .settings {
-    .icon {
-      display: none;
-      margin-right: 10px;
-    }
-
-    .label {
-      font: 600 16px/20px $fontMain;
-      color: $background;
-    }
+  .profile {
+    width: auto;
   }
 }
 
@@ -241,19 +264,23 @@ header {
 
         .input {
           position: relative;
+          width: 80px;
+          height: 32px;
+          box-shadow: 2px 2px 0 0px #1d1d1d;
+          border-radius: 25px;
+          overflow: hidden;
 
           &:first-child {
             margin-right: 10px;
           }
 
           input[type=number] {
-            width: 80px;
-            height: 32px;
+            width: 100%;
+            height: 100%;
             padding: 8px 0;
             background: $background;
             border: none;
             outline: none;
-            border-radius: 25px;
             font: 900 16px/18px $fontMain;
             text-align: center;
             color: $dark;
@@ -350,6 +377,60 @@ header {
           }
         }
       }
+    }
+  }
+}
+
+.gallery-range-slider {
+  opacity: 1;
+  pointer-events: auto;
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  padding: 0 20px;
+  background: lighten($dark, 10%);
+  &.readOnly {
+    opacity: .5;
+    pointer-events: none;
+  }
+
+  .MuiSlider-root {
+    padding: 0;
+    height: 100%;
+
+    .MuiSlider-rail {
+      height: 100%;
+      background: lighten($dark, 10%);
+    }
+
+    .MuiSlider-track {
+      height: 100%;
+      background: linear-gradient(-90deg, #D400F7 24.45%, #FF3DC9 43.26%, #FFEA29 79.6%);
+    }
+
+    .MuiSlider-thumb {
+      height: 100%;
+      width: 40px;
+      border-radius: 8px;
+      background: $background;
+      margin-top: 0;
+
+      &.MuiSlider-active {
+        box-shadow: 0 0 2px 2px lighten($background, 20%);
+      }
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+
+    .MuiSlider-thumb[data-index='0'] {
+      margin-left: -20px;
+    }
+
+    .MuiSlider-thumb[data-index='1'] {
+      margin-left: -20px;
     }
   }
 }

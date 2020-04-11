@@ -13,6 +13,7 @@ export const Form = (props) => (
                             <span>You've got <span className="albumSize">{props.albumSize}</span> pix collected. </span>
                             <span>Enter the range of pixies you want to collect,</span>
                             <span>or hit the circle to grab the whole thing. </span>
+                            <span>(use a bottom page slider at least) </span>
                         </div>
                         <div className="inputs">
                             <div className="input">

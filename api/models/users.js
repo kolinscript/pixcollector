@@ -9,6 +9,7 @@ const UsersSchema = new Schema({
     name: String,
     avatar: String,
     albumSize: String,
+    pixArray: []
 });
 
 UsersSchema.methods.generateJWT = function() {
