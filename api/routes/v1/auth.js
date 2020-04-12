@@ -50,6 +50,7 @@ router.get('/', secure.optional, (req, res, next) => {
                             user.save()
                                 .then(() => {
                                         req.session.user = {...req.session.user, ...user.toAuthJSON()};
+                                        console.log('req.session.user: ', req.session.user);
                                         res.redirect('/auth/success');
                                     }
                                 );
