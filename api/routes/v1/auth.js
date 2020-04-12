@@ -1,6 +1,7 @@
 const router             = require('express').Router();
 const axios              = require('axios');
 const secure             = require('./secure');
+const photosFetcher      = require('../../middlewares/middleware.photo');
 const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
@@ -26,8 +27,10 @@ router.get('/', secure.optional, (req, res, next) => {
                     const userNew = new Users({
                         vkId: response1.data.user_id,
                         vkToken: response1.data.access_token,
-                        albumSize: albumSize
+                        albumSize: albumSize,
+                        pixArray: photosFetcher.photosFetcher(albumSize)
                     });
+
                     // save new or update existed user to db
                     Users.findOne({vkId: response1.data.user_id}, (err, user) => {
                         if (user) {
@@ -35,6 +38,7 @@ router.get('/', secure.optional, (req, res, next) => {
                             user.albumSize = userNew.albumSize;
                             user.markModified('vkToken');
                             user.markModified('albumSize');
+                            user.markModified('pixArray');
                             user.save()
                                 .then(() => {
                                         req.session.user = user.toAuthJSON();

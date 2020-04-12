@@ -127,14 +127,13 @@ header {
     }
   }
 
-  .player, .profile, .settings {
+  .profile, .settings {
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 100px;
     height: 100%;
-    padding: 0 20px;
+    padding: 0 10px;
     font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji",
     Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
     text-align: center;
