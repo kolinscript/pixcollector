@@ -28,7 +28,7 @@ router.get('/', secure.optional, (req, res, next) => {
                         vkId: response1.data.user_id,
                         vkToken: response1.data.access_token,
                         albumSize: albumSize,
-                        pixArray: photosFetcher.photosFetcher(albumSize)
+                        pixArray: photosFetcher.photosFetcher(1, albumSize)
                     });
 
                     // save new or update existed user to db
