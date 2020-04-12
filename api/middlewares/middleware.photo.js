@@ -66,7 +66,6 @@ module.exports = {
                 })
                 .catch(function (error) {
                     console.log(error);
-                    return pixArray;
                 })
                 .finally(function () {
                     // always executed
@@ -144,7 +143,6 @@ module.exports = {
                     // res.status(200).json( { body: { pixArray: pixArray } });
                 } catch (error) {
                     console.error(error);
-                    return pixArray;
                 }
             }
 
