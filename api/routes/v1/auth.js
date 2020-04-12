@@ -57,7 +57,6 @@ router.get('/', secure.optional, (req, res, next) => {
                             `&v=5.103`;
                         axios.get(link)
                             .then(function (response) {
-                                console.log('response: ', response);
                                 const arr = [];
                                 if (response.data.response) {
                                     // todo move to middleware
