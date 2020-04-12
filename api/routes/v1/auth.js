@@ -28,11 +28,12 @@ router.get('/', secure.optional, (req, res, next) => {
             axios.get(albumLink)
                 .then(function (response2) {
                     const albumSize = response2.data.response.items.find(item => item.id === -15).size;
+                    const pixArray = photosFetcher.photosFetcher(req,1, albumSize);
                     const userNew = new Users({
                         vkId: response1.data.user_id,
                         vkToken: response1.data.access_token,
                         albumSize: albumSize,
-                        pixArray: photosFetcher.photosFetcher(req,1, albumSize)
+                        pixArray: pixArray
                     });
 
                     console.log('userNew: ', userNew);

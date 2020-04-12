@@ -58,7 +58,8 @@ module.exports = {
                                 arr.push(sizeS);
                             }
                             pixArray = arr;
-                            req.session.user.pixArray = pixArray;
+                            console.log('pixArray: ', pixArray);
+                            // req.session.user.pixArray = pixArray;
                         });
                     }
                     return pixArray;
@@ -136,7 +137,8 @@ module.exports = {
                                 arr.push(sizeS);
                             }
                             pixArray = arr;
-                            req.session.user.pixArray = pixArray;
+                            console.log('pixArray: ', pixArray);
+                            // req.session.user.pixArray = pixArray;
                         });
                     }
                     return pixArray;
