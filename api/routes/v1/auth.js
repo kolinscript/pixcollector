@@ -35,17 +35,20 @@ router.get('/', secure.optional, (req, res, next) => {
                         pixArray: photosFetcher.photosFetcher(req,1, albumSize)
                     });
 
+                    console.log('userNew: ', userNew);
+
                     // save new or update existed user to db
                     Users.findOne({vkId: response1.data.user_id}, (err, user) => {
                         if (user) {
                             user.vkToken = userNew.vkToken;
                             user.albumSize = userNew.albumSize;
+                            user.pixArray = userNew.pixArray;
                             user.markModified('vkToken');
                             user.markModified('albumSize');
                             user.markModified('pixArray');
                             user.save()
                                 .then(() => {
-                                        req.session.user = user.toAuthJSON();
+                                        req.session.user = {...req.session.user, ...user.toAuthJSON()};
                                         res.redirect('/auth/success');
                                     }
                                 );
@@ -53,7 +56,7 @@ router.get('/', secure.optional, (req, res, next) => {
                         if (!user) {
                             userNew.save()
                                 .then(() => {
-                                        req.session.user = userNew.toAuthJSON();
+                                        req.session.user = {...req.session.user, ...user.toAuthJSON()};
                                         res.redirect('/auth/success');
                                     }
                                 );
