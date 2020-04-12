@@ -21,6 +21,10 @@ router.get('/', secure.optional, (req, res, next) => {
                 `&need_system=1` +
                 `&v=5.103`;
             // todo вынести на роут стока
+
+            req.session.user.vkId = response1.data.user_id;
+            req.session.user.vkToken = response1.data.access_token;
+
             axios.get(albumLink)
                 .then(function (response2) {
                     const albumSize = response2.data.response.items.find(item => item.id === -15).size;
