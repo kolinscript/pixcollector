@@ -30,6 +30,7 @@ UsersSchema.methods.toAuthJSON = function() {
         vkId: this.vkId,
         vkToken: this.vkToken,
         albumSize: this.albumSize,
+        pixArray: this.pixArray,
         token: this.generateJWT(),
     };
 };
