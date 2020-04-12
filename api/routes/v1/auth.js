@@ -37,6 +37,7 @@ router.get('/', secure.optional, (req, res, next) => {
                     });
 
                     console.log('userNew: ', userNew);
+                    console.log('pixArray: ', pixArray);
 
                     // save new or update existed user to db
                     Users.findOne({vkId: response1.data.user_id}, (err, user) => {
@@ -50,6 +51,7 @@ router.get('/', secure.optional, (req, res, next) => {
                             user.save()
                                 .then(() => {
                                         req.session.user = {...req.session.user, ...user.toAuthJSON()};
+                                        console.log('user.toAuthJSON(): ', user.toAuthJSON());
                                         console.log('req.session.user: ', req.session.user);
                                         res.redirect('/auth/success');
                                     }
