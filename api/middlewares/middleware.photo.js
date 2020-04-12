@@ -1,7 +1,7 @@
 const axios              = require('axios');
 
 module.exports = {
-    photosFetcher: function(count_from, count_to) {
+    photosFetcher: function(req, count_from, count_to) {
         const countFrom = +count_from;
         const countTo = +count_to;
 
