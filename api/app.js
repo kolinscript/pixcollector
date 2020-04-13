@@ -17,7 +17,6 @@ mongoose
         () => { console.log('Database is connected'); },
         (err) => { console.log('Can not connect to the database' + err); }
     );
-mongoose.set('debug', true);
 mongoose.model('Users');
 
 const sessionOptions = {

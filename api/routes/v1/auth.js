@@ -29,8 +29,9 @@ router.get('/', secure.optional, (req, res, next) => {
                 `&v=5.103`;
 
             axios.get(userLink)
-                .then((responseUser) => {
-                    console.log('responseUser', responseUser.data.response);
+                .then(function (responseUser) {
+                    console.log('responseUser', responseUser);
+                    console.log('responseUser.data.response', responseUser.data.response);
 
                     axios.get(albumLink)
                         .then(function (responseAlbum) {
