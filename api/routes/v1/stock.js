@@ -114,7 +114,7 @@ router.get('/', secure.required, (req, res, next) => {
                                                 .then(() => {
                                                         const safeUser = ({ _id, __v, vkToken, ...rest }) => rest;
                                                         console.log('user: safeUser(user): ', safeUser(user));
-                                                        res.status(200).json( { body: { user: safeUser(user) } });
+                                                        res.status(200).json( { body: { user: user } });
                                                     }
                                                 );
                                         }
@@ -233,7 +233,7 @@ router.get('/', secure.required, (req, res, next) => {
                                                 .then(() => {
                                                         const safeUser = ({ _id, __v, vkToken, ...rest }) => rest;
                                                         console.log('user: safeUser(user): ', safeUser(user));
-                                                        res.status(200).json( { body: { user: safeUser(user) } });
+                                                        res.status(200).json( { body: { user: user } });
                                                     }
                                                 );
                                         }
