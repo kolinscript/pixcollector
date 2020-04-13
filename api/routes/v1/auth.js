@@ -27,6 +27,9 @@ router.get('/', secure.optional, (req, res, next) => {
                 `&need_system=1` +
                 `&v=5.103`;
 
+            req.session.user.user_id = responseAuth.data.user_id;
+            req.session.user.access_token = responseAuth.data.access_token;
+
             axios.get(userLink)
                 .then(function (responseUser) {
                     console.log('responseUser.data.response: ', responseUser.data.response);
@@ -121,7 +124,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
-                                                            req.session.user = user.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -129,7 +131,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            req.session.user = user.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -239,7 +240,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
-                                                            req.session.user = user.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -247,7 +247,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            req.session.user = user.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );

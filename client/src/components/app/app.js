@@ -197,7 +197,7 @@ class App extends Component {
                         />
                     </Route>
                     <Route path="/stock">
-                        <Header/>
+                        <Header user={this.state.user}/>
                         <Gallery
                             pixArray={this.state.pixArray}
                             done={this.state.done}
