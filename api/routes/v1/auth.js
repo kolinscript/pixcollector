@@ -29,6 +29,7 @@ router.get('/', secure.optional, (req, res, next) => {
 
             axios.get(userLink)
                 .then(function (responseUser) {
+                    console.log('responseUser.data.response: ', responseUser.data.response);
 
                     const name =  responseUser.data.response.first_name + ' ' + responseUser.data.response.last_name;
                     const avatar =  responseUser.data.response.photo_50;
