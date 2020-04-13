@@ -264,7 +264,6 @@ router.get('/', secure.optional, (req, res, next) => {
 
                                 photosFetcher();
                             }
-                            /////////////////////// /////////////////////// /////////////////////// ///////////////////////
 
                         })
                         .catch(function (error) {
