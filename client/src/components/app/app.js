@@ -30,7 +30,7 @@ class App extends Component {
             },
             token: '',
             pixArray: [],
-            done: false,
+            done: true,
             readOnly: false,
             countFrom: '',
             countTo: '',
@@ -199,23 +199,23 @@ class App extends Component {
                     <Route path="/stock">
                         <Header user={this.state.user}/>
                         <Gallery
-                            pixArray={this.state.pixArray}
+                            pixArray={this.state.user.pixArray}
                             done={this.state.done}
                             showPixFullscreen={this.showPixFullscreen}
                         />
-                        <Form
-                            showVkLogin={this.state.showVkLogin}
-                            done={this.state.done}
-                            albumSize={this.state.user.albumSize}
-                            countFrom={this.state.countFrom}
-                            countTo={this.state.countTo}
-                            readOnly={this.state.readOnly}
-                            handleChange={this.handleChange}
-                            all={this.state.all}
-                            handleCheckbox={this.handleCheckbox}
-                            getPhotos={this.getPhotos}
-                            goToLogin={this.goToLogin}
-                        />
+                        {/*<Form*/}
+                        {/*    showVkLogin={this.state.showVkLogin}*/}
+                        {/*    done={this.state.done}*/}
+                        {/*    albumSize={this.state.user.albumSize}*/}
+                        {/*    countFrom={this.state.countFrom}*/}
+                        {/*    countTo={this.state.countTo}*/}
+                        {/*    readOnly={this.state.readOnly}*/}
+                        {/*    handleChange={this.handleChange}*/}
+                        {/*    all={this.state.all}*/}
+                        {/*    handleCheckbox={this.handleCheckbox}*/}
+                        {/*    getPhotos={this.getPhotos}*/}
+                        {/*    goToLogin={this.goToLogin}*/}
+                        {/*/>*/}
                         {(this.state.fullScreen) && (
                             <Viewer
                                 url={this.state.pixUrl}
