@@ -97,7 +97,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                     arr.push(sizeS);
                                                 }
                                                 pixArray = arr;
-                                                // req.session.user.pixArray = pixArray;
                                             });
                                         }
                                         const userNew = new Users({
