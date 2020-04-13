@@ -31,8 +31,6 @@ router.get('/', secure.required, (req, res, next) => {
                     .then(function (responseAlbum) {
                         const albumSize = responseAlbum.data.response.items.find(item => item.id === -15).size;
 
-                        /////////////////////// /////////////////////// /////////////////////// ///////////////////////
-
                         const countFrom = 1;
                         const countTo = albumSize;
 
@@ -115,6 +113,7 @@ router.get('/', secure.required, (req, res, next) => {
                                             user.save()
                                                 .then(() => {
                                                         const safeUser = ({ _id, vkToken, token, ...rest }) => rest;
+                                                        console.log('user: safeUser(user): ', safeUser(user));
                                                         res.status(200).json( { body: { user: safeUser(user) } });
                                                     }
                                                 );
@@ -129,8 +128,6 @@ router.get('/', secure.required, (req, res, next) => {
                                         }
                                         if (err) return console.error(err);
                                     });
-                                    // return pixArray;
-                                    // res.status(200).json( { body: { pixArray: pixArray } });
                                 })
                                 .catch(function (error) {
                                     console.log(error);
@@ -234,6 +231,7 @@ router.get('/', secure.required, (req, res, next) => {
                                             user.save()
                                                 .then(() => {
                                                         const safeUser = ({ _id, vkToken, token, ...rest }) => rest;
+                                                        console.log('user: safeUser(user): ', safeUser(user));
                                                         res.status(200).json( { body: { user: safeUser(user) } });
                                                     }
                                                 );
@@ -256,7 +254,6 @@ router.get('/', secure.required, (req, res, next) => {
 
                             photosFetcher();
                         }
-                        /////////////////////// /////////////////////// /////////////////////// ///////////////////////
 
                     })
                     .catch(function (error) {
