@@ -4,7 +4,7 @@ export const Form = (props) => (
     (!props.done) && (
         <div className="main">
             {(!props.done) && (
-                <div className="logo"><h1 className="title">PIXCOLLECTOR</h1></div>
+                <div className="logo"><h1 className="title">COLLECTOR</h1></div>
             )}
             {(!props.done) && (
                 <div className="form">

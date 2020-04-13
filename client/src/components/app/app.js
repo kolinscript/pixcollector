@@ -31,8 +31,8 @@ class App extends Component {
             },
             token: '',
             readOnly: false,
-            countFrom: '',
-            countTo: '',
+            countFrom: '1',
+            countTo: '42',
             all: false,
             fullScreen: false,
             pixUrl: ''
@@ -195,8 +195,13 @@ class App extends Component {
                     </Route>
                     <Route path="/stock">
                         <Header user={this.state.user}/>
+                        {/* моя галерея / галереи пользователей */}
+
+                        {/*move to gallery route*/}
                         <Gallery
                             pixArray={this.state.user.pixArray}
+                            cutFrom={this.state.countFrom}
+                            cutTo={this.state.countTo}
                             showPixFullscreen={this.showPixFullscreen}
                         />
                         {/*<Form*/}

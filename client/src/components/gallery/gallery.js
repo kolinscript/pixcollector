@@ -3,7 +3,7 @@ import React from "react";
 export const Gallery = (props) => (
     <div className="gallery">
         <div className="pixies">
-            {props.pixArray.map((value) => {
+            {props.pixArray.slice(props.cutFrom, props.cutTo).map((value) => {
                 return (
                     <div className="pix">
                         <div className="pix-container">
