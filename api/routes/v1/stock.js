@@ -87,7 +87,6 @@ router.get('/', secure.required, (req, res, next) => {
                                                 arr.push(sizeS);
                                             }
                                             pixArray = arr;
-                                            // req.session.user.pixArray = pixArray;
                                         });
                                     }
                                     const userNew = new Users({
@@ -101,6 +100,7 @@ router.get('/', secure.required, (req, res, next) => {
 
                                     // save new or update existed user to db
                                     Users.findOne({vkId: req.session.user.user_id}, (err, user) => {
+                                        console.log('Users.findOne', user);
                                         if (user) {
                                             user.vkToken = userNew.vkToken;
                                             user.name = userNew.name;
