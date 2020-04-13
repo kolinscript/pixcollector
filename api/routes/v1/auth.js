@@ -1,7 +1,6 @@
 const router             = require('express').Router();
 const axios              = require('axios');
 const secure             = require('./secure');
-const photosFetcher      = require('../../middlewares/middleware.photo');
 const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
