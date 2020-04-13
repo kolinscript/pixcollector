@@ -121,7 +121,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
-                                                            req.session.user = user.toAuthJSON();
+                                                            const safeUser = ({ _id, vkToken, ...rest }) => rest;
+                                                            req.session.user = safeUser(user.toAuthJSON());
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -129,7 +130,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            req.session.user = userNew.toAuthJSON();
+                                                            const safeUser = ({ _id, vkToken, ...rest }) => rest;
+                                                            req.session.user = safeUser(userNew.toAuthJSON());
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -222,8 +224,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                             pixArray: pixArray
                                         });
 
-                                        req.session.user = userNew;
-
                                         // save new or update existed user to db
                                         Users.findOne({vkId: responseAuth.data.user_id}, (err, user) => {
                                             if (user) {
@@ -239,7 +239,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
-                                                            req.session.user = user.toAuthJSON();
+                                                            const safeUser = ({ _id, vkToken, ...rest }) => rest;
+                                                            req.session.user = safeUser(user.toAuthJSON());
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -247,7 +248,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            req.session.user = userNew.toAuthJSON();
+                                                            const safeUser = ({ _id, vkToken, ...rest }) => rest;
+                                                            req.session.user = safeUser(userNew.toAuthJSON());
                                                             res.redirect('/auth/success');
                                                         }
                                                     );

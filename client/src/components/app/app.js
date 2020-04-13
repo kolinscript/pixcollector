@@ -69,7 +69,7 @@ class App extends Component {
                         this.setState({showVkLogin: true});
                         window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
                     } else if (response.data.body.user) {
-                        localStorage.setItem('user', response.data.body.user);
+                        localStorage.setItem('user', JSON.stringify(response.data.body.user));
                         this.setState({user: response.data.body.user, showVkLogin: false});
                     }
                 })
