@@ -20,7 +20,6 @@ router.get('/', secure.optional, (req, res, next) => {
                 `?user_ids=${responseAuth.data.user_id}` +
                 `?fields=photo_50` +
                 `&access_token=${responseAuth.data.access_token}` +
-                `&need_system=1` +
                 `&v=5.103`;
             const albumLink = `https://api.vk.com/` +
                 `method/photos.getAlbums` +
@@ -115,8 +114,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                 user.save()
                                                     .then(() => {
                                                             req.session.user = user.toAuthJSON();
-                                                            console.log('user.toAuthJSON(): ', user.toAuthJSON());
-                                                            console.log('req.session.user: ', req.session.user);
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -124,7 +121,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            req.session.user = {...req.session.user, ...user.toAuthJSON()};
+                                                            req.session.user = user.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -229,8 +226,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                 user.save()
                                                     .then(() => {
                                                             req.session.user = user.toAuthJSON();
-                                                            console.log('user.toAuthJSON(): ', user.toAuthJSON());
-                                                            console.log('req.session.user: ', req.session.user);
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -238,7 +233,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            req.session.user = {...req.session.user, ...user.toAuthJSON()};
+                                                            req.session.user = user.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
