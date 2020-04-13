@@ -31,8 +31,8 @@ class App extends Component {
             },
             token: '',
             readOnly: false,
-            countFrom: '1',
-            countTo: '42',
+            countFrom: 1,
+            countTo: 42,
             all: false,
             fullScreen: false,
             pixUrl: ''
