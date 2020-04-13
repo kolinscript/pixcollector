@@ -12,19 +12,33 @@ router.get('/', secure.optional, (req, res, next) => {
         `&client_secret=XgglLIZcB7qB3nNryc8y` +
         `&redirect_uri=https://pixcollector.herokuapp.com/api/v1/auth` +
         `&code=${code}`;
+
     axios.get(authLink)
-        .then(function (response1) {
-            const albumLink = `https://api.vk.com/` +
-                `method/photos.getAlbums` +
-                `?owner_id=${response1.data.user_id}` +
-                `&access_token=${response1.data.access_token}` +
+        .then(function (responseAuth) {
+            const userLink = `https://api.vk.com/` +
+                `method/users.get` +
+                `?user_ids=${responseAuth.data.user_id}` +
+                `?fields=photo_50` +
+                `&access_token=${responseAuth.data.access_token}` +
                 `&need_system=1` +
                 `&v=5.103`;
-            // todo вынести на роут стока
+            const albumLink = `https://api.vk.com/` +
+                `method/photos.getAlbums` +
+                `?owner_id=${responseAuth.data.user_id}` +
+                `&access_token=${responseAuth.data.access_token}` +
+                `&need_system=1` +
+                `&v=5.103`;
 
+            axios.get(userLink)
+                .then((responseUser) => {
+                    console.log('responseUser', responseUser.data.response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             axios.get(albumLink)
-                .then(function (response2) {
-                    const albumSize = response2.data.response.items.find(item => item.id === -15).size;
+                .then(function (responseAlbum) {
+                    const albumSize = responseAlbum.data.response.items.find(item => item.id === -15).size;
 
                     /////////////////////// /////////////////////// /////////////////////// ///////////////////////
 
@@ -48,8 +62,8 @@ router.get('/', secure.optional, (req, res, next) => {
                         // single request
                         const link = `https://api.vk.com/` +
                             `method/photos.get` +
-                            `?owner_id=${response1.data.user_id}` +
-                            `&access_token=${response1.data.access_token}` +
+                            `?owner_id=${responseAuth.data.user_id}` +
+                            `&access_token=${responseAuth.data.access_token}` +
                             `&album_id=saved` +
                             `&photo_sizes=1` +
                             `&offset=${reqOffset}` +
@@ -86,8 +100,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                     });
                                 }
                                 const userNew = new Users({
-                                    vkId: response1.data.user_id,
-                                    vkToken: response1.data.access_token,
+                                    vkId: responseAuth.data.user_id,
+                                    vkToken: responseAuth.data.access_token,
                                     albumSize: albumSize,
                                     pixArray: pixArray
                                 });
@@ -95,7 +109,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                 console.log('pixArray.length: ', pixArray.length);
 
                                 // save new or update existed user to db
-                                Users.findOne({vkId: response1.data.user_id}, (err, user) => {
+                                Users.findOne({vkId: responseAuth.data.user_id}, (err, user) => {
                                     if (user) {
                                         user.vkToken = userNew.vkToken;
                                         user.albumSize = userNew.albumSize;
@@ -139,8 +153,8 @@ router.get('/', secure.optional, (req, res, next) => {
                         for (let offset = reqOffset, count = 1000; offset < reqIntegerPart; offset = offset + 1000) {
                             const link = `https://api.vk.com/` +
                                 `method/photos.get` +
-                                `?owner_id=${response1.data.user_id}` +
-                                `&access_token=${response1.data.access_token}` +
+                                `?owner_id=${responseAuth.data.user_id}` +
+                                `&access_token=${responseAuth.data.access_token}` +
                                 `&album_id=saved` +
                                 `&photo_sizes=1` +
                                 `&offset=${offset}` +
@@ -151,8 +165,8 @@ router.get('/', secure.optional, (req, res, next) => {
                         }
                         const linkLast = `https://api.vk.com/` +
                             `method/photos.get` +
-                            `?owner_id=${response1.data.user_id}` +
-                            `&access_token=${response1.data.access_token}` +
+                            `?owner_id=${responseAuth.data.user_id}` +
+                            `&access_token=${responseAuth.data.access_token}` +
                             `&album_id=saved` +
                             `&photo_sizes=1` +
                             `&offset=${offsetLast}` +
@@ -198,13 +212,12 @@ router.get('/', secure.optional, (req, res, next) => {
                                             arr.push(sizeS);
                                         }
                                         pixArray = arr;
-                                        // req.session.user.pixArray = pixArray;
                                     });
                                 }
-                                // return pixArray;
+
                                 const userNew = new Users({
-                                    vkId: response1.data.user_id,
-                                    vkToken: response1.data.access_token,
+                                    vkId: responseAuth.data.user_id,
+                                    vkToken: responseAuth.data.access_token,
                                     albumSize: albumSize,
                                     pixArray: pixArray
                                 });
@@ -212,7 +225,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                 console.log('pixArray.length: ', pixArray.length);
 
                                 // save new or update existed user to db
-                                Users.findOne({vkId: response1.data.user_id}, (err, user) => {
+                                Users.findOne({vkId: responseAuth.data.user_id}, (err, user) => {
                                     if (user) {
                                         user.vkToken = userNew.vkToken;
                                         user.albumSize = userNew.albumSize;
@@ -239,15 +252,13 @@ router.get('/', secure.optional, (req, res, next) => {
                                     }
                                     if (err) return console.error(err);
                                 });
-                                // res.status(200).json( { body: { pixArray: pixArray } });
+
                             } catch (error) {
                                 console.error(error);
                             }
                         }
 
                         photosFetcher();
-
-
                     }
                     /////////////////////// /////////////////////// /////////////////////// ///////////////////////
 
