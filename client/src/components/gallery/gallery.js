@@ -14,10 +14,8 @@ export const Gallery = (props) => (
                 )
             })}
         </div>
-        {(props.done) && (
-            <a className="button bottomed" href="/api/v1/download/pixcollector.zip" download>
-                <div className="label">Download</div>
-            </a>
-        )}
+        <a className="button bottomed" href="/api/v1/download/pixcollector.zip" download>
+            <div className="label">Download</div>
+        </a>
     </div>
 );

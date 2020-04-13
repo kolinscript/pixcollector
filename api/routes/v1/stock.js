@@ -1,5 +1,8 @@
 const router             = require('express').Router();
 const secure             = require('./secure');
+const axios              = require('axios');
+const mongoose           = require('mongoose');
+const Users              = mongoose.model('Users');
 
 router.get('/', secure.required, (req, res, next) => {
     // todo запрос новой информации из вк (альбом, etc) на основании текущего токена, обновление в базе

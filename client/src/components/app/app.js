@@ -26,11 +26,10 @@ class App extends Component {
         this.state = {
             showVkLogin: true,
             user: {
-                albumSize: 100
+                albumSize: 100,
+                pixArray: [],
             },
             token: '',
-            pixArray: [],
-            done: true,
             readOnly: false,
             countFrom: '',
             countTo: '',
@@ -102,20 +101,19 @@ class App extends Component {
             '&v=5.103';
         window.open(AUTH_URL_AUTHORIZE, "_self")
     }
-
-    getPhotos() {
-        // fetch array with the pixies links
-        axios.get(`/api/v1/photos?countFrom=${this.state.countFrom}&countTo=${this.state.countTo}`)
-            .then((response) => {
-                if (response.data.body.pixArray) {
-                    this.setState(prevState => ({
-                        pixArray: response.data.body.pixArray,
-                        done: true
-                    }));
-                }
-            })
-            .catch(err => console.log(err));
-    }
+    //
+    // getPhotos() {
+    //     // fetch array with the pixies links
+    //     axios.get(`/api/v1/photos?countFrom=${this.state.countFrom}&countTo=${this.state.countTo}`)
+    //         .then((response) => {
+    //             if (response.data.body.pixArray) {
+    //                 this.setState(prevState => ({
+    //                     pixArray: response.data.body.pixArray,
+    //                 }));
+    //             }
+    //         })
+    //         .catch(err => console.log(err));
+    // }
 
     handleChange(event) {
         const name = event.target.name;
@@ -200,7 +198,6 @@ class App extends Component {
                         <Header user={this.state.user}/>
                         <Gallery
                             pixArray={this.state.user.pixArray}
-                            done={this.state.done}
                             showPixFullscreen={this.showPixFullscreen}
                         />
                         {/*<Form*/}
