@@ -112,7 +112,7 @@ router.get('/', secure.required, (req, res, next) => {
                                             user.markModified('pixArray');
                                             user.save()
                                                 .then(() => {
-                                                        const safeUser = ({ _id, vkToken, token, ...rest }) => rest;
+                                                        const safeUser = ({ _id, vkToken, ...rest }) => rest;
                                                         console.log('user: safeUser(user): ', safeUser(user));
                                                         res.status(200).json( { body: { user: safeUser(user) } });
                                                     }
@@ -121,7 +121,7 @@ router.get('/', secure.required, (req, res, next) => {
                                         if (!user) {
                                             userNew.save()
                                                 .then(() => {
-                                                        const safeUser = ({ _id, vkToken, token, ...rest }) => rest;
+                                                    const safeUser = ({ _id, vkToken, ...rest }) => rest;
                                                         res.status(200).json( { body: { user: safeUser(userNew) } });
                                                     }
                                                 );
@@ -230,7 +230,7 @@ router.get('/', secure.required, (req, res, next) => {
                                             user.markModified('pixArray');
                                             user.save()
                                                 .then(() => {
-                                                        const safeUser = ({ _id, vkToken, token, ...rest }) => rest;
+                                                        const safeUser = ({ _id, vkToken, ...rest }) => rest;
                                                         console.log('user: safeUser(user): ', safeUser(user));
                                                         res.status(200).json( { body: { user: safeUser(user) } });
                                                     }
@@ -239,7 +239,7 @@ router.get('/', secure.required, (req, res, next) => {
                                         if (!user) {
                                             userNew.save()
                                                 .then(() => {
-                                                        const safeUser = ({ _id, vkToken, token, ...rest }) => rest;
+                                                        const safeUser = ({ _id, vkToken, ...rest }) => rest;
                                                         res.status(200).json( { body: { user: safeUser(userNew) } });
                                                     }
                                                 );
