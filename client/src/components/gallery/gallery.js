@@ -3,7 +3,7 @@ import React from "react";
 export const Gallery = (props) => (
     <div className="gallery">
         <div className="pixies">
-            {props.pixArray.slice(props.cutFrom, props.cutTo).map((value) => {
+            {props.pixArray.slice(props.cutFrom - 1, props.cutTo + 1).map((value) => {
                 return (
                     <div className="pix">
                         <div className="pix-container">
@@ -14,8 +14,8 @@ export const Gallery = (props) => (
                 )
             })}
         </div>
-        <a className="button bottomed" href="/api/v1/download/pixcollector.zip" download>
-            <div className="label">Download</div>
-        </a>
+        {/*<a className="button bottomed" href="/api/v1/download/pixcollector.zip" download>*/}
+        {/*    <div className="label">Download</div>*/}
+        {/*</a>*/}
     </div>
 );
