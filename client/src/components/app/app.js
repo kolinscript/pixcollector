@@ -38,7 +38,7 @@ class App extends Component {
             pixUrl: ''
         };
         this.loginVk = this.loginVk.bind(this);
-        this.getPhotos = this.getPhotos.bind(this);
+        // this.getPhotos = this.getPhotos.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
