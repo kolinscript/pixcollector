@@ -19,6 +19,7 @@ router.get('/', secure.optional, (req, res, next) => {
                 `method/users.get` +
                 `?user_ids=${responseAuth.data.user_id}` +
                 `?fields=photo_50` +
+                `?name_case=nom` +
                 `&access_token=${responseAuth.data.access_token}` +
                 `&v=5.103`;
             const albumLink = `https://api.vk.com/` +
@@ -31,6 +32,7 @@ router.get('/', secure.optional, (req, res, next) => {
             axios.get(userLink)
                 .then(function (responseUser) {
                     console.log('responseUser', responseUser);
+                    console.log('responseUser.data', responseUser.data);
                     console.log('responseUser.data.response', responseUser.data.response);
 
                     axios.get(albumLink)
