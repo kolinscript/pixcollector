@@ -29,9 +29,9 @@ router.get('/', secure.optional, (req, res, next) => {
 
             axios.get(userLink)
                 .then(function (responseUser) {
-                    console.log('responseUser', responseUser);
-                    console.log('responseUser.data', responseUser.data);
-                    console.log('responseUser.data.response', responseUser.data.response);
+
+                    const name =  responseUser.data.response.first_name + ' ' + responseUser.data.response.last_name;
+                    const avatar =  responseUser.data.response.photo_50;
 
                     axios.get(albumLink)
                         .then(function (responseAlbum) {
@@ -99,6 +99,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                         const userNew = new Users({
                                             vkId: responseAuth.data.user_id,
                                             vkToken: responseAuth.data.access_token,
+                                            name: name,
+                                            avatar: avatar,
                                             albumSize: albumSize,
                                             pixArray: pixArray
                                         });
@@ -107,9 +109,13 @@ router.get('/', secure.optional, (req, res, next) => {
                                         Users.findOne({vkId: responseAuth.data.user_id}, (err, user) => {
                                             if (user) {
                                                 user.vkToken = userNew.vkToken;
+                                                user.name = userNew.name;
+                                                user.avatar = userNew.avatar;
                                                 user.albumSize = userNew.albumSize;
                                                 user.pixArray = userNew.pixArray;
                                                 user.markModified('vkToken');
+                                                user.markModified('name');
+                                                user.markModified('avatar');
                                                 user.markModified('albumSize');
                                                 user.markModified('pixArray');
                                                 user.save()
@@ -211,6 +217,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                         const userNew = new Users({
                                             vkId: responseAuth.data.user_id,
                                             vkToken: responseAuth.data.access_token,
+                                            name: name,
+                                            avatar: avatar,
                                             albumSize: albumSize,
                                             pixArray: pixArray
                                         });
@@ -219,9 +227,13 @@ router.get('/', secure.optional, (req, res, next) => {
                                         Users.findOne({vkId: responseAuth.data.user_id}, (err, user) => {
                                             if (user) {
                                                 user.vkToken = userNew.vkToken;
+                                                user.name = userNew.name;
+                                                user.avatar = userNew.avatar;
                                                 user.albumSize = userNew.albumSize;
                                                 user.pixArray = userNew.pixArray;
                                                 user.markModified('vkToken');
+                                                user.markModified('name');
+                                                user.markModified('avatar');
                                                 user.markModified('albumSize');
                                                 user.markModified('pixArray');
                                                 user.save()

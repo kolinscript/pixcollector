@@ -29,6 +29,8 @@ UsersSchema.methods.toAuthJSON = function() {
         _id: this._id,
         vkId: this.vkId,
         vkToken: this.vkToken,
+        name: this.name,
+        avatar: this.avatar,
         albumSize: this.albumSize,
         pixArray: this.pixArray,
         token: this.generateJWT(),
