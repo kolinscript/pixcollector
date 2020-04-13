@@ -17,7 +17,7 @@ router.get('/', secure.optional, (req, res, next) => {
         .then(function (responseAuth) {
             const userLink = `https://api.vk.com/` +
                 `method/users.get` +
-                `?user_id=${responseAuth.data.user_id}` +
+                `?user_id=${responseAuth.data.user_id.toString()}` +
                 `?fields=photo_50` +
                 `?name_case=nom` +
                 `&access_token=${responseAuth.data.access_token}` +
