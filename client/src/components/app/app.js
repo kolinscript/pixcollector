@@ -28,8 +28,8 @@ class App extends Component {
             user: {
                 albumSize: 100,
                 pixArray: [],
+                token: '',
             },
-            token: '',
             readOnly: false,
             countFrom: 1,
             countTo: 42,
@@ -62,15 +62,15 @@ class App extends Component {
             this.setState({showVkLogin: true});
         } else if (url_current === 'https://pixcollector.herokuapp.com/auth/success' || url_current === 'http://localhost:3000/auth/success') {
             this.setState({showVkLogin: true});
-            // fetch AUTH token on success authentication
+            // fetch AUTH token on success authentication (contains in user obj)
             axios.get(`/api/v1/auth/success`)
                 .then((response) => {
-                    if (!response.data.body.token) {
+                    if (!response.data.body.user) {
                         this.setState({showVkLogin: true});
                         window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
-                    } else if (response.data.body.token) {
-                        localStorage.setItem('token', response.data.body.token);
-                        this.setState({token: response.data.body.token, showVkLogin: false});
+                    } else if (response.data.body.user) {
+                        localStorage.setItem('user', response.data.body.user);
+                        this.setState({user: response.data.body.user, showVkLogin: false});
                     }
                 })
                 .catch(err => console.log(err));

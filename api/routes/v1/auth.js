@@ -1,6 +1,7 @@
 const router             = require('express').Router();
 const axios              = require('axios');
 const secure             = require('./secure');
+// const photosFetcher      = require('../../middlewares/middleware.photo');
 const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
@@ -26,8 +27,8 @@ router.get('/', secure.optional, (req, res, next) => {
                 `&need_system=1` +
                 `&v=5.103`;
 
-            req.session.user.user_id = responseAuth.data.user_id;
-            req.session.user.access_token = responseAuth.data.access_token;
+            // req.session.user.user_id = responseAuth.data.user_id;
+            // req.session.user.access_token = responseAuth.data.access_token;
 
             axios.get(userLink)
                 .then(function (responseUser) {
@@ -39,8 +40,6 @@ router.get('/', secure.optional, (req, res, next) => {
                     axios.get(albumLink)
                         .then(function (responseAlbum) {
                             const albumSize = responseAlbum.data.response.items.find(item => item.id === -15).size;
-
-                            /////////////////////// /////////////////////// /////////////////////// ///////////////////////
 
                             const countFrom = 1;
                             const countTo = albumSize;
@@ -122,6 +121,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
+                                                            req.session.user = user.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -129,14 +129,13 @@ router.get('/', secure.optional, (req, res, next) => {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
+                                                            req.session.user = userNew.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
                                             }
                                             if (err) return console.error(err);
                                         });
-                                        // return pixArray;
-                                        // res.status(200).json( { body: { pixArray: pixArray } });
                                     })
                                     .catch(function (error) {
                                         console.log(error);
@@ -223,6 +222,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                             pixArray: pixArray
                                         });
 
+                                        req.session.user = userNew;
+
                                         // save new or update existed user to db
                                         Users.findOne({vkId: responseAuth.data.user_id}, (err, user) => {
                                             if (user) {
@@ -238,6 +239,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
+                                                            req.session.user = user.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -245,6 +247,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
+                                                            req.session.user = userNew.toAuthJSON();
                                                             res.redirect('/auth/success');
                                                         }
                                                     );
@@ -277,7 +280,7 @@ router.get('/', secure.optional, (req, res, next) => {
 
 router.get('/success', secure.optional, (req, res, next) => {
     if (req.session.user) {
-        res.status(200).json( { body: { token: req.session.user.token } });
+        res.status(200).json( { body: { user: req.session.user } });
     } else {
         res.status(200).json( { body: { error: 'unauthorized' } });
     }

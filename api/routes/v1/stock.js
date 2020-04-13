@@ -5,6 +5,41 @@ const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
 router.get('/', secure.required, (req, res, next) => {
+    const vkId = req.query.id;
+    Users.findOne({vkId: vkId}, (err, user) => {
+
+        console.log('Users.findOne', user);
+        if (user) {
+            user.vkToken = userNew.vkToken;
+            user.name = userNew.name;
+            user.avatar = userNew.avatar;
+            user.albumSize = userNew.albumSize;
+            user.pixArray = userNew.pixArray;
+            user.markModified('vkToken');
+            user.markModified('name');
+            user.markModified('avatar');
+            user.markModified('albumSize');
+            user.markModified('pixArray');
+            user.save()
+                .then(() => {
+                        const safeUser = ({ _id, __v, vkToken, ...rest }) => rest;
+                        console.log('user: safeUser(user): ', safeUser(user));
+                        res.status(200).json( { body: { user: user } });
+                    }
+                );
+        }
+        if (!user) {
+            userNew.save()
+                .then(() => {
+                        const safeUser = ({ _id, __v, vkToken, ...rest }) => rest;
+                        res.status(200).json( { body: { user: safeUser(userNew) } });
+                    }
+                );
+        }
+
+
+        if (err) return console.error(err);
+    });
     // todo запрос новой информации из вк (альбом, etc) на основании текущего токена, обновление в базе
 
     if (req.session.user.user_id && req.session.user.access_token) {
