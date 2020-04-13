@@ -213,6 +213,7 @@ router.get('/', secure.required, (req, res, next) => {
                                         albumSize: albumSize,
                                         pixArray: pixArray
                                     });
+                                    console.log('userNew', userNew);
 
                                     // save new or update existed user to db
                                     Users.findOne({vkId: req.session.user.user_id}, (err, user) => {
