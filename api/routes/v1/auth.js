@@ -92,6 +92,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                     pixArray: pixArray
                                 });
                                 console.log('userNew: ', userNew);
+                                console.log('pixArray.length: ', pixArray.length);
 
                                 // save new or update existed user to db
                                 Users.findOne({vkId: response1.data.user_id}, (err, user) => {
@@ -201,7 +202,43 @@ router.get('/', secure.optional, (req, res, next) => {
                                     });
                                 }
                                 // return pixArray;
-                                pixArray = pixArray;
+                                const userNew = new Users({
+                                    vkId: response1.data.user_id,
+                                    vkToken: response1.data.access_token,
+                                    albumSize: albumSize,
+                                    pixArray: pixArray
+                                });
+                                console.log('userNew: ', userNew);
+                                console.log('pixArray.length: ', pixArray.length);
+
+                                // save new or update existed user to db
+                                Users.findOne({vkId: response1.data.user_id}, (err, user) => {
+                                    if (user) {
+                                        user.vkToken = userNew.vkToken;
+                                        user.albumSize = userNew.albumSize;
+                                        user.pixArray = userNew.pixArray;
+                                        user.markModified('vkToken');
+                                        user.markModified('albumSize');
+                                        user.markModified('pixArray');
+                                        user.save()
+                                            .then(() => {
+                                                    req.session.user = user.toAuthJSON();
+                                                    console.log('user.toAuthJSON(): ', user.toAuthJSON());
+                                                    console.log('req.session.user: ', req.session.user);
+                                                    res.redirect('/auth/success');
+                                                }
+                                            );
+                                    }
+                                    if (!user) {
+                                        userNew.save()
+                                            .then(() => {
+                                                    req.session.user = {...req.session.user, ...user.toAuthJSON()};
+                                                    res.redirect('/auth/success');
+                                                }
+                                            );
+                                    }
+                                    if (err) return console.error(err);
+                                });
                                 // res.status(200).json( { body: { pixArray: pixArray } });
                             } catch (error) {
                                 console.error(error);
@@ -210,42 +247,7 @@ router.get('/', secure.optional, (req, res, next) => {
 
                         photosFetcher();
 
-                        const userNew = new Users({
-                            vkId: response1.data.user_id,
-                            vkToken: response1.data.access_token,
-                            albumSize: albumSize,
-                            pixArray: pixArray
-                        });
-                        console.log('userNew: ', userNew);
 
-                        // save new or update existed user to db
-                        Users.findOne({vkId: response1.data.user_id}, (err, user) => {
-                            if (user) {
-                                user.vkToken = userNew.vkToken;
-                                user.albumSize = userNew.albumSize;
-                                user.pixArray = userNew.pixArray;
-                                user.markModified('vkToken');
-                                user.markModified('albumSize');
-                                user.markModified('pixArray');
-                                user.save()
-                                    .then(() => {
-                                            req.session.user = user.toAuthJSON();
-                                            console.log('user.toAuthJSON(): ', user.toAuthJSON());
-                                            console.log('req.session.user: ', req.session.user);
-                                            res.redirect('/auth/success');
-                                        }
-                                    );
-                            }
-                            if (!user) {
-                                userNew.save()
-                                    .then(() => {
-                                            req.session.user = {...req.session.user, ...user.toAuthJSON()};
-                                            res.redirect('/auth/success');
-                                        }
-                                    );
-                            }
-                            if (err) return console.error(err);
-                        });
                     }
                     /////////////////////// /////////////////////// /////////////////////// ///////////////////////
 
