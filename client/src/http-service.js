@@ -1,8 +1,11 @@
 import axios from "axios";
 
 const getToken = () => {
-    const token = JSON.parse(localStorage.getItem('user')).token;
-    return token;
+    if (localStorage.getItem('user')) {
+        return JSON.parse(localStorage.getItem('user')).token;
+    } else {
+        return null;
+    }
 };
 
 export default {
