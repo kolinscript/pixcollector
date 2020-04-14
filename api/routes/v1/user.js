@@ -106,7 +106,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                         });
 
                                         // save new or update existed user to db
-                                        Users.findOne({vkId: user.vkId}, (err, user) => {
+                                        Users.findOne({vkId: userRoot.vkId}, (err, user) => {
                                             console.log('Users.findOne', user);
                                             if (user) {
                                                 user.vkToken = userNew.vkToken;
@@ -224,7 +224,7 @@ router.get('/', secure.optional, (req, res, next) => {
                                         });
 
                                         // save new or update existed user to db
-                                        Users.findOne({vkId: req.session.user.user_id}, (err, user) => {
+                                        Users.findOne({vkId: userRoot.vkId}, (err, user) => {
                                             console.log('Users.findOne', user);
                                             if (user) {
                                                 user.vkToken = userNew.vkToken;
