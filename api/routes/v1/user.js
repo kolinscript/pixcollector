@@ -7,7 +7,6 @@ const Users              = mongoose.model('Users');
 router.get('/', secure.optional, (req, res, next) => {
     // todo запрос новой информации из вк (альбом, etc) на основании текущего токена, обновление в базе
     const userID = req.query.id;
-    console.log('req.query.id: ', req.query.id);
     Users.findOne({
         vkId: userID
     }, (err, userRoot) => {
@@ -31,8 +30,6 @@ router.get('/', secure.optional, (req, res, next) => {
 
             axios.get(userLink)
                 .then(function (responseUser) {
-                    console.log('responseUser.data.response: ', responseUser.data.response);
-
                     const name = `${responseUser.data.response[0].first_name} ${responseUser.data.response[0].last_name}`;
                     const avatar =  responseUser.data.response[0].photo_50;
 
@@ -107,7 +104,6 @@ router.get('/', secure.optional, (req, res, next) => {
 
                                         // save new or update existed user to db
                                         Users.findOne({vkId: userRoot.vkId}, (err, user) => {
-                                            console.log('Users.findOne', user);
                                             if (user) {
                                                 user.vkToken = userNew.vkToken;
                                                 user.name = userNew.name;
@@ -225,7 +221,6 @@ router.get('/', secure.optional, (req, res, next) => {
 
                                         // save new or update existed user to db
                                         Users.findOne({vkId: userRoot.vkId}, (err, user) => {
-                                            console.log('Users.findOne', user);
                                             if (user) {
                                                 user.vkToken = userNew.vkToken;
                                                 user.name = userNew.name;
