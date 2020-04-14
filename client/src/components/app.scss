@@ -207,11 +207,12 @@ header {
     .subtitle {
       position: absolute;
       width: 100%;
-      bottom: -30px;
+      bottom: -38px;
       left: 0;
-      font: 500 14px/20px $fontMain;
+      font: 500 18px/20px $fontMain;
       color: $background;
       text-align: center;
+      text-transform: capitalize;
     }
   }
 }
@@ -607,6 +608,9 @@ footer {
       height: 110px;
       &.users {
         margin-left: 40px;
+      }
+      .subtitle {
+        font: 500 14px/20px $fontMain;
       }
     }
   }
