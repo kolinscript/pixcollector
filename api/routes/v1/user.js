@@ -103,36 +103,22 @@ router.get('/', secure.optional, (req, res, next) => {
                                         });
 
                                         // save new or update existed user to db
-                                        Users.findOne({vkId: userRoot.vkId}, (err, user) => {
-                                            if (user) {
-                                                user.vkToken = userNew.vkToken;
-                                                user.name = userNew.name;
-                                                user.avatar = userNew.avatar;
-                                                user.albumSize = userNew.albumSize;
-                                                user.pixArray = userNew.pixArray;
-                                                user.markModified('vkToken');
-                                                user.markModified('name');
-                                                user.markModified('avatar');
-                                                user.markModified('albumSize');
-                                                user.markModified('pixArray');
-                                                user.save()
-                                                    .then(() => {
-                                                            const safeUser = ({ vkToken, ...rest }) => rest;
-                                                            res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
-                                                        }
-                                                    );
-                                            }
-                                            if (!user) {
-                                                userNew.save()
-                                                    .then(() => {
-                                                            const safeUser = ({ vkToken, ...rest }) => rest;
-                                                            req.session.user = safeUser(userNew.toAuthJSON());
-                                                            res.status(200).json( { body: { user: safeUser(userNew.toAuthJSON()) } });
-                                                        }
-                                                    );
-                                            }
-                                            if (err) return console.error(err);
-                                        });
+                                        userRoot.vkToken = userNew.vkToken;
+                                        userRoot.name = userNew.name;
+                                        userRoot.avatar = userNew.avatar;
+                                        userRoot.albumSize = userNew.albumSize;
+                                        userRoot.pixArray = userNew.pixArray;
+                                        userRoot.markModified('vkToken');
+                                        userRoot.markModified('name');
+                                        userRoot.markModified('avatar');
+                                        userRoot.markModified('albumSize');
+                                        userRoot.markModified('pixArray');
+                                        userRoot.save()
+                                            .then(() => {
+                                                    const safeUser = ({ vkToken, ...rest }) => rest;
+                                                    res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
+                                                }
+                                            );
                                     })
                                     .catch(function (error) {
                                         console.log(error);
@@ -220,37 +206,22 @@ router.get('/', secure.optional, (req, res, next) => {
                                         });
 
                                         // save new or update existed user to db
-                                        Users.findOne({vkId: userRoot.vkId}, (err, user) => {
-                                            if (user) {
-                                                user.vkToken = userNew.vkToken;
-                                                user.name = userNew.name;
-                                                user.avatar = userNew.avatar;
-                                                user.albumSize = userNew.albumSize;
-                                                user.pixArray = userNew.pixArray;
-                                                user.markModified('vkToken');
-                                                user.markModified('name');
-                                                user.markModified('avatar');
-                                                user.markModified('albumSize');
-                                                user.markModified('pixArray');
-                                                user.save()
-                                                    .then(() => {
-                                                            const safeUser = ({ vkToken, ...rest }) => rest;
-                                                            req.session.user = safeUser(user.toAuthJSON());
-                                                            res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
-                                                        }
-                                                    );
-                                            }
-                                            if (!user) {
-                                                userNew.save()
-                                                    .then(() => {
-                                                            const safeUser = ({ vkToken, ...rest }) => rest;
-                                                            req.session.user = safeUser(userNew.toAuthJSON());
-                                                            res.status(200).json( { body: { user: safeUser(userNew.toAuthJSON()) } });
-                                                        }
-                                                    );
-                                            }
-                                            if (err) return console.error(err);
-                                        });
+                                        userRoot.vkToken = userNew.vkToken;
+                                        userRoot.name = userNew.name;
+                                        userRoot.avatar = userNew.avatar;
+                                        userRoot.albumSize = userNew.albumSize;
+                                        userRoot.pixArray = userNew.pixArray;
+                                        userRoot.markModified('vkToken');
+                                        userRoot.markModified('name');
+                                        userRoot.markModified('avatar');
+                                        userRoot.markModified('albumSize');
+                                        userRoot.markModified('pixArray');
+                                        userRoot.save()
+                                            .then(() => {
+                                                    const safeUser = ({ vkToken, ...rest }) => rest;
+                                                    res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
+                                                }
+                                            );
 
                                     } catch (error) {
                                         console.error(error);
