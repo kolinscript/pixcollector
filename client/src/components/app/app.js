@@ -81,6 +81,7 @@ class App extends Component {
             const id = localStorage.getItem('id');
             axios.get(`/api/v1/user?id=${id}`)
                 .then((response) => {
+                    console.log(response);
                     if (!response.data.body.user) {
                         this.setState({showVkLogin: true});
                         window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
