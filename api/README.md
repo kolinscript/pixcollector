@@ -1,1 +1,1 @@
-# Pix Collector
+# Collector

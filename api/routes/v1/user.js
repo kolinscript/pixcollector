@@ -10,21 +10,22 @@ router.get('/', secure.optional, (req, res, next) => {
     console.log('req.query.id: ', req.query.id);
     Users.findOne({
         vkId: userID
-    }, (err, user) => {
+    }, (err, userRoot) => {
         if (err) {
             res.status(200).json( { body: { error: err } });
             return console.error(err);
         }
-        if (user) {
+        if (userRoot) {
+            console.log('userRoot: ', userRoot);
             const userLink = `https://api.vk.com/` +
                 `method/users.get` +
                 `?fields=photo_50` +
-                `&access_token=${user.vkToken}` +
+                `&access_token=${userRoot.vkToken}` +
                 `&v=5.103`;
             const albumLink = `https://api.vk.com/` +
                 `method/photos.getAlbums` +
-                `?owner_id=${user.vkId}` +
-                `&access_token=${user.vkToken}` +
+                `?owner_id=${userRoot.vkId}` +
+                `&access_token=${userRoot.vkToken}` +
                 `&need_system=1` +
                 `&v=5.103`;
 
@@ -59,8 +60,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                 // single request
                                 const link = `https://api.vk.com/` +
                                     `method/photos.get` +
-                                    `?owner_id=${user.vkId}` +
-                                    `&access_token=${user.vkToken}` +
+                                    `?owner_id=${userRoot.vkId}` +
+                                    `&access_token=${userRoot.vkToken}` +
                                     `&album_id=saved` +
                                     `&photo_sizes=1` +
                                     `&offset=${reqOffset}` +
@@ -96,8 +97,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                             });
                                         }
                                         const userNew = new Users({
-                                            vkId: user.vkId,
-                                            vkToken: user.vkToken,
+                                            vkId: userRoot.vkId,
+                                            vkToken: userRoot.vkToken,
                                             name: name,
                                             avatar: avatar,
                                             albumSize: albumSize,
@@ -121,7 +122,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                 user.save()
                                                     .then(() => {
                                                             const safeUser = ({ vkToken, ...rest }) => rest;
-                                                            req.session.user = safeUser(user.toAuthJSON());
                                                             res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
                                                         }
                                                     );
@@ -152,8 +152,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                 for (let offset = reqOffset, count = 1000; offset < reqIntegerPart; offset = offset + 1000) {
                                     const link = `https://api.vk.com/` +
                                         `method/photos.get` +
-                                        `?owner_id=${user.vkId}` +
-                                        `&access_token=${user.vkToken}` +
+                                        `?owner_id=${userRoot.vkId}` +
+                                        `&access_token=${userRoot.vkToken}` +
                                         `&album_id=saved` +
                                         `&photo_sizes=1` +
                                         `&offset=${offset}` +
@@ -164,8 +164,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                 }
                                 const linkLast = `https://api.vk.com/` +
                                     `method/photos.get` +
-                                    `?owner_id=${user.vkId}` +
-                                    `&access_token=${user.vkToken}` +
+                                    `?owner_id=${userRoot.vkId}` +
+                                    `&access_token=${userRoot.vkToken}` +
                                     `&album_id=saved` +
                                     `&photo_sizes=1` +
                                     `&offset=${offsetLast}` +
@@ -215,8 +215,8 @@ router.get('/', secure.optional, (req, res, next) => {
                                         }
 
                                         const userNew = new Users({
-                                            vkId: user.vkId,
-                                            vkToken: user.vkToken,
+                                            vkId: userRoot.vkId,
+                                            vkToken: userRoot.vkToken,
                                             name: name,
                                             avatar: avatar,
                                             albumSize: albumSize,
@@ -273,9 +273,6 @@ router.get('/', secure.optional, (req, res, next) => {
                 .catch(function (error) {
                     console.log(error);
                 });
-
-            const safeUser = ({ _id, vkToken, ...rest }) => rest;
-            res.status(200).json( { body: { user: safeUser(user) } });
         } else {
             res.status(200).json( { body: { error: 'found no user' } });
         }
