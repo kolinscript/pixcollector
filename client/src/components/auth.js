@@ -1,6 +1,6 @@
 import React from "react";
 import {Switch, Route, useRouteMatch, BrowserRouter as Router} from "react-router-dom";
-import {Footer} from "../footer/footer";
+import {Footer} from "./footer";
 
 export const Auth = (props) => {
     let {path} = useRouteMatch();

@@ -3,12 +3,12 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom
 import './app.scss';
 import axios from 'axios';
 import Slider from "@material-ui/core/Slider";
-import {Header} from "../header/header";
-import {Auth} from "../auth/auth";
-import {Gallery} from "../gallery/gallery";
-import {Form} from "../form/form";
-import {Viewer} from "../viewer/viewer";
-import httpService from "../../http-service";
+import {Auth} from "./auth";
+import {Header} from "./header";
+import {Stock} from "./stock";
+import {Gallery} from "./gallery";
+import {Viewer} from "./viewer";
+import httpService from "../http-service";
 import Tooltip from "@material-ui/core/Tooltip";
 
 httpService.setupInterceptors();
@@ -199,28 +199,16 @@ class App extends Component {
                     </Route>
                     <Route path="/stock">
                         <Header user={this.state.user}/>
-                        {/* моя галерея / галереи пользователей */}
-
-                        {/*move to gallery route*/}
+                        <Stock />
+                    </Route>
+                    <Route path="/gallery">
+                        <Header user={this.state.user}/>
                         <Gallery
                             pixArray={this.state.user.pixArray}
                             cutFrom={this.state.countFrom}
                             cutTo={this.state.countTo}
                             showPixFullscreen={this.showPixFullscreen}
                         />
-                        {/*<Form*/}
-                        {/*    showVkLogin={this.state.showVkLogin}*/}
-                        {/*    done={this.state.done}*/}
-                        {/*    albumSize={this.state.user.albumSize}*/}
-                        {/*    countFrom={this.state.countFrom}*/}
-                        {/*    countTo={this.state.countTo}*/}
-                        {/*    readOnly={this.state.readOnly}*/}
-                        {/*    handleChange={this.handleChange}*/}
-                        {/*    all={this.state.all}*/}
-                        {/*    handleCheckbox={this.handleCheckbox}*/}
-                        {/*    getPhotos={this.getPhotos}*/}
-                        {/*    goToLogin={this.goToLogin}*/}
-                        {/*/>*/}
                         {(this.state.fullScreen) && (
                             <Viewer
                                 url={this.state.pixUrl}
@@ -239,6 +227,19 @@ class App extends Component {
                                 onChange={handleChangeRange}
                             />
                         </div>
+                        {/*<Form*/}
+                        {/*    showVkLogin={this.state.showVkLogin}*/}
+                        {/*    done={this.state.done}*/}
+                        {/*    albumSize={this.state.user.albumSize}*/}
+                        {/*    countFrom={this.state.countFrom}*/}
+                        {/*    countTo={this.state.countTo}*/}
+                        {/*    readOnly={this.state.readOnly}*/}
+                        {/*    handleChange={this.handleChange}*/}
+                        {/*    all={this.state.all}*/}
+                        {/*    handleCheckbox={this.handleCheckbox}*/}
+                        {/*    getPhotos={this.getPhotos}*/}
+                        {/*    goToLogin={this.goToLogin}*/}
+                        {/*/>*/}
                     </Route>
                     <Route path="*">
                         <Redirect to="/auth" />

@@ -1,6 +1,6 @@
 {
-  "short_name": "PixColl",
-  "name": "PixCollector",
+  "short_name": "COLLECTOR",
+  "name": "COLLECTOR",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#314569cc",
-  "background_color": "#314569cc"
+  "theme_color": "#4D4D4D",
+  "background_color": "#4D4D4D"
 }
