@@ -5,7 +5,6 @@ const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
 router.get('/', secure.optional, (req, res, next) => {
-    // todo запрос новой информации из вк (альбом, etc) на основании текущего токена, обновление в базе
     const userID = req.query.id;
     console.log('userID: ', userID);
     Users.findOne({

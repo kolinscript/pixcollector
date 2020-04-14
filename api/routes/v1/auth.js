@@ -1,7 +1,6 @@
 const router             = require('express').Router();
 const axios              = require('axios');
 const secure             = require('./secure');
-// const photosFetcher      = require('../../middlewares/middleware.photo');
 const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
@@ -26,9 +25,6 @@ router.get('/', secure.optional, (req, res, next) => {
                 `&access_token=${responseAuth.data.access_token}` +
                 `&need_system=1` +
                 `&v=5.103`;
-
-            // req.session.user.user_id = responseAuth.data.user_id;
-            // req.session.user.access_token = responseAuth.data.access_token;
 
             axios.get(userLink)
                 .then(function (responseUser) {

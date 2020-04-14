@@ -10,9 +10,9 @@ export const Auth = (props) => {
             <Switch>
                 <Route exact path={`${path}`}>
                     <div className="main">
-                        <div className="logo"><h1 className="title">PIXCOLLECTOR</h1></div>
+                        <div className="logo"><h1 className="title">COLLECTOR</h1></div>
                         <h2 className="subtitle">
-                            Pixcollector provide to VK users ability to view their pictures from the saved folder and
+                            Collector provide to VK users ability to view their pictures from the saved folder and
                             download it all like one ZIP file
                             <div className="button login" onClick={props.loginVk}>
                                 <div className="label">Login with</div>
@@ -25,7 +25,7 @@ export const Auth = (props) => {
                 </Route>
                 <Route path={`${path}/success`}>
                     <div className="main">
-                        <div className="logo"><h1 className="title">PIXCOLLECTOR</h1></div>
+                        <div className="logo"><h1 className="title">COLLECTOR</h1></div>
                         <div className="description">
                             <span>Successfully authorized!</span>
                             <div className="button login" onClick={props.goToStock}>
