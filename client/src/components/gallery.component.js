@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Switch, Route, Redirect, useParams} from "react-router-dom";
 import axios from "axios";
 import {Header} from "./header";
 import {Gallery} from "./gallery";
@@ -72,12 +71,11 @@ class GalleryComponent extends Component {
     render() {
         const handleChangeRange = (event, newValue) => {
             if (newValue) {
-                this.state.countFrom = newValue[0];
-                this.state.countTo = newValue[1];
+                this.setState({countFrom: newValue[0], countTo: newValue[1],});
             }
         };
         return (
-            <div>
+            <div className="gallery-wrapper">
                 <Header user={this.state.user}/>
                 <Gallery
                     pixArray={this.state.user.pixArray}

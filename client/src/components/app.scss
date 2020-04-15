@@ -4,6 +4,10 @@ $light: #949494;
 $dark: #252525;
 $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3DC9 41.15%, #FFEA29 85.42%);
 
+.gallery-wrapper {
+  width: 100%;
+}
+
 .gallery {
   position: absolute;
   top: 0;
