@@ -29,7 +29,7 @@ export const Auth = (props) => {
                         <div className="description">
                             <span>Successfully authorized!</span>
                             <div className="button login" onClick={props.goToStock}>
-                                <div className="label">Go to stock</div>
+                                <div className="label">Go to Stocks</div>
                             </div>
                         </div>
                         <div className="bottom"></div>

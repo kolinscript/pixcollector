@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route, Redirect, useParams} from "react-router-dom";
 import './app.scss';
 import axios from 'axios';
 import Slider from "@material-ui/core/Slider";
@@ -10,6 +10,7 @@ import {Gallery} from "./gallery";
 import {Viewer} from "./viewer";
 import httpService from "../http-service";
 import Tooltip from "@material-ui/core/Tooltip";
+import GalleryComponent from "./gallery.component";
 
 httpService.setupInterceptors();
 
@@ -39,12 +40,12 @@ class App extends Component {
         };
         this.loginVk = this.loginVk.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleCheckbox = this.handleCheckbox.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+        // this.handleCheckbox = this.handleCheckbox.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.goToStock = this.goToStock.bind(this);
-        this.showPixFullscreen = this.showPixFullscreen.bind(this);
-        this.fullScreenClose = this.fullScreenClose.bind(this);
+        // this.showPixFullscreen = this.showPixFullscreen.bind(this);
+        // this.fullScreenClose = this.fullScreenClose.bind(this);
     }
 
     componentDidMount() {
@@ -81,7 +82,6 @@ class App extends Component {
             const id = localStorage.getItem('id');
             axios.get(`/api/v1/user?id=${id}`)
                 .then((response) => {
-                    console.log(response);
                     if (!response.data.body.user) {
                         this.setState({showVkLogin: true});
                         window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
@@ -118,36 +118,37 @@ class App extends Component {
     //         .catch(err => console.log(err));
     // }
 
-    handleChange(event) {
-        const name = event.target.name;
-        const value = event.target.value;
-        this.setState({
-            [name]: value
-        });
-    }
+    // handleChange(event) {
+    //     const name = event.target.name;
+    //     const value = event.target.value;
+    //     this.setState({
+    //         [name]: value
+    //     });
+    // }
 
-    handleCheckbox(event) {
-        const name = event.target.name;
-        const value = event.target.checked;
-        if (value) {
-            this.setState(prevState => ({
-                countFrom: 1,
-                countTo: this.state.user.albumSize,
-                readOnly: true
-            }));
-        } else {
-            this.setState(prevState => ({
-                countFrom: '',
-                countTo: '',
-                readOnly: false
-            }));
-        }
-        this.setState({
-            [name]: value
-        });
-    }
+    // handleCheckbox(event) {
+    //     const name = event.target.name;
+    //     const value = event.target.checked;
+    //     if (value) {
+    //         this.setState(prevState => ({
+    //             countFrom: 1,
+    //             countTo: this.state.user.albumSize,
+    //             readOnly: true
+    //         }));
+    //     } else {
+    //         this.setState(prevState => ({
+    //             countFrom: '',
+    //             countTo: '',
+    //             readOnly: false
+    //         }));
+    //     }
+    //     this.setState({
+    //         [name]: value
+    //     });
+    // }
 
     goToLogin() {
+        this.setState({showVkLogin: true});
         window.location = 'https://pixcollector.herokuapp.com/auth';
     }
 
@@ -155,38 +156,8 @@ class App extends Component {
         window.location = 'https://pixcollector.herokuapp.com/stock';
     }
 
-    showPixFullscreen(pixUrl) {
-        console.log('showPixFullscreen pixUrl', pixUrl);
-        if (pixUrl) {
-            this.setState(() => ({
-                fullScreen: true,
-                pixUrl: pixUrl
-            }));
-        } else {
-            this.setState(() => ({
-                fullScreen: false,
-                pixUrl: ''
-            }));
-        }
-    }
-
-    fullScreenClose() {
-        this.setState(() => ({
-            fullScreen: false,
-            pixUrl: ''
-        }));
-    }
-
 
     render() {
-        const handleChangeRange = (event, newValue) => {
-            if (newValue) {
-                this.setState(prevState => ({
-                    countFrom: newValue[0],
-                    countTo: newValue[1],
-                }));
-            }
-        };
         return (
             <Router>
                 <Switch>
@@ -201,45 +172,11 @@ class App extends Component {
                         <Header user={this.state.user}/>
                         <Stock />
                     </Route>
-                    <Route path="/gallery">
-                        <Header user={this.state.user}/>
-                        <Gallery
-                            pixArray={this.state.user.pixArray}
-                            cutFrom={this.state.countFrom}
-                            cutTo={this.state.countTo}
-                            showPixFullscreen={this.showPixFullscreen}
+                    <Route path="/gallery/:id">
+                        <GalleryComponent
+                            user={this.state.user}
+                            goToLogin={this.goToLogin}
                         />
-                        {(this.state.fullScreen) && (
-                            <Viewer
-                                url={this.state.pixUrl}
-                                fullScreenClose={this.fullScreenClose}
-                            />
-                        )}
-                        <div  className={`gallery-range-slider ${this.state.readOnly ? "readOnly" : ""}`}>
-                            <Slider
-                                defaultValue={[0, this.state.user.albumSize]}
-                                min={1}
-                                step={1}
-                                max={this.state.user.albumSize}
-                                value={[+this.state.countFrom, +this.state.countTo]}
-                                valueLabelDisplay="auto"
-                                ValueLabelComponent={ValueLabelComponent}
-                                onChange={handleChangeRange}
-                            />
-                        </div>
-                        {/*<Form*/}
-                        {/*    showVkLogin={this.state.showVkLogin}*/}
-                        {/*    done={this.state.done}*/}
-                        {/*    albumSize={this.state.user.albumSize}*/}
-                        {/*    countFrom={this.state.countFrom}*/}
-                        {/*    countTo={this.state.countTo}*/}
-                        {/*    readOnly={this.state.readOnly}*/}
-                        {/*    handleChange={this.handleChange}*/}
-                        {/*    all={this.state.all}*/}
-                        {/*    handleCheckbox={this.handleCheckbox}*/}
-                        {/*    getPhotos={this.getPhotos}*/}
-                        {/*    goToLogin={this.goToLogin}*/}
-                        {/*/>*/}
                     </Route>
                     <Route path="*">
                         <Redirect to="/auth" />
@@ -248,15 +185,6 @@ class App extends Component {
             </Router>
         );
     }
-}
-
-function ValueLabelComponent(props) {
-    const { children, open, value } = props;
-    return (
-        <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-            {children}
-        </Tooltip>
-    );
 }
 
 export default App;

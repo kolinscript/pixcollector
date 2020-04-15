@@ -19,9 +19,8 @@ UsersSchema.methods.generateJWT = function() {
     // information stored in the token, can be fetched with jwt.verify(token, secret)
     return jwt.sign({
         vkId: this.vkId,
-        id: this._id,
         exp: parseInt(expirationDate.getTime() / 1000, 10),
-    }, 'pix');
+    }, 'collector_secret');
 };
 
 UsersSchema.methods.toAuthJSON = function() {
