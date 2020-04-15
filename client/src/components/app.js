@@ -30,13 +30,7 @@ class App extends Component {
                 albumSize: 100,
                 pixArray: [],
                 token: '',
-            },
-            readOnly: false,
-            countFrom: 1,
-            countTo: 42,
-            all: false,
-            fullScreen: false,
-            pixUrl: ''
+            }
         };
         this.loginVk = this.loginVk.bind(this);
         this.handleLoad = this.handleLoad.bind(this);

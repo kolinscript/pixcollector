@@ -16,7 +16,10 @@ class GalleryComponent extends Component {
             user: {
                 albumSize: 100,
                 pixArray: [],
-            }
+            },
+            fullScreen: false,
+            pixUrl: '',
+            readOnly: false,
         };
         this.handleLoad = this.handleLoad.bind(this);
         this.showPixFullscreen = this.showPixFullscreen.bind(this);
@@ -25,6 +28,16 @@ class GalleryComponent extends Component {
 
     componentDidMount() {
         window.addEventListener('load', this.handleLoad);
+    }
+
+    // componentDidMount() {
+    //     this.props.getUserDetails(this.props.match.params.id);
+    // }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.match.params.id !== nextProps.match.params.id) {
+            this.handleLoad();
+        }
     }
 
     componentWillUnmount() {
