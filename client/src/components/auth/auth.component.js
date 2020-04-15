@@ -1,8 +1,8 @@
 import React from "react";
 import {Switch, Route, useRouteMatch, BrowserRouter as Router} from "react-router-dom";
-import {Footer} from "./footer";
+import {Footer} from "../shared/footer";
 
-export const Auth = (props) => {
+export const AuthComponent = (props) => {
     let {path} = useRouteMatch();
 
     return (
@@ -29,7 +29,7 @@ export const Auth = (props) => {
                         <div className="description">
                             <span>Successfully authorized!</span>
                             <div className="button login" onClick={props.goToStock}>
-                                <div className="label">Go to Stocks</div>
+                                <div className="label">Go to Stock</div>
                             </div>
                         </div>
                         <div className="bottom"></div>

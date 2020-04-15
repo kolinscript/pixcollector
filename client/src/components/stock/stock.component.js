@@ -1,7 +1,9 @@
 import React from "react";
-import {Switch, Route, Link, useRouteMatch, useParams, BrowserRouter as Router} from "react-router-dom";
+import {Switch, Route, Link, useRouteMatch, BrowserRouter as Router} from "react-router-dom";
+import StockItemComponent from "./stock-item.component";
+import {Header} from "../shared/header";
 
-export const Stock = (props) => {
+export const StockComponent = (props) => {
     let {path} = useRouteMatch();
     const id = localStorage.getItem('id');
 
@@ -9,22 +11,25 @@ export const Stock = (props) => {
         <Router>
             <Switch>
                 <Route exact path={`${path}`}>
+                    <Header user={props.user}/>
                     <div className="stock">
                         <div className="stock-card self">
                             <div className="logo"></div>
                             <div className="subtitle">my stock</div>
-                            <Link to={`/gallery/${id}`}></Link>
+                            <Link to={`/stock/${id}`}></Link>
                         </div>
                         <div className="stock-card users">
                             <div className="logo"></div>
                             <div className="subtitle">users stocks</div>
-                            <Link to={`/stock/public`}></Link>
+                            <Link to={`/stocks`}></Link>
                         </div>
                     </div>
                 </Route>
 
-                <Route path={`${path}/public`}>
-                    <div className="public">public</div>
+                <Route path={`${path}/:id`}>
+                    <StockItemComponent
+                        user={props.user}
+                    />
                 </Route>
             </Switch>
 

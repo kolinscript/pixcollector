@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Switch, Route, Redirect, useParams} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import './app.scss';
 import axios from 'axios';
-import Slider from "@material-ui/core/Slider";
-import {Auth} from "./auth";
-import {Header} from "./header";
-import {Stock} from "./stock";
-import {Gallery} from "./gallery";
-import {Viewer} from "./viewer";
-import httpService from "../http-service";
-import Tooltip from "@material-ui/core/Tooltip";
-import GalleryComponent from "./gallery.component";
+import httpService from "./../../http-service";
+import {AuthComponent} from "../auth/auth.component";
+import {StockComponent} from "../stock/stock.component";
+import {StocksComponent} from "../stock/stocks.component";
 
 httpService.setupInterceptors();
 
@@ -34,12 +29,8 @@ class App extends Component {
         };
         this.loginVk = this.loginVk.bind(this);
         this.handleLoad = this.handleLoad.bind(this);
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleCheckbox = this.handleCheckbox.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.goToStock = this.goToStock.bind(this);
-        // this.showPixFullscreen = this.showPixFullscreen.bind(this);
-        // this.fullScreenClose = this.fullScreenClose.bind(this);
     }
 
     componentDidMount() {
@@ -157,25 +148,15 @@ class App extends Component {
             <Router>
                 <Switch>
                     <Route path="/auth">
-                        <Auth
+                        <AuthComponent
                             showVkLogin={this.state.showVkLogin}
                             goToStock={this.goToStock}
                             loginVk={this.loginVk}
                         />
                     </Route>
-                    <Route path="/stock">
-                        <Header user={this.state.user}/>
-                        <Stock />
-                    </Route>
-                    <Route path="/gallery/:id">
-                        <GalleryComponent
-                            user={this.state.user}
-                            goToLogin={this.goToLogin}
-                        />
-                    </Route>
-                    <Route path="*">
-                        <Redirect to="/auth" />
-                    </Route>
+                    <Route path="/stock"><StockComponent user={this.state.user}/></Route>
+                    <Route path="/stocks"><StocksComponent/></Route>
+                    <Route path="*"><Redirect to="/auth"/></Route>
                 </Switch>
             </Router>
         );

@@ -95,7 +95,7 @@ $gradient: radial-gradient(103.1% 103.1% at 47.74% 108.93%, #D400F7 18.23%, #FF3
       cursor: pointer;
       width: 24px;
       height: 24px;
-      mask-image: url('../images/close.svg');
+      mask-image: url('../../images/close.svg');
       mask-size: 100%;
       transition: background 200ms;
       background: $background;
@@ -194,7 +194,7 @@ header {
       width: 100%;
       height: 100%;
       border-radius: 10px;
-      background: url("../images/logo-no-banner.svg");
+      background: url("../../images/logo-no-banner.svg");
       background-repeat: no-repeat;
       background-position: 50%;
       background-size: 80%;
@@ -249,7 +249,7 @@ header {
   .logo {
     width: 100%;
     height: 300px;
-    background: url("../images/logo.svg");
+    background: url("../../images/logo.svg");
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: contain;
@@ -535,28 +535,28 @@ footer {
 
         &.github {
           background-color: $dark;
-          mask-image: url("../images/github.svg");
+          mask-image: url("../../images/github.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
         }
 
         &.telega {
           background-color: $dark;
-          mask-image: url("../images/telega.svg");
+          mask-image: url("../../images/telega.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
         }
 
         &.vk {
           background-color: $dark;
-          mask-image: url("../images/vk.svg");
+          mask-image: url("../../images/vk.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
         }
 
         &.instagram {
           background-color: $dark;
-          mask-image: url("../images/instagram.svg");
+          mask-image: url("../../images/instagram.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
         }
@@ -600,7 +600,7 @@ footer {
     width: 34px;
     height: 19px;
     background-color: $dark;
-    mask-image: url("../images/vk-login.svg");
+    mask-image: url("../../images/vk-login.svg");
     mask-size: cover;
     -webkit-mask-size: cover;
     box-shadow: inset 2px 2px 8px #101010;

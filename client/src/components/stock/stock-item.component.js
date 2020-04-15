@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import axios from "axios";
-import {Header} from "./header";
-import {Gallery} from "./gallery";
-import {Viewer} from "./viewer";
 import Slider from "@material-ui/core/Slider";
 import Tooltip from "@material-ui/core/Tooltip";
+import {Header} from "../shared/header";
+import {Gallery} from "../shared/gallery";
+import {Viewer} from "../shared/viewer";
 
-class GalleryComponent extends Component {
+class StockItemComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -30,12 +30,8 @@ class GalleryComponent extends Component {
         window.addEventListener('load', this.handleLoad);
     }
 
-    // componentDidMount() {
-    //     this.props.getUserDetails(this.props.match.params.id);
-    // }
-
-    componentWillReceiveProps(nextProps) {
-        if(this.props.match.params.id !== nextProps.match.params.id) {
+    componentDidUpdate(prevProps) {
+        if (this.props.location !== prevProps.location) {
             this.handleLoad();
         }
     }
@@ -141,4 +137,4 @@ function ValueLabelComponent(props) {
     );
 }
 
-export default GalleryComponent;
+export default StockItemComponent;
