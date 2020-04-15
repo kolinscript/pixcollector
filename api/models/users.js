@@ -9,7 +9,9 @@ const UsersSchema = new Schema({
     name: String,
     avatar: String,
     albumSize: String,
-    pixArray: Array
+    pixArray: Array,
+    privacy: Number, // 0 for public, 1 for private account type
+    ratings: String
 });
 
 UsersSchema.methods.generateJWT = function() {
