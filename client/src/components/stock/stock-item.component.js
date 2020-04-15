@@ -63,7 +63,7 @@ class StockItemComponent extends Component {
     }
 
     handleLoad() {
-        const id = +window.location.href.substring(window.location.href.indexOf('gallery/') + 8);
+        const id = +window.location.href.substring(window.location.href.indexOf('stock/') + 6);
         axios.get(`/api/v1/user?id=${id}`)
             .then((response) => {
                 console.log(response);
