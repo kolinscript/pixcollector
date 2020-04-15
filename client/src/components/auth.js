@@ -19,7 +19,7 @@ export const Auth = (props) => {
                                 <div className="logo-vk"></div>
                             </div>
                         </h2>
-                        <h3 className="made-by"><span className="code">👨‍💻</span> by N Koshkarov with <span className="love">❤</span></h3>
+                        <h3 className="made-by"><span className="code">👨‍💻</span> by Nikolai Koshkarov with <span className="love">❤</span></h3>
                     </div>
                     <Footer/>
                 </Route>
