@@ -66,9 +66,10 @@ class App extends Component {
             // fetch AUTH token on success authentication (contains in user obj)
             axios.get(`/api/v1/auth/success`)
                 .then((response) => {
+                    console.log(response);
                     if (!response.data.body.user) {
                         this.setState({showVkLogin: true});
-                        window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+                        // window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
                     } else if (response.data.body.user) {
                         localStorage.setItem('token', response.data.body.user.token);
                         localStorage.setItem('id', response.data.body.user.vkId);
