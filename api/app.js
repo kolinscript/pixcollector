@@ -22,7 +22,7 @@ mongoose.model('Users');
 const sessionOptions = {
     resave: false,
     saveUninitialized: true,
-    secret: 'pix',
+    secret: 'collector_secret',
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 };
 

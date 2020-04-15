@@ -19,9 +19,10 @@ export default {
             return response;
         }, error => {
 
+            // todo on prod switch back and uncommit code
             console.log('** interceptor ** error response: ', error);
             if (error.response.status === 401) {
-                console.log('** interceptor ** error response: ', error);
+                // console.log('** interceptor ** error response: ', error);
                 // localStorage.clear();
                 // window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
             }

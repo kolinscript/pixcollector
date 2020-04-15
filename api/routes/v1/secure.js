@@ -10,12 +10,12 @@ const getTokenFromHeaders = (req) => {
 
 const secure = {
     required: jwt({
-        secret: 'pix',
+        secret: 'collector_secret',
         userProperty: 'payload',
         getToken: getTokenFromHeaders,
     }),
     optional: jwt({
-        secret: 'pix',
+        secret: 'collector_secret',
         userProperty: 'payload',
         getToken: getTokenFromHeaders,
         credentialsRequired: false,
