@@ -58,8 +58,9 @@ class GalleryComponent extends Component {
         const id = +window.location.href.substring(window.location.href.indexOf('gallery/') + 8);
         axios.get(`/api/v1/user?id=${id}`)
             .then((response) => {
+                console.log(response);
                 if (!response.data.body.user) {
-                    window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+                    // window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
                 } else if (response.data.body.user) {
                     console.log(response.data);
                     this.setState({user: response.data.body.user});
