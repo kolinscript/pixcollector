@@ -84,7 +84,7 @@ class App extends Component {
                 .then((response) => {
                     if (!response.data.body.user) {
                         this.setState({showVkLogin: true});
-                        window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
+                        // window.location = 'https://pixcollector.herokuapp.com/auth'; // redirect to AUTH
                     } else if (response.data.body.user) {
                         console.log(response.data);
                         this.setState({user: response.data.body.user, showVkLogin: false});
