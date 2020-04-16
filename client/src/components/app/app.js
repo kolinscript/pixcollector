@@ -35,10 +35,14 @@ class App extends Component {
 
     componentDidMount() {
         window.addEventListener('load', this.handleLoad);
+        this.unlisten = this.props.history.listen((location, action) => {
+            console.log("on route change, location ", location);
+        });
     }
 
     componentWillUnmount() {
-        window.removeEventListener('load', this.handleLoad)
+        window.removeEventListener('load', this.handleLoad);
+        this.unlisten();
     }
 
     handleLoad() {
@@ -147,13 +151,7 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route path="/auth">
-                        <AuthComponent
-                            showVkLogin={this.state.showVkLogin}
-                            goToStock={this.goToStock}
-                            loginVk={this.loginVk}
-                        />
-                    </Route>
+                    <Route path="/auth"><AuthComponent showVkLogin={this.state.showVkLogin} goToStock={this.goToStock} loginVk={this.loginVk}/></Route>
                     <Route path="/stock"><StockComponent user={this.state.user}/></Route>
                     <Route path="/stocks"><StocksComponent/></Route>
                     <Route path="*"><Redirect to="/auth"/></Route>
