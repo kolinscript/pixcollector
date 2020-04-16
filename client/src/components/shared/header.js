@@ -4,7 +4,7 @@ export const Header = (props) => (
     <header>
         <div className="profile">
             <a className="user-avatar" href={`https://vk.com/id${props.user.vkId}`} target="_blank" rel="noopener noreferrer">
-                <img src={props.user.avatar ? props.user.avatar : process.env.PUBLIC_URL + '/logo-no-banner.svg'} />
+                <img src={props.user.avatar ? props.user.avatar : process.env.PUBLIC_URL + '/logo-no-banner.svg'} alt="Avatar"/>
             </a>
             <span className="user-name">{props.user.name}</span>
         </div>

@@ -30,10 +30,11 @@ class StockItemComponent extends Component {
         window.addEventListener('load', this.handleLoad);
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.location !== prevProps.location) {
-            this.handleLoad();
-        }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const url_current = window.location.href;
+        console.log('prevProps: ', prevProps);
+        console.log('prevState: ', prevState);
+        console.log('url_current: ', url_current);
     }
 
     componentWillUnmount() {
@@ -129,7 +130,7 @@ class StockItemComponent extends Component {
 }
 
 function ValueLabelComponent(props) {
-    const { children, open, value } = props;
+    const {children, open, value} = props;
     return (
         <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
             {children}
