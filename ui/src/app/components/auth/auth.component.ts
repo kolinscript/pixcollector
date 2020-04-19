@@ -15,6 +15,7 @@ enum State {
 export class AuthComponent implements OnInit {
   public StateEnum = State;
   public state: State = State.auth;
+  code: number;
 
   constructor(
     private authService: AuthService,
@@ -22,9 +23,19 @@ export class AuthComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     console.log(this.router.url);
-    if (this.router.url === '/auth/success') {
+    if (this.router.url.slice(0, 10) === '/auth?code') {
+      this.code = +this.router.url.slice(11);
+      console.log(this.code);
+      this.authService.code(this.code).subscribe(user => {
+        if (user.body.user) {
+          localStorage.setItem('token', user.body.user.token);
+          const safeUser = ({ token, pixArray, ...rest }) => rest;
+          localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
+        }
+      });
+    } else if (this.router.url === '/auth/success') {
       this.state = State.success;
-      this.authService.success().subscribe((user) => {
+      this.authService.success().subscribe(user => {
         console.log(user);
         if (!user.body.user) {
           // this.router.navigate(['/auth']);
@@ -34,8 +45,6 @@ export class AuthComponent implements OnInit {
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
         }
       });
-    } else if (this.router.url === '/auth?code?=') {
-
     }
     // if (this.authService.isAuthorized) {
     //   this.router.navigate(['']);
@@ -49,7 +58,7 @@ export class AuthComponent implements OnInit {
     const AUTH_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
       '?client_id=7372433' +
       '&display=page' +
-      '&redirect_uri=https://pixcollector.herokuapp.com/api/v1/auth' +
+      '&redirect_uri=https://pixcollector.herokuapp.com/auth' +
       '&scope=friends,photos,offline' +
       '&response_type=code' +
       '&v=5.103';

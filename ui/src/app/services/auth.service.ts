@@ -14,6 +14,12 @@ export class AuthService implements CanActivate {
     private router: Router
   ) { }
 
+  code(code): Observable<any> {
+    return this.http
+      .get(`/api/v1/auth?code=${code}`)
+      .pipe(map(res => res as any));
+  }
+
   success(): Observable<any> {
     return this.http
       .get('/api/v1/auth/success')
