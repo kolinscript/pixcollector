@@ -23,9 +23,10 @@ export class InterceptorService implements HttpInterceptor {
     const request = req.clone({ url: url, headers: this.withAuthorization(req.headers) });
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
+        console.log(err);
         if (err.status === 401) {
           localStorage.clear();
-          this.router.navigate(['/auth']);
+          // this.router.navigate(['/auth']);
         }
         return throwError(err);
         }

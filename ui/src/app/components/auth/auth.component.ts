@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 enum State {
   auth, success,
@@ -19,8 +19,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +34,7 @@ export class AuthComponent implements OnInit {
           localStorage.setItem('token', user.body.user.token);
           const safeUser = ({ token, pixArray, ...rest }) => rest;
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
-          // this.router.navigate(['/auth/success']);
+          this.router.navigate(['/auth/success']);
         }
       });
     } else if (this.router.url === '/auth/success') {
@@ -52,7 +51,7 @@ export class AuthComponent implements OnInit {
       });
     }
     // if (this.authService.isAuthorized) {
-    //   this.router.navigate(['']);
+    //   this.router.navigate(['/stocks']);
     // }
   }
 
