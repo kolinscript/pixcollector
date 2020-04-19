@@ -12,8 +12,9 @@ router.get('/', secure.required, (req, res, next) => {
         }
         if (userRoot) {
             console.log('userRoot: ', userRoot);
+            console.log('userRoot.map(user => (safeUser(user.toAuthJSON()))): ', userRoot.map(user => (safeUser(user.toAuthJSON()))));
             const safeUser = ({ vkToken, ...rest }) => rest;
-            res.status(200).json( { body: { users: userRoot.forEach(user => (safeUser(user.toAuthJSON()))) } });
+            res.status(200).json( { body: { users: userRoot.map(user => (safeUser(user.toAuthJSON()))) } });
         } else {
             res.status(200).json( { body: { error: 'found no users' } });
         }
