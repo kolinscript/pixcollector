@@ -5,7 +5,7 @@ const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
 router.get('/', secure.required, (req, res, next) => {
-    Users.find(function (err, usersRaw) {
+    Users.find( (err, usersRaw) => {
         if (err) {
             res.status(200).json( { body: { error: err } });
             return console.error(err);
@@ -13,7 +13,7 @@ router.get('/', secure.required, (req, res, next) => {
         if (usersRaw) {
             const users = usersRaw.map((user) => {
                 const safeUser = ({ vkToken, ...rest }) => rest;
-                return safeUser(user);
+                return safeUser(user.toAuthJSON());
             });
             console.log('users: ', users);
             res.status(200).json( { body: { users: users } });
