@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'auth', component: AuthComponent },
   { path: 'auth/success', component: AuthComponent },
   { path: 'stock/:id', component: StockComponent },
-  { path: '', component: MainComponent,
+  { path: '', canActivate: [AuthService], component: MainComponent,
     children: [
       { path: 'stocks', component: StocksComponent },
       { path: 'chart', component: ChartComponent },
