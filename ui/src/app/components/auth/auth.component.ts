@@ -21,16 +21,19 @@ export class AuthComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-    console.log(this.router.url);
+  ) {}
+
+  ngOnInit(): void {
+    console.log('router.url: ', this.router.url);
     if (this.router.url.slice(0, 10) === '/auth?code') {
       this.code = +this.router.url.slice(11);
-      console.log(this.code);
+      console.log('code: ', this.code);
       this.authService.code(this.code).subscribe(user => {
         if (user.body.user) {
           localStorage.setItem('token', user.body.user.token);
           const safeUser = ({ token, pixArray, ...rest }) => rest;
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
+          this.router.navigate(['/auth/success']);
         }
       });
     } else if (this.router.url === '/auth/success') {
@@ -49,9 +52,6 @@ export class AuthComponent implements OnInit {
     // if (this.authService.isAuthorized) {
     //   this.router.navigate(['']);
     // }
-  }
-
-  ngOnInit(): void {
   }
 
   public loginVk(): void {
