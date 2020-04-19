@@ -27,7 +27,7 @@ export class AuthComponent implements OnInit {
       this.authService.success().subscribe((user) => {
         console.log(user);
         if (!user.data.body.user) {
-          this.router.navigate(['/auth']);
+          // this.router.navigate(['/auth']);
         } else if (user.data.body.user) {
           localStorage.setItem('token', user.data.body.user.token);
           const safeUser = ({ token, pixArray, ...rest }) => rest;
