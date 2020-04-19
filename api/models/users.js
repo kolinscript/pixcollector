@@ -7,11 +7,12 @@ const UsersSchema = new Schema({
     vkId: String,
     vkToken: String,
     name: String,
+    nickname: String,
     avatar: String,
     albumSize: String,
     pixArray: Array,
     privacy: Number, // 0 for public, 1 for private account type
-    ratings: String
+    ratings: String,
 });
 
 UsersSchema.methods.generateJWT = function() {

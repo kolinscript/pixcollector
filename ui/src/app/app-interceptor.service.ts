@@ -26,7 +26,7 @@ export class InterceptorService implements HttpInterceptor {
         console.log(err);
         if (err.status === 401) {
           localStorage.clear();
-          // this.router.navigate(['/auth']);
+          this.router.navigate(['/auth']);
         }
         return throwError(err);
         }
