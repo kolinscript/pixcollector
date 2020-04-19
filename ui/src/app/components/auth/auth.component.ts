@@ -30,11 +30,12 @@ export class AuthComponent implements OnInit {
       console.log('code: ', this.router.url);
       console.log('code.slice(11)', this.code.slice(11));
       this.authService.code(this.code).subscribe(user => {
+        console.log(user);
         if (user.body.user) {
           localStorage.setItem('token', user.body.user.token);
           const safeUser = ({ token, pixArray, ...rest }) => rest;
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
-          this.router.navigate(['/auth/success']);
+          // this.router.navigate(['/auth/success']);
         }
       });
     } else if (this.router.url === '/auth/success') {

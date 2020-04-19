@@ -18,7 +18,7 @@ header {
     justify-content: center;
     cursor: pointer;
     height: 100%;
-    padding: 5px 10px;
+    padding: 0 10px;
     font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji",
     Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
     text-align: center;
@@ -57,9 +57,9 @@ header {
   .settings {
     .icon {
       display: block;
-      width: 40px;
-      height: 40px;
-      margin-bottom: 3px;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 4px;
       background: url("../../../../assets/images/logo-no-juice-no-banner-105.svg");
       background-repeat: no-repeat;
       background-position: 50%;
