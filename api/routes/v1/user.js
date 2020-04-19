@@ -15,7 +15,6 @@ router.get('/', secure.optional, (req, res, next) => {
             return console.error(err);
         }
         if (userRoot) {
-            console.log('userRoot: ', userRoot);
             const userLink = `https://api.vk.com/` +
                 `method/users.get` +
                 `?fields=photo_50` +

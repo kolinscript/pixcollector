@@ -37,7 +37,7 @@ export class InterceptorService implements HttpInterceptor {
   private withAuthorization(headers: HttpHeaders): HttpHeaders {
     const token = this.getToken();
     if (token) {
-      return headers.set('x-csrf-token', token);
+      return headers.set('x-csrf-token', `token ${token}`);
     }
     return headers;
   }
