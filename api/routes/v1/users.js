@@ -5,16 +5,18 @@ const mongoose           = require('mongoose');
 const Users              = mongoose.model('Users');
 
 router.get('/', secure.required, (req, res, next) => {
-    Users.find(function (err, userRoot) {
+    Users.find(function (err, usersRaw) {
         if (err) {
             res.status(200).json( { body: { error: err } });
             return console.error(err);
         }
-        if (userRoot) {
-            console.log('userRoot: ', userRoot);
-            console.log('userRoot.map(user => (safeUser(user.toAuthJSON()))): ', userRoot.map(user => (safeUser(user.toAuthJSON()))));
-            const safeUser = ({ vkToken, ...rest }) => rest;
-            res.status(200).json( { body: { users: userRoot.map(user => (safeUser(user.toAuthJSON()))) } });
+        if (usersRaw) {
+            const users = usersRaw.map((user) => {
+                const safeUser = ({ vkToken, ...rest }) => rest;
+                return safeUser(user);
+            });
+            console.log('users: ', users);
+            res.status(200).json( { body: { users: users } });
         } else {
             res.status(200).json( { body: { error: 'found no users' } });
         }
