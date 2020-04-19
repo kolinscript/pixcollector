@@ -9,7 +9,7 @@ router.get('/', secure.optional, (req, res, next) => {
     const authLink = `https://oauth.vk.com/access_token` +
         `?client_id=7372433` +
         `&client_secret=XgglLIZcB7qB3nNryc8y` +
-        `&redirect_uri=https://pixcollector.herokuapp.com/api/v1/auth` +
+        `&redirect_uri=https://pixcollector.herokuapp.com/auth` +
         `&code=${code}`;
 
     axios.get(authLink)
