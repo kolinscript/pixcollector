@@ -23,8 +23,8 @@ export class ChartComponent implements OnInit {
     });
   }
 
-  public goToStock(dest): void {
-    dest === 'all' ? this.router.navigate(['/chart']) : this.router.navigate([`/stock/${dest}`]);
+  public goToStock(vkId: number): void {
+    this.router.navigate([`/stock/${vkId}`]);
   }
 
 }
