@@ -20,12 +20,14 @@ export class StockComponent implements OnInit {
     this.id = this.router.url.slice(7);
     console.log(this.id);
     this.userService.getUser(this.id).subscribe((user) => {
-      if (!user.data.body.user) {
-      } else if (user.data.body.user) {
-        localStorage.setItem('token', user.data.body.user.token);
+      if (!user.body.user) {
+      } else if (user.body.user) {
         const safeUser = ({ token, pixArray, ...rest }) => rest;
-        localStorage.setItem('user', JSON.stringify(safeUser(user.data.body.user)));
-        this.user = user.data.body.user;
+        this.user = user.body.user;
+        if (localStorage.getItem('token')) {
+          localStorage.setItem('token', user.body.user.token);
+          localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
+        }
       }
     });
     //   console.log(response);

@@ -27,7 +27,8 @@ export class AuthComponent implements OnInit {
     console.log('router.url: ', this.router.url);
     if (this.router.url.slice(0, 10) === '/auth?code') {
       this.code = this.router.url.slice(11);
-      console.log('code: ', this.code);
+      console.log('code: ', this.router.url);
+      console.log('code.slice(11)', this.code.slice(11));
       this.authService.code(this.code).subscribe(user => {
         if (user.body.user) {
           localStorage.setItem('token', user.body.user.token);
