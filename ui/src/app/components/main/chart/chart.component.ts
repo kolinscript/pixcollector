@@ -17,8 +17,8 @@ export class ChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getPublicUsers().subscribe((users) => {
-      if (users.data.body.users) {
-        this.users = users.data.body.users;
+      if (users.body.users) {
+        this.users = users.body.users;
       }
     });
   }
