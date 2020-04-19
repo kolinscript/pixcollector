@@ -14,14 +14,14 @@ export const StockComponent = (props) => {
                     <Header user={props.user}/>
                     <div className="stock">
                         <div className="stock-card self">
-                            <div className="logo"></div>
+                            <div className="logo"> </div>
                             <div className="subtitle">my stock</div>
-                            <Link to={`/stock/${id}`}></Link>
+                            <Link to={`/stock/${id}`}> </Link>
                         </div>
                         <div className="stock-card users">
-                            <div className="logo"></div>
+                            <div className="logo"> </div>
                             <div className="subtitle">users stocks</div>
-                            <Link to={`/stocks`}></Link>
+                            <Link to={`/stocks`}> </Link>
                         </div>
                     </div>
                 </Route>

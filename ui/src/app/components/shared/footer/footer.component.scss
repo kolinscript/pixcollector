@@ -1,0 +1,69 @@
+@import "../../../../assets/styles/vars";
+
+footer {
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  background: $background;
+  opacity: .9;
+
+  .social {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .link {
+      width: 22px;
+      height: 22px;
+      margin-right: 40px;
+
+      a {
+        display: block;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        transition: background-color 100ms ease-in-out;
+        box-shadow: inset 2px 2px 8px #101010;
+
+        &.github {
+          background-color: $dark;
+          mask-image: url("../../../../assets/images/github.svg");
+          mask-size: cover;
+          -webkit-mask-size: cover;
+        }
+
+        &.telega {
+          background-color: $dark;
+          mask-image: url("../../../../assets/images/telega.svg");
+          mask-size: cover;
+          -webkit-mask-size: cover;
+        }
+
+        &.vk {
+          background-color: $dark;
+          mask-image: url("../../../../assets/images/vk.svg");
+          mask-size: cover;
+          -webkit-mask-size: cover;
+        }
+
+        &.instagram {
+          background-color: $dark;
+          mask-image: url("../../../../assets/images/instagram.svg");
+          mask-size: cover;
+          -webkit-mask-size: cover;
+        }
+
+        &:hover {
+          background-color: darken($dark, 4%);
+        }
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

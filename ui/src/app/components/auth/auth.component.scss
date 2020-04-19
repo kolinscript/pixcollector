@@ -1,0 +1,206 @@
+@import "../../../assets/styles/vars";
+
+.auth-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  .main {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 60px 0 40px;
+    height: 100%;
+    width: 100%;
+
+    .logo {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      //.pulsar {
+      //  position: absolute;
+      //  width: 232px;
+      //  height: 232px;
+      //  animation: avatar_pulse 5s infinite linear;
+      //  border-radius: 50%;
+      //  left: 50%;
+      //  top: 50%;
+      //  margin-left: -112px;
+      //  margin-top: -107px;
+      //}
+      .svg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url("../../../assets/images/logo.svg");
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: contain;
+      }
+      .juice {
+        position: absolute;
+        left: 50%;
+        margin-left: -75px;
+        bottom: -25px;
+        width: 150px;
+        height: 27%;
+        background: url("../../../assets/images/logo-juice.svg");
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: contain;
+        &.scale-up-ver-top-1 {
+          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite both;
+          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite both;
+        }
+        &.scale-up-ver-top-2 {
+          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 500ms infinite both;
+          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 500ms infinite both;
+        }
+        &.scale-up-ver-top-3 {
+          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 1000ms infinite both;
+          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 1000ms infinite both;
+        }
+        &.scale-up-ver-top-4 {
+          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 1500ms infinite both;
+          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 1500ms infinite both;
+        }
+        &.scale-up-ver-top-5 {
+          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 2000ms infinite both;
+          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 2000ms infinite both;
+        }
+        &.scale-up-ver-top-6 {
+          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 2500ms infinite both;
+          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 2500ms infinite both;
+        }
+        &.scale-up-ver-top-7 {
+          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 3000ms infinite both;
+          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 3000ms infinite both;
+        }
+        &.scale-up-ver-top-8 {
+          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 3500ms infinite both;
+          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 3500ms infinite both;
+        }
+        &.scale-up-ver-top-9 {
+          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 4000ms infinite both;
+          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 4000ms infinite both;
+        }
+      }
+
+      h1.title {
+        display: none;
+        opacity: .9;
+        margin: 0 auto;
+        width: 360px;
+        padding: 5px 0;
+        border-radius: 50px;
+        font: 400 42px/44px $fontMain;
+        text-align: center;
+        background: $gradient;
+        color: $background;
+        border: 4px solid $background;
+      }
+    }
+
+    h2.subtitle {
+      margin-top: 60px;
+      width: 340px;
+      font: 500 18px/24px $fontMain;
+      color: $background;
+      text-align: center;
+    }
+
+    h3.made-by {
+      width: 360px;
+      margin: 20px 0;
+      font: 500 12px/16px $fontMain;
+      color: $background;
+      text-align: center;
+
+      .code, .love {
+        font-size: 14px;
+        opacity: .75;
+        font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji",
+        Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
+      }
+
+      .love {
+        margin-left: 4px;
+      }
+    }
+
+    .description {
+      margin: 0 auto;
+      margin-block-start: 0.83em;
+      margin-block-end: 0.83em;
+      font: 500 18px/24px $fontMain;
+      color: $background;
+      text-align: center;
+    }
+
+    app-footer {
+      width: 100%;
+    }
+  }
+}
+
+//@keyframes avatar_pulse {
+//  0% {
+//    -webkit-box-shadow: 0px 0px 10px 0px $light;
+//    box-shadow: 0px 0px 10px 0px $light;
+//  }
+//  50% {
+//    -webkit-box-shadow: 0px 0px 50px 50px $light;
+//    box-shadow: 0px 0px 50px 50px $light;
+//  }
+//  100% {
+//    -webkit-box-shadow: 0px 0px 10px 0px $light;
+//    box-shadow: 0px 0px 10px 0px $light;
+//  }
+//}
+@keyframes scale-up-ver-top {
+  0% {
+    -webkit-transform: scaleY(0.4);
+    transform: scaleY(0.4);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+}
+
+
+@media screen and (max-width: 750px) {
+  .auth-wrapper {
+    .main {
+      .logo {
+        height: 200px;
+        .pulsar {
+          width: 156px;
+          height: 156px;
+          margin-left: -76px;
+          margin-top: -72px;
+        }
+        .juice {
+          bottom: -15px;
+        }
+        h1.title {
+          width: 300px;
+          font: 400 32px/34px $fontMain;
+        }
+      }
+
+      h2.subtitle {
+        width: 300px;
+        font: 500 16px/20px $fontMain;
+      }
+    }
+  }
+}
+

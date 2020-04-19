@@ -1,7 +1,6 @@
-// import React, {Component} from 'react';
 import React, { useEffect, useState } from "react";
 import {BrowserRouter as Router, Redirect} from "react-router-dom";
-import { withRouter, Switch, Route, Link } from "react-router-dom";
+import { withRouter, Switch, Route } from "react-router-dom";
 import './app.scss';
 import axios from 'axios';
 import httpService from "./../../http-service";

@@ -1,0 +1,20 @@
+<div class="stock-wrapper">
+  <app-header></app-header>
+
+  <div class="main">
+    <div class="gallery">
+      <div class="pixies" *ngIf="user">
+        <!-- (props.pixArray.length) && props.pixArray.slice(props.cutFrom - 1, props.cutTo + 3)-->
+        <div class="pix" *ngFor="let pix of user.pixArray">
+          <div class="pix-container">
+            <img class="pix-img" src="{{pix.url}}" alt="{{pix.url}}"/>
+            <div class="pix-selector"></div>
+          </div>
+        </div>
+      </div>
+      <a class="button bottomed" href="/api/v1/download/pixcollector.zip" download>
+        <div class="label">Download</div>
+      </a>
+    </div>
+  </div>
+</div>

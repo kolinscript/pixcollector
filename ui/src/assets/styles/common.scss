@@ -1,0 +1,82 @@
+@import "vars";
+
+html, body { height: 100%; box-sizing: border-box; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background: #252525;
+  //background: linear-gradient(200.44deg, #4C4C4C 9.18%, #616161 80.34%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font: 500 18px/20px 'Roboto', sans-serif;
+}
+
+.button {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 180px;
+  height: 44px;
+  margin: 40px auto;
+  padding: 8px 20px;
+  background: $background;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 100ms ease;
+  box-shadow: -12px -20px 56px rgba(232, 237, 243, 0.05), 36px 12px 64px #4B4B4B, inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+
+  &:hover {
+    background: lighten($dark, 10%);
+    .logo-vk {
+      background-color: #1b1b1b;
+    }
+  }
+
+  .logo-vk {
+    margin-left: 10px;
+    width: 34px;
+    height: 19px;
+    background-color: $dark;
+    mask-image: url("/assets/images/vk-login.svg");
+    mask-size: cover;
+    -webkit-mask-size: cover;
+    box-shadow: inset 2px 2px 8px #101010;
+    transition: background 100ms ease;
+  }
+
+  .label {
+    font: 500 16px/18px $fontMain;
+    text-align: center;
+    color: $dark;
+  }
+
+  &.bottomed {
+    opacity: .94;
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    margin-left: -90px;
+  }
+
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

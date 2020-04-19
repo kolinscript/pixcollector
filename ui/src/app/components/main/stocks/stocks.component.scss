@@ -1,0 +1,97 @@
+@import "../../../../assets/styles/vars";
+
+.stock-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  .stock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .stock-card {
+      cursor: pointer;
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 10px;
+      //background: $background;
+      box-shadow: -12px -20px 56px rgba(232, 237, 243, 0.05), 36px 12px 64px #4B4B4B, inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+      transition: background 100ms ease;
+      &:hover {
+        background: lighten($dark, 10%);
+      }
+      .logo {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background: url("../../../../assets/images/logo-no-banner.svg");
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: 80%;
+      }
+      &.self {
+        .logo {
+          background-position: 53% 80%;
+          background-size: 242%;
+        }
+      }
+      &.users {
+        margin-left: 80px;
+        .logo {
+          background-repeat: repeat;
+          background-size: 42%;
+        }
+      }
+      .subtitle {
+        position: absolute;
+        width: 100%;
+        bottom: -38px;
+        left: 0;
+        font: 500 18px/20px $fontMain;
+        color: $background;
+        text-align: center;
+        text-transform: capitalize;
+      }
+      a {
+        display: block;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        text-indent: 100%;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 750px) {
+  .stock-wrapper {
+    .stock {
+      .stock-card {
+        width: 110px;
+        height: 110px;
+
+        &.users {
+          margin-left: 40px;
+        }
+
+        .subtitle {
+          font: 500 14px/20px $fontMain;
+        }
+      }
+    }
+  }
+}

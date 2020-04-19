@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route, useRouteMatch, BrowserRouter as Router} from "react-router-dom";
+import {Switch, Route, useRouteMatch, BrowserRouter as Router, Link} from "react-router-dom";
 import {Footer} from "../shared/footer";
 
 export const AuthComponent = (props) => {
@@ -40,8 +40,8 @@ export const AuthComponent = (props) => {
                         <div className="description">
                             <span>Successfully authorized!</span>
                             <div className="button login">
-                            {/*<div className="button login" onClick={props.goToStock}>*/}
                                 <div className="label">Go to Stock</div>
+                                <Link to={`/stock`}> </Link>
                             </div>
                         </div>
                         <div className="bottom"> </div>

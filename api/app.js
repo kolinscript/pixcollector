@@ -28,13 +28,13 @@ const sessionOptions = {
 
 app.use(cors());
 app.use(session(sessionOptions));
-app.use('/', express.static(path.join(__dirname, '../client/build')));
+app.use('/', express.static(path.join(__dirname, '../ui/dist/ui')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api/v1', apiV1);
 
 app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../ui/dist/ui', 'index.html'));
 });
 
 app.listen(port, () => console.log('Api live on port', + port));

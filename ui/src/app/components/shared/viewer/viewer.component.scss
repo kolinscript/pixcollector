@@ -1,0 +1,48 @@
+@import "../../../../assets/styles/vars";
+
+.viewer-wrapper {
+  .fullScreen {
+    z-index: 20;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+    background: #252525;
+
+    .pix {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: scale-down;
+        object-position: 50%;
+      }
+
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        mask-image: url('../../../../assets/images/close.svg');
+        mask-size: 100%;
+        transition: background 200ms;
+        background: $background;
+
+        &:hover {
+          background: lighten($dark, 10%);
+        }
+      }
+    }
+  }
+}

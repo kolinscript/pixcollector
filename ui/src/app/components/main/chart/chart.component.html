@@ -1,0 +1,8 @@
+<div class="chart-wrapper">
+  <div class="chart">
+    <div class="chart-card" *ngFor="let user of users" (click)="goToStock(user.vkId)">
+      <div class="logo"> </div>
+      <div class="subtitle">{{user.name}}</div>
+    </div>
+  </div>
+</div>
