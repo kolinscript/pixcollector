@@ -26,14 +26,16 @@ export class AuthComponent implements OnInit {
       this.state = State.success;
       this.authService.success().subscribe((user) => {
         console.log(user);
-        if (!user.data.body.user) {
+        if (!user.body.user) {
           // this.router.navigate(['/auth']);
-        } else if (user.data.body.user) {
-          localStorage.setItem('token', user.data.body.user.token);
+        } else if (user.body.user) {
+          localStorage.setItem('token', user.body.user.token);
           const safeUser = ({ token, pixArray, ...rest }) => rest;
-          localStorage.setItem('user', JSON.stringify(safeUser(user.data.body.user)));
+          localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
         }
       });
+    } else if (this.router.url === '/auth?code?=') {
+
     }
     // if (this.authService.isAuthorized) {
     //   this.router.navigate(['']);
