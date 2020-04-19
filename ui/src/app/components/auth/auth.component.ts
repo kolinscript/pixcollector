@@ -15,7 +15,7 @@ enum State {
 export class AuthComponent implements OnInit {
   public StateEnum = State;
   public state: State = State.auth;
-  code: number;
+  code: string;
 
   constructor(
     private authService: AuthService,
@@ -26,7 +26,7 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
     console.log('router.url: ', this.router.url);
     if (this.router.url.slice(0, 10) === '/auth?code') {
-      this.code = +this.router.url.slice(11);
+      this.code = this.router.url.slice(11);
       console.log('code: ', this.code);
       this.authService.code(this.code).subscribe(user => {
         if (user.body.user) {
