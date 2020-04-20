@@ -15,7 +15,6 @@ router.get('/', secure.required, (req, res, next) => {
                 const safeUser = ({ vkToken, ...rest }) => rest;
                 return safeUser(user.toAuthJSON());
             });
-            console.log('users: ', users);
             res.status(200).json( { body: { users: users } });
         } else {
             res.status(200).json( { body: { error: 'found no users' } });

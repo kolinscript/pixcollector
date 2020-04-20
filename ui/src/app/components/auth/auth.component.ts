@@ -23,13 +23,9 @@ export class AuthComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('router.url: ', this.router.url);
     if (this.router.url.slice(0, 10) === '/auth?code') {
       this.code = this.router.url.slice(11);
-      console.log('code: ', this.router.url);
-      console.log('code.slice(11)', this.code.slice(11));
       this.authService.code(this.code).subscribe(user => {
-        console.log(user);
         if (user.body.user) {
           const safeUser = ({ token, pixArray, ...rest }) => rest;
           localStorage.setItem('token', user.body.user.token);
@@ -40,13 +36,12 @@ export class AuthComponent implements OnInit {
     } else if (this.router.url === '/auth/success') {
       this.state = State.success;
       this.authService.success().subscribe(user => {
-        console.log(user);
-        if (!user.body.user) {
-          // this.router.navigate(['/auth']);
-        } else if (user.body.user) {
+        if (user.body.user) {
           const safeUser = ({ token, pixArray, ...rest }) => rest;
           localStorage.setItem('token', user.body.user.token);
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
+        } else if (!user.body.user) {
+          // this.router.navigate(['/auth']);
         }
       });
     }

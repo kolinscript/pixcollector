@@ -117,7 +117,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                     .then(() => {
                                                             const safeUser = ({ _id, vkToken, pixArray, ...rest }) => rest;
                                                             req.session.user = safeUser(user.toAuthJSON());
-                                                            // res.redirect('/auth/success');
                                                             res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
                                                         }
                                                     );
@@ -127,7 +126,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                     .then(() => {
                                                             const safeUser = ({ _id, vkToken, pixArray, ...rest }) => rest;
                                                             req.session.user = safeUser(userNew.toAuthJSON());
-                                                            // res.redirect('/auth/success');
                                                             res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
                                                         }
                                                     );
@@ -237,7 +235,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                     .then(() => {
                                                             const safeUser = ({ vkToken, ...rest }) => rest;
                                                             req.session.user = safeUser(user.toAuthJSON());
-                                                            // res.redirect('/auth/success');
                                                             res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
                                                         }
                                                     );
@@ -247,7 +244,6 @@ router.get('/', secure.optional, (req, res, next) => {
                                                     .then(() => {
                                                             const safeUser = ({ vkToken, ...rest }) => rest;
                                                             req.session.user = safeUser(userNew.toAuthJSON());
-                                                            // res.redirect('/auth/success');
                                                             res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
                                                         }
                                                     );

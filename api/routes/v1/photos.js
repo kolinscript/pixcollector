@@ -1,6 +1,7 @@
 const router             = require('express').Router();
 const axios              = require('axios');
 const secure             = require('./secure');
+
 // todo create route to selective downloads (ex:  42, 43, 50)
 
 router.get('/', secure.required, (req, res, next) => {
@@ -36,7 +37,6 @@ router.get('/', secure.required, (req, res, next) => {
                 console.log('response: ', response);
                 const arr = [];
                 if (response.data.response) {
-                    // todo move to middleware
                     response.data.response.items.forEach((item) => {
                         // ascending flow
                         // S -> M -> X -> Y -> Z -> W
