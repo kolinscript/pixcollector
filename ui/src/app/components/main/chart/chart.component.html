@@ -3,6 +3,7 @@
     <div class="chart-card" *ngFor="let user of users" (click)="goToStock(user.vkId)">
       <div class="avatar"><img src="{{user.avatar}}" alt="{{user.name}}"/></div>
       <div class="name">{{user.name}}</div>
+      <div class="value">{{user.albumSize}}</div>
     </div>
   </div>
 </div>

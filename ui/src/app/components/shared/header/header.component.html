@@ -1,11 +1,10 @@
 <header>
-  <div class="profile">
-<!--    <a class="user-avatar" href={`https://vk.com/id${props.user.vkId}`} target="_blank" rel="noopener noreferrer">-->
-<!--      <img src={props.user.avatar ? props.user.avatar : process.env.PUBLIC_URL + '/logo-no-banner.svg'} alt="Avatar"/>-->
-<!--    </a>-->
-<!--    <span class="user-name">{props.user.name}</span>-->
-  </div>
   <div class="settings">
     <span class="icon"></span>
+  </div>
+  <div class="profile" *ngIf="user">
+        <a class="user-avatar" href="{{href}}" target="_blank" rel="noopener noreferrer">
+          <img class="pix-img" src="{{user.avatar}}" alt="{{user.name}}"/>
+        </a>
   </div>
 </header>

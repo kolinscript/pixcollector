@@ -5,9 +5,6 @@
   width: 100%;
   padding-top: 52px;
   .chart {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     display: flex;
@@ -24,6 +21,7 @@
       width: 94%;
       height: 80px;
       border-radius: 10px;
+      padding: 20px;
       box-shadow: -12px -20px 56px rgba(232, 237, 243, 0.05), 36px 12px 64px #4B4B4B, inset -16px -6px 80px rgba(248, 249, 249, 0.03);
       transition: background 100ms ease;
       &:hover {
@@ -43,7 +41,13 @@
         }
       }
       .name {
-        font: 500 18px/24px $fontMain;
+        margin-left: 20px;
+        font: 500 16px/20px $fontMain;
+        color: $background;
+      }
+      .value {
+        margin-left: 20px;
+        font: 500 18px/20px $fontMain;
         color: $background;
       }
     }
