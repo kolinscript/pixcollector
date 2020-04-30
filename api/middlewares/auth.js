@@ -1,3 +1,7 @@
+const axios              = require('axios');
+const mongoose           = require('mongoose');
+const Users              = mongoose.model('Users');
+
 const auth = {
     login: ((req, res, next) => {
         const code = req.query.code;
