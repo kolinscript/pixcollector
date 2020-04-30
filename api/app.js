@@ -8,7 +8,7 @@ const Users              = require('./models/users');
 const MongoStore         = require('connect-mongo')(session);
 const apiV1              = require('./routes/v1/routes.js');
 const port               = process.env.PORT || 5000;
-const db                 = process.env.MONGO || 'mongodb://127.0.0.1:27017/pixcollector';
+const db                 = process.env.MONGO;
 const app                = express();
 
 mongoose
