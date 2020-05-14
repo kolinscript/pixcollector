@@ -98,7 +98,7 @@ export class StockComponent implements OnInit {
     this.calculateViewport();
   }
 
-  public paginatorClickHandler(direction: 'backward' | 'forward'): void {
+  public paginatorClickHandler(direction: 'backward' | 'forward' | 'lastPage'): void {
     switch (direction) {
       case 'backward': {
         if (this.paginatorPageCurrent - 1 > 0) {
@@ -114,6 +114,12 @@ export class StockComponent implements OnInit {
           this.pixViewportStart = this.pixViewportStart + this.pixPerPage;
           this.calculateViewport();
         }
+        break;
+      }
+      case 'lastPage': {
+        this.paginatorPageCurrent = this.paginatorPageTotal;
+        this.pixViewportStart = this.pixPerPage * (this.paginatorPageCurrent - 1);
+        this.calculateViewport();
         break;
       }
     }
