@@ -95,6 +95,7 @@ export class StockComponent implements OnInit {
   public pixPerPageHandler(ppp: number): void {
     this.pixPerPage = ppp;
     this.pppMode = false;
+    this.paginatorPageCurrent = 1;
     this.calculateLastPage();
     this.calculateViewport();
   }
@@ -150,8 +151,14 @@ export class StockComponent implements OnInit {
 
   private calculateViewport(): void {
     this.pixInViewport = [];
-    for (let i = this.pixViewportStart; i < (this.pixViewportStart + this.pixPerPage); i++) {
-      this.pixInViewport.push(this.user.pixArray[i]);
+    if (this.paginatorPageCurrent === this.paginatorPageTotal) {
+      for (let i = this.pixViewportStart; i < (this.pixPerPage - this.user.albumSize.substring(this.user.albumSizeString.length - 2)); i++) {
+        this.pixInViewport.push(this.user.pixArray[i]);
+      }
+    } else {
+      for (let i = this.pixViewportStart; i < (this.pixViewportStart + this.pixPerPage); i++) {
+        this.pixInViewport.push(this.user.pixArray[i]);
+      }
     }
   }
 
