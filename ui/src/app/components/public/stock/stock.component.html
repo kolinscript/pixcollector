@@ -6,11 +6,11 @@
       <div class="pixies" *ngIf="user">
         <!-- (props.pixArray.length) && props.pixArray.slice(props.cutFrom - 1, props.cutTo + 3)-->
         <div class="pix" *ngFor="let pix of pixInViewport; index as i">
-          <div class="pix-container">
+          <div class="pix-container" (mouseenter)="pixHoveredStart($event, pix, i)" (mouseleave)="pixHoveredEnd($event, pix, i)">
             <img class="pix-img" src="{{pix.url}}" alt="{{pix.url}}"/>
-            <div class="pix-btn" (mouseenter)="pixHoveredStart($event, pix, i)" (mouseleave)="pixHoveredEnd($event, pix, i)"></div>
+            <div class="pix-btn"></div>
             <div class="pix-selector" *ngIf="pix.selected || pix.hovered" (click)="pixSelectorClickHandler($event, pix, i)">
-              <span class="selected" *ngIf="pix.selected">✅</span>
+              <span class="selected" *ngIf="pix.selected"></span>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="label">Download</div>
           </a>
           <a class="button select-all" (click)="selectAll()" *ngIf="selectMode">
-            <div class="label">Select all</div>
+            <div class="label"><span *ngIf="!selectAllPix">Select</span><span *ngIf="selectAllPix">Unselect</span> all</div>
           </a>
         </div>
       </div>

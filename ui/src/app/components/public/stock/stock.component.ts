@@ -15,7 +15,7 @@ export class StockComponent implements OnInit {
   public selectMode: boolean = false;
   public selectedAmount: number = 0;
   public pixInViewport: object[] = [];
-
+  public selectAllPix: boolean = false;
   public paginatorPageCurrent: number = 1;
   public paginatorPageTotal: number = 1;
 
@@ -95,12 +95,12 @@ export class StockComponent implements OnInit {
     switch (direction) {
       case 'backward': {
         if (this.paginatorPageCurrent - this.pixPerPage > 0) {
-          this.paginatorPageCurrent = this.paginatorPageCurrent - this.pixPerPage;
+          this.paginatorPageCurrent = this.paginatorPageCurrent - 1;
         }
         break;
       }
       case 'forward': {
-        this.paginatorPageCurrent = this.paginatorPageCurrent + this.pixPerPage;
+        this.paginatorPageCurrent = this.paginatorPageCurrent + 1;
         break;
       }
     }
@@ -108,9 +108,17 @@ export class StockComponent implements OnInit {
   }
 
   public selectAll(): void {
-    this.user.pixArray.forEach((pix) => {
-      pix.selected = true;
-    });
+    if (this.selectAllPix) {
+      this.selectAllPix = false;
+      this.user.pixArray.forEach((pix) => {
+        pix.selected = false;
+      });
+    } else if (!this.selectAllPix) {
+      this.selectAllPix = true;
+      this.user.pixArray.forEach((pix) => {
+        pix.selected = true;
+      });
+    }
   }
 
   private calculateLastPage(): void {
@@ -121,8 +129,6 @@ export class StockComponent implements OnInit {
   private calculateViewport(): void {
     this.pixInViewport = [];
     for (let i = this.paginatorPageCurrent - 1; i < ((this.paginatorPageCurrent - 1) + this.pixPerPage); i++) {
-      console.log('i: ', i);
-      console.log('this.user.pixArray[i]: ', this.user.pixArray[i]);
       this.pixInViewport.push(this.user.pixArray[i]);
     }
     console.log('pixInViewport: ', this.pixInViewport);
