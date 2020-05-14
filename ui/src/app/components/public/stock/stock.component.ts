@@ -14,7 +14,7 @@ export class StockComponent implements OnInit {
   public pppMode: boolean = false;
   public selectMode: boolean = false;
   public selectedAmount: number = 0;
-  public pixInViewport: [{}] = [{}];
+  public pixInViewport: object[] = [];
 
   public paginatorPageCurrent: number = 1;
   public paginatorPageTotal: number = 1;
@@ -119,7 +119,7 @@ export class StockComponent implements OnInit {
   }
 
   private calculateViewport(): void {
-    this.pixInViewport = [{}];
+    this.pixInViewport = [];
     for (let i = this.user.pixArray[this.paginatorPageCurrent - 1]; i < ((this.paginatorPageCurrent - 1) + this.pixPerPage); i++) {
       console.log(i);
       this.pixInViewport.push(this.user.pixArray[i]);
