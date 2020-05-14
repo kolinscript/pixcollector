@@ -55,17 +55,19 @@ export class StockComponent implements OnInit {
   }
 
   public pixHoveredStart(event, pix, i): void {
-    this.user.pixArray[i].hovered = true;
+    const item = this.user.pixArray.find(el => el.url === pix.url);
+    item.hovered = true;
   }
 
   public pixHoveredEnd(event, pix, i): void {
-    this.user.pixArray[i].hovered = false;
+    const item = this.user.pixArray.find(el => el.url === pix.url);
+    item.hovered = false;
   }
 
   public pixSelectorClickHandler(event, pix, i): void {
     const item = this.user.pixArray.find(el => el.url === pix.url);
     item.selected = !item.selected;
-    this.selectedPixies = this.user.pixArray.map(pix => pix.selected);
+    this.selectedPixies = this.user.pixArray.filter(pix => pix.selected);
     this.selectedAmount = this.selectedPixies.length;
     console.log('selectedPixies: ', this.selectedPixies);
     console.log('selectedAmount: ', this.selectedAmount);
@@ -128,6 +130,8 @@ export class StockComponent implements OnInit {
       this.user.pixArray.forEach((pix) => {
         pix.selected = true;
       });
+      this.selectedPixies = this.user.pixArray.filter(pix => pix.selected);
+      this.selectedAmount = this.selectedPixies.length;
     }
   }
 
@@ -138,7 +142,7 @@ export class StockComponent implements OnInit {
 
   private calculateViewport(): void {
     this.pixInViewport = [];
-    for (let i = this.pixViewportStart; i < (this.pixViewportStart + this.pixPerPage); i++) {
+    for (let i = this.pixViewportStart - 1; i < (this.pixViewportStart + this.pixPerPage); i++) {
       this.pixInViewport.push(this.user.pixArray[i]);
     }
     console.log('pixInViewport: ', this.pixInViewport);
