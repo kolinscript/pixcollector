@@ -156,6 +156,13 @@
           }
           .pages {
             padding: 0 20px;
+            .page-total {
+              user-select: none;
+              cursor: pointer;
+              &:hover {
+                color: lighten($background, 10%);
+              }
+            }
           }
         }
         .download {
