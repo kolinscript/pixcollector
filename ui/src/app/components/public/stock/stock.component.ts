@@ -46,10 +46,11 @@ export class StockComponent implements OnInit {
         this.calculateLastPage();
         this.calculateViewport();
 
-        if (localStorage.getItem('token')) {
-          localStorage.setItem('token', user.body.user.token);
-          localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
-        }
+        // only if looking on self page!
+        // if (localStorage.getItem('token')) {
+        //   localStorage.setItem('token', user.body.user.token);
+        //   localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
+        // }
       }
     });
   }

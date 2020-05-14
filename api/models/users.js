@@ -13,6 +13,7 @@ const UsersSchema = new Schema({
     pixArray: Array,
     privacy: Number, // 0 for public, 1 for private account type
     ratings: String,
+    accessRights: String
 });
 
 UsersSchema.methods.generateJWT = function() {
