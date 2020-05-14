@@ -166,6 +166,7 @@ export class StockComponent implements OnInit {
         this.pixInViewport.push(this.user.pixArray[i]);
       }
     }
+    console.log('pixInViewport: ', this.pixInViewport);
   }
 
 }

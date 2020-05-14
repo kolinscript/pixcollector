@@ -139,6 +139,7 @@
             width: 30px;
             height: 30px;
             background: #4D4D4D;
+            margin: 0 5px;
             outline: none;
             border: none;
             border-radius: 8px;
@@ -156,7 +157,7 @@
             }
           }
           .pages {
-            padding: 0 20px;
+            padding: 0 10px;
             user-select: none;
             .page-total {}
           }
