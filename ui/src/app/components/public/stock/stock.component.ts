@@ -45,6 +45,8 @@ export class StockComponent implements OnInit {
           localStorage.setItem('token', user.body.user.token);
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
         }
+
+        console.log('user: ', this.user);
       }
     });
   }
@@ -113,6 +115,7 @@ export class StockComponent implements OnInit {
 
   private calculateLastPage(): void {
     this.paginatorPageTotal =  Math.ceil(this.user.albumSize / this.pixPerPage);
+    console.log(this.paginatorPageTotal);
   }
 
   private calculateViewport(): void {
@@ -120,6 +123,7 @@ export class StockComponent implements OnInit {
       pix.inViewport = false;
     });
     for (let i = this.user.pixArray[this.paginatorPageCurrent - 1]; i < ((this.paginatorPageCurrent - 1) + this.pixPerPage); i++) {
+      console.log(i);
       this.user.pixArray[i].inViewport = true;
     }
   }
