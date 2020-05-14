@@ -153,13 +153,13 @@ export class StockComponent implements OnInit {
   }
 
   private calculateLastPage(): void {
-    this.paginatorPageTotal =  Math.ceil(this.user.albumSize / this.pixPerPage);
+    this.paginatorPageTotal =  Math.ceil(this.user.pixArray.length / this.pixPerPage);
   }
 
   private calculateViewport(): void {
     this.pixInViewport = [];
     if (this.paginatorPageCurrent === this.paginatorPageTotal) {
-      const lastPixCount = +this.user.albumSize.substring(this.user.albumSize.length - 2);
+      const lastPixCount = +this.user.pixArray.length.substring(this.user.pixArray.length.length - 2);
       for (let i = this.pixViewportStart; i < (this.pixViewportStart + lastPixCount); i++) {
         this.pixInViewport.push(this.user.pixArray[i]);
       }
