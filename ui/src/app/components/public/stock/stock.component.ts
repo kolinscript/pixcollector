@@ -13,11 +13,14 @@ export class StockComponent implements OnInit {
   public pixPerPage: number = 50;
   public pppMode: boolean = false;
   public selectMode: boolean = false;
+  public selectedPixies: object[] = [];
   public selectedAmount: number = 0;
   public pixInViewport: object[] = [];
+  public pixViewportStart: number = 0;
   public selectAllPix: boolean = false;
   public paginatorPageCurrent: number = 1;
   public paginatorPageTotal: number = 1;
+
 
   constructor(
     private router: Router,
@@ -60,8 +63,12 @@ export class StockComponent implements OnInit {
   }
 
   public pixSelectorClickHandler(event, pix, i): void {
-    this.user.pixArray[i].selected = !this.user.pixArray[i].selected;
-    this.selectedAmount = this.user.pixArray.map(pix.selected).length;
+    const item = this.user.pixArray.find(el => el.url === pix.url);
+    item.selected = !item.selected;
+    this.selectedPixies = this.user.pixArray.map(pix => pix.selected);
+    this.selectedAmount = this.selectedPixies.length;
+    console.log('selectedPixies: ', this.selectedPixies);
+    console.log('selectedAmount: ', this.selectedAmount);
   }
 
   public pppClickHandler(): void {
@@ -94,13 +101,15 @@ export class StockComponent implements OnInit {
   public paginatorClickHandler(direction: 'backward' | 'forward'): void {
     switch (direction) {
       case 'backward': {
-        if (this.paginatorPageCurrent - this.pixPerPage > 0) {
+        if (this.paginatorPageCurrent - 1 >= 0) {
           this.paginatorPageCurrent = this.paginatorPageCurrent - 1;
+          this.pixViewportStart = this.pixViewportStart + this.pixPerPage;
         }
         break;
       }
       case 'forward': {
         this.paginatorPageCurrent = this.paginatorPageCurrent + 1;
+        this.pixViewportStart = this.pixViewportStart - this.pixPerPage;
         break;
       }
     }
@@ -128,7 +137,7 @@ export class StockComponent implements OnInit {
 
   private calculateViewport(): void {
     this.pixInViewport = [];
-    for (let i = this.paginatorPageCurrent - 1; i < ((this.paginatorPageCurrent - 1) + this.pixPerPage); i++) {
+    for (let i = this.pixViewportStart; i < (this.pixViewportStart + this.pixPerPage); i++) {
       this.pixInViewport.push(this.user.pixArray[i]);
     }
     console.log('pixInViewport: ', this.pixInViewport);
