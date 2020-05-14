@@ -69,8 +69,6 @@ export class StockComponent implements OnInit {
     item.selected = !item.selected;
     this.selectedPixies = this.user.pixArray.filter(pixItem => pixItem.selected);
     this.selectedAmount = this.selectedPixies.length;
-    console.log('selectedPixies: ', this.selectedPixies);
-    console.log('selectedAmount: ', this.selectedAmount);
   }
 
   public pppClickHandler(): void {
@@ -103,7 +101,7 @@ export class StockComponent implements OnInit {
   public paginatorClickHandler(direction: 'backward' | 'forward'): void {
     switch (direction) {
       case 'backward': {
-        if (this.paginatorPageCurrent - 1 >= 0) {
+        if (this.paginatorPageCurrent - 1 > 0) {
           this.paginatorPageCurrent = this.paginatorPageCurrent - 1;
           this.pixViewportStart = this.pixViewportStart - this.pixPerPage;
           this.calculateViewport();
@@ -111,9 +109,11 @@ export class StockComponent implements OnInit {
         break;
       }
       case 'forward': {
-        this.paginatorPageCurrent = this.paginatorPageCurrent + 1;
-        this.pixViewportStart = this.pixViewportStart + this.pixPerPage;
-        this.calculateViewport();
+        if (this.paginatorPageCurrent < this.paginatorPageTotal) {
+          this.paginatorPageCurrent = this.paginatorPageCurrent + 1;
+          this.pixViewportStart = this.pixViewportStart + this.pixPerPage;
+          this.calculateViewport();
+        }
         break;
       }
     }
@@ -125,6 +125,8 @@ export class StockComponent implements OnInit {
       this.user.pixArray.forEach((pix) => {
         pix.selected = false;
       });
+      this.selectedPixies = [];
+      this.selectedAmount = 0;
     } else if (!this.selectAllPix) {
       this.selectAllPix = true;
       this.user.pixArray.forEach((pix) => {
@@ -137,7 +139,6 @@ export class StockComponent implements OnInit {
 
   private calculateLastPage(): void {
     this.paginatorPageTotal =  Math.ceil(this.user.albumSize / this.pixPerPage);
-    console.log(this.paginatorPageTotal);
   }
 
   private calculateViewport(): void {
@@ -145,7 +146,6 @@ export class StockComponent implements OnInit {
     for (let i = this.pixViewportStart; i < (this.pixViewportStart + this.pixPerPage); i++) {
       this.pixInViewport.push(this.user.pixArray[i]);
     }
-    console.log('pixInViewport: ', this.pixInViewport);
   }
 
 }
