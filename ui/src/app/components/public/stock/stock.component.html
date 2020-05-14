@@ -31,7 +31,9 @@
 
         <div class="paginator">
           <button class="btn-page backward" (click)="paginatorClickHandler('backward')"><</button>
-          <span class="pages"><span class="page-current">{{paginatorPageCurrent}}</span> of <span class="page-total" (click)="paginatorClickHandler('lastPage')">{{paginatorPageTotal}}</span></span>
+          <button class="btn-page backward" (click)="paginatorClickHandler('firstPage')"><<</button>
+          <span class="pages"><span class="page-current">{{paginatorPageCurrent}}</span> of <span class="page-total">{{paginatorPageTotal}}</span></span>
+          <button class="btn-page backward" (click)="paginatorClickHandler('lastPage')">>></button>
           <button class="btn-page backward" (click)="paginatorClickHandler('forward')">></button>
         </div>
 
