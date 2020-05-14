@@ -207,3 +207,28 @@
     }
   }
 }
+
+
+@media screen and (max-width: 750px) {
+  .stock-wrapper {
+    .main {
+      .gallery {
+        .pixies {
+          .pix {
+            width: 33%;
+            height: 25%;
+          }
+        }
+
+        .bottom-panel {
+          font: 500 14px/20px $fontMain;
+          .paginator {
+            .btn-page {
+              width: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
