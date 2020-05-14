@@ -103,17 +103,18 @@ export class StockComponent implements OnInit {
       case 'backward': {
         if (this.paginatorPageCurrent - 1 >= 0) {
           this.paginatorPageCurrent = this.paginatorPageCurrent - 1;
-          this.pixViewportStart = this.pixViewportStart + this.pixPerPage;
+          this.pixViewportStart = this.pixViewportStart - this.pixPerPage;
+          this.calculateViewport();
         }
         break;
       }
       case 'forward': {
         this.paginatorPageCurrent = this.paginatorPageCurrent + 1;
-        this.pixViewportStart = this.pixViewportStart - this.pixPerPage;
+        this.pixViewportStart = this.pixViewportStart + this.pixPerPage;
+        this.calculateViewport();
         break;
       }
     }
-    this.calculateViewport();
   }
 
   public selectAll(): void {
