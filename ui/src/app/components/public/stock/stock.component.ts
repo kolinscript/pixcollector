@@ -159,11 +159,12 @@ export class StockComponent implements OnInit {
   private calculateViewport(): void {
     this.pixInViewport = [];
     if (this.paginatorPageCurrent === this.paginatorPageTotal) {
-      console.log('substring: ', +this.user.albumSize.substring(this.user.albumSize.length - 2));
+      const substring = +this.user.albumSize.substring(this.user.albumSize.length - 2);
+      console.log('substring: ', substring);
       console.log('pixViewportStart: ', this.pixViewportStart);
       const max = this.pixPerPage - (+this.user.albumSize.substring(this.user.albumSize.length - 2));
       console.log('max: ', max);
-      for (let i = this.pixViewportStart; i <= max; i++) {
+      for (let i = this.pixViewportStart; i <= (this.pixViewportStart + substring); i++) {
         this.pixInViewport.push(this.user.pixArray[i]);
       }
     } else {
