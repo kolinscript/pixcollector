@@ -67,7 +67,7 @@ export class StockComponent implements OnInit {
   public pixSelectorClickHandler(event, pix, i): void {
     const item = this.user.pixArray.find(el => el.url === pix.url);
     item.selected = !item.selected;
-    this.selectedPixies = this.user.pixArray.filter(pix => pix.selected);
+    this.selectedPixies = this.user.pixArray.filter(pixItem => pixItem.selected);
     this.selectedAmount = this.selectedPixies.length;
     console.log('selectedPixies: ', this.selectedPixies);
     console.log('selectedAmount: ', this.selectedAmount);
