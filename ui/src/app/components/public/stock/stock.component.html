@@ -9,7 +9,7 @@
           <div class="pix-container" (mouseenter)="pixHoveredStart($event, pix, i)" (mouseleave)="pixHoveredEnd($event, pix, i)">
             <img class="pix-img" src="{{pix.url}}" alt="{{pix.url}}"/>
             <div class="pix-btn"></div>
-            <div class="pix-selector" *ngIf="pix.selected || pix.hovered" (click)="pixSelectorClickHandler($event, pix, i)">
+            <div class="pix-selector" *ngIf="pix.selected || selectMode" (click)="pixSelectorClickHandler($event, pix, i)">
               <span class="selected" *ngIf="pix.selected"></span>
             </div>
           </div>

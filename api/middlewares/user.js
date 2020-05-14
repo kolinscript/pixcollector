@@ -27,6 +27,7 @@ const user = {
 
                 axios.get(userLink)
                     .then(function (responseUser) {
+                        console.log('responseUser: ', responseUser);
                         const name = `${responseUser.data.response[0].first_name} ${responseUser.data.response[0].last_name}`;
                         const avatar =  responseUser.data.response[0].photo_50;
 
@@ -34,7 +35,7 @@ const user = {
                             .then(function (responseAlbum) {
                                 const albumSize = responseAlbum.data.response.items.find(item => item.id === -15).size;
 
-                                const countFrom = 1;
+                                const countFrom = 0;
                                 const countTo = albumSize;
 
                                 const countTotal = countTo - countFrom;

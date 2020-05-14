@@ -34,7 +34,7 @@ const auth = {
                             .then(function (responseAlbum) {
                                 const albumSize = responseAlbum.data.response.items.find(item => item.id === -15).size;
 
-                                const countFrom = 1;
+                                const countFrom = 0;
                                 const countTo = albumSize;
 
                                 const countTotal = countTo - countFrom;
