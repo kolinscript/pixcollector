@@ -2,6 +2,9 @@
   <div class="settings">
     <span class="icon"></span>
   </div>
+  <div class="album-size" *ngIf="user">
+    {{user.albumSize}} total
+  </div>
   <div class="profile" *ngIf="user">
         <a class="user-avatar" href="{{href}}" target="_blank" rel="noopener noreferrer">
           <img class="pix-img" src="{{user.avatar}}" alt="{{user.name}}"/>

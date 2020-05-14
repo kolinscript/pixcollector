@@ -5,16 +5,49 @@
     <div class="gallery">
       <div class="pixies" *ngIf="user">
         <!-- (props.pixArray.length) && props.pixArray.slice(props.cutFrom - 1, props.cutTo + 3)-->
-        <div class="pix" *ngFor="let pix of user.pixArray">
-          <div class="pix-container">
+        <div class="pix" *ngFor="let pix of user.pixArray; index as i">
+          <div class="pix-container" *ngIf="pix.inViewport">
             <img class="pix-img" src="{{pix.url}}" alt="{{pix.url}}"/>
-            <div class="pix-selector"></div>
+            <div class="pix-btn" (mouseenter)="pixHoveredStart($event, pix, i)" (mouseleave)="pixHoveredEnd($event, pix, i)"></div>
+            <div class="pix-selector" *ngIf="pix.selected || pix.hovered" (click)="pixSelectorClickHandler($event, pix, i)">
+              <span class="selected" *ngIf="pix.selected">✅</span>
+            </div>
           </div>
         </div>
       </div>
-      <a class="button bottomed" href="/api/v1/download/pixcollector.zip" download>
-        <div class="label">Download</div>
-      </a>
+      <div class="bottom-panel">
+        <div class="pix-per-page">
+          <a class="select"  (click)="pppClickHandler()">Pix p.page</a>
+          <a class="button ppp50" (click)="pixPerPageHandler(50)" *ngIf="pppMode">
+            <div class="label">50</div>
+          </a>
+          <a class="button ppp100" (click)="pixPerPageHandler(100)" *ngIf="pppMode">
+            <div class="label">100</div>
+          </a>
+          <a class="button ppp200" (click)="pixPerPageHandler(200)" *ngIf="pppMode">
+            <div class="label">200</div>
+          </a>
+        </div>
+
+        <div class="paginator">
+          <button class="btn-page backward" (click)="paginatorClickHandler('backward')"><</button>
+          <span class="pages"><span class="page-current">{{paginatorPageCurrent}}</span> of <span class="page-total">{{paginatorPageCurrent}}</span></span>
+          <button class="btn-page backward" (click)="paginatorClickHandler('forward')">></button>
+        </div>
+
+        <div class="download">
+          <a class="select" (click)="selectClickHandler()">Select</a>
+          <a class="button selected" *ngIf="selectMode">
+            <div class="label">{{selectedAmount}} selected</div>
+          </a>
+          <a class="button download" href="/api/v1/download/pixcollector.zip" download *ngIf="selectMode">
+            <div class="label">Download</div>
+          </a>
+          <a class="button select-all" (click)="selectAll()" *ngIf="selectMode">
+            <div class="label">Select all</div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

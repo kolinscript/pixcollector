@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.authService.isAuthorized) {
+    const authorized = this.authService.isAuthorized();
+    if (authorized) {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.href = `https://vk.com/id${this.user.vkId}`;
     }
