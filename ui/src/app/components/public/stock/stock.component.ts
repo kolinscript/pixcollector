@@ -14,7 +14,7 @@ export class StockComponent implements OnInit {
   public pppMode: boolean = false;
   public selectMode: boolean = false;
   public selectedAmount: number = 0;
-  public pixInViewport: [object] = [];
+  public pixInViewport: [{}] = [{}];
 
   public paginatorPageCurrent: number = 1;
   public paginatorPageTotal: number = 1;
