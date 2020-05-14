@@ -162,7 +162,8 @@ export class StockComponent implements OnInit {
       console.log('user.pixArray: ', this.user.pixArray.length);
       console.log('user.pixArray type: ', typeof this.user.pixArray.length);
       console.log('user.pixArray sbbstr: ', +this.user.pixArray.length.toString().substring(this.user.pixArray.length.toString().length - 2));
-      const lastPixCount = +this.user.albumSize.substring(this.user.albumSize.length - 2);
+      const lastPixCount = +this.user.pixArray.length.toString().substring(this.user.pixArray.length.toString().length - 2);
+      // const lastPixCount = +this.user.albumSize.substring(this.user.albumSize.length - 2);
       for (let i = this.pixViewportStart; i < (this.pixViewportStart + lastPixCount); i++) {
         this.pixInViewport.push(this.user.pixArray[i]);
       }
