@@ -7,7 +7,6 @@ const UsersSchema = new Schema({
     vkId: String,
     vkToken: String,
     name: String,
-    nickname: String,
     avatar: String,
     albumSize: String,
     pixArray: Array,
