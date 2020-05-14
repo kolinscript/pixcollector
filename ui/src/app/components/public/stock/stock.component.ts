@@ -38,6 +38,8 @@ export class StockComponent implements OnInit {
           pix.selected = false;
         });
 
+        console.log('user: ', this.user);
+
         this.calculateLastPage();
         this.calculateViewport();
 
@@ -45,8 +47,6 @@ export class StockComponent implements OnInit {
           localStorage.setItem('token', user.body.user.token);
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
         }
-
-        console.log('user: ', this.user);
       }
     });
   }
@@ -120,8 +120,9 @@ export class StockComponent implements OnInit {
 
   private calculateViewport(): void {
     this.pixInViewport = [];
-    for (let i = this.user.pixArray[this.paginatorPageCurrent - 1]; i < ((this.paginatorPageCurrent - 1) + this.pixPerPage); i++) {
-      console.log(i);
+    for (let i = this.paginatorPageCurrent - 1; i < ((this.paginatorPageCurrent - 1) + this.pixPerPage); i++) {
+      console.log('i: ', i);
+      console.log('this.user.pixArray[i]: ', this.user.pixArray[i]);
       this.pixInViewport.push(this.user.pixArray[i]);
     }
     console.log('pixInViewport: ', this.pixInViewport);
