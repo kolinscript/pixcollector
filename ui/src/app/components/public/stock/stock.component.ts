@@ -142,7 +142,7 @@ export class StockComponent implements OnInit {
 
   private calculateViewport(): void {
     this.pixInViewport = [];
-    for (let i = this.pixViewportStart - 1; i < (this.pixViewportStart + this.pixPerPage); i++) {
+    for (let i = this.pixViewportStart; i < (this.pixViewportStart + this.pixPerPage); i++) {
       this.pixInViewport.push(this.user.pixArray[i]);
     }
     console.log('pixInViewport: ', this.pixInViewport);
