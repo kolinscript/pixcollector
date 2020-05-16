@@ -40,7 +40,7 @@
         <div class="download">
           <a class="select" (click)="selectClickHandler()"></a>
           <a class="button selected" *ngIf="selectMode">
-            <div class="deselect" (click)="deselectClickHandler()">
+            <div class="deselect" *ngIf="selectedAmount > 0" (click)="deselectClickHandler()">
               <span></span>
               <span></span>
             </div>
