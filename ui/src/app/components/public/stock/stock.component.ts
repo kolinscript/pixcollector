@@ -92,6 +92,15 @@ export class StockComponent implements OnInit {
     }
   }
 
+  public deselectClickHandler(): void {
+    this.selectAllPix = false;
+    this.user.pixArray.forEach((pix) => {
+      pix.selected = false;
+    });
+    this.selectedPixies = [];
+    this.selectedAmount = 0;
+  }
+
   public pixPerPageHandler(ppp: number): void {
     this.pixPerPage = ppp;
     this.pppMode = false;
@@ -153,17 +162,13 @@ export class StockComponent implements OnInit {
   }
 
   private calculateLastPage(): void {
-    this.paginatorPageTotal =  Math.ceil(this.user.albumSize / this.pixPerPage);
+    this.paginatorPageTotal =  Math.ceil(this.user.pixArray.length / this.pixPerPage);
   }
 
   private calculateViewport(): void {
     this.pixInViewport = [];
     if (this.paginatorPageCurrent === this.paginatorPageTotal) {
-      console.log('user.pixArray: ', this.user.pixArray.length);
-      console.log('user.pixArray type: ', typeof this.user.pixArray.length);
-      console.log('user.pixArray sbbstr: ', +this.user.pixArray.length.toString().substring(this.user.pixArray.length.toString().length - 2));
       const lastPixCount = +this.user.pixArray.length.toString().substring(this.user.pixArray.length.toString().length - 2);
-      // const lastPixCount = +this.user.albumSize.substring(this.user.albumSize.length - 2);
       for (let i = this.pixViewportStart; i < (this.pixViewportStart + lastPixCount); i++) {
         this.pixInViewport.push(this.user.pixArray[i]);
       }
@@ -172,7 +177,6 @@ export class StockComponent implements OnInit {
         this.pixInViewport.push(this.user.pixArray[i]);
       }
     }
-    console.log('pixInViewport: ', this.pixInViewport);
   }
 
 }

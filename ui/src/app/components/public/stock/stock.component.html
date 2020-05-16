@@ -9,7 +9,7 @@
           <div class="pix-container" (mouseenter)="pixHoveredStart($event, pix, i)" (mouseleave)="pixHoveredEnd($event, pix, i)">
             <img class="pix-img" src="{{pix.url}}" alt="{{pix.url}}"/>
             <div class="pix-btn" *ngIf="pix.hovered"></div>
-            <div class="pix-selector" *ngIf="pix.selected || selectMode" (click)="pixSelectorClickHandler($event, pix, i)">
+            <div class="pix-selector" *ngIf="selectMode" (click)="pixSelectorClickHandler($event, pix, i)">
               <span class="selected" *ngIf="pix.selected"></span>
             </div>
           </div>
@@ -38,8 +38,12 @@
         </div>
 
         <div class="download">
-          <a class="select" (click)="selectClickHandler()">Select</a>
+          <a class="select" (click)="selectClickHandler()"></a>
           <a class="button selected" *ngIf="selectMode">
+            <div class="deselect" (click)="deselectClickHandler()">
+              <span></span>
+              <span></span>
+            </div>
             <div class="label">{{selectedAmount}} selected</div>
           </a>
           <a class="button download" href="/api/v1/download/pixcollector.zip" download *ngIf="selectMode">
