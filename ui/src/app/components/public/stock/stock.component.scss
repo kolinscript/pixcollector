@@ -2,6 +2,40 @@
 
 .stock-wrapper {
   .main {
+    padding-top: 52px;
+    .user-info {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      .user-info-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 20px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .user-info-main {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .name {
+          font: 500 14px/14px $fontMain;
+          color: $background;
+        }
+        .album-size {
+          font: 500 14px/14px $fontMain;
+          color: $background;
+        }
+      }
+    }
     .gallery {
       position: absolute;
       top: 0;
@@ -9,6 +43,10 @@
       width: 100%;
       height: 100%;
       padding-top: 52px;
+
+      &.with-user-info {
+        padding-top: 180px;
+      }
 
       .pixies {
         display: flex;
@@ -66,7 +104,7 @@
                 width: 32px;
                 height: 32px;
                 border-radius: 16px;
-                background: darken($background, 10%);
+                background: darken($background, 3%);
               }
 
               &:hover {
@@ -119,7 +157,9 @@
             }
             &.ppp200 {
               left: 130px;
-
+            }
+            &.ppp420 {
+              left: 190px;
             }
           }
         }

@@ -2,7 +2,18 @@
   <app-header></app-header>
 
   <div class="main">
-    <div class="gallery">
+    <div class="user-info" *ngIf="!selfStock">
+      <div class="user-info-avatar">
+        <a class="user-avatar" href="{{href}}" target="_blank" rel="noopener noreferrer">
+          <img class="pix-img" src="{{user.avatar}}"/>
+        </a>
+      </div>
+      <div class="user-info-main">
+        <div class="name">{{user.name}}</div>
+        <div class="album-size">{{user.albumSize}}</div>
+      </div>
+    </div>
+    <div class="gallery" [ngClass]="selfStock ? 'with-user-info' : ''">
       <div class="pixies" *ngIf="user">
         <!-- (props.pixArray.length) && props.pixArray.slice(props.cutFrom - 1, props.cutTo + 3)-->
         <div class="pix" *ngFor="let pix of pixInViewport; index as i">
@@ -26,6 +37,9 @@
           </a>
           <a class="button ppp200" (click)="pixPerPageHandler(200)" *ngIf="pppMode">
             <div class="label">200</div>
+          </a>
+          <a class="button ppp420" (click)="pixPerPageHandler(420)" *ngIf="pppMode">
+            <div class="label">420</div>
           </a>
         </div>
 

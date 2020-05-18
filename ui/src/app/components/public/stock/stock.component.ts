@@ -20,6 +20,8 @@ export class StockComponent implements OnInit {
   public selectAllPix: boolean = false;
   public paginatorPageCurrent: number = 1;
   public paginatorPageTotal: number = 1;
+  public selfStock: boolean = true;
+  public href: string = '';
 
 
   constructor(
@@ -35,6 +37,10 @@ export class StockComponent implements OnInit {
         const safeUser = ({ token, pixArray, ...rest }) => rest;
 
         this.user = user.body.user;
+        this.href = `https://vk.com/id${this.user.vkId}`;
+
+        const USER_LOCAL = JSON.parse(localStorage.getItem('user'));
+        if (USER_LOCAL) { this.selfStock = this.id === USER_LOCAL.vkId; }
 
         this.user.pixArray.forEach((pix) => {
           pix.hovered = false;
