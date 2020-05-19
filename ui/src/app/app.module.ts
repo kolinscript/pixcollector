@@ -15,8 +15,8 @@ import { MainComponent } from './components/main/main.component';
 import { StocksComponent } from './components/main/stocks/stocks.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
-import { ViewerComponent } from './components/shared/viewer/viewer.component';
 import { ChartComponent } from './components/main/chart/chart.component';
+import { ViewerComponent } from './components/shared/viewer/viewer.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +27,8 @@ import { ChartComponent } from './components/main/chart/chart.component';
     StocksComponent,
     HeaderComponent,
     FooterComponent,
-    ViewerComponent,
-    ChartComponent
+    ChartComponent,
+    ViewerComponent
   ],
   imports: [
     BrowserModule,

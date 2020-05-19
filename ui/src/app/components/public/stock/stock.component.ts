@@ -22,6 +22,8 @@ export class StockComponent implements OnInit {
   public paginatorPageTotal: number = 1;
   public selfStock: boolean = true;
   public href: string = '';
+  public viewerOpened: boolean = false;
+  public viewer: object = {};
 
 
   constructor(
@@ -69,6 +71,18 @@ export class StockComponent implements OnInit {
   public pixHoveredEnd(event, pix, i): void {
     const item = this.user.pixArray.find(el => el.url === pix.url);
     item.hovered = false;
+  }
+
+  public openViewer(event, pix, i): void {
+    this.viewer = {
+      pixArray: this.user.pixArray,
+      currentPixIndex: i
+    };
+    this.viewerOpened = true;
+  }
+
+  public viewerEvent(): void {
+    this.viewerOpened = false;
   }
 
   public pixSelectorClickHandler(event, pix, i): void {

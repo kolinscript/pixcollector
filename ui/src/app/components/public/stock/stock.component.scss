@@ -4,11 +4,13 @@
   .main {
     padding-top: 52px;
     .user-info {
+      z-index: 99;
+      position: relative;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       width: 100%;
-      padding: 20px;
+      padding: 15px;
       .user-info-avatar {
         width: 36px;
         height: 36px;
@@ -21,18 +23,18 @@
         }
       }
       .user-info-main {
-        margin-left: 10px;
+        margin-left: 15px;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         .name {
-          font: 500 14px/14px $fontMain;
+          font: 500 22px/24px $fontMain;
           color: $background;
         }
         .album-size {
-          font: 500 14px/14px $fontMain;
-          color: $background;
+          font: 500 100px/0px $fontMain;
+          margin-left: 15px;
+          margin-top: -50px;
         }
       }
     }
@@ -45,7 +47,7 @@
       padding-top: 52px;
 
       &.with-user-info {
-        padding-top: 180px;
+        padding-top: 118px;
       }
 
       .pixies {

@@ -1,6 +1,8 @@
-<div class="fullScreen">
-  <div class="pix">
-    <img src={props.url} alt=""/>
-    <div class="close"></div>
+<div class="viewer-wrapper">
+  <div class="fullScreen">
+    <div class="pix">
+      <img src="{{href}}" alt=""/>
+      <div class="close" (click)="close()"></div>
+    </div>
   </div>
 </div>
