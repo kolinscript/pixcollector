@@ -45,11 +45,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      padding-top: 52px;
-
-      &.with-user-info {
-        padding-top: 118px;
-      }
+      padding-top: 118px;
 
       .pixies {
         display: flex;
@@ -240,7 +236,7 @@
               }
             }
             &:hover {
-              background: darken($dark, 10%);
+              background: lighten($dark, 10%);
             }
           }
           .pages {

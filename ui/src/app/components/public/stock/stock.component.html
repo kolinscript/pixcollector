@@ -13,7 +13,7 @@
         <div class="album-size">{{user.albumSize}}</div>
       </div>
     </div>
-    <div class="gallery" [ngClass]="selfStock ? '' : 'with-user-info'">
+    <div class="gallery">
       <div class="pixies" *ngIf="user">
         <!-- (props.pixArray.length) && props.pixArray.slice(props.cutFrom - 1, props.cutTo + 3)-->
         <div class="pix" *ngFor="let pix of pixInViewport; index as i">
