@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit {
-  @Input() viewer;
+  @Input() viewerPix;
   @Output() close = new EventEmitter<boolean>();
   @Output() slideTo = new EventEmitter<string>();
   public href: string;
@@ -14,7 +14,7 @@ export class ViewerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.href = this.viewer.currentPix.url;
+    this.href = this.viewerPix.url;
   }
 
   public slideHandler(direction: 'left' | 'right'): void {

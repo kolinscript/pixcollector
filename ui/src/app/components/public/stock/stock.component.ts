@@ -23,7 +23,7 @@ export class StockComponent implements OnInit {
   public selfStock: boolean = true;
   public href: string = '';
   public viewerOpened: boolean = false;
-  public viewer;
+  public viewerPix;
 
 
   constructor(
@@ -85,26 +85,17 @@ export class StockComponent implements OnInit {
   }
 
   public viewerSlide(direction): void {
-    console.log('direction', direction);
-    console.log('find', this.user.pixArray.find(el => el.url === this.viewer.currentPix.url));
-    console.log('currentPix index of', this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)));
-    console.log('currentPix', this.user.pixArray
-      [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)) - 1]);
     switch (direction) {
       case 'left': {
-        this.viewer = {
-          currentPix:
-            this.user.pixArray
-              [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)) - 1]
-        };
+        const CUR_PIX = this.user.pixArray
+          [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)) - 1];
+        this.viewerPix = CUR_PIX;
         break;
       }
       case 'right': {
-        this.viewer = {
-          currentPix:
-            this.user.pixArray
-              [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)) + 1]
-        };
+        const CUR_PIX = this.user.pixArray
+          [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)) + 1];
+        this.viewerPix = CUR_PIX;
         break;
       }
     }

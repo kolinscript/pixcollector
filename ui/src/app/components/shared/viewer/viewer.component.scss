@@ -51,9 +51,25 @@
         }
         &.left {
           left: 0;
+          span {
+            &:nth-child(1) {
+              top: calc(50% + 10px);
+            }
+            &:nth-child(2) {
+              top: calc(50% - 10px);
+            }
+          }
         }
         &.right {
           right: 0;
+          span {
+            &:nth-child(1) {
+              top: calc(50% - 10px);
+            }
+            &:nth-child(2) {
+              top: calc(50% + 10px);
+            }
+          }
         }
         &:hover {
           span {
