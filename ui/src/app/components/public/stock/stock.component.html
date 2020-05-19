@@ -74,6 +74,7 @@
   <app-viewer
     *ngIf="viewerOpened"
     [viewer]="viewer"
-    (event)="viewerEvent()"
+    (close)="viewerClose()"
+    (slideTo)="viewerSlide($event)"
   ></app-viewer>
 </div>

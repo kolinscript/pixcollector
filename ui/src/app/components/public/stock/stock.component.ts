@@ -75,14 +75,34 @@ export class StockComponent implements OnInit {
 
   public openViewer(event, pix, i): void {
     this.viewer = {
-      pixArray: this.user.pixArray,
-      currentPixIndex: i
+      currentPix: this.user.pixArray.find(el => el.url === pix.url)
     };
     this.viewerOpened = true;
   }
 
-  public viewerEvent(): void {
+  public viewerClose(): void {
     this.viewerOpened = false;
+  }
+
+  public viewerSlide(direction: 'left' | 'right'): void {
+    switch (direction) {
+      case 'left': {
+        this.viewer = {
+          currentPix:
+            this.user.pixArray
+              [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)) - 1]
+        };
+        break;
+      }
+      case 'right': {
+        this.viewer = {
+          currentPix:
+            this.user.pixArray
+              [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)) + 1]
+        };
+        break;
+      }
+    }
   }
 
   public pixSelectorClickHandler(event, pix, i): void {

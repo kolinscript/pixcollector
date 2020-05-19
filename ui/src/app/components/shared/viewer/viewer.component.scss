@@ -27,6 +27,22 @@
         object-position: 50%;
       }
 
+      .slide {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 200px;
+        &.left {
+          left: 0;
+        }
+        &.right {
+          right: 0;
+        }
+        &:hover {
+          background: lighten($dark, 10%);
+        }
+      }
+
       .close {
         position: absolute;
         top: 20px;
