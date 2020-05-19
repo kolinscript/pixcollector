@@ -123,7 +123,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 10px;
+        padding: 0 20px;
         width: 100%;
         height: 60px;
         bottom: 0;
@@ -134,6 +134,8 @@
           width: 80px;
           .select {
             cursor: pointer;
+            height: 30px;
+            width: 50px;
             transition: color 100ms ease;
             font: 500 14px/18px $fontMain;
             user-select: none;
@@ -193,7 +195,50 @@
             font: 500 14px/18px "Roboto", sans-serif;
             text-align: center;
             color: $dark;
-            &.backward {}
+            &.backward {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              height: 100%;
+              width: 100%;
+              span {
+                position: absolute;
+                width: 10px;
+                height: 2px;
+                top: 50%;
+                left: 50%;
+                border-radius: 2px;
+                background: lighten($dark, 10%);
+                &:nth-child(1) {
+                  transform: rotate(45deg);
+                }
+                &:nth-child(2) {
+                  transform: rotate(-45deg);
+                }
+              }
+              &.left {
+                left: 0;
+                span {
+                  &:nth-child(1) {
+                    top: calc(50% + 4px);
+                  }
+                  &:nth-child(2) {
+                    top: calc(50% - 4px);
+                  }
+                }
+              }
+              &.right {
+                right: 0;
+                span {
+                  &:nth-child(1) {
+                    top: calc(50% - 4px);
+                  }
+                  &:nth-child(2) {
+                    top: calc(50% + 4px);
+                  }
+                }
+              }
+            }
             &.forward {}
             &:hover {
               background: lighten($dark, 10%);

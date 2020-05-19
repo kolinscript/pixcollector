@@ -5,6 +5,7 @@
   width: 100%;
   padding-top: 52px;
   .chart {
+    cursor: pointer;
     width: 100%;
     height: 100%;
     display: flex;
@@ -12,27 +13,30 @@
     align-items: center;
     flex-direction: column;
     .chart-card {
-      cursor: pointer;
       position: relative;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       margin-top: 20px;
       width: 94%;
-      height: 80px;
-      border-radius: 10px;
+      height: 120px;
+      border-radius: 14px;
       padding: 20px;
-      //box-shadow: -12px -20px 56px rgba(232, 237, 243, 0.05), 36px 12px 64px #4B4B4B, inset -16px -6px 80px rgba(248, 249, 249, 0.03);
-      transition: background 100ms ease;
+      background: radial-gradient(110.3% 95.84% at 56.25% 0%, #4C4C4C 0%, #333333 100%);
       &:hover {
-        background: lighten($dark, 10%);
+        .cc-preview {
+          .arrow {
+            right: -40px;
+          }
+        }
       }
 
-      .avatar {
-        width: 50px;
-        height: 50px;
-        border-radius: 8px;
+      .cc-avatar {
         overflow: hidden;
+        width: 90px;
+        height: 90px;
+        border-radius: 8px;
+        border: 1px solid #525252;
         img {
           display: block;
           width: 100%;
@@ -40,15 +44,78 @@
 
         }
       }
-      .name {
-        margin-left: 20px;
-        font: 500 16px/20px $fontMain;
-        color: $background;
+
+      .cc-info-main {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 400px;
+        .row {
+          position: relative;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .name {
+            margin-left: 20px;
+            font: 900 22px/24px $fontMain;
+            color: $background;
+          }
+          .album-size {
+            margin-left: 20px;
+            font: 900 142/166px $fontMain;
+            color: $background;
+          }
+        }
       }
-      .value {
-        margin-left: 20px;
-        font: 500 18px/20px $fontMain;
-        color: $background;
+
+      .cc-preview {
+        position: relative;
+        width: 100%;
+        .preview-block {
+          position: absolute;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          .preview-pix {
+            width: 20%;
+            overflow: hidden;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: scale-down;
+              object-position: 50%;
+            }
+          }
+        }
+        .arrow {
+          position: absolute;
+          right: -20px;
+          top: 20px;
+          transition: right 100ms ease;
+          span {
+            display: block;
+            position: absolute;
+            color: $background;
+            &:nth-child(1) {}
+            &:nth-child(2) {}
+            &:nth-child(3) {}
+          }
+        }
+        span {
+          display: block;
+          position: absolute;
+          font: 900 142/166px $fontMain;
+          color: $background;
+          &.take {}
+          &.look {
+            font: 900 142/166px $fontMain;
+            background: lighten($background, 25%);
+          }
+        }
       }
     }
   }

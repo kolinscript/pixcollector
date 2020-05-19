@@ -28,7 +28,7 @@
       </div>
       <div class="bottom-panel">
         <div class="pix-per-page">
-          <a class="select"  (click)="pppClickHandler()">{{pixPerPage}} on page</a>
+          <a class="button select"  (click)="pppClickHandler()">{{pixPerPage}}</a>
           <a class="button ppp50" (click)="pixPerPageHandler(50)" *ngIf="pppMode">
             <div class="label">50</div>
           </a>
@@ -44,11 +44,17 @@
         </div>
 
         <div class="paginator">
-          <button class="btn-page backward" (click)="paginatorClickHandler('backward')"><</button>
+          <button class="btn-page backward" (click)="paginatorClickHandler('backward')">
+            <span></span>
+            <span></span>
+          </button>
           <button class="btn-page backward" (click)="paginatorClickHandler('firstPage')"><<</button>
           <span class="pages"><span class="page-current">{{paginatorPageCurrent}}</span> of <span class="page-total">{{paginatorPageTotal}}</span></span>
           <button class="btn-page backward" (click)="paginatorClickHandler('lastPage')">>></button>
-          <button class="btn-page backward" (click)="paginatorClickHandler('forward')">></button>
+          <button class="btn-page backward" (click)="paginatorClickHandler('forward')">
+            <span></span>
+            <span></span>
+          </button>
         </div>
 
         <div class="download">

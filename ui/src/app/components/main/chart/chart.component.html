@@ -1,10 +1,32 @@
 <div class="chart-wrapper">
   <div class="chart">
     <div class="chart-card" *ngFor="let user of users" (click)="goToStock(user.vkId)">
-      <div class="avatar"><img src="{{user.avatar}}" alt="{{user.name}}"/></div>
-      <div class="name">{{user.name}}</div>
-      <div class="value">{{user.albumSize}}</div>
-      
+      <div class="cc-avatar"><img src="{{user.avatar}}" alt="{{user.name}}"/></div>
+
+      <div class="cc-info-main">
+        <div class="row">
+          <div class="name">{{user.name}}</div>
+        </div>
+        <div class="row">
+          <div class="name">{{user.name}}</div>
+          <div class="album-size">{{user.albumSize}}</div>
+        </div>
+      </div>
+
+      <div class="cc-preview">
+        <div class="preview-block">
+          <div class="preview-pix" *ngFor="let pix of user.pixArray.slice(-5)">
+            <img class="pix-img" src="{{pix.url}}" alt="{{pix.url}}"/>
+          </div>
+          <div class="arrow">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <span class="take">take</span>
+        <span class="look">a look</span>
+      </div>
     </div>
   </div>
 </div>
