@@ -195,12 +195,8 @@
             font: 500 14px/18px "Roboto", sans-serif;
             text-align: center;
             color: $dark;
-            &.backward {
-              position: absolute;
-              cursor: pointer;
-              top: 0;
+            .icon {
               height: 100%;
-              width: 100%;
               span {
                 position: absolute;
                 width: 10px;
@@ -216,8 +212,10 @@
                   transform: rotate(-45deg);
                 }
               }
-              &.left {
-                left: 0;
+            }
+            &.backward {
+              left: 0;
+              .icon {
                 span {
                   &:nth-child(1) {
                     top: calc(50% + 4px);
@@ -227,8 +225,10 @@
                   }
                 }
               }
-              &.right {
-                right: 0;
+            }
+            &.forward {
+              right: 0;
+              .icon {
                 span {
                   &:nth-child(1) {
                     top: calc(50% - 4px);
@@ -239,7 +239,6 @@
                 }
               }
             }
-            &.forward {}
             &:hover {
               background: lighten($dark, 10%);
             }

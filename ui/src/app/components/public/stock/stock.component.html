@@ -45,15 +45,37 @@
 
         <div class="paginator">
           <button class="btn-page backward" (click)="paginatorClickHandler('backward')">
-            <span></span>
-            <span></span>
+            <span class="icon">
+              <span></span>
+              <span></span>
+            </span>
           </button>
-          <button class="btn-page backward" (click)="paginatorClickHandler('firstPage')"><<</button>
+          <button class="btn-page backward" (click)="paginatorClickHandler('firstPage')">
+            <span class="icon">
+              <span></span>
+              <span></span>
+            </span>
+            <span class="icon">
+              <span></span>
+              <span></span>
+            </span>
+          </button>
           <span class="pages"><span class="page-current">{{paginatorPageCurrent}}</span> of <span class="page-total">{{paginatorPageTotal}}</span></span>
-          <button class="btn-page backward" (click)="paginatorClickHandler('lastPage')">>></button>
-          <button class="btn-page backward" (click)="paginatorClickHandler('forward')">
-            <span></span>
-            <span></span>
+          <button class="btn-page forward" (click)="paginatorClickHandler('lastPage')">
+            <span class="icon">
+              <span></span>
+              <span></span>
+            </span>
+            <span class="icon">
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+          <button class="btn-page forward" (click)="paginatorClickHandler('forward')">
+            <span class="icon">
+              <span></span>
+              <span></span>
+            </span>
           </button>
         </div>
 
