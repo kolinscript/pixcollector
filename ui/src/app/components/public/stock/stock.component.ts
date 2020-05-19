@@ -23,7 +23,7 @@ export class StockComponent implements OnInit {
   public selfStock: boolean = true;
   public href: string = '';
   public viewerOpened: boolean = false;
-  public viewer: object = {};
+  public viewer;
 
 
   constructor(

@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit {
-  @Input() viewer: object;
+  @Input() viewer;
   @Output() event = new EventEmitter<boolean>();
   public href: string;
 
