@@ -74,9 +74,7 @@ export class StockComponent implements OnInit {
   }
 
   public openViewer(event, pix, i): void {
-    this.viewer = {
-      currentPix: this.user.pixArray.find(el => el.url === pix.url)
-    };
+    this.viewerPix = this.user.pixArray.find(el => el.url === pix.url);
     this.viewerOpened = true;
   }
 
@@ -88,13 +86,13 @@ export class StockComponent implements OnInit {
     switch (direction) {
       case 'left': {
         const CUR_PIX = this.user.pixArray
-          [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)) - 1];
+          [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewerPix.url)) - 1];
         this.viewerPix = CUR_PIX;
         break;
       }
       case 'right': {
         const CUR_PIX = this.user.pixArray
-          [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewer.currentPix.url)) + 1];
+          [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewerPix.url)) + 1];
         this.viewerPix = CUR_PIX;
         break;
       }
