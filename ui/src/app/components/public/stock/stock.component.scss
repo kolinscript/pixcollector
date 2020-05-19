@@ -134,15 +134,11 @@
           width: 80px;
           .select {
             cursor: pointer;
-            height: 30px;
-            width: 50px;
-            transition: color 100ms ease;
-            font: 500 14px/18px $fontMain;
-            user-select: none;
-            color: $background;
-            &:hover {
-              color: lighten($background, 10%);
-            }
+            top: calc(50% - 20px);
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            margin: 0;
           }
           .button {
             position: absolute;
@@ -195,14 +191,17 @@
             font: 500 14px/18px "Roboto", sans-serif;
             text-align: center;
             color: $dark;
-            .icon {
+            span.icon {
+              display: block;
+              position: relative;
               height: 100%;
+              width: 10px;
               span {
                 position: absolute;
                 width: 10px;
                 height: 2px;
                 top: 50%;
-                left: 50%;
+                left: calc(50% - 3px);
                 border-radius: 2px;
                 background: lighten($dark, 10%);
                 &:nth-child(1) {
@@ -218,7 +217,7 @@
               .icon {
                 span {
                   &:nth-child(1) {
-                    top: calc(50% + 4px);
+                    top: calc(50% + 2px);
                   }
                   &:nth-child(2) {
                     top: calc(50% - 4px);
@@ -234,7 +233,7 @@
                     top: calc(50% - 4px);
                   }
                   &:nth-child(2) {
-                    top: calc(50% + 4px);
+                    top: calc(50% + 2px);
                   }
                 }
               }
@@ -261,8 +260,8 @@
             transition: color 100ms ease;
             font: 500 14px/18px $fontMain;
             user-select: none;
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             mask-image: url("../../../../assets/images/save.svg");
             mask-size: cover;
             background: $background;

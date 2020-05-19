@@ -27,7 +27,7 @@
       &:hover {
         .cc-preview {
           .arrow {
-            right: -40px;
+            right: -54px;
           }
         }
       }
@@ -84,7 +84,7 @@
         .preview-block {
           position: absolute;
           display: flex;
-          justify-content: flex-start;
+          justify-content: flex-end;
           align-items: center;
           width: 100%;
           height: 100%;
@@ -92,6 +92,7 @@
           left: 0;
           .preview-pix {
             width: 20%;
+            height: 100%;
             overflow: hidden;
             img {
               width: 100%;
@@ -100,7 +101,7 @@
               object-position: 50%;
             }
           }
-          &:after {
+          &:before {
             opacity: .42;
             position: absolute;
             display: block;
@@ -117,40 +118,49 @@
           position: absolute;
           right: -20px;
           top: 0;
-          width: 160px;
+          width: 200px;
           height: 100%;
           transition: right 100ms ease;
           span {
-            height: 20px;
+            height: 40px;
             display: block;
             position: absolute;
-            border-radius: 10px;
-            color: $background;
+            border-radius: 20px;
+            background: $background;
             &:nth-child(1) {
               width: 100%;
-              top: calc(50% - 10px);
+              top: calc(50% - 20px);
             }
             &:nth-child(2) {
-              width: 50px;
-              top: calc(50% - 10px);
+              width: 142px;
+              right: -5px;
+              top: calc(50% - 56px);
               transform: rotate(45deg);
             }
             &:nth-child(3) {
-              width: 50px;
-              top: calc(50% - 10px);
-              transform: rotate(45deg);
+              width: 142px;
+              top: calc(50% + 18px);
+              transform: rotate(-45deg);
             }
           }
         }
         span {
           display: block;
           position: absolute;
-          font: 900 142/166px $fontMain;
+          font: 900 142px/166px $fontMain;
           color: $background;
-          &.take {}
+          &.take {
+            top: calc(50% - 25px);
+            right: 200px;
+            font: 900 42px/50px Roboto,sans-serif;
+            font-style: italic;
+          }
           &.look {
-            font: 900 142/166px $fontMain;
-            background: lighten($background, 25%);
+            top: calc(50% - 37px);
+            right: -2px;
+            font: 900 46px/50px $fontMain;
+            color: lighten($background, 25%);
+            font-style: italic;
           }
         }
       }
