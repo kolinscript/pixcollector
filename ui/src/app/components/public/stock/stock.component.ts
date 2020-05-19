@@ -87,6 +87,8 @@ export class StockComponent implements OnInit {
       case 'left': {
         const CUR_PIX = this.user.pixArray
           [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewerPix.url)) - 1];
+        console.log('viewerPix: ', this.viewerPix);
+        console.log('CUR_PIX: ', CUR_PIX);
         this.viewerPix = CUR_PIX;
         break;
       }
@@ -94,6 +96,8 @@ export class StockComponent implements OnInit {
         const CUR_PIX = this.user.pixArray
           [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewerPix.url)) + 1];
         this.viewerPix = CUR_PIX;
+        console.log('viewerPix: ', this.viewerPix);
+        console.log('CUR_PIX: ', CUR_PIX);
         break;
       }
     }
