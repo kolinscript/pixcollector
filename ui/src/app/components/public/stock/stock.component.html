@@ -28,7 +28,9 @@
       </div>
       <div class="bottom-panel">
         <div class="pix-per-page">
-          <a class="button select"  (click)="pppClickHandler()">{{pixPerPage}}</a>
+          <a class="button select"  (click)="pppClickHandler()">
+            <div class="label">{{pixPerPage}}</div>
+          </a>
           <a class="button ppp50" (click)="pixPerPageHandler(50)" *ngIf="pppMode">
             <div class="label">50</div>
           </a>

@@ -132,14 +132,6 @@
         background: #2a2a2af2;
         .pix-per-page {
           width: 80px;
-          .select {
-            cursor: pointer;
-            top: calc(50% - 20px);
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            margin: 0;
-          }
           .button {
             position: absolute;
             top: -40px;
@@ -162,6 +154,14 @@
             &.ppp420 {
               left: 190px;
             }
+          }
+          .select {
+            cursor: pointer;
+            position: relative;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            margin: 0;
           }
         }
         .paginator {

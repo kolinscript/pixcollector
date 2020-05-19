@@ -29,6 +29,14 @@
           .arrow {
             right: -54px;
           }
+          span {
+            &.take {
+              top: calc(50% - 25px);
+              right: 166px;
+              font: 900 42px/50px Roboto,sans-serif;
+              font-style: italic;
+            }
+          }
         }
       }
 
@@ -90,6 +98,7 @@
           height: 100%;
           top: 0;
           left: 0;
+          box-shadow: inset 0 0 20px #272727, inset 0 0 10px rgba(255, 255, 255, 0.05);
           .preview-pix {
             width: 20%;
             height: 100%;
@@ -101,7 +110,7 @@
               object-position: 50%;
             }
           }
-          &:before {
+          &:after {
             opacity: .42;
             position: absolute;
             display: block;
@@ -110,7 +119,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            filter: blur(3px);
+            backdrop-filter: blur(1px);
             background: lighten($background, 10%);
           }
         }
@@ -139,6 +148,7 @@
             }
             &:nth-child(3) {
               width: 142px;
+              right: -5px;
               top: calc(50% + 18px);
               transform: rotate(-45deg);
             }
