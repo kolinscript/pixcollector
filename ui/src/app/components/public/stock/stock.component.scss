@@ -131,7 +131,7 @@
         border-radius: 8px 8px 0 0;
         background: #2a2a2af2;
         .pix-per-page {
-          width: 80px;
+          width: 50px;
           .button {
             position: absolute;
             top: -40px;
@@ -240,7 +240,7 @@
               }
             }
             &:hover {
-              background: lighten($dark, 10%);
+              background: darken($dark, 10%);
             }
           }
           .pages {
@@ -250,7 +250,7 @@
           }
         }
         .download {
-          width: 80px;
+          width: 50px;
           display: flex;
           align-items: center;
           justify-content: flex-end;
@@ -261,8 +261,8 @@
             transition: color 100ms ease;
             font: 500 14px/18px $fontMain;
             user-select: none;
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
             mask-image: url("../../../../assets/images/save.svg");
             mask-size: cover;
             background: $background;
