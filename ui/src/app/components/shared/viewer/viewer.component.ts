@@ -13,7 +13,7 @@ export class ViewerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.href = this.viewer.pixArray[this.viewer.currentPixIndex];
+    this.href = this.viewer.pixArray[this.viewer.currentPixIndex].url;
   }
 
   public close(): void {
