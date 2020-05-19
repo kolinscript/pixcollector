@@ -7,7 +7,7 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public user: object;
+  public user;
   public href: string;
 
   constructor(
