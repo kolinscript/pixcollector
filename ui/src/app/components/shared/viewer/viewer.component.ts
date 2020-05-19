@@ -18,7 +18,10 @@ export class ViewerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.href = this.viewerPix.url;
+    console.log(changes);
+    if ('viewerPix' in changes) {
+      this.href = this.viewerPix.url;
+    }
   }
 
   public slideHandler(direction: 'left' | 'right'): void {
