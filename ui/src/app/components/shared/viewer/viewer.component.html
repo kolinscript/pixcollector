@@ -2,8 +2,14 @@
   <div class="fullScreen">
     <div class="pix">
       <img src="{{href}}" alt=""/>
-      <div class="slide left" (click)="slideHandler('left')"></div>
-      <div class="slide right" (click)="slideHandler('right')"></div>
+      <div class="slide left" (click)="slideHandler('left')">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="slide right" (click)="slideHandler('right')">
+        <span></span>
+        <span></span>
+      </div>
       <div class="close" (click)="closeHandler()"></div>
     </div>
   </div>

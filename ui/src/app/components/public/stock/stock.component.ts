@@ -84,7 +84,8 @@ export class StockComponent implements OnInit {
     this.viewerOpened = false;
   }
 
-  public viewerSlide(direction: 'left' | 'right'): void {
+  public viewerSlide(direction): void {
+    console.log(direction);
     switch (direction) {
       case 'left': {
         this.viewer = {
