@@ -83,17 +83,18 @@ export class StockComponent implements OnInit {
   }
 
   public viewerSlide(direction): void {
+    const CUR_PIX_INDEX = this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewerPix.url));
     switch (direction) {
       case 'left': {
-        const CUR_PIX = this.user.pixArray
-          [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewerPix.url)) - 1];\
-        this.viewerPix = CUR_PIX;
+        if (CUR_PIX_INDEX - 1 >= 0) {
+          this.viewerPix = this.user.pixArray[CUR_PIX_INDEX - 1];
+        }
         break;
       }
       case 'right': {
-        const CUR_PIX = this.user.pixArray
-          [this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewerPix.url)) + 1];
-        this.viewerPix = CUR_PIX;
+        if (CUR_PIX_INDEX + 1 <= this.user.pixArray.length) {
+          this.viewerPix = this.user.pixArray[CUR_PIX_INDEX + 1];
+        }
         break;
       }
     }
