@@ -129,7 +129,7 @@
           top: 0;
           width: 200px;
           height: 100%;
-          transition: right 100ms ease;
+          transition: right 200ms ease;
           span {
             height: 40px;
             display: block;
@@ -162,6 +162,7 @@
           &.take {
             top: calc(50% - 25px);
             right: 200px;
+            transition: right 200ms ease;
             font: 900 42px/50px Roboto,sans-serif;
             font-style: italic;
           }
