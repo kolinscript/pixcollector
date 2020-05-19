@@ -92,7 +92,7 @@ export class StockComponent implements OnInit {
         break;
       }
       case 'right': {
-        if (CUR_PIX_INDEX + 1 <= this.user.pixArray.length) {
+        if (CUR_PIX_INDEX + 1 < this.user.pixArray.length) {
           this.viewerPix = this.user.pixArray[CUR_PIX_INDEX + 1];
         }
         break;
