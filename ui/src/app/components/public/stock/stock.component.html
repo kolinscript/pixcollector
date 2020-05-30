@@ -2,7 +2,7 @@
   <app-header></app-header>
 
   <div class="main">
-    <div class="user-info">
+    <div class="user-info" *ngIf="user">
       <div class="user-info-avatar">
         <a class="user-avatar" href="{{href}}" target="_blank" rel="noopener noreferrer">
           <img class="pix-img" src="{{user.avatar}}"/>
@@ -15,7 +15,6 @@
     </div>
     <div class="gallery">
       <div class="pixies" *ngIf="user">
-        <!-- (props.pixArray.length) && props.pixArray.slice(props.cutFrom - 1, props.cutTo + 3)-->
         <div class="pix" *ngFor="let pix of pixInViewport; index as i">
           <div class="pix-container" (mouseenter)="pixHoveredStart($event, pix, i)" (mouseleave)="pixHoveredEnd($event, pix, i)">
             <img class="pix-img" src="{{pix.url}}" alt="{{pix.url}}"/>

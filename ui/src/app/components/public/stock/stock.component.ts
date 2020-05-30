@@ -202,8 +202,11 @@ export class StockComponent implements OnInit {
 
   private calculateViewport(): void {
     this.pixInViewport = [];
+    console.log('paginatorPageCurrent: ',this.paginatorPageCurrent);
+    console.log('paginatorPageTotal: ', this.paginatorPageTotal);
     if (this.paginatorPageCurrent === this.paginatorPageTotal) {
       const lastPixCount = +this.user.pixArray.length.toString().substring(this.user.pixArray.length.toString().length - 2);
+      console.log('lastPixCount: ', lastPixCount);
       for (let i = this.pixViewportStart; i < (this.pixViewportStart + lastPixCount); i++) {
         this.pixInViewport.push(this.user.pixArray[i]);
       }
