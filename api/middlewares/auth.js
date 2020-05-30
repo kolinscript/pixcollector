@@ -75,18 +75,20 @@ const auth = {
                                                     const sizeM = {...item, ...item.sizes.find(size => size.type === 'm')};
                                                     const sizeS = {...item, ...item.sizes.find(size => size.type === 's')};
 
+                                                    const safePix= ({ sizes, ...rest }) => rest;
+
                                                     if (sizeW) {
-                                                        arr.push(sizeW);
+                                                        arr.push(safePix(sizeW));
                                                     } else if (sizeZ) {
-                                                        arr.push(sizeZ);
+                                                        arr.push(safePix(sizeZ));
                                                     } else if (sizeY) {
-                                                        arr.push(sizeY);
+                                                        arr.push(safePix(sizeY));
                                                     } else if (sizeX) {
-                                                        arr.push(sizeX);
+                                                        arr.push(safePix(sizeX));
                                                     } else if (sizeM) {
-                                                        arr.push(sizeM);
+                                                        arr.push(safePix(sizeM));
                                                     } else if (sizeS) {
-                                                        arr.push(sizeS);
+                                                        arr.push(safePix(sizeS));
                                                     }
                                                     pixArray = arr;
                                                 });
@@ -193,18 +195,20 @@ const auth = {
                                                     const sizeM = {...item, ...item.sizes.find(size => size.type === 'm')};
                                                     const sizeS = {...item, ...item.sizes.find(size => size.type === 's')};
 
+                                                    const safePix= ({ sizes, ...rest }) => rest;
+
                                                     if (sizeW) {
-                                                        arr.push(sizeW);
+                                                        arr.push(safePix(sizeW));
                                                     } else if (sizeZ) {
-                                                        arr.push(sizeZ);
+                                                        arr.push(safePix(sizeZ));
                                                     } else if (sizeY) {
-                                                        arr.push(sizeY);
+                                                        arr.push(safePix(sizeY));
                                                     } else if (sizeX) {
-                                                        arr.push(sizeX);
+                                                        arr.push(safePix(sizeX));
                                                     } else if (sizeM) {
-                                                        arr.push(sizeM);
+                                                        arr.push(safePix(sizeM));
                                                     } else if (sizeS) {
-                                                        arr.push(sizeS);
+                                                        arr.push(safePix(sizeS));
                                                     }
                                                     pixArray = arr;
                                                 });
