@@ -147,6 +147,39 @@
               &:last-child {
                 margin: 0;
               }
+              &.selected {
+                pointer-events: none;
+                right: 230px;
+                width: auto;
+                .label {
+                  font-size: 14px;
+                }
+                .deselect {
+                  pointer-events: all;
+                  position: absolute;
+                  width: 20px;
+                  height: 20px;
+                  left: -5px;
+                  top: -10px;
+                  border-radius: 10px;
+                  background: $dark;
+                  span {
+                    position: absolute;
+                    width: 12px;
+                    height: 2px;
+                    left: 4px;
+                    top: 50%;
+                    margin-top: -1px;
+                    background: $background;
+                    &:nth-child(1) {
+                      transform: rotate(45deg);
+                    }
+                    &:nth-child(2) {
+                      transform: rotate(-45deg);
+                    }
+                  }
+                }
+              }
             }
           }
           &.downloads {
