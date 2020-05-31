@@ -147,6 +147,22 @@
               &:last-child {
                 margin: 0;
               }
+            }
+          }
+          &.downloads {
+            justify-content: flex-end;
+            .button {
+              margin: 0 0 0 10px;
+              height: 30px;
+              width: 105px;
+              box-shadow: none;
+              padding: 8px;
+              .label {
+                font-size: 12px;
+              }
+              &:first-child {
+                margin: 0;
+              }
               &.selected {
                 pointer-events: none;
                 right: 230px;
@@ -179,22 +195,6 @@
                     }
                   }
                 }
-              }
-            }
-          }
-          &.downloads {
-            justify-content: flex-end;
-            .button {
-              margin: 0 0 0 10px;
-              height: 30px;
-              width: 105px;
-              box-shadow: none;
-              padding: 8px;
-              .label {
-                font-size: 12px;
-              }
-              &:first-child {
-                margin: 0;
               }
             }
           }
