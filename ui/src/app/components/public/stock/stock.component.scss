@@ -128,10 +128,10 @@
           position: absolute;
           display: flex;
           align-items: center;
-          top: -50px;
+          top: -60px;
           left: 0;
           width: 100%;
-          height: 50px;
+          height: 60px;
           padding: 5px 20px;
           border-radius: 12px 12px 0 0;
           &.items-per-page {
@@ -165,7 +165,6 @@
               }
               &.selected {
                 pointer-events: none;
-                right: 230px;
                 width: auto;
                 .label {
                   font-size: 14px;
