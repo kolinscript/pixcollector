@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
+import { SlideUpDown } from '../../../animations';
 
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.scss']
+  styleUrls: ['./stock.component.scss'],
+  animations: [SlideUpDown.animationTrigger]
 })
 export class StockComponent implements OnInit {
   public id;
@@ -204,9 +206,6 @@ export class StockComponent implements OnInit {
     this.pixInViewport = [];
     if (this.paginatorPageCurrent === this.paginatorPageTotal) {
       const lastPixCount = this.user.pixArray.length - this.pixViewportStart;
-      console.log('lastPixCount: ', lastPixCount);
-      console.log('this.user.pixArray: ', this.user.pixArray);
-      console.log('this.pixViewportStart: ', this.pixViewportStart);
       for (let i = this.pixViewportStart; i < (this.pixViewportStart + lastPixCount); i++) {
         this.pixInViewport.push(this.user.pixArray[i]);
       }

@@ -117,190 +117,118 @@
       .bottom-panel {
         position: fixed;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        padding: 0 20px;
         width: 100%;
         height: 60px;
         bottom: 0;
         left: 0;
-        border-radius: 8px 8px 0 0;
-        background: #2a2a2af2;
-        .pix-per-page {
-          width: 50px;
-          .button {
-            position: absolute;
-            top: -40px;
-            margin: 0;
-            height: 30px;
-            width: 50px;
-            box-shadow: -2px -6px 10px rgba(232, 237, 243, 0.05), 2px 12px 64px #4B4B4B, inset -2px -6px 10px rgba(248, 249, 249, 0.03);
-            .label {
-              font-size: 14px;
-            }
-            &.select {
-              top: auto;
-              position: relative;
+        .bottom-panel-popup {
+          background: #2a2a2af2;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          top: -50px;
+          left: 0;
+          width: 100%;
+          height: 50px;
+          padding: 5px 20px;
+          border-radius: 12px 12px 0 0;
+          &.items-per-page {
+            justify-content: flex-start;
+            .button {
+              margin: 0 10px 0 0;
+              height: 30px;
               width: 40px;
-              height: 40px;
+              box-shadow: none;
+              .label {
+                font-size: 12px;
+              }
+              &:last-child {
+                margin: 0;
+              }
+            }
+          }
+          &.downloads {
+            justify-content: flex-end;
+            .button {
+              margin: 0 0 0 10px;
+              height: 30px;
+              width: 105px;
+              box-shadow: none;
+              padding: 8px;
+              .label {
+                font-size: 12px;
+              }
+              &:first-child {
+                margin: 0;
+              }
+            }
+          }
+        }
+        .bottom-panel-wrapper {
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          padding: 0 20px;
+          background: #2a2a2af2;
+          .pix-per-page {
+            .button {
               padding: 0;
               margin: 0;
-            }
-            &.ppp50 {
-              left: 10px;
-            }
-            &.ppp100 {
-              left: 70px;
-            }
-            &.ppp200 {
-              left: 130px;
-            }
-            &.ppp420 {
-              left: 190px;
-            }
-          }
-        }
-        .paginator {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font: 500 14px/18px $fontMain;
-          color: $background;
-          .btn-page {
-            position: relative;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            width: 30px;
-            height: 30px;
-            background: #4D4D4D;
-            padding: 0;
-            margin: 0 5px;
-            outline: none;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 100ms ease;
-            box-shadow: -2px -6px 10px rgba(232, 237, 243, 0.05), 2px 12px 64px #4B4B4B, inset -2px -6px 10px rgba(248, 249, 249, 0.03);
-            font: 500 14px/18px "Roboto", sans-serif;
-            text-align: center;
-            color: $dark;
-            span.icon {
-              display: block;
-              position: relative;
-              height: 100%;
-              width: 10px;
-              span {
-                position: absolute;
-                width: 10px;
-                height: 2px;
-                top: 50%;
-                left: calc(50% - 5px);
-                border-radius: 2px;
-                background: lighten($dark, 10%);
-                &:nth-child(1) {
-                  transform: rotate(45deg);
-                }
-                &:nth-child(2) {
-                  transform: rotate(-45deg);
-                }
-              }
-            }
-            &.backward {
-              left: 0;
-              .icon {
-                span {
-                  &:nth-child(1) {
-                    top: calc(50% + 2px);
-                  }
-                  &:nth-child(2) {
-                    top: calc(50% - 4px);
-                  }
-                }
-              }
-            }
-            &.forward {
-              right: 0;
-              .icon {
-                span {
-                  &:nth-child(1) {
-                    top: calc(50% - 4px);
-                  }
-                  &:nth-child(2) {
-                    top: calc(50% + 2px);
-                  }
-                }
-              }
-            }
-            &:hover {
-              background: lighten($dark, 10%);
-            }
-          }
-          .pages {
-            padding: 0 10px;
-            user-select: none;
-            .page-total {}
-          }
-        }
-        .download {
-          width: 50px;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          .select {
-            position: relative;
-            right: -5px;
-            cursor: pointer;
-            transition: color 100ms ease;
-            font: 500 14px/18px $fontMain;
-            user-select: none;
-            width: 48px;
-            height: 48px;
-            mask-image: url("../../../../assets/images/save.svg");
-            mask-size: cover;
-            background: $background;
-            &:hover {
-              background: lighten($dark, 10%);
-            }
-          }
-          .button {
-            position: absolute;
-            top: -40px;
-            margin: 0;
-            height: 30px;
-            width: 100px;
-            box-shadow: -2px -6px 10px rgba(232, 237, 243, 0.05), 2px 12px 64px #4B4B4B, inset -2px -6px 10px rgba(248, 249, 249, 0.03);
-            .label {
-              font-size: 14px;
-            }
-
-            &.selected {
-              pointer-events: none;
-              right: 230px;
-              width: auto;
+              height: 40px;
+              width: 40px;
+              box-shadow: -2px -6px 10px rgba(232, 237, 243, 0.05), 2px 12px 64px #4B4B4B, inset -2px -6px 10px rgba(248, 249, 249, 0.03);
               .label {
                 font-size: 14px;
               }
-              .deselect {
-                pointer-events: all;
-                position: absolute;
-                width: 20px;
-                height: 20px;
-                left: -5px;
-                top: -10px;
-                border-radius: 10px;
-                background: $dark;
+            }
+          }
+          .paginator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 240px;
+            font: 500 14px/18px $fontMain;
+            color: $background;
+            .btn-page {
+              position: relative;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              flex-shrink: 0;
+              width: 30px;
+              height: 30px;
+              background: #4D4D4D;
+              padding: 0;
+              margin: 0 5px;
+              outline: none;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              text-decoration: none;
+              transition: background 100ms ease;
+              box-shadow: -2px -6px 10px rgba(232, 237, 243, 0.05), 2px 12px 64px #4B4B4B, inset -2px -6px 10px rgba(248, 249, 249, 0.03);
+              font: 500 14px/18px "Roboto", sans-serif;
+              text-align: center;
+              color: $dark;
+              span.icon {
+                display: block;
+                position: relative;
+                height: 100%;
+                width: 10px;
                 span {
                   position: absolute;
-                  width: 12px;
+                  width: 10px;
                   height: 2px;
-                  left: 4px;
                   top: 50%;
-                  margin-top: -1px;
-                  background: $background;
+                  left: calc(50% - 5px);
+                  border-radius: 2px;
+                  background: $dark;
                   &:nth-child(1) {
                     transform: rotate(45deg);
                   }
@@ -309,14 +237,62 @@
                   }
                 }
               }
+              &.backward {
+                left: 0;
+                .icon {
+                  span {
+                    &:nth-child(1) {
+                      top: calc(50% + 2px);
+                    }
+                    &:nth-child(2) {
+                      top: calc(50% - 4px);
+                    }
+                  }
+                }
+              }
+              &.forward {
+                right: 0;
+                .icon {
+                  span {
+                    &:nth-child(1) {
+                      top: calc(50% - 4px);
+                    }
+                    &:nth-child(2) {
+                      top: calc(50% + 2px);
+                    }
+                  }
+                }
+              }
+              &:hover {
+                background: lighten($dark, 10%);
+              }
             }
-
-            &.download {
-              right: 120px;
+            .pages {
+              padding: 0 10px;
+              user-select: none;
+              .page-total {}
             }
-
-            &.select-all {
-              right: 10px;
+          }
+          .download {
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .select {
+              position: relative;
+              right: -5px;
+              cursor: pointer;
+              transition: color 100ms ease;
+              font: 500 14px/18px $fontMain;
+              user-select: none;
+              width: 48px;
+              height: 48px;
+              mask-image: url("../../../../assets/images/save.svg");
+              mask-size: cover;
+              background: $background;
+              &:hover {
+                background: lighten($dark, 10%);
+              }
             }
           }
         }
@@ -341,7 +317,7 @@
           font: 500 14px/20px $fontMain;
           .paginator {
             .btn-page {
-              width: 12px;
+              width: 30px;
             }
           }
         }
