@@ -124,7 +124,7 @@
         bottom: 0;
         left: 0;
         .bottom-panel-popup {
-          background: #2a2a2af2;
+          background: lighten(#2a2a2af2, 3%);
           position: absolute;
           display: flex;
           align-items: center;
@@ -290,7 +290,7 @@
               mask-image: url("../../../../assets/images/save.svg");
               mask-size: cover;
               background: $background;
-              &:hover {
+              &:hover, &.active {
                 background: lighten($dark, 10%);
               }
             }

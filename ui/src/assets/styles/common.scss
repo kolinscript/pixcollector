@@ -39,7 +39,7 @@ body {
   transition: background 100ms ease;
   box-shadow: -12px -20px 56px rgba(232, 237, 243, 0.05), 36px 12px 64px #4B4B4B, inset -16px -6px 80px rgba(248, 249, 249, 0.03);
 
-  &:hover {
+  &:hover, &.active {
     background: lighten($dark, 10%);
     .logo-vk {
       background-color: #1b1b1b;
