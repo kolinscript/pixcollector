@@ -76,7 +76,11 @@ export class StockComponent implements OnInit {
   }
 
   public openViewer(event, pix, i): void {
-    this.viewerPix = this.user.pixArray.find(el => el.url === pix.url);
+    const CUR_PIX_INDEX = this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewerPix.url));
+    this.viewerPix = {
+      ...this.user.pixArray.find(el => el.url === pix.url),
+      album_pix_number: CUR_PIX_INDEX
+    };
     this.viewerOpened = true;
   }
 
@@ -91,8 +95,9 @@ export class StockComponent implements OnInit {
         if (CUR_PIX_INDEX - 1 >= 0) {
           this.viewerPix = {
             ...this.user.pixArray[CUR_PIX_INDEX - 1],
-            albumPixNumber: CUR_PIX_INDEX
+            album_pix_number: CUR_PIX_INDEX
           };
+          console.log(this.viewerPix);
         }
         break;
       }
@@ -100,9 +105,10 @@ export class StockComponent implements OnInit {
         if (CUR_PIX_INDEX + 1 < this.user.pixArray.length) {
           this.viewerPix = {
             ...this.user.pixArray[CUR_PIX_INDEX + 1],
-            albumPixNumber: CUR_PIX_INDEX
+            album_pix_number: CUR_PIX_INDEX
           };
         }
+        console.log(this.viewerPix);
         break;
       }
     }

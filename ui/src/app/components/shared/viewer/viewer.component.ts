@@ -32,7 +32,6 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
       this.controlsViewed = false;
     }, 3000);
     this.globalMousemoveListenFunc = this.renderer.listen('document', 'mousemove', e => {
-      console.log(e);
       this.controlsViewed = true;
     });
   }

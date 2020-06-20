@@ -51,7 +51,7 @@
         height: 100%;
         width: 200px;
         span {
-          display: none;
+          display: block;
           position: absolute;
           width: 30px;
           height: 2px;
@@ -88,22 +88,23 @@
             }
           }
         }
-        &:hover {
-          span {
-            display: block;
-          }
-        }
+        &:hover {}
       }
 
       .panel-bot {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 40px;
+        padding: 0 20px;
         .number {
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          padding: 8px 20px;
+          background: $background;
+          border-radius: 8px;
+          font: 900 22px/24px $fontMain;
+          color: #252525;
         }
       }
 
