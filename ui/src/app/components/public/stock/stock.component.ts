@@ -89,13 +89,19 @@ export class StockComponent implements OnInit {
     switch (direction) {
       case 'left': {
         if (CUR_PIX_INDEX - 1 >= 0) {
-          this.viewerPix = this.user.pixArray[CUR_PIX_INDEX - 1];
+          this.viewerPix = {
+            ...this.user.pixArray[CUR_PIX_INDEX - 1],
+            albumPixNumber: CUR_PIX_INDEX
+          };
         }
         break;
       }
       case 'right': {
         if (CUR_PIX_INDEX + 1 < this.user.pixArray.length) {
-          this.viewerPix = this.user.pixArray[CUR_PIX_INDEX + 1];
+          this.viewerPix = {
+            ...this.user.pixArray[CUR_PIX_INDEX + 1],
+            albumPixNumber: CUR_PIX_INDEX
+          };
         }
         break;
       }

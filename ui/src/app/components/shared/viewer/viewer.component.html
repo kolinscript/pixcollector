@@ -2,15 +2,18 @@
   <div class="fullScreen">
     <div class="pix">
       <img src="{{href}}" alt=""/>
-      <div class="slide left" (click)="slideHandler('left')">
+      <div class="close" *ngIf="controlsViewed" (click)="closeHandler()"></div>
+      <div class="slide left" *ngIf="controlsViewed" (click)="slideHandler('left')">
         <span></span>
         <span></span>
       </div>
-      <div class="slide right" (click)="slideHandler('right')">
+      <div class="slide right" *ngIf="controlsViewed" (click)="slideHandler('right')">
         <span></span>
         <span></span>
       </div>
-      <div class="close" (click)="closeHandler()"></div>
+      <div class="panel-bot">
+        <div class="number">{{viewerPix.albumPixNumber}}</div>
+      </div>
     </div>
   </div>
 </div>
