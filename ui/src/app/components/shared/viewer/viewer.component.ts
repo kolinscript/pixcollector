@@ -7,7 +7,6 @@ import {
   Output, Renderer2,
   SimpleChanges
 } from '@angular/core';
-import Timeout = NodeJS.Timeout;
 
 @Component({
   selector: 'app-viewer',
@@ -21,7 +20,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   href: string;
   controlsViewed: boolean = false;
   globalMousemoveListenFunc: Function;
-  globalMousemoveStopInterval: Timeout;
+  globalMousemoveStopInterval;
 
   constructor(
     private renderer: Renderer2
