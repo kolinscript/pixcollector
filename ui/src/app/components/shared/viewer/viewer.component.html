@@ -2,7 +2,6 @@
   <div class="fullScreen">
     <div class="pix">
       <img src="{{href}}" alt=""/>
-      <div class="close" *ngIf="controlsViewed" (click)="closeHandler()"></div>
       <div class="slide left" *ngIf="controlsViewed" (click)="slideHandler('left')">
         <span></span>
         <span></span>
@@ -11,8 +10,9 @@
         <span></span>
         <span></span>
       </div>
+      <div class="close" *ngIf="controlsViewed" (click)="closeHandler()"></div>
       <div class="panel-bot">
-        <div class="number">{{viewerPix.album_pix_number}}</div>
+        <div class="number">{{viewerPix.num_current}} / {{viewerPix.num_total}}</div>
       </div>
     </div>
   </div>

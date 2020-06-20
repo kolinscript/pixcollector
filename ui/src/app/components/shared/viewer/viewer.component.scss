@@ -98,12 +98,12 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        padding: 0 20px;
+        padding: 20px;
         .number {
           padding: 8px 20px;
           background: $background;
           border-radius: 8px;
-          font: 900 22px/24px $fontMain;
+          font: 500 18px/20px $fontMain;
           color: #252525;
         }
       }
