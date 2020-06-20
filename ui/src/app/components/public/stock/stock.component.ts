@@ -81,6 +81,7 @@ export class StockComponent implements OnInit {
       ...this.user.pixArray.find(el => el.url === pix.url),
       album_pix_number: CUR_PIX_INDEX
     };
+    console.log(this.viewerPix);
     this.viewerOpened = true;
   }
 
