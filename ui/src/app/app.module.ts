@@ -18,6 +18,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { ChartComponent } from './components/main/chart/chart.component';
 import { ViewerComponent } from './components/shared/viewer/viewer.component';
 import { SideBarComponent } from './components/shared/side-bar/side-bar.component';
+import { MenuComponent } from './components/shared/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SideBarComponent } from './components/shared/side-bar/side-bar.componen
     FooterComponent,
     ChartComponent,
     ViewerComponent,
-    SideBarComponent
+    SideBarComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

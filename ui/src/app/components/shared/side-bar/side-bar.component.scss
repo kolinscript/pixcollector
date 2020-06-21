@@ -1,0 +1,35 @@
+.sidebar-item {
+  overflow: hidden;
+  overflow-y: auto;
+  position: fixed;
+  left: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 990;
+  min-width: 510px;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 5px 0 0 5px;
+  //font: 400 14px/16px 'Roboto', Arial, "Helvetica Neue", Helvetica, sans-serif;
+  //color: $color-primary;
+  &.shadow {
+    box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3);
+  }
+  &:nth-last-child(2) {
+    box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3);
+  }
+
+
+  ::ng-deep.sidebar-wrapper {
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+    padding-bottom: 110px;
+  }
+}

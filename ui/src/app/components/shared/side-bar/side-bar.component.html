@@ -1,1 +1,9 @@
-<p>side-bar works!</p>
+<div class="sidebar-wrapper">
+  <div class="sidebar-item"
+       *ngFor="let sidebar of sidebars"
+       [ngClass]="{'shadow': sidebars.length === 1}"
+       [@slideRightLeft]
+  >
+    <app-menu *ngIf="sidebar.type === SideBarTypes.MENU"></app-menu>
+  </div>
+</div>

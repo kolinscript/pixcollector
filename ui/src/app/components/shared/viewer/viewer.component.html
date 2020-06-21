@@ -23,13 +23,9 @@
       <div class="close"
            *ngIf="controlsViewed"
            (click)="closeHandler()"
-           (mouseenter) ="mouseEnter()"
-           (mouseleave) ="mouseLeave()"
       ></div>
       <div class="panel-bot"
            *ngIf="controlsViewed"
-           (mouseenter) ="mouseEnter()"
-           (mouseleave) ="mouseLeave()"
       >
         <div class="number">{{viewerPix.num_current}} of {{viewerPix.num_total}}</div>
       </div>
