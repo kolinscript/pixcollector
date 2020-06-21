@@ -10,21 +10,12 @@ import { SideBarTypes } from 'src/app/models/side-bar.model';
 })
 export class HeaderComponent implements OnInit {
   SideBarTypes = SideBarTypes;
-  public user;
-  public href: string;
 
   constructor(
-    private authService: AuthService,
     private sideBar: SideBarService
   ) { }
 
-  ngOnInit(): void {
-    const authorized = this.authService.isAuthorized();
-    if (authorized) {
-      this.user = JSON.parse(localStorage.getItem('user'));
-      this.href = `https://vk.com/id${this.user.vkId}`;
-    }
-  }
+  ngOnInit(): void {}
 
   public openMenu(type): void {
     this.sideBar.openSideBar({

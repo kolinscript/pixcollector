@@ -20,8 +20,18 @@ header {
     user-select: none;
     font: 900 22px/26px $fontMain;
     text-decoration: none;
-    color: $light;
+    color: #f839d1;
     padding: 0 10px;
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 800% 800%;
+    animation: rainbow 8s ease infinite;
+    @keyframes rainbow {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 25%}
+      100%{background-position:0% 50%}
+    }
   }
 
   .settings {
@@ -45,23 +55,6 @@ header {
       background-repeat: no-repeat;
       background-position: 50%;
       background-size: contain;
-    }
-
-    .profile {
-      width: auto;
-      padding-left: 50px;
-      position: relative;
-      .user-avatar {
-        width: 36px;
-        height: 36px;
-        border-radius: 20px;
-        overflow: hidden;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
     }
 
   }

@@ -1,3 +1,5 @@
+@import "../../../../assets/styles/vars";
+
 .sidebar-item {
   overflow: hidden;
   overflow-y: auto;
@@ -7,12 +9,10 @@
   right: 0;
   bottom: 0;
   z-index: 990;
-  min-width: 510px;
+  width: 275px;
   height: 100%;
-  background: #FFFFFF;
+  background-color: $dark;
   border-radius: 5px 0 0 5px;
-  //font: 400 14px/16px 'Roboto', Arial, "Helvetica Neue", Helvetica, sans-serif;
-  //color: $color-primary;
   &.shadow {
     box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3);
   }

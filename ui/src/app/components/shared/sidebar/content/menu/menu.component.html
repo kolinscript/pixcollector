@@ -1,0 +1,56 @@
+<div class="menu-wrapper"
+  [formGroup]="form"
+  *ngIf="form"
+>
+  <div class="block user" *ngIf="user">
+    <a class="user-avatar" href="{{href}}" target="_blank" rel="noopener noreferrer">
+      <img class="pix-img" src="{{user.avatar}}"/>
+    </a>
+    <div class="user-name">{{user.name}}</div>
+  </div>
+
+  <div class="block privacy">
+    <div class="title">
+      <span>Privacy settings</span>
+    </div>
+    <div class="row">
+      <div class="radio">
+        <input type="radio"
+               id="all"
+               value="all"
+               name="privacy"
+               formControlName="privacy"
+        />
+        <label for="all">Visible to all</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="radio">
+        <input type="radio"
+               id="authorized"
+               value="authorized"
+               name="privacy"
+               formControlName="privacy"
+        />
+        <label for="authorized">Authorized users only</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="radio">
+        <input type="radio"
+               id="nobody"
+               value="nobody"
+               name="privacy"
+               formControlName="privacy"
+        />
+        <label for="nobody">Nobody</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="block logout">
+    <div class="button login" (click)="logout()">
+      <div class="label">Logout</div>
+    </div>
+  </div>
+</div>

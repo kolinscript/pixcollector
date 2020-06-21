@@ -17,8 +17,8 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ChartComponent } from './components/main/chart/chart.component';
 import { ViewerComponent } from './components/shared/viewer/viewer.component';
-import { SideBarComponent } from './components/shared/side-bar/side-bar.component';
-import { MenuComponent } from './components/shared/menu/menu.component';
+import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
+import { MenuComponent } from './components/shared/sidebar/content/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { MenuComponent } from './components/shared/menu/menu.component';
     FooterComponent,
     ChartComponent,
     ViewerComponent,
-    SideBarComponent,
+    SidebarComponent,
     MenuComponent
   ],
   imports: [

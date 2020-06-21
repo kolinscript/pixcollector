@@ -4,12 +4,12 @@ import { SideBarTypes } from 'src/app/models/side-bar.model';
 import { SlideRightLeft } from '../../../animations';
 
 @Component({
-  selector: 'app-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss'],
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
   animations: [SlideRightLeft.animationTrigger]
 })
-export class SideBarComponent implements OnInit {
+export class SidebarComponent implements OnInit {
   SideBarTypes = SideBarTypes;
   sidebars: any[];
 

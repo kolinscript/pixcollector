@@ -1,0 +1,136 @@
+@import "../../../../../../assets/styles/vars";
+
+.menu-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0;
+  width: 100%;
+  height: 100%;
+  .block {
+    margin-top: 40px;
+    width: 100%;
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &.user {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      .user-avatar {
+        display: block;
+        width: 66px;
+        height: 66px;
+        border-radius: 33px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .user-name {
+        margin-top: 20px;
+        font: 400 18px/20px $fontMain;
+        text-align: center;
+        color: $background;
+      }
+    }
+
+    &.logout {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .title {
+      width: 100%;
+      padding: 0 20px;
+      font: 400 16px/20px $fontMain;
+      text-align: left;
+      color: $background;
+    }
+
+    .row {
+      margin-top: 20px;
+      padding: 0 20px;
+      font: 400 14px/20px $fontMain;
+      text-align: left;
+      color: $background;
+      &:first-child {
+        margin-top: 0;
+      }
+
+      .radio {
+        position: relative;
+        height: 20px;
+        width: 100%;
+
+        input[type=radio] {
+          display: none;
+        }
+
+        label {
+          cursor: pointer;
+          position: absolute;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          left: 0;
+          bottom: 0;
+          padding-left: 32px;
+          font: 400 14px/32px $fontMain;
+          color: $background;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+
+        label::before,
+        label::after {
+          position: absolute;
+          display: block;
+          box-sizing: border-box;
+          content: "";
+        }
+
+        label::before {
+          height: 22px;
+          width: 22px;
+          left: 0;
+          top: 5px;
+          border-radius: 16px;
+          border: 2px solid $background;
+          box-shadow: 2px 2px 0 0px #1d1d1d;
+        }
+
+        label::after {
+          transition: transform .2s ease-in-out;
+          content: "";
+          height: 8px;
+          width: 8px;
+          left: 7px;
+          top: 50%;
+          margin-top: 2px;
+          border-radius: 8px;
+          background: $background;
+          box-shadow: 2px 2px 0 0px #1d1d1d;
+        }
+
+        input[type=radio] + label::after {
+          transform: scale(0);
+        }
+
+        input[type=radio]:checked + label::after {
+          transform: scale(1);
+        }
+      }
+
+    }
+  }
+}

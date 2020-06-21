@@ -96,7 +96,7 @@ export class StockComponent implements OnInit {
         if (CUR_PIX_INDEX - 1 >= 0) {
           this.viewerPix = {
             ...this.user.pixArray[CUR_PIX_INDEX - 1],
-            num_current: CUR_PIX_INDEX + 2,
+            num_current: CUR_PIX_INDEX,
             num_total: this.user.pixArray.length
           };
           console.log(this.viewerPix);
@@ -107,7 +107,7 @@ export class StockComponent implements OnInit {
         if (CUR_PIX_INDEX + 1 < this.user.pixArray.length) {
           this.viewerPix = {
             ...this.user.pixArray[CUR_PIX_INDEX + 1],
-            num_current: CUR_PIX_INDEX + 2,
+            num_current: CUR_PIX_INDEX,
             num_total: this.user.pixArray.length
           };
         }
