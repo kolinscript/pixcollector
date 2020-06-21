@@ -78,7 +78,7 @@ export class StockComponent implements OnInit {
   public openViewer(event, pix, i): void {
     this.viewerPix = {
       ...this.user.pixArray.find(el => el.url === pix.url),
-      num_current: i + 1,
+      num_current: this.user.pixArray.indexOf(el => el.url === pix.url),
       num_total: this.user.pixArray.length + 1
     };
     console.log(this.viewerPix);
