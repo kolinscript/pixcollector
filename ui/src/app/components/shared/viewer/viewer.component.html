@@ -2,16 +2,35 @@
   <div class="fullScreen">
     <div class="pix">
       <img src="{{href}}" alt=""/>
-      <div class="slide left" *ngIf="controlsViewed" (click)="slideHandler('left')">
+      <div class="slide left"
+           *ngIf="controlsViewed"
+           (click)="slideHandler('left')"
+           (mouseenter) ="mouseEnter()"
+           (mouseleave) ="mouseLeave()"
+      >
         <span></span>
         <span></span>
       </div>
-      <div class="slide right" *ngIf="controlsViewed" (click)="slideHandler('right')">
+      <div class="slide right"
+           *ngIf="controlsViewed"
+           (click)="slideHandler('right')"
+           (mouseenter) ="mouseEnter()"
+           (mouseleave) ="mouseLeave()"
+      >
         <span></span>
         <span></span>
       </div>
-      <div class="close" *ngIf="controlsViewed" (click)="closeHandler()"></div>
-      <div class="panel-bot">
+      <div class="close"
+           *ngIf="controlsViewed"
+           (click)="closeHandler()"
+           (mouseenter) ="mouseEnter()"
+           (mouseleave) ="mouseLeave()"
+      ></div>
+      <div class="panel-bot"
+           *ngIf="controlsViewed"
+           (mouseenter) ="mouseEnter()"
+           (mouseleave) ="mouseLeave()"
+      >
         <div class="number">{{viewerPix.num_current}} of {{viewerPix.num_total}}</div>
       </div>
     </div>

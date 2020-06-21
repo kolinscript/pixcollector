@@ -28,12 +28,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.href = this.viewerPix.url;
-    this.globalMousemoveStopInterval = setInterval(() => {
-      this.controlsViewed = false;
-    }, 3000);
-    this.globalMousemoveListenFunc = this.renderer.listen('document', 'mousemove', e => {
-      this.controlsViewed = true;
-    });
+    this.activateControlView();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -44,8 +39,17 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.globalMousemoveListenFunc();
+   this.deactivateControlView();
+  }
+
+  public mouseEnter(): void {
     clearInterval(this.globalMousemoveStopInterval);
+  }
+
+  public mouseLeave(): void {
+    this.globalMousemoveStopInterval = setInterval(() => {
+      this.controlsViewed = false;
+    }, 3000);
   }
 
   public slideHandler(direction: 'left' | 'right'): void {
@@ -54,6 +58,20 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
 
   public closeHandler(): void {
     this.close.emit();
+  }
+
+  private activateControlView() {
+    this.globalMousemoveStopInterval = setInterval(() => {
+      this.controlsViewed = false;
+    }, 3000);
+    this.globalMousemoveListenFunc = this.renderer.listen('document', 'mousemove', e => {
+      this.controlsViewed = true;
+    });
+  }
+
+  private deactivateControlView() {
+    this.globalMousemoveListenFunc();
+    clearInterval(this.globalMousemoveStopInterval);
   }
 
 }
