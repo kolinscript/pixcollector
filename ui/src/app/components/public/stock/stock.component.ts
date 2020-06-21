@@ -78,8 +78,8 @@ export class StockComponent implements OnInit {
   public openViewer(event, pix, i): void {
     this.viewerPix = {
       ...this.user.pixArray.find(el => el.url === pix.url),
-      num_current: this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === pix.url)) + 2,
-      num_total: this.user.pixArray.length + 1
+      num_current: this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === pix.url)) + 1,
+      num_total: this.user.pixArray.length
     };
     console.log(this.viewerPix);
     this.viewerOpened = true;
@@ -97,7 +97,7 @@ export class StockComponent implements OnInit {
           this.viewerPix = {
             ...this.user.pixArray[CUR_PIX_INDEX - 1],
             num_current: CUR_PIX_INDEX + 2,
-            num_total: this.user.pixArray.length + 1
+            num_total: this.user.pixArray.length
           };
           console.log(this.viewerPix);
         }
@@ -108,7 +108,7 @@ export class StockComponent implements OnInit {
           this.viewerPix = {
             ...this.user.pixArray[CUR_PIX_INDEX + 1],
             num_current: CUR_PIX_INDEX + 2,
-            num_total: this.user.pixArray.length + 1
+            num_total: this.user.pixArray.length
           };
         }
         console.log(this.viewerPix);
