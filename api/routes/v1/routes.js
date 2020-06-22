@@ -13,6 +13,6 @@ router.get('/user', secure.optional, user.getUser);
 
 router.get('/users', secure.required, user.getUsers);
 
-router.get('/download/pixcollector.zip', download.download);
+router.post('/download/pixcollector.zip', download.download);
 
 module.exports = router;

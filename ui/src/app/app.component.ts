@@ -12,9 +12,10 @@ import { ShadowInOut } from './animations';
     '       [@shadowInOut]\n' +
     '  ></div>\n' +
     '  <app-sidebar></app-sidebar>',
-  styles: ['.no-interaction-screen {\n' +
+  styles:
+    ['.no-interaction-screen {\n' +
   '  z-index: 99;\n' +
-  '  position: absolute;\n' +
+  '  position: fixed;\n' +
   '  width: 100%;\n' +
   '  height: 100%;\n' +
   '  top: 0;\n' +

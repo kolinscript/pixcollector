@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { SlideUpDown } from '../../../animations';
+import { saveAs } from 'file-saver';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { SlideUpDown } from '../../../animations';
+import { DownloadService } from '../../../services/download.service';
 
 @Component({
   selector: 'app-stock',
@@ -31,6 +33,7 @@ export class StockComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
+    private downloadService: DownloadService,
   ) {}
 
   ngOnInit(): void {
@@ -97,7 +100,7 @@ export class StockComponent implements OnInit {
           this.viewerPix = {
             ...this.user.pixArray[CUR_PIX_INDEX - 1],
             num_current: CUR_PIX_INDEX,
-            num_total: this.user.pixArray.length
+            num_total: this.user.pixArray.length,
           };
           console.log(this.viewerPix);
         }
@@ -108,7 +111,7 @@ export class StockComponent implements OnInit {
           this.viewerPix = {
             ...this.user.pixArray[CUR_PIX_INDEX + 1],
             num_current: CUR_PIX_INDEX + 2,
-            num_total: this.user.pixArray.length
+            num_total: this.user.pixArray.length,
           };
         }
         console.log(this.viewerPix);
@@ -212,6 +215,18 @@ export class StockComponent implements OnInit {
       this.selectedPixies = this.user.pixArray.filter(pix => pix.selected);
       this.selectedAmount = this.selectedPixies.length;
     }
+  }
+
+  public download(): void {
+    this.downloadService.downloadZip(this.selectedPixies).subscribe(
+      data => {
+        saveAs(data, 'pixcollector.zip');
+      },
+      err => {
+        alert("Problem while downloading the file.");
+        console.error(err);
+      }
+    );
   }
 
   private calculateLastPage(): void {
