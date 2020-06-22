@@ -28,7 +28,7 @@ const auth = {
                 axios.get(userLink)
                     .then(function (responseUser) {
                         const name = `${responseUser.data.response[0].first_name} ${responseUser.data.response[0].last_name}`;
-                        const avatar =  responseUser.data.response[0].photo_50;
+                        const avatar =  responseUser.data.response[0].photo_100;
 
                         axios.get(albumLink)
                             .then(function (responseAlbum) {
