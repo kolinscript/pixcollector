@@ -107,7 +107,7 @@ export class StockComponent implements OnInit {
         if (CUR_PIX_INDEX + 1 < this.user.pixArray.length) {
           this.viewerPix = {
             ...this.user.pixArray[CUR_PIX_INDEX + 1],
-            num_current: CUR_PIX_INDEX,
+            num_current: CUR_PIX_INDEX + 2,
             num_total: this.user.pixArray.length
           };
         }
@@ -122,6 +122,7 @@ export class StockComponent implements OnInit {
     item.selected = !item.selected;
     this.selectedPixies = this.user.pixArray.filter(pixItem => pixItem.selected);
     this.selectedAmount = this.selectedPixies.length;
+    console.log(this.selectedPixies);
   }
 
   public pppClickHandler(): void {
