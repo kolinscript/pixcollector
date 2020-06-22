@@ -15,7 +15,7 @@ const auth = {
             .then(function (responseAuth) {
                 const userLink = `https://api.vk.com/` +
                     `method/users.get` +
-                    `?fields=photo_50` +
+                    `?fields=photo_100` +
                     `&access_token=${responseAuth.data.access_token}` +
                     `&v=5.103`;
                 const albumLink = `https://api.vk.com/` +
