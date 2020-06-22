@@ -27,8 +27,7 @@ export class AuthService implements CanActivate {
   }
 
   isAuthorized(): boolean {
-    // return !!localStorage.getItem('token');
-    return true;
+    return !!localStorage.getItem('token');
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
