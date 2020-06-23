@@ -1,12 +1,24 @@
 const axios              = require('axios');
 const mongoose           = require('mongoose');
+const jwt                = require('jsonwebtoken');
 const Users              = mongoose.model('Users');
 
 const user = {
     getUser: ((req, res, next) => {
-        const userID = req.query.id;
+        const { headers: { authorization } } = req;
+        let token;
+        if(authorization && authorization.split(' ')[0] === 'token') {
+            token = authorization.split(' ')[1];
+        }
+
+        const tokenVkId = jwt.verify(token, 'collector_secret');
+        const reqVkID = req.query.id;
+
+        console.log('tokenVkId:____', tokenVkId);
+        console.log('reqVkID:____', reqVkID);
+
         Users.findOne({
-            vkId: userID
+            vkId: reqVkID
         }, (err, userRoot) => {
             if (err) {
                 res.status(200).json( { body: { error: err } });
@@ -244,6 +256,7 @@ const user = {
             }
         });
     }),
+
     getUsers: ((req, res, next) => {
         Users.find( (err, usersRaw) => {
             if (err) {

@@ -195,6 +195,12 @@
                   }
                 }
               }
+              &.download {
+                &.no-one-selected {
+                  pointer-events: none;
+                  background: darken($background, 10%);
+                }
+              }
             }
           }
         }

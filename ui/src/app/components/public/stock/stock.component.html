@@ -48,7 +48,7 @@
             </div>
             <div class="label">{{selectedAmount}} selected</div>
           </a>
-          <a class="button download" (click)="download()">
+          <a class="button download" [ngClass]="{'no-one-selected':selectedAmount === 0}" (click)="download()">
             <div class="label">Download</div>
           </a>
           <a class="button select-all" (click)="selectAll()">

@@ -100,8 +100,9 @@ const auth = {
                                                 avatar: avatar,
                                                 albumSize: albumSize,
                                                 pixArray: pixArray,
-                                                privacy: 0,
-                                                accessRights: 2
+                                                privacyAccView: 0,
+                                                privacyDownloads: 0,
+                                                sysAccessRights: 2
                                             });
 
                                             // save new or update existed user to db
@@ -223,8 +224,9 @@ const auth = {
                                                 avatar: avatar,
                                                 albumSize: albumSize,
                                                 pixArray: pixArray,
-                                                privacy: 0,
-                                                accessRights: 2
+                                                privacyAccView: 0,
+                                                privacyDownloads: 0,
+                                                sysAccessRights: 2
                                             });
 
                                             // save new or update existed user to db
