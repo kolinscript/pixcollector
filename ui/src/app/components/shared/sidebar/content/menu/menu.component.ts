@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SideBarService } from '../../../../../services/side-bar.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../../../services/user.service';
+import { StoreService } from '../../../../../services/store.service';
 
 @Component({
   selector: 'app-menu',
@@ -15,6 +16,7 @@ export class MenuComponent implements OnInit {
   public user;
 
   constructor(
+    private store: StoreService,
     private sideBar: SideBarService,
     private userService: UserService,
     private router: Router,
@@ -22,8 +24,12 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.store.store.user;
     this.href = `https://vk.com/id${this.user.vkId}`;
+    this.store.storeObservable.subscribe((store) => {
+      console.log('store: ', store);
+    })
+
     this.initForm();
   }
 
@@ -45,8 +51,9 @@ export class MenuComponent implements OnInit {
           privacyVisible: +privacy,
         }
       };
-      this.userService.updUser(userUpdates).subscribe((res) => {
-        console.log(res);
+      this.userService.updUser(userUpdates).subscribe((user) => {
+        console.log(user);
+        this.store.setStore({user: user.body.user});
       });
     });
     this.form.get('privacyDownloadable').valueChanges.subscribe((privacy) => {
@@ -56,8 +63,8 @@ export class MenuComponent implements OnInit {
           privacyDownloadable: +privacy,
         }
       };
-      this.userService.updUser(userUpdates).subscribe((res) => {
-        console.log(res);
+      this.userService.updUser(userUpdates).subscribe((user) => {
+        console.log(user);
       });
     });
   }

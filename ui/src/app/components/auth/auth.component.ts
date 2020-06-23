@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { StoreService } from '../../services/store.service';
 
 enum State {
   auth, success,
@@ -18,6 +19,7 @@ export class AuthComponent implements OnInit {
   code: string;
 
   constructor(
+    private store: StoreService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -28,6 +30,7 @@ export class AuthComponent implements OnInit {
       this.authService.code(this.code).subscribe(user => {
         if (user.body.user) {
           const safeUser = ({ token, pixArray, ...rest }) => rest;
+          this.store.setStore({user: safeUser(user.body.user)});
           localStorage.setItem('token', user.body.user.token);
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
           this.router.navigate(['/auth/success']);
@@ -38,6 +41,7 @@ export class AuthComponent implements OnInit {
       this.authService.success().subscribe(user => {
         if (user.body.user) {
           const safeUser = ({ token, pixArray, ...rest }) => rest;
+          this.store.setStore({user: safeUser(user.body.user)});
           localStorage.setItem('token', user.body.user.token);
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
         } else if (!user.body.user) {

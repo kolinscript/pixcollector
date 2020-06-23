@@ -34,6 +34,9 @@ UsersSchema.methods.toAuthJSON = function() {
         avatar: this.avatar,
         albumSize: this.albumSize,
         pixArray: this.pixArray,
+        privacyVisible: this.privacyVisible,
+        privacyDownloadable: this.privacyDownloadable,
+        sysAccessRights: this.sysAccessRights,
         token: this.generateJWT(),
     };
 };

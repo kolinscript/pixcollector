@@ -276,19 +276,14 @@ const user = {
     }),
 
     updateUser: ((req, res, next) => {
-        const reqUser = req.body.user;
-
-        const { headers: { authorization } } = req;
         let token;
-        if(authorization && authorization.split(' ')[0] === 'token') {
+        const { headers: { authorization } } = req;
+        if (authorization && authorization.split(' ')[0] === 'token') {
             token = authorization.split(' ')[1];
         }
-
+        const reqUser = req.body.user;
         const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
         const reqVkID = reqUser.vkId;
-
-        console.log('tokenVkId:____', tokenVkId);
-        console.log('reqVkID:____', reqVkID);
 
         if (tokenVkId === reqVkID) {
             Users.findOne({
@@ -301,14 +296,13 @@ const user = {
                         user.markModified('privacyVisible');
                     }
                     if (reqUser.privacyDownloadable) {
-                        user.privacyVisible = reqUser.privacyDownloadable;
+                        user.privacyDownloadable = reqUser.privacyDownloadable;
                         user.markModified('privacyDownloadable');
                     }
                     user.save()
                         .then(() => {
                                 const safeUser = ({ _id, vkToken, pixArray, ...rest }) => rest;
-                                req.session.user = safeUser(user.toAuthJSON());
-                                res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
+                                res.status(200).json( { body: { user: safeUser(user) } });
                             }
                         );
                 }

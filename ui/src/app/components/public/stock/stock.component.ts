@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { DownloadService } from '../../../services/download.service';
+import { StoreService } from '../../../services/store.service';
 
 @Component({
   selector: 'app-stock',
@@ -31,6 +32,7 @@ export class StockComponent implements OnInit {
 
 
   constructor(
+    private store: StoreService,
     private router: Router,
     private userService: UserService,
     private downloadService: DownloadService,
@@ -60,11 +62,12 @@ export class StockComponent implements OnInit {
         this.calculateLastPage();
         this.calculateViewport();
 
-        // only if looking on self page!
-        // if (localStorage.getItem('token')) {
-        //   localStorage.setItem('token', user.body.user.token);
-        //   localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
-        // }
+        // only if self page!
+        if (this.selfStock) {
+          this.store.setStore({user: safeUser(user.body.user)});
+          localStorage.setItem('token', user.body.user.token);
+          localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
+        }
       }
     });
   }
