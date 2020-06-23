@@ -277,8 +277,6 @@ const user = {
 
     updateUser: ((req, res, next) => {
         const reqUser = req.body.user;
-        console.log('req.query.user___', req.body.user);
-        console.log('REQ_user___', reqUser);
 
         const { headers: { authorization } } = req;
         let token;
@@ -287,7 +285,7 @@ const user = {
         }
 
         const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
-        const reqVkID = req.query.user.user.vkId;
+        const reqVkID = reqUser.vkId;
 
         console.log('tokenVkId:____', tokenVkId);
         console.log('reqVkID:____', reqVkID);
