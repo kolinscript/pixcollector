@@ -20,17 +20,6 @@
       position: relative;
       width: 100%;
       height: 300px;
-      //.pulsar {
-      //  position: absolute;
-      //  width: 232px;
-      //  height: 232px;
-      //  animation: avatar_pulse 5s infinite linear;
-      //  border-radius: 50%;
-      //  left: 50%;
-      //  top: 50%;
-      //  margin-left: -112px;
-      //  margin-top: -107px;
-      //}
       .svg {
         position: absolute;
         width: 100%;
@@ -51,41 +40,25 @@
         background-repeat: no-repeat;
         background-position: 50%;
         background-size: contain;
-        &.scale-up-ver-top-1 {
-          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite both;
-          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite both;
+        animation: scale-up-ver-top 4s linear infinite;
+
+        &.one {
+          animation-delay: .2s;
         }
-        &.scale-up-ver-top-2 {
-          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 500ms infinite both;
-          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 500ms infinite both;
+        &.two {
+          animation-delay: .7s;
         }
-        &.scale-up-ver-top-3 {
-          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 1000ms infinite both;
-          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 1000ms infinite both;
+        &.three {
+          animation-delay: 1.4s;
         }
-        &.scale-up-ver-top-4 {
-          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 1500ms infinite both;
-          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 1500ms infinite both;
+        &.four {
+          animation-delay: 2.6s;
         }
-        &.scale-up-ver-top-5 {
-          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 2000ms infinite both;
-          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 2000ms infinite both;
+        &.five {
+          animation-delay: 3.2s;
         }
-        &.scale-up-ver-top-6 {
-          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 2500ms infinite both;
-          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 2500ms infinite both;
-        }
-        &.scale-up-ver-top-7 {
-          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 3000ms infinite both;
-          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 3000ms infinite both;
-        }
-        &.scale-up-ver-top-8 {
-          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 3500ms infinite both;
-          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 3500ms infinite both;
-        }
-        &.scale-up-ver-top-9 {
-          -webkit-animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 4000ms infinite both;
-          animation: scale-up-ver-top 4000ms cubic-bezier(0.390, 0.575, 0.565, 1.000) 4000ms infinite both;
+        &.six {
+          animation-delay: 3.8s;
         }
       }
 
@@ -146,20 +119,11 @@
   }
 }
 
-//@keyframes avatar_pulse {
-//  0% {
-//    -webkit-box-shadow: 0px 0px 10px 0px $light;
-//    box-shadow: 0px 0px 10px 0px $light;
-//  }
-//  50% {
-//    -webkit-box-shadow: 0px 0px 50px 50px $light;
-//    box-shadow: 0px 0px 50px 50px $light;
-//  }
-//  100% {
-//    -webkit-box-shadow: 0px 0px 10px 0px $light;
-//    box-shadow: 0px 0px 10px 0px $light;
-//  }
-//}
+@keyframes waterfall {
+  0% { background-position: 50% 0; }
+  100% { background-position: 50% 50px; }
+}
+
 @keyframes scale-up-ver-top {
   0% {
     -webkit-transform: scaleY(0.4);

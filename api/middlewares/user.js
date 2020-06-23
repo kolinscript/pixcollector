@@ -11,7 +11,7 @@ const user = {
             token = authorization.split(' ')[1];
         }
 
-        const tokenVkId = jwt.verify(token, 'collector_secret');
+        const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
         const reqVkID = req.query.id;
 
         console.log('tokenVkId:____', tokenVkId);
@@ -286,7 +286,7 @@ const user = {
             token = authorization.split(' ')[1];
         }
 
-        const tokenVkId = jwt.verify(token, 'collector_secret');
+        const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
         const reqVkID = req.query.user.user.vkId;
 
         console.log('tokenVkId:____', tokenVkId);
