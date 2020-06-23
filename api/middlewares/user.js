@@ -274,6 +274,50 @@ const user = {
             }
         });
     }),
+
+    updateUser: ((req, res, next) => {
+        const reqUser = req.query.user.user;
+        console.log('req.query.user___', req.query.user);
+        console.log('REQ_user___', reqUser);
+
+        const { headers: { authorization } } = req;
+        let token;
+        if(authorization && authorization.split(' ')[0] === 'token') {
+            token = authorization.split(' ')[1];
+        }
+
+        const tokenVkId = jwt.verify(token, 'collector_secret');
+        const reqVkID = req.query.user.user.vkId;
+
+        console.log('tokenVkId:____', tokenVkId);
+        console.log('reqVkID:____', reqVkID);
+
+        if (tokenVkId === reqVkID) {
+            Users.findOne({
+                vkId: reqVkID
+            }, (err, user) => {
+                if (err) {}
+                if (user) {
+                    if (reqUser.privacyVisible) {
+                        user.privacyVisible = reqUser.privacyVisible;
+                        user.markModified('privacyVisible');
+                    }
+                    if (reqUser.privacyDownloadable) {
+                        user.privacyVisible = reqUser.privacyDownloadable;
+                        user.markModified('privacyDownloadable');
+                    }
+                    user.save()
+                        .then(() => {
+                                const safeUser = ({ _id, vkToken, pixArray, ...rest }) => rest;
+                                req.session.user = safeUser(user.toAuthJSON());
+                                res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
+                            }
+                        );
+                }
+                else {}
+            });
+        }
+    }),
 };
 
 module.exports = user;

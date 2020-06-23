@@ -10,8 +10,8 @@ const UsersSchema = new Schema({
     avatar: String,
     albumSize: String,
     pixArray: Array,
-    privacyAccView: Number, // 0 public, 1 private - authorized, 2 private - nobody
-    privacyDownloads: Number, // 0 public, 1 private - authorized, 2 private - nobody
+    privacyVisible: Number, // 0 public, 1 private - authorized, 2 private - nobody
+    privacyDownloadable: Number, // 0 public, 1 private - authorized, 2 private - nobody
     sysAccessRights: Number // 0 admin, 1 moderator, 2 user
 });
 

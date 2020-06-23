@@ -11,6 +11,8 @@ router.get('/auth/success', secure.optional, auth.success);
 
 router.get('/user', secure.optional, user.getUser);
 
+router.put('/user/update', secure.required, user.updateUser);
+
 router.get('/users', secure.required, user.getUsers);
 
 router.post('/download/pixcollector.zip', download.download);

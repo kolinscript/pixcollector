@@ -2,7 +2,7 @@
   <a class="logo" [routerLink]="['/']">
     #PixCollector
   </a>
-  <div class="settings" (click)="openMenu(SideBarTypes.MENU)">
+  <div class="settings" *ngIf="authorized" (click)="openMenu(SideBarTypes.MENU)">
     <span class="icon"></span>
   </div>
 </header>

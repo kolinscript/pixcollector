@@ -100,8 +100,8 @@ const auth = {
                                                 avatar: avatar,
                                                 albumSize: albumSize,
                                                 pixArray: pixArray,
-                                                privacyAccView: 0,
-                                                privacyDownloads: 0,
+                                                privacyVisible: 0,
+                                                privacyDownloadable: 0,
                                                 sysAccessRights: 2
                                             });
 
@@ -224,8 +224,8 @@ const auth = {
                                                 avatar: avatar,
                                                 albumSize: albumSize,
                                                 pixArray: pixArray,
-                                                privacyAccView: 0,
-                                                privacyDownloads: 0,
+                                                privacyVisible: 0,
+                                                privacyDownloadable: 0,
                                                 sysAccessRights: 2
                                             });
 

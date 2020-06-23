@@ -10,12 +10,16 @@ import { SideBarTypes } from 'src/app/models/side-bar.model';
 })
 export class HeaderComponent implements OnInit {
   SideBarTypes = SideBarTypes;
+  authorized: boolean = false;
 
   constructor(
+    private authService: AuthService,
     private sideBar: SideBarService
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authorized = this.authService.isAuthorized();
+  }
 
   public openMenu(type): void {
     this.sideBar.openSideBar({

@@ -47,19 +47,46 @@ body {
     }
   }
 
-  .logo-vk {
-    margin-left: 10px;
-    width: 34px;
-    height: 19px;
-    background-color: $dark;
-    mask-image: url("/assets/images/vk-login.svg");
-    mask-size: cover;
-    -webkit-mask-size: cover;
-    box-shadow: inset 2px 2px 8px #101010;
-    transition: background 100ms ease;
+  &.stroke {
+    background: transparent;
+    border: 2px solid $background;
+    box-shadow: 2px 2px 0 0 #1d1d1d;
+    .btn-label {
+      color: $background;
+    }
+    .btn-logo {
+      background-color: $background;
+    }
+    &:hover, &.active {
+      background: lighten($dark, 3%);
+    }
   }
 
-  .label {
+  .btn-logo {
+    background-color: $dark;
+    &.logo-vk {
+      margin-left: 10px;
+      width: 34px;
+      height: 19px;
+      mask-image: url("/assets/images/vk-login.svg");
+      mask-size: cover;
+      -webkit-mask-size: cover;
+      box-shadow: inset 2px 2px 8px #101010;
+      transition: background 100ms ease;
+    }
+
+    &.logo-logout {
+      margin-left: 10px;
+      width: 17px;
+      height: 18px;
+      mask-image: url("/assets/images/logout.svg");
+      mask-size: cover;
+      -webkit-mask-size: cover;
+      transition: background 100ms ease;
+    }
+  }
+
+  .btn-label {
     font: 500 16px/18px $fontMain;
     text-align: center;
     color: $dark;

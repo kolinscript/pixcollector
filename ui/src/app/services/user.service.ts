@@ -18,6 +18,12 @@ export class UserService {
       .pipe(map(res => res as any));
   }
 
+  updUser(user: {}): Observable<any> {
+    return this.http
+      .put(`/api/v1/user/update`, user)
+      .pipe(map(res => res as any));
+  }
+
   getPublicUsers(): Observable<any> {
     return this.http
       .get(`/api/v1/users`)

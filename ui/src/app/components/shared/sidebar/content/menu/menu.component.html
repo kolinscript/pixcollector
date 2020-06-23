@@ -13,44 +13,84 @@
     <div class="title">
       <span>Privacy settings</span>
     </div>
+    <div class="sub-title">
+      <span>Visible</span>
+    </div>
     <div class="row">
       <div class="radio">
         <input type="radio"
-               id="all"
-               value="all"
-               name="privacy"
-               formControlName="privacy"
+               id="v-all"
+               value="0"
+               name="privacyVisible"
+               formControlName="privacyVisible"
         />
-        <label for="all">Visible to all</label>
+        <label for="v-all">All</label>
       </div>
     </div>
     <div class="row">
       <div class="radio">
         <input type="radio"
-               id="authorized"
-               value="authorized"
-               name="privacy"
-               formControlName="privacy"
+               id="v-authorized"
+               value="1"
+               name="privacyVisible"
+               formControlName="privacyVisible"
         />
-        <label for="authorized">Authorized users only</label>
+        <label for="v-authorized">Authorized users only</label>
       </div>
     </div>
     <div class="row">
       <div class="radio">
         <input type="radio"
-               id="nobody"
-               value="nobody"
-               name="privacy"
-               formControlName="privacy"
+               id="v-nobody"
+               value="2"
+               name="privacyVisible"
+               formControlName="privacyVisible"
         />
-        <label for="nobody">Nobody</label>
+        <label for="v-nobody">Nobody</label>
+      </div>
+    </div>
+    <div class="sub-title">
+      <span>Downloadable</span>
+    </div>
+    <div class="row">
+      <div class="radio">
+        <input type="radio"
+               id="d-all"
+               value="0"
+               name="privacyDownloadable"
+               formControlName="privacyDownloadable"
+        />
+        <label for="d-all">All</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="radio">
+        <input type="radio"
+               id="d-authorized"
+               value="1"
+               name="privacyDownloadable"
+               formControlName="privacyDownloadable"
+        />
+        <label for="d-authorized">Authorized users only</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="radio">
+        <input type="radio"
+               id="d-nobody"
+               value="2"
+               name="privacyDownloadable"
+               formControlName="privacyDownloadable"
+        />
+        <label for="d-nobody">Nobody</label>
       </div>
     </div>
   </div>
 
   <div class="block logout">
-    <div class="button login" (click)="logout()">
-      <div class="label">Logout</div>
+    <div class="button stroke login" (click)="logout()">
+      <div class="btn-label">Logout</div>
+      <div class="btn-logo logo-logout"> </div>
     </div>
   </div>
 </div>
