@@ -276,8 +276,8 @@ const user = {
     }),
 
     updateUser: ((req, res, next) => {
-        const reqUser = req.query.user.user;
-        console.log('req.query.user___', req.query.user);
+        const reqUser = req.body.user;
+        console.log('req.query.user___', req.body.user);
         console.log('REQ_user___', reqUser);
 
         const { headers: { authorization } } = req;

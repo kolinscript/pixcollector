@@ -30,6 +30,7 @@
         background-size: contain;
       }
       .juice {
+        opacity: .42;
         position: absolute;
         left: 50%;
         margin-left: -75px;
@@ -41,7 +42,7 @@
         background-position: 50%;
         background-size: contain;
         animation: scale-up-ver-top 4s linear infinite;
-
+        animation-fill-mode: both;
         &.one {
           animation-delay: .2s;
         }
