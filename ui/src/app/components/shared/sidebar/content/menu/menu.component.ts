@@ -45,8 +45,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.form = this.fb.group({
-      privacyVisible: new FormGroup(this.user.privacyVisible),
-      privacyDownloadable: new FormGroup(this.user.privacyVisible),
+      privacyVisible: [this.user.privacyVisible ? this.user.privacyVisible : null],
+      privacyDownloadable: [this.user.privacyDownloadable ? this.user.privacyDownloadable : null]
     });
     console.log(this.form.value);
     this.form.get('privacyVisible').valueChanges.subscribe((privacy) => {

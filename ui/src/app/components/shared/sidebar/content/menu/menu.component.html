@@ -18,9 +18,9 @@
     </div>
     <div class="row">
       <div class="radio">
-        <input type="radio"
+        <input [value]="0"
+               type="radio"
                id="v-all"
-               value=0
                name="privacyVisible"
                formControlName="privacyVisible"
         />
@@ -29,9 +29,9 @@
     </div>
     <div class="row">
       <div class="radio">
-        <input type="radio"
+        <input [value]="1"
+               type="radio"
                id="v-authorized"
-               value=1
                name="privacyVisible"
                formControlName="privacyVisible"
         />
@@ -40,9 +40,9 @@
     </div>
     <div class="row">
       <div class="radio">
-        <input type="radio"
+        <input [value]="2"
+               type="radio"
                id="v-nobody"
-               value=2
                name="privacyVisible"
                formControlName="privacyVisible"
         />
@@ -54,7 +54,8 @@
     </div>
     <div class="row">
       <div class="radio">
-        <input type="radio"
+        <input [value]="0"
+               type="radio"
                id="d-all"
                value=0
                name="privacyDownloadable"
@@ -65,9 +66,9 @@
     </div>
     <div class="row">
       <div class="radio">
-        <input type="radio"
+        <input [value]="1"
+               type="radio"
                id="d-authorized"
-               value=1
                name="privacyDownloadable"
                formControlName="privacyDownloadable"
         />
@@ -76,9 +77,9 @@
     </div>
     <div class="row">
       <div class="radio">
-        <input type="radio"
+        <input [value]="2"
+               type="radio"
                id="d-nobody"
-               value=2
                name="privacyDownloadable"
                formControlName="privacyDownloadable"
         />
