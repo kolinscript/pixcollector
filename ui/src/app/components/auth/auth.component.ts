@@ -40,7 +40,7 @@ export class AuthComponent implements OnInit {
         if (user.body.user) {
           this.storeService.setStore({user: user.body.user});
           localStorage.setItem('token', user.body.user.token);
-          // setInterval(() => { this.router.navigate(['/stocks']); }, 5000);
+          setInterval(() => { this.router.navigate(['/stocks']); }, 5000);
         } else if (!user.body.user) {
           // this.router.navigate(['/auth']);
         }

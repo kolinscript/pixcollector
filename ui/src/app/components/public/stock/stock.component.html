@@ -41,6 +41,9 @@
           </a>
         </div>
         <div class="bottom-panel-popup downloads" *ngIf="selectMode" [@slideUpDown]>
+          <a class="button select-all" (click)="selectAll()">
+            <div class="btn-label"><span *ngIf="!selectAllPix">Select all</span><span *ngIf="selectAllPix">Unselect</span></div>
+          </a>
           <a class="button selected">
             <div class="deselect" *ngIf="selectedAmount > 0" (click)="deselectClickHandler()">
               <span></span>
@@ -50,9 +53,6 @@
           </a>
           <a class="button download" [ngClass]="{'no-one-selected':selectedAmount === 0}" (click)="download()">
             <div class="btn-label">Download</div>
-          </a>
-          <a class="button select-all" (click)="selectAll()">
-            <div class="btn-label"><span *ngIf="!selectAllPix">Select all</span><span *ngIf="selectAllPix">Unselect</span></div>
           </a>
         </div>
 
@@ -115,7 +115,7 @@
       <div class="alert">Private page, sorry.</div>
     </div>
 
-    <div class="pr pr-authorized" *ngIf="stockUser.privacyVisible === 2"> k
+    <div class="pr pr-authorized" *ngIf="stockUser.privacyVisible === 2">
       <div class="icon-lock"></div>
       <div class="alert">Authorize to view this content.</div>
       <div class="button login" [routerLink]="['/auth']">
