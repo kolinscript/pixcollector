@@ -1,1 +1,1 @@
-# Collector
+# #PIXcollector API

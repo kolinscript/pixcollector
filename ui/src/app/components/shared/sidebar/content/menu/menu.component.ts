@@ -25,6 +25,9 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.store.store.user;
+    console.log('11_this.store: ', this.store);
+    console.log('this.user: ', this.user);
+
     this.href = `https://vk.com/id${this.user.vkId}`;
     this.store.storeObservable.subscribe((store) => {
       console.log('store: ', store);
@@ -51,8 +54,9 @@ export class MenuComponent implements OnInit {
         }
       };
       this.userService.updUser(userUpdates).subscribe((user) => {
-        console.log(user);
-        this.store.setStore({user: user.body.user});
+        if (user) {
+          this.store.setStore({user: user.body.user});
+        }
       });
     });
     this.form.get('privacyDownloadable').valueChanges.subscribe((privacy) => {
@@ -63,7 +67,9 @@ export class MenuComponent implements OnInit {
         }
       };
       this.userService.updUser(userUpdates).subscribe((user) => {
-        console.log(user);
+        if (user) {
+          this.store.setStore({user: user.body.user});
+        }
       });
     });
   }
