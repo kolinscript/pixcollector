@@ -26,11 +26,11 @@ export class MenuComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.storeObservable.subscribe((store) => {
       this.user = store.user;
-      this.href = `https://vk.com/id${this.user.vkId}`;
-      this.initForm();
       console.log('store: ', store);
-      console.log('this.user: ', this.user);
     })
+    this.href = `https://vk.com/id${this.user.vkId}`;
+    this.initForm();
+    console.log('this.user: ', this.user);
   }
 
   ngOnDestroy() {
@@ -45,8 +45,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.form = this.fb.group({
-      privacyVisible: [this.user.privacyVisible ? this.user.privacyVisible : null],
-      privacyDownloadable: [this.user.privacyDownloadable ? this.user.privacyDownloadable : null]
+      privacyVisible: new FormGroup(this.user.privacyVisible),
+      privacyDownloadable: new FormGroup(this.user.privacyVisible),
     });
     console.log(this.form.value);
     this.form.get('privacyVisible').valueChanges.subscribe((privacy) => {
