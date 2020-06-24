@@ -32,7 +32,6 @@ export class AuthComponent implements OnInit {
           const safeUser = ({ token, pixArray, ...rest }) => rest;
           this.storeService.setStore({user: safeUser(user.body.user)});
           localStorage.setItem('token', user.body.user.token);
-          localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
           this.router.navigate(['/auth/success']);
         }
       });
@@ -43,8 +42,7 @@ export class AuthComponent implements OnInit {
           const safeUser = ({ token, pixArray, ...rest }) => rest;
           this.storeService.setStore({user: safeUser(user.body.user)});
           localStorage.setItem('token', user.body.user.token);
-          localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
-          setInterval(() => { this.router.navigate(['/stocks']); }, 5000);
+          // setInterval(() => { this.router.navigate(['/stocks']); }, 5000);
         } else if (!user.body.user) {
           // this.router.navigate(['/auth']);
         }
