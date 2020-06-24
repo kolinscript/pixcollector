@@ -29,8 +29,7 @@ export class AuthComponent implements OnInit {
       this.code = this.router.url.slice(11);
       this.authService.code(this.code).subscribe(user => {
         if (user.body.user) {
-          const safeUser = ({ token, pixArray, ...rest }) => rest;
-          this.storeService.setStore({user: safeUser(user.body.user)});
+          this.storeService.setStore({user: user.body.user});
           localStorage.setItem('token', user.body.user.token);
           this.router.navigate(['/auth/success']);
         }
@@ -39,8 +38,7 @@ export class AuthComponent implements OnInit {
       this.state = State.success;
       this.authService.success().subscribe(user => {
         if (user.body.user) {
-          const safeUser = ({ token, pixArray, ...rest }) => rest;
-          this.storeService.setStore({user: safeUser(user.body.user)});
+          this.storeService.setStore({user: user.body.user});
           localStorage.setItem('token', user.body.user.token);
           // setInterval(() => { this.router.navigate(['/stocks']); }, 5000);
         } else if (!user.body.user) {

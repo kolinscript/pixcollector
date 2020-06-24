@@ -85,11 +85,8 @@ export class StockComponent implements OnInit, OnDestroy {
     this.userService.getUser(this.id).subscribe((user) => {
       if (!user.body.user) {
       } else if (user.body.user) {
-        const safeUser = ({ token, pixArray, ...rest }) => rest;
-
         this.user = user.body.user;
         this.href = `https://vk.com/id${this.user.vkId}`;
-
         if (this.selfStock) {
           this.storeService.setStore({user: this.user});
           // localStorage.setItem('token', user.body.user.token);
