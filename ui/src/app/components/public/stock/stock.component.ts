@@ -71,6 +71,13 @@ export class StockComponent implements OnInit, OnDestroy {
       } else if (this.user.privacyDownloadable === 0) {
         this.allowDownload = true;
       }
+
+      this.user.pixArray.forEach((pix) => {
+        pix.hovered = false;
+        pix.selected = false;
+      });
+      this.calculateLastPage();
+      this.calculateViewport();
     })
 
     this.userService.getUser(this.id).subscribe((user) => {
@@ -81,23 +88,19 @@ export class StockComponent implements OnInit, OnDestroy {
         this.user = user.body.user;
         this.href = `https://vk.com/id${this.user.vkId}`;
 
-        this.user.pixArray.forEach((pix) => {
-          pix.hovered = false;
-          pix.selected = false;
-        });
-
-        console.log('user: ', this.user);
-
-        this.calculateLastPage();
-        this.calculateViewport();
-
-        // only if self page!
         if (this.selfStock) {
-          this.storeService.setStore({user: safeUser(user.body.user)});
-          localStorage.setItem('token', user.body.user.token);
-          localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
+          this.storeService.setStore({user: this.user});
+          // localStorage.setItem('token', user.body.user.token);
+          // localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
         }
       }
+
+      this.user.pixArray.forEach((pix) => {
+        pix.hovered = false;
+        pix.selected = false;
+      });
+      this.calculateLastPage();
+      this.calculateViewport();
     });
   }
 
