@@ -32,7 +32,7 @@ export class StockComponent implements OnInit {
 
 
   constructor(
-    private store: StoreService,
+    private storeService: StoreService,
     private router: Router,
     private userService: UserService,
     private downloadService: DownloadService,
@@ -64,7 +64,7 @@ export class StockComponent implements OnInit {
 
         // only if self page!
         if (this.selfStock) {
-          this.store.setStore({user: safeUser(user.body.user)});
+          this.storeService.setStore({user: safeUser(user.body.user)});
           localStorage.setItem('token', user.body.user.token);
           localStorage.setItem('user', JSON.stringify(safeUser(user.body.user)));
         }

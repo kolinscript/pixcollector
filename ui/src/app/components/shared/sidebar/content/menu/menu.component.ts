@@ -4,19 +4,21 @@ import { SideBarService } from '../../../../../services/side-bar.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../../../services/user.service';
 import { StoreService } from '../../../../../services/store.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public href: string;
   public user;
+  store: Subscription
 
   constructor(
-    private store: StoreService,
+    private storeService: StoreService,
     private sideBar: SideBarService,
     private userService: UserService,
     private router: Router,
@@ -24,13 +26,17 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.store.storeObservable.subscribe((store) => {
+    this.store = this.storeService.storeObservable.subscribe((store) => {
       this.user = store.user;
       console.log('store: ', store);
     })
     this.href = `https://vk.com/id${this.user.vkId}`;
     this.initForm();
     console.log('this.user: ', this.user);
+  }
+
+  ngOnDestroy() {
+    this.store.unsubscribe();
   }
 
   public logout(): void {
@@ -54,7 +60,7 @@ export class MenuComponent implements OnInit {
       };
       this.userService.updUser(userUpdates).subscribe((user) => {
         if (user) {
-          this.store.setStore({user: user.body.user});
+          this.storeService.setStore({user: user.body.user});
         }
       });
     });
@@ -67,7 +73,7 @@ export class MenuComponent implements OnInit {
       };
       this.userService.updUser(userUpdates).subscribe((user) => {
         if (user) {
-          this.store.setStore({user: user.body.user});
+          this.storeService.setStore({user: user.body.user});
         }
       });
     });
