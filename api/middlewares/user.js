@@ -289,6 +289,7 @@ const user = {
                     const safeUser = ({ vkToken, ...rest }) => rest;
                     return safeUser(user.toAuthJSON());
                 });
+                // TODO rework for admin
                 users = users.filter(user => (user.privacyVisible !== 3));
                 res.status(200).json( { body: { users: users } });
             } else {
