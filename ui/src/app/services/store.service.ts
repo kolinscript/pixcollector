@@ -6,7 +6,7 @@ import { Store } from '../models/store.model';
   providedIn: 'root'
 })
 export class StoreService {
-  public store: Store;
+  private store: Store;
   public storeObservable: BehaviorSubject<Store>;
 
   constructor() {

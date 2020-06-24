@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SideBarService } from '../../../../../services/side-bar.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -10,7 +10,7 @@ import { StoreService } from '../../../../../services/store.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public href: string;
   public user;
@@ -24,15 +24,17 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = this.store.store.user;
-    console.log('11_this.store: ', this.store);
-    console.log('this.user: ', this.user);
-
-    this.href = `https://vk.com/id${this.user.vkId}`;
     this.store.storeObservable.subscribe((store) => {
+      this.user = store.user;
+      this.href = `https://vk.com/id${this.user.vkId}`;
+      this.initForm();
       console.log('store: ', store);
+      console.log('this.user: ', this.user);
     })
-    this.initForm();
+  }
+
+  ngOnDestroy() {
+    this.store.storeObservable.unsubscribe();
   }
 
   public logout(): void {
