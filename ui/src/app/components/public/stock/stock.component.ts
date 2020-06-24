@@ -48,10 +48,13 @@ export class StockComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.id = this.router.url.slice(7);
     this.authorized = this.authService.isAuthorized();
+    this.userService.isSelfStock(this.id).subscribe((selfStockCheck) => {
+      console.log(selfStockCheck);
+      this.selfStock = selfStockCheck.body.isSelfStock;
+    });
     this.store = this.storeService.storeObservable.subscribe((store) => {
       if (store && store.user) {
         this.user = store.user;
-        this.selfStock = this.id === this.user.vkId;
         console.log('store: ', store);
         if (this.selfStock) {
           this.private = false;
@@ -59,7 +62,7 @@ export class StockComponent implements OnInit, OnDestroy {
           this.private = true;
         } else if (this.user.privacyVisible === 2 && !this.selfStock && this.authorized) {
           this.private = false;
-        } else if (this.user.privacyVisible === 2 && !this.selfStock && !this.authorized) {
+        } else if (this.user.privacyVisible === 2  && !this.authorized) {
           this.private = true;
         } else if (this.user.privacyVisible === 1) {
           this.private = false;
@@ -71,7 +74,7 @@ export class StockComponent implements OnInit, OnDestroy {
           this.allowDownload = false;
         } else if (this.user.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
           this.allowDownload = true;
-        } else if (this.user.privacyDownloadable === 2 && !this.selfStock && !this.authorized) {
+        } else if (this.user.privacyDownloadable === 2  && !this.authorized) {
           this.allowDownload = false;
         } else if (this.user.privacyDownloadable === 1) {
           this.allowDownload = true;

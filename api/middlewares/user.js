@@ -303,7 +303,7 @@ const user = {
                     user.save()
                         .then(() => {
                                 const safeUser = ({ _id, vkToken, ...rest }) => rest;
-                                res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
+                                res.status(200).json({ body: { user: safeUser(user.toAuthJSON()) } });
                             }
                         );
                 }
@@ -311,6 +311,21 @@ const user = {
             });
         }
     }),
+
+    isSelfStock: ((req, res, next) => {
+        let token;
+        const { headers: { authorization } } = req;
+        if (authorization && authorization.split(' ')[0] === 'token') {
+            token = authorization.split(' ')[1];
+        }
+        const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
+        const reqVkID = req.query.id;
+        if (tokenVkId === reqVkID) {
+            res.status(200).json({ body: { isSelfStock: true } });
+        } else {
+            res.status(200).json({ body: { isSelfStock: false } });
+        }
+    })
 };
 
 module.exports = user;

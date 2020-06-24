@@ -18,6 +18,12 @@ export class UserService {
       .pipe(map(res => res as any));
   }
 
+  isSelfStock(id: string): Observable<any> {
+    return this.http
+      .get(`/api/v1/user/is_self_stock?id=${id}`)
+      .pipe(map(res => res as any));
+  }
+
   updUser(user: {}): Observable<any> {
     return this.http
       .put(`/api/v1/user/update`, user)

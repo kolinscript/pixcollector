@@ -283,6 +283,7 @@ const auth = {
                 console.log(error);
             });
     }),
+
     success: ((req, res, next) => {
         if (req.session.user) {
             res.status(200).json( { body: { user: req.session.user } });
