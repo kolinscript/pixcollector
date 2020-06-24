@@ -11,7 +11,7 @@ router.get('/auth/success', secure.optional, auth.success);
 
 router.get('/user', secure.optional, user.getUser);
 
-router.get('/user/is_self_stock', secure.required, user.isSelfStock);
+router.get('/user/is_self_stock', secure.optional, user.isSelfStock);
 
 router.put('/user/update', secure.required, user.updateUser);
 
