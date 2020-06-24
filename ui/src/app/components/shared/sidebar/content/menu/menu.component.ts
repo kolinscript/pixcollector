@@ -10,7 +10,7 @@ import { StoreService } from '../../../../../services/store.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit, OnDestroy {
+export class MenuComponent implements OnInit {
   public form: FormGroup;
   public href: string;
   public user;
@@ -31,10 +31,6 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.href = `https://vk.com/id${this.user.vkId}`;
     this.initForm();
     console.log('this.user: ', this.user);
-  }
-
-  ngOnDestroy() {
-    this.store.storeObservable.unsubscribe();
   }
 
   public logout(): void {
