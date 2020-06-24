@@ -1,20 +1,20 @@
 <div class="stock-wrapper">
   <app-header></app-header>
 
-  <div class="main" *ngIf="user && !private">
-    <div class="user-info" *ngIf="user">
+  <div class="main" *ngIf="stockUser && !private">
+    <div class="user-info" *ngIf="stockUser">
       <div class="user-info-avatar">
         <a class="user-avatar" href="{{href}}" target="_blank" rel="noopener noreferrer">
-          <img class="pix-img" src="{{user.avatar}}"/>
+          <img class="pix-img" src="{{stockUser.avatar}}"/>
         </a>
       </div>
       <div class="user-info-main">
-        <div class="name">{{user.name}}</div>
-        <div class="album-size">{{user.albumSize}}</div>
+        <div class="name">{{stockUser.name}}</div>
+        <div class="album-size">{{stockUser.albumSize}}</div>
       </div>
     </div>
     <div class="gallery">
-      <div class="pixies" *ngIf="user">
+      <div class="pixies" *ngIf="stockUser">
         <div class="pix" *ngFor="let pix of pixInViewport; index as i">
           <div class="pix-container" (mouseenter)="pixHoveredStart($event, pix, i)" (mouseleave)="pixHoveredEnd($event, pix, i)">
             <img class="pix-img" src="{{pix.url}}" alt="{{pix.url}}"/>
@@ -79,7 +79,11 @@
               <span></span>
             </span>
             </button>
-            <span class="pages"><span class="page-current">{{paginatorPageCurrent}}</span> of <span class="page-total">{{paginatorPageTotal}}</span></span>
+            <span class="pages">
+              <span class="page-current">{{paginatorPageCurrent}}</span>
+              of
+              <span class="page-total">{{paginatorPageTotal}}</span>
+            </span>
             <button class="btn-page forward" (click)="paginatorClickHandler('lastPage')">
             <span class="icon">
               <span></span>

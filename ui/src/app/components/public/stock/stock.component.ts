@@ -16,7 +16,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class StockComponent implements OnInit, OnDestroy {
   public id;
-  public user;
+  public stockUser;
   public pixPerPage: number = 50;
   public pppMode: boolean = false;
   public selectMode: boolean = false;
@@ -54,34 +54,34 @@ export class StockComponent implements OnInit, OnDestroy {
       this.selfStock = selfStockCheck.body.isSelfStock;
     });
     this.store = this.storeService.storeObservable.subscribe((store) => {
-      if (store && store.user) {
-        this.user = store.user;
+      if (store && store.stockUser) {
+        this.stockUser = store.stockUser;
         console.log('store: ', store);
         if (this.selfStock) {
           this.private = false;
-        } else if (this.user.privacyVisible === 3 && !this.selfStock) {
+        } else if (this.stockUser.privacyVisible === 3 && !this.selfStock) {
           this.private = true;
-        } else if (this.user.privacyVisible === 2 && !this.selfStock && this.authorized) {
+        } else if (this.stockUser.privacyVisible === 2 && !this.selfStock && this.authorized) {
           this.private = false;
-        } else if (this.user.privacyVisible === 2  && !this.authorized) {
+        } else if (this.stockUser.privacyVisible === 2  && !this.authorized) {
           this.private = true;
-        } else if (this.user.privacyVisible === 1) {
+        } else if (this.stockUser.privacyVisible === 1) {
           this.private = false;
         }
 
         if (this.selfStock) {
           this.allowDownload = true;
-        } else if (this.user.privacyDownloadable === 3 && !this.selfStock) {
+        } else if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
           this.allowDownload = false;
-        } else if (this.user.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
+        } else if (this.stockUser.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
           this.allowDownload = true;
-        } else if (this.user.privacyDownloadable === 2  && !this.authorized) {
+        } else if (this.stockUser.privacyDownloadable === 2  && !this.authorized) {
           this.allowDownload = false;
-        } else if (this.user.privacyDownloadable === 1) {
+        } else if (this.stockUser.privacyDownloadable === 1) {
           this.allowDownload = true;
         }
 
-        this.user.pixArray.forEach((pix) => {
+        this.stockUser.pixArray.forEach((pix) => {
           pix.hovered = false;
           pix.selected = false;
         });
@@ -93,12 +93,12 @@ export class StockComponent implements OnInit, OnDestroy {
     this.userService.getUser(this.id).subscribe((user) => {
       if (!user.body.user) {
       } else if (user.body.user) {
-        this.user = user.body.user;
+        this.stockUser = user.body.user;
         this.href = `https://vk.com/id${this.user.vkId}`;
-        this.storeService.setStore({user: this.user});
+        this.storeService.setStore({stockUser: this.stockUser});
       }
 
-      this.user.pixArray.forEach((pix) => {
+      this.stockUser.pixArray.forEach((pix) => {
         pix.hovered = false;
         pix.selected = false;
       });
@@ -112,20 +112,20 @@ export class StockComponent implements OnInit, OnDestroy {
   }
 
   public pixHoveredStart(event, pix, i): void {
-    const item = this.user.pixArray.find(el => el.url === pix.url);
+    const item = this.stockUser.pixArray.find(el => el.url === pix.url);
     item.hovered = true;
   }
 
   public pixHoveredEnd(event, pix, i): void {
-    const item = this.user.pixArray.find(el => el.url === pix.url);
+    const item = this.stockUser.pixArray.find(el => el.url === pix.url);
     item.hovered = false;
   }
 
   public openViewer(event, pix, i): void {
     this.viewerPix = {
-      ...this.user.pixArray.find(el => el.url === pix.url),
-      num_current: this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === pix.url)) + 1,
-      num_total: this.user.pixArray.length
+      ...this.stockUser.pixArray.find(el => el.url === pix.url),
+      num_current: this.stockUser.pixArray.indexOf(this.stockUser.pixArray.find(el => el.url === pix.url)) + 1,
+      num_total: this.stockUser.pixArray.length
     };
     console.log(this.viewerPix);
     this.viewerOpened = true;
@@ -136,25 +136,25 @@ export class StockComponent implements OnInit, OnDestroy {
   }
 
   public viewerSlide(direction): void {
-    const CUR_PIX_INDEX = this.user.pixArray.indexOf(this.user.pixArray.find(el => el.url === this.viewerPix.url));
+    const CUR_PIX_INDEX = this.stockUser.pixArray.indexOf(this.stockUser.pixArray.find(el => el.url === this.viewerPix.url));
     switch (direction) {
       case 'left': {
         if (CUR_PIX_INDEX - 1 >= 0) {
           this.viewerPix = {
-            ...this.user.pixArray[CUR_PIX_INDEX - 1],
+            ...this.stockUser.pixArray[CUR_PIX_INDEX - 1],
             num_current: CUR_PIX_INDEX,
-            num_total: this.user.pixArray.length,
+            num_total: this.stockUser.pixArray.length,
           };
           console.log(this.viewerPix);
         }
         break;
       }
       case 'right': {
-        if (CUR_PIX_INDEX + 1 < this.user.pixArray.length) {
+        if (CUR_PIX_INDEX + 1 < this.stockUser.pixArray.length) {
           this.viewerPix = {
-            ...this.user.pixArray[CUR_PIX_INDEX + 1],
+            ...this.stockUser.pixArray[CUR_PIX_INDEX + 1],
             num_current: CUR_PIX_INDEX + 2,
-            num_total: this.user.pixArray.length,
+            num_total: this.stockUser.pixArray.length,
           };
         }
         console.log(this.viewerPix);
@@ -164,9 +164,9 @@ export class StockComponent implements OnInit, OnDestroy {
   }
 
   public pixSelectorClickHandler(event, pix, i): void {
-    const item = this.user.pixArray.find(el => el.url === pix.url);
+    const item = this.stockUser.pixArray.find(el => el.url === pix.url);
     item.selected = !item.selected;
-    this.selectedPixies = this.user.pixArray.filter(pixItem => pixItem.selected);
+    this.selectedPixies = this.stockUser.pixArray.filter(pixItem => pixItem.selected);
     this.selectedAmount = this.selectedPixies.length;
     console.log(this.selectedPixies);
   }
@@ -245,17 +245,17 @@ export class StockComponent implements OnInit, OnDestroy {
   public selectAll(): void {
     if (this.selectAllPix) {
       this.selectAllPix = false;
-      this.user.pixArray.forEach((pix) => {
+      this.stockUser.pixArray.forEach((pix) => {
         pix.selected = false;
       });
       this.selectedPixies = [];
       this.selectedAmount = 0;
     } else if (!this.selectAllPix) {
       this.selectAllPix = true;
-      this.user.pixArray.forEach((pix) => {
+      this.stockUser.pixArray.forEach((pix) => {
         pix.selected = true;
       });
-      this.selectedPixies = this.user.pixArray.filter(pix => pix.selected);
+      this.selectedPixies = this.stockUser.pixArray.filter(pix => pix.selected);
       this.selectedAmount = this.selectedPixies.length;
     }
   }
@@ -273,19 +273,19 @@ export class StockComponent implements OnInit, OnDestroy {
   }
 
   private calculateLastPage(): void {
-    this.paginatorPageTotal =  Math.ceil(this.user.pixArray.length / this.pixPerPage);
+    this.paginatorPageTotal =  Math.ceil(this.stockUser.pixArray.length / this.pixPerPage);
   }
 
   private calculateViewport(): void {
     this.pixInViewport = [];
     if (this.paginatorPageCurrent === this.paginatorPageTotal) {
-      const lastPixCount = this.user.pixArray.length - this.pixViewportStart;
+      const lastPixCount = this.stockUser.pixArray.length - this.pixViewportStart;
       for (let i = this.pixViewportStart; i < (this.pixViewportStart + lastPixCount); i++) {
-        this.pixInViewport.push(this.user.pixArray[i]);
+        this.pixInViewport.push(this.stockUser.pixArray[i]);
       }
     } else {
       for (let i = this.pixViewportStart; i < (this.pixViewportStart + this.pixPerPage); i++) {
-        this.pixInViewport.push(this.user.pixArray[i]);
+        this.pixInViewport.push(this.stockUser.pixArray[i]);
       }
     }
   }
