@@ -120,7 +120,7 @@ const auth = {
                                                     user.markModified('pixArray');
                                                     user.save()
                                                         .then(() => {
-                                                                const safeUser = ({ _id, vkToken, pixArray, ...rest }) => rest;
+                                                                const safeUser = ({ _id, vkToken, ...rest }) => rest;
                                                                 req.session.user = safeUser(user.toAuthJSON());
                                                                 res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
                                                             }
@@ -129,7 +129,7 @@ const auth = {
                                                 if (!user) {
                                                     userNew.save()
                                                         .then(() => {
-                                                                const safeUser = ({ _id, vkToken, pixArray, ...rest }) => rest;
+                                                                const safeUser = ({ _id, vkToken, ...rest }) => rest;
                                                                 req.session.user = safeUser(userNew.toAuthJSON());
                                                                 res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
                                                             }
