@@ -193,7 +193,7 @@ export class StockComponent implements OnInit, OnDestroy {
 
   public deselectClickHandler(): void {
     this.selectAllPix = false;
-    this.user.pixArray.forEach((pix) => {
+    this.stockUser.pixArray.forEach((pix) => {
       pix.selected = false;
     });
     this.selectedPixies = [];
