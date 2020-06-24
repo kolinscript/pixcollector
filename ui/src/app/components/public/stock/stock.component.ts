@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SlideUpDown } from '../../../animations';
 import { saveAs } from 'file-saver';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { DownloadService } from '../../../services/download.service';
 import { StoreService } from '../../../services/store.service';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-stock',
@@ -12,7 +14,7 @@ import { StoreService } from '../../../services/store.service';
   styleUrls: ['./stock.component.scss'],
   animations: [SlideUpDown.animationTrigger]
 })
-export class StockComponent implements OnInit {
+export class StockComponent implements OnInit, OnDestroy {
   public id;
   public user;
   public pixPerPage: number = 50;
@@ -29,10 +31,15 @@ export class StockComponent implements OnInit {
   public href: string = '';
   public viewerOpened: boolean = false;
   public viewerPix;
+  public private: boolean;
+  public allowDownload: boolean;
+  private store: Subscription;
+  private authorized: boolean;
 
 
   constructor(
     private storeService: StoreService,
+    private authService: AuthService,
     private router: Router,
     private userService: UserService,
     private downloadService: DownloadService,
@@ -40,9 +47,31 @@ export class StockComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.router.url.slice(7);
+    this.authorized = this.authService.isAuthorized();
+    this.store = this.storeService.storeObservable.subscribe((store) => {
+      this.user = store.user;
+      this.selfStock = this.id === this.user.vkId;
+      console.log('store: ', store);
+      if (this.selfStock) {
+        this.private = false;
+      } else if (this.user.privacyVisible === 2 && !this.selfStock) {
+        this.private = true;
+      } else if (this.user.privacyVisible === 1 && !this.selfStock && this.authorized) {
+        this.private = false;
+      } else if (this.user.privacyVisible === 0) {
+        this.private = false;
+      }
 
-    const USER_LOCAL = JSON.parse(localStorage.getItem('user'));
-    if (USER_LOCAL) { this.selfStock = this.id === USER_LOCAL.vkId; }
+      if (this.selfStock) {
+        this.allowDownload = true;
+      } else if (this.user.privacyDownloadable === 2 && !this.selfStock) {
+        this.allowDownload = false;
+      } else if (this.user.privacyDownloadable === 1 && !this.selfStock && this.authorized) {
+        this.allowDownload = true;
+      } else if (this.user.privacyDownloadable === 0) {
+        this.allowDownload = true;
+      }
+    })
 
     this.userService.getUser(this.id).subscribe((user) => {
       if (!user.body.user) {
@@ -70,6 +99,10 @@ export class StockComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.store.unsubscribe();
   }
 
   public pixHoveredStart(event, pix, i): void {

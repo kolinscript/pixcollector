@@ -1,7 +1,7 @@
 <div class="stock-wrapper">
   <app-header></app-header>
 
-  <div class="main">
+  <div class="main" *ngIf="user && !private">
     <div class="user-info" *ngIf="user">
       <div class="user-info-avatar">
         <a class="user-avatar" href="{{href}}" target="_blank" rel="noopener noreferrer">
@@ -95,13 +95,23 @@
             </span>
             </button>
           </div>
-          <div class="download">
+          <div class="download" *ngIf="allowDownload">
             <a class="select" [ngClass]="{active:selectMode}" (click)="selectClickHandler()"></a>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="main private" *ngIf="private">
+    <div class="user-info">
+      <div class="user-info-main">
+        <div class="name">Private page, sorry.</div>
+      </div>
+    </div>
+  </div>
+
+<!--  <div class="loader"></div>-->
 
   <app-viewer
     *ngIf="viewerOpened"

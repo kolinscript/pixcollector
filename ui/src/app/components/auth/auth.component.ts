@@ -16,7 +16,7 @@ enum State {
 export class AuthComponent implements OnInit {
   public StateEnum = State;
   public state: State = State.auth;
-  code: string;
+  private code: string;
 
   constructor(
     private storeService: StoreService,

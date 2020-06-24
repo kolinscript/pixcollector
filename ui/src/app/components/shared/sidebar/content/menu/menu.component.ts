@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public href: string;
   public user;
-  store: Subscription
+  private store: Subscription
 
   constructor(
     private storeService: StoreService,
