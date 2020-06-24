@@ -26,10 +26,6 @@ const user = {
                 return console.error(err);
             }
             if (userRoot) {
-                const safeUser = ({ vkToken, ...rest }) => rest;
-                res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
-
-
                 if (token !== undefined) {
                     if (tokenVkId === reqVkID) {
                         const safeUser = ({ vkToken, ...rest }) => rest;
@@ -272,7 +268,8 @@ const user = {
                 //     .catch(function (error) {
                 //         console.log(error);
                 //     });
-            } else {
+            }
+            else {
                 res.status(200).json( { body: { error: 'found no user' } });
             }
         });
