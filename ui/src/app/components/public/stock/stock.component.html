@@ -28,16 +28,16 @@
       <div class="bottom-panel">
         <div class="bottom-panel-popup items-per-page" *ngIf="pppMode" [@slideUpDown]>
           <a class="button" (click)="pixPerPageHandler(50)">
-            <div class="label">50</div>
+            <div class="btn-label">50</div>
           </a>
           <a class="button" (click)="pixPerPageHandler(100)">
-            <div class="label">100</div>
+            <div class="btn-label">100</div>
           </a>
           <a class="button" (click)="pixPerPageHandler(200)">
-            <div class="label">200</div>
+            <div class="btn-label">200</div>
           </a>
           <a class="button" (click)="pixPerPageHandler(420)">
-            <div class="label">420</div>
+            <div class="btn-label">420</div>
           </a>
         </div>
         <div class="bottom-panel-popup downloads" *ngIf="selectMode" [@slideUpDown]>
@@ -46,13 +46,13 @@
               <span></span>
               <span></span>
             </div>
-            <div class="label">{{selectedAmount}} selected</div>
+            <div class="btn-label">{{selectedAmount}} selected</div>
           </a>
           <a class="button download" [ngClass]="{'no-one-selected':selectedAmount === 0}" (click)="download()">
-            <div class="label">Download</div>
+            <div class="btn-label">Download</div>
           </a>
           <a class="button select-all" (click)="selectAll()">
-            <div class="label"><span *ngIf="!selectAllPix">Select all</span><span *ngIf="selectAllPix">Unselect</span></div>
+            <div class="btn-label"><span *ngIf="!selectAllPix">Select all</span><span *ngIf="selectAllPix">Unselect</span></div>
           </a>
         </div>
 

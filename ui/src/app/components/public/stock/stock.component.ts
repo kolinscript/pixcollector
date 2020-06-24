@@ -59,6 +59,8 @@ export class StockComponent implements OnInit, OnDestroy {
           this.private = true;
         } else if (this.user.privacyVisible === 2 && !this.selfStock && this.authorized) {
           this.private = false;
+        } else if (this.user.privacyVisible === 2 && !this.selfStock && !this.authorized) {
+          this.private = true;
         } else if (this.user.privacyVisible === 1) {
           this.private = false;
         }
@@ -69,6 +71,8 @@ export class StockComponent implements OnInit, OnDestroy {
           this.allowDownload = false;
         } else if (this.user.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
           this.allowDownload = true;
+        } else if (this.user.privacyDownloadable === 2 && !this.selfStock && !this.authorized) {
+          this.allowDownload = false;
         } else if (this.user.privacyDownloadable === 1) {
           this.allowDownload = true;
         }
