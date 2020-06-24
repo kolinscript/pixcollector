@@ -355,23 +355,16 @@
         &.pr-nobody {}
         &.pr-authorized {}
 
-        .icon-face {
-          cursor: pointer;
-          width: 24px;
-          height: 24px;
-          mask-image: url('../../../../assets/images/face.svg');
-          mask-size: 100%;
-          background: $background;
-        }
         .icon-lock {
           cursor: pointer;
-          width: 24px;
-          height: 24px;
+          width: 124px;
+          height: 124px;
           mask-image: url('../../../../assets/images/lock.svg');
           mask-size: 100%;
           background: $background;
         }
         .alert {
+          margin-top: 40px;
           font: 500 22px/24px $fontMain;
           text-align: center;
           color: $background;

@@ -111,13 +111,11 @@
 
   <div class="main privacy" *ngIf="private">
     <div class="pr pr-nobody" *ngIf="stockUser.privacyVisible === 3">
-      <div class="icon-face"></div>
       <div class="icon-lock"></div>
       <div class="alert">Private page, sorry.</div>
     </div>
 
-    <div class="pr pr-authorized" *ngIf="stockUser.privacyVisible === 2">
-      <div class="icon-face"></div>
+    <div class="pr pr-authorized" *ngIf="stockUser.privacyVisible === 2"> k
       <div class="icon-lock"></div>
       <div class="alert">Authorize to view this content.</div>
       <div class="button login" [routerLink]="['/auth']">

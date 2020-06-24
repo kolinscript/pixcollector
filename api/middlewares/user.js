@@ -6,13 +6,13 @@ const Users              = mongoose.model('Users');
 const user = {
     getUser: ((req, res, next) => {
         const { headers: { authorization } } = req;
+        const reqVkID = req.query.id;
         let token;
         let tokenVkId;
-        if(authorization && authorization.split(' ')[0] === 'token') {
+        if (authorization && authorization.split(' ')[0] === 'token') {
             token = authorization.split(' ')[1];
             tokenVkId = jwt.verify(token, 'collector_secret').vkId;
         }
-        const reqVkID = req.query.id;
 
         console.log('token:____', token);
         console.log('tokenVkId:____', tokenVkId);
@@ -28,6 +28,26 @@ const user = {
             if (userRoot) {
                 const safeUser = ({ vkToken, ...rest }) => rest;
                 res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
+
+
+                if (token !== undefined) {
+                    if (tokenVkId === reqVkID) {
+                        const safeUser = ({ vkToken, ...rest }) => rest;
+                        res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
+                    } else {
+                        // watch on privacy rights
+
+                        const safeUser = ({ vkToken, ...rest }) => rest;
+                        res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
+                    }
+                } else {
+                    // watch on privacy rights
+
+                    const safeUser = ({ vkToken, ...rest }) => rest;
+                    res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
+                }
+
+
                 // const userLink = `https://api.vk.com/` +
                 //     `method/users.get` +
                 //     `?fields=photo_50` +
@@ -265,10 +285,11 @@ const user = {
                 return console.error(err);
             }
             if (usersRaw) {
-                const users = usersRaw.map((user) => {
+                let users = usersRaw.map((user) => {
                     const safeUser = ({ vkToken, ...rest }) => rest;
                     return safeUser(user.toAuthJSON());
                 });
+                users = users.filter(user => (user.privacyVisible !== 3));
                 res.status(200).json( { body: { users: users } });
             } else {
                 res.status(200).json( { body: { error: 'found no users' } });

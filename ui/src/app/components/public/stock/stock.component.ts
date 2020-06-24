@@ -57,6 +57,8 @@ export class StockComponent implements OnInit, OnDestroy {
       if (store && store.stockUser) {
         this.stockUser = store.stockUser;
         console.log('store: ', store);
+
+        // TODO move to api
         if (this.selfStock) {
           this.private = false;
         } else if (this.stockUser.privacyVisible === 3 && !this.selfStock) {
