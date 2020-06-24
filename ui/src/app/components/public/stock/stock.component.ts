@@ -94,7 +94,7 @@ export class StockComponent implements OnInit, OnDestroy {
       if (!user.body.user) {
       } else if (user.body.user) {
         this.stockUser = user.body.user;
-        this.href = `https://vk.com/id${this.user.vkId}`;
+        this.href = `https://vk.com/id${this.stockUser.vkId}`;
         this.storeService.setStore({stockUser: this.stockUser});
       }
 
