@@ -319,7 +319,7 @@ const user = {
             token = authorization.split(' ')[1];
         }
         console.log('token:__', token);
-        if (token) {
+        if (token !== undefined) {
             const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
             const reqVkID = req.query.id;
             if (tokenVkId === reqVkID) {
