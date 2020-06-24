@@ -49,35 +49,37 @@ export class StockComponent implements OnInit, OnDestroy {
     this.id = this.router.url.slice(7);
     this.authorized = this.authService.isAuthorized();
     this.store = this.storeService.storeObservable.subscribe((store) => {
-      this.user = store.user;
-      this.selfStock = this.id === this.user.vkId;
-      console.log('store: ', store);
-      if (this.selfStock) {
-        this.private = false;
-      } else if (this.user.privacyVisible === 2 && !this.selfStock) {
-        this.private = true;
-      } else if (this.user.privacyVisible === 1 && !this.selfStock && this.authorized) {
-        this.private = false;
-      } else if (this.user.privacyVisible === 0) {
-        this.private = false;
-      }
+      if (store && store.user) {
+        this.user = store.user;
+        this.selfStock = this.id === this.user.vkId;
+        console.log('store: ', store);
+        if (this.selfStock) {
+          this.private = false;
+        } else if (this.user.privacyVisible === 2 && !this.selfStock) {
+          this.private = true;
+        } else if (this.user.privacyVisible === 1 && !this.selfStock && this.authorized) {
+          this.private = false;
+        } else if (this.user.privacyVisible === 0) {
+          this.private = false;
+        }
 
-      if (this.selfStock) {
-        this.allowDownload = true;
-      } else if (this.user.privacyDownloadable === 2 && !this.selfStock) {
-        this.allowDownload = false;
-      } else if (this.user.privacyDownloadable === 1 && !this.selfStock && this.authorized) {
-        this.allowDownload = true;
-      } else if (this.user.privacyDownloadable === 0) {
-        this.allowDownload = true;
-      }
+        if (this.selfStock) {
+          this.allowDownload = true;
+        } else if (this.user.privacyDownloadable === 2 && !this.selfStock) {
+          this.allowDownload = false;
+        } else if (this.user.privacyDownloadable === 1 && !this.selfStock && this.authorized) {
+          this.allowDownload = true;
+        } else if (this.user.privacyDownloadable === 0) {
+          this.allowDownload = true;
+        }
 
-      this.user.pixArray.forEach((pix) => {
-        pix.hovered = false;
-        pix.selected = false;
-      });
-      this.calculateLastPage();
-      this.calculateViewport();
+        this.user.pixArray.forEach((pix) => {
+          pix.hovered = false;
+          pix.selected = false;
+        });
+        this.calculateLastPage();
+        this.calculateViewport();
+      }
     })
 
     this.userService.getUser(this.id).subscribe((user) => {

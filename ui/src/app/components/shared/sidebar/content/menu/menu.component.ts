@@ -27,8 +27,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store = this.storeService.storeObservable.subscribe((store) => {
-      this.user = store.user;
-      console.log('store: ', store);
+      if (store && store.user) {
+        this.user = store.user;
+        console.log('store: ', store);
+      }
     })
     this.href = `https://vk.com/id${this.user.vkId}`;
     this.initForm();
