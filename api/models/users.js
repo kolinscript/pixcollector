@@ -10,9 +10,9 @@ const UsersSchema = new Schema({
     avatar: String,
     albumSize: String,
     pixArray: Array,
-    privacyVisible: Number, // 0 public, 1 private - authorized, 2 private - nobody
-    privacyDownloadable: Number, // 0 public, 1 private - authorized, 2 private - nobody
-    sysAccessRights: Number // 0 admin, 1 moderator, 2 user
+    privacyVisible: Number, // 1 public, 2 private - authorized, 3 private - nobody
+    privacyDownloadable: Number, // 1 public, 2 private - authorized, 3 private - nobody
+    sysAccessRights: Number // 1 admin, 2 moderator, 3 user
 });
 
 UsersSchema.methods.generateJWT = function() {

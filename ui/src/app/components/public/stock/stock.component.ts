@@ -55,21 +55,21 @@ export class StockComponent implements OnInit, OnDestroy {
         console.log('store: ', store);
         if (this.selfStock) {
           this.private = false;
-        } else if (this.user.privacyVisible === 2 && !this.selfStock) {
+        } else if (this.user.privacyVisible === 3 && !this.selfStock) {
           this.private = true;
-        } else if (this.user.privacyVisible === 1 && !this.selfStock && this.authorized) {
+        } else if (this.user.privacyVisible === 2 && !this.selfStock && this.authorized) {
           this.private = false;
-        } else if (this.user.privacyVisible === 0) {
+        } else if (this.user.privacyVisible === 1) {
           this.private = false;
         }
 
         if (this.selfStock) {
           this.allowDownload = true;
-        } else if (this.user.privacyDownloadable === 2 && !this.selfStock) {
+        } else if (this.user.privacyDownloadable === 3 && !this.selfStock) {
           this.allowDownload = false;
-        } else if (this.user.privacyDownloadable === 1 && !this.selfStock && this.authorized) {
+        } else if (this.user.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
           this.allowDownload = true;
-        } else if (this.user.privacyDownloadable === 0) {
+        } else if (this.user.privacyDownloadable === 1) {
           this.allowDownload = true;
         }
 

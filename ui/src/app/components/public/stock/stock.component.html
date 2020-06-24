@@ -58,7 +58,9 @@
 
         <div class="bottom-panel-wrapper">
           <div class="pix-per-page">
-            <a class="button select" [ngClass]="{active:pppMode}"  (click)="pppClickHandler()"><div class="label">{{pixPerPage}}</div></a>
+            <a class="button select" [ngClass]="{active:pppMode}"  (click)="pppClickHandler()">
+              <div class="btn-label">{{pixPerPage}}</div>
+            </a>
           </div>
           <div class="paginator">
             <button class="btn-page backward" (click)="paginatorClickHandler('backward')">
