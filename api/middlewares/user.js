@@ -7,13 +7,14 @@ const user = {
     getUser: ((req, res, next) => {
         const { headers: { authorization } } = req;
         let token;
+        let tokenVkId;
         if(authorization && authorization.split(' ')[0] === 'token') {
             token = authorization.split(' ')[1];
+            tokenVkId = jwt.verify(token, 'collector_secret').vkId;
         }
-
-        const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
         const reqVkID = req.query.id;
 
+        console.log('token:____', token);
         console.log('tokenVkId:____', tokenVkId);
         console.log('reqVkID:____', reqVkID);
 
