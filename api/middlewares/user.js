@@ -302,7 +302,7 @@ const user = {
                     user.save()
                         .then(() => {
                                 const safeUser = ({ _id, vkToken, pixArray, ...rest }) => rest;
-                                res.status(200).json( { body: { user: safeUser(user) } });
+                                res.status(200).json( { body: { user: safeUser(user.toAuthJSON()) } });
                             }
                         );
                 }

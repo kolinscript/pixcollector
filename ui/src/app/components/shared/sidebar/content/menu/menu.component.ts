@@ -29,7 +29,6 @@ export class MenuComponent implements OnInit {
     this.store.storeObservable.subscribe((store) => {
       console.log('store: ', store);
     })
-
     this.initForm();
   }
 
