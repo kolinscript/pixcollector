@@ -48,6 +48,7 @@ export class StockComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.id = this.router.url.slice(7);
     this.authorized = this.authService.isAuthorized();
+    console.log('authorized: ', this.authorized);
     this.userService.isSelfStock(this.id).subscribe((selfStockCheck) => {
       console.log(selfStockCheck);
       this.selfStock = selfStockCheck.body.isSelfStock;
@@ -90,6 +91,7 @@ export class StockComponent implements OnInit, OnDestroy {
     })
 
     this.userService.getUser(this.id).subscribe((user) => {
+      console.log(user);
       if (!user.body.user) {
       } else if (user.body.user) {
         this.user = user.body.user;
