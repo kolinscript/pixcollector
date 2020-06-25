@@ -141,5 +141,14 @@
       }
 
     }
+
+    .box-col-double {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .col {
+        width: 50%;
+      }
+    }
   }
 }
