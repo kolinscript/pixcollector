@@ -111,3 +111,25 @@
     }
   }
 }
+
+
+@media screen and (max-width: 750px) {
+  .viewer-wrapper {
+    .fullScreen {
+      .pix {
+        img {
+        }
+
+        .close {
+        }
+
+        .slide {
+          width: 50%;
+        }
+
+        .panel-bot {}
+
+      }
+    }
+  }
+}
