@@ -49,7 +49,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   public mouseLeave(): void {
     this.globalMousemoveStopInterval = setInterval(() => {
       this.controlsViewed = false;
-    }, 3000);
+    }, 2000);
   }
 
   public slideHandler(direction: 'left' | 'right'): void {
@@ -63,7 +63,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   private activateControlView() {
     this.globalMousemoveStopInterval = setInterval(() => {
       this.controlsViewed = false;
-    }, 3000);
+    }, 2000);
     this.globalMousemoveListenFunc = this.renderer.listen('document', 'mousemove', e => {
       this.controlsViewed = true;
     });
