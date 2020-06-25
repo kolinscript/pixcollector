@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { StoreService } from '../../services/store.service';
@@ -13,10 +13,11 @@ enum State {
   styleUrls: ['./auth.component.scss']
 })
 
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   public StateEnum = State;
   public state: State = State.auth;
   private code: string;
+  private transitionInterval;
 
   constructor(
     private storeService: StoreService,
@@ -40,7 +41,7 @@ export class AuthComponent implements OnInit {
         if (user.body.user) {
           this.storeService.setStore({user: user.body.user});
           localStorage.setItem('token', user.body.user.token);
-          setInterval(() => { this.router.navigate(['/stocks']); }, 5000);
+          this.transitionInterval = setInterval(() => { this.router.navigate(['/stocks']); }, 3000);
         } else if (!user.body.user) {
           // this.router.navigate(['/auth']);
         }
@@ -49,6 +50,10 @@ export class AuthComponent implements OnInit {
     // if (this.authService.isAuthorized) {
     //   this.router.navigate(['/stocks']);
     // }
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.transitionInterval);
   }
 
   public loginVk(): void {
