@@ -1,48 +1,60 @@
-const axios              = require('axios');
-const mongoose           = require('mongoose');
-const jwt                = require('jsonwebtoken');
-const Users              = mongoose.model('Users');
+const axios = require('axios');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const Users = mongoose.model('Users');
 
 const user = {
     getUser: ((req, res, next) => {
-        const { headers: { authorization } } = req;
-        const reqVkID = req.query.id;
         let token;
         let tokenVkId;
+        const reqVkID = req.query.id;
+        const {headers: {authorization}} = req;
+
         if (authorization && authorization.split(' ')[0] === 'token') {
             token = authorization.split(' ')[1];
             tokenVkId = jwt.verify(token, 'collector_secret').vkId;
         }
 
-        console.log('token:____', token);
-        console.log('tokenVkId:____', tokenVkId);
-        console.log('reqVkID:____', reqVkID);
+        if (token !== undefined) {
+            const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
+            const reqVkID = req.query.id;
+            if (tokenVkId === reqVkID) {
+                // token, user req himself
+                // update user from vk (optional) - send user
+            } else {
+                // token, user(2) req other user(1)
+                // update user(1) from vk (optional)
+                // user(2) sysAccessRights 1 or 2 (admin/moderator) - send user
+                // // else if user(1) privacyVisible === 1 || 2 (public/authorized)
+                // // // else if user(1) privacyDownloadable === 1 || 2 (public/authorized) - send user with downloadable true
 
-        // TODO add for admin
+            }
+        } else {
+            // no token, user(anonymous) req other user(1)
+            // if user(1) privacyVisible === 1 (public) - send user
+        }
 
-        Users.findOne({
-            vkId: reqVkID
-        }, (err, userRoot) => {
+        Users.findOne({vkId: reqVkID}, (err, userRoot) => {
             if (err) {
-                res.status(200).json( { body: { error: err } });
+                res.status(200).json({body: {error: err}});
                 return console.error(err);
             }
             if (userRoot) {
                 if (token !== undefined) {
                     if (tokenVkId === reqVkID) {
-                        const safeUser = ({ vkToken, ...rest }) => rest;
-                        res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
+                        const safeUser = ({vkToken, ...rest}) => rest;
+                        res.status(200).json({body: {user: safeUser(userRoot.toAuthJSON())}});
                     } else {
                         // watch on privacy rights
 
-                        const safeUser = ({ vkToken, ...rest }) => rest;
-                        res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
+                        const safeUser = ({vkToken, ...rest}) => rest;
+                        res.status(200).json({body: {user: safeUser(userRoot.toAuthJSON())}});
                     }
                 } else {
                     // watch on privacy rights
 
-                    const safeUser = ({ vkToken, ...rest }) => rest;
-                    res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
+                    const safeUser = ({vkToken, ...rest}) => rest;
+                    res.status(200).json({body: {user: safeUser(userRoot.toAuthJSON())}});
                 }
 
 
@@ -270,36 +282,35 @@ const user = {
                 //     .catch(function (error) {
                 //         console.log(error);
                 //     });
-            }
-            else {
-                res.status(200).json( { body: { error: 'found no user' } });
+            } else {
+                res.status(200).json({body: {error: 'found no user'}});
             }
         });
     }),
 
     getUsers: ((req, res, next) => {
-        Users.find( (err, usersRaw) => {
+        Users.find((err, usersRaw) => {
             if (err) {
-                res.status(200).json( { body: { error: err } });
+                res.status(200).json({body: {error: err}});
                 return console.error(err);
             }
             if (usersRaw) {
                 let users = usersRaw.map((user) => {
-                    const safeUser = ({ vkToken, ...rest }) => rest;
+                    const safeUser = ({vkToken, ...rest}) => rest;
                     return safeUser(user.toAuthJSON());
                 });
                 // TODO rework for admin
                 users = users.filter(user => (user.privacyVisible !== 3));
-                res.status(200).json( { body: { users: users } });
+                res.status(200).json({body: {users: users}});
             } else {
-                res.status(200).json( { body: { error: 'found no users' } });
+                res.status(200).json({body: {error: 'found no users'}});
             }
         });
     }),
 
     updateUser: ((req, res, next) => {
         let token;
-        const { headers: { authorization } } = req;
+        const {headers: {authorization}} = req;
         if (authorization && authorization.split(' ')[0] === 'token') {
             token = authorization.split(' ')[1];
         }
@@ -311,7 +322,8 @@ const user = {
             Users.findOne({
                 vkId: reqVkID
             }, (err, user) => {
-                if (err) {}
+                if (err) {
+                }
                 if (user) {
                     if (reqUser.privacyVisible) {
                         user.privacyVisible = reqUser.privacyVisible;
@@ -323,33 +335,33 @@ const user = {
                     }
                     user.save()
                         .then(() => {
-                                const safeUser = ({ _id, vkToken, ...rest }) => rest;
-                                res.status(200).json({ body: { user: safeUser(user.toAuthJSON()) } });
+                                const safeUser = ({_id, vkToken, ...rest}) => rest;
+                                res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
                             }
                         );
+                } else {
                 }
-                else {}
             });
         }
     }),
 
     isSelfStock: ((req, res, next) => {
         let token;
-        const { headers: { authorization } } = req;
+        let tokenVkId;
+        const reqVkID = req.query.id;
+        const {headers: {authorization}} = req;
         if (authorization && authorization.split(' ')[0] === 'token') {
             token = authorization.split(' ')[1];
+            tokenVkId = jwt.verify(token, 'collector_secret').vkId;
         }
-        console.log('token:__', token);
         if (token !== undefined) {
-            const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
-            const reqVkID = req.query.id;
             if (tokenVkId === reqVkID) {
-                res.status(200).json({ body: { isSelfStock: true } });
+                res.status(200).json({body: {isSelfStock: true}});
             } else {
-                res.status(200).json({ body: { isSelfStock: false } });
+                res.status(200).json({body: {isSelfStock: false}});
             }
-        } else  {
-            res.status(200).json({ body: { isSelfStock: false } });
+        } else {
+            res.status(200).json({body: {isSelfStock: false}});
         }
     })
 };
