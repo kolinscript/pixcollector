@@ -142,8 +142,8 @@ const helpers = {
                             for (let offset = reqOffset, count = 1000; offset < reqIntegerPart; offset = offset + 1000) {
                                 const link = `https://api.vk.com/` +
                                     `method/photos.get` +
-                                    `?owner_id=${responseAuth.data.user_id}` +
-                                    `&access_token=${responseAuth.data.access_token}` +
+                                    `?owner_id=${vkId}` +
+                                    `&access_token=${vkToken}` +
                                     `&album_id=saved` +
                                     `&photo_sizes=1` +
                                     `&offset=${offset}` +
@@ -154,8 +154,8 @@ const helpers = {
                             }
                             const linkLast = `https://api.vk.com/` +
                                 `method/photos.get` +
-                                `?owner_id=${responseAuth.data.user_id}` +
-                                `&access_token=${responseAuth.data.access_token}` +
+                                `?owner_id=${vkId}` +
+                                `&access_token=${vkToken}` +
                                 `&album_id=saved` +
                                 `&photo_sizes=1` +
                                 `&offset=${offsetLast}` +
