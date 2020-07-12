@@ -3,16 +3,16 @@ const mongoose = require('mongoose');
 const Users = mongoose.model('Users');
 
 const helpers = {
-    UserUpdateVkData: (req, res, next, access_token, user_id) => {
+    UserUpdateVkData: (req, res, next, vkToken, vkId) => {
         const userLink = `https://api.vk.com/` +
             `method/users.get` +
             `?fields=photo_100` +
-            `&access_token=${access_token}` +
+            `&access_token=${vkToken}` +
             `&v=5.103`;
         const albumLink = `https://api.vk.com/` +
             `method/photos.getAlbums` +
-            `?owner_id=${user_id}` +
-            `&access_token=${access_token}` +
+            `?owner_id=${vkId}` +
+            `&access_token=${vkToken}` +
             `&need_system=1` +
             `&v=5.103`;
 
