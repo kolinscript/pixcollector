@@ -45,8 +45,8 @@ const helpers = {
                             // single request
                             const link = `https://api.vk.com/` +
                                 `method/photos.get` +
-                                `?owner_id=${responseAuth.data.user_id}` +
-                                `&access_token=${responseAuth.data.access_token}` +
+                                `?owner_id=${vkId}` +
+                                `&access_token=${vkToken}` +
                                 `&album_id=saved` +
                                 `&photo_sizes=1` +
                                 `&offset=${reqOffset}` +
@@ -97,7 +97,7 @@ const helpers = {
                                     });
 
                                     // save new or update existed user to db
-                                    Users.findOne({vkId: responseAuth.data.user_id}, (err, user) => {
+                                    Users.findOne({vkId: vkId}, (err, user) => {
                                         if (user) {
                                             user.vkToken = userNew.vkToken;
                                             user.name = userNew.name;
@@ -220,7 +220,7 @@ const helpers = {
                                     });
 
                                     // save new or update existed user to db
-                                    Users.findOne({vkId: responseAuth.data.user_id}, (err, user) => {
+                                    Users.findOne({vkId: vkId}, (err, user) => {
                                         if (user) {
                                             user.vkToken = userNew.vkToken;
                                             user.name = userNew.name;
