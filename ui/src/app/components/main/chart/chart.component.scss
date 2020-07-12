@@ -93,6 +93,7 @@
         width: 100%;
         height: 100%;
         .preview-block {
+          filter: blur(69px);
           position: absolute;
           display: flex;
           justify-content: flex-end;
@@ -111,17 +112,6 @@
               object-fit: cover;
               object-position: 50%;
             }
-          }
-          &:after {
-            opacity: .55;
-            position: absolute;
-            display: block;
-            content: "";
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            backdrop-filter: blur(99px);
           }
         }
         .arrow {
