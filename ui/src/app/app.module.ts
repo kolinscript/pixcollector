@@ -41,7 +41,7 @@ import { MenuComponent } from './components/shared/sidebar/content/menu/menu.com
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
   ],
   providers: [
     {
