@@ -85,8 +85,8 @@ const helpers = {
                                         });
                                     }
                                     const userNew = new Users({
-                                        vkId: responseAuth.data.user_id,
-                                        vkToken: responseAuth.data.access_token,
+                                        vkId: vkId,
+                                        vkToken: vkToken,
                                         name: name,
                                         avatar: avatar,
                                         albumSize: albumSize,
@@ -208,8 +208,8 @@ const helpers = {
                                     }
 
                                     const userNew = new Users({
-                                        vkId: responseAuth.data.user_id,
-                                        vkToken: responseAuth.data.access_token,
+                                        vkId: vkId,
+                                        vkToken: vkToken,
                                         name: name,
                                         avatar: avatar,
                                         albumSize: albumSize,
