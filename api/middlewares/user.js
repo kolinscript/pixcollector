@@ -18,6 +18,8 @@ const user = {
         console.log('tokenVkId:____', tokenVkId);
         console.log('reqVkID:____', reqVkID);
 
+        // TODO add for admin
+
         Users.findOne({
             vkId: reqVkID
         }, (err, userRoot) => {

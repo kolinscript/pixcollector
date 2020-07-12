@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { SideBarService } from './services/side-bar.service';
 import { ShadowInOut } from './animations';
+import { SwUpdate } from '@angular/service-worker';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -27,8 +29,30 @@ import { ShadowInOut } from './animations';
 export class AppComponent {
 
   constructor(
-    public sideBar: SideBarService
-  ) {}
+    public sideBar: SideBarService,
+    private swUpdate: SwUpdate,
+  ) {
+    addEventListener('offline', (e) => {
+      console.log('Подключение к сети Интернет отсутствует');
+    });
+
+    addEventListener('online', (e) => {
+      console.log('Подключение к сети Интернет восстановлено');
+    });
+
+    interval(3600).subscribe(() => {
+      this.swUpdate.checkForUpdate()
+    })
+
+    this.swUpdate.available.subscribe(event => {
+      this.swUpdate.activateUpdate().then(() => document.location.reload())
+    })
+
+    this.swUpdate.activated.subscribe(ev => {
+      console.log('Previous version: ', ev.previous)
+      console.log('Current version: ', ev.current)
+    })
+  }
 
   public sideBarClose(): void {
     this.sideBar.closeSideBar();

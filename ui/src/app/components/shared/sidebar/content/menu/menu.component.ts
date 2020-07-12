@@ -50,7 +50,6 @@ export class MenuComponent implements OnInit, OnDestroy {
       privacyVisible: [this.user.privacyVisible ? this.user.privacyVisible : null],
       privacyDownloadable: [this.user.privacyDownloadable ? this.user.privacyDownloadable : null]
     });
-    console.log(this.form.value);
     this.form.get('privacyVisible').valueChanges.subscribe((privacy) => {
       const userUpdates = {
         user: {

@@ -27,9 +27,11 @@
       &:hover {
         .cc-preview {
           .arrow {
+            opacity: 1;
             right: -54px;
           }
           span {
+            opacity: 1;
             &.take {
               top: calc(50% - 25px);
               right: 166px;
@@ -123,12 +125,13 @@
           }
         }
         .arrow {
+          opacity: 0;
           position: absolute;
           right: -20px;
           top: 0;
           width: 200px;
           height: 100%;
-          transition: right 200ms ease;
+          transition: right 200ms ease, opacity 200ms ease;
           span {
             height: 40px;
             display: block;
@@ -154,10 +157,12 @@
           }
         }
         span {
+          opacity: 0;
           display: block;
           position: absolute;
           font: 900 142px/166px $fontMain;
           color: #2f2f2f;
+          transition: opacity 200ms ease;
           &.take {
             top: calc(50% - 25px);
             right: 200px;

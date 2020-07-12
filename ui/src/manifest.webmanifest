@@ -1,6 +1,6 @@
 {
-  "name": "collector",
-  "short_name": "collector",
+  "name": "#PIXcollector",
+  "short_name": "pixcollector",
   "theme_color": "#4D4D4D",
   "background_color": "#4D4D4D",
   "display": "standalone",
