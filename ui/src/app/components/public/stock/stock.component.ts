@@ -33,6 +33,7 @@ export class StockComponent implements OnInit, OnDestroy {
   public viewerPix;
   public private: boolean;
   public allowDownload: boolean;
+  public privacyVisible: number;
   private store: Subscription;
   private authorized: boolean;
 
@@ -56,20 +57,6 @@ export class StockComponent implements OnInit, OnDestroy {
     this.store = this.storeService.storeObservable.subscribe((store) => {
       if (store && store.stockUser) {
         this.stockUser = store.stockUser;
-        console.log('store: ', store);
-
-        // TODO move to api
-        if (this.selfStock) {
-          this.private = false;
-        } else if (this.stockUser.privacyVisible === 3 && !this.selfStock) {
-          this.private = true;
-        } else if (this.stockUser.privacyVisible === 2 && !this.selfStock && this.authorized) {
-          this.private = false;
-        } else if (this.stockUser.privacyVisible === 2  && !this.authorized) {
-          this.private = true;
-        } else if (this.stockUser.privacyVisible === 1) {
-          this.private = false;
-        }
 
         if (this.selfStock) {
           this.allowDownload = true;
@@ -93,11 +80,18 @@ export class StockComponent implements OnInit, OnDestroy {
     })
 
     this.userService.getUser(this.id).subscribe((user) => {
-      if (!user.body.user) {
-      } else if (user.body.user) {
+      if (user.body.user) {
         this.stockUser = user.body.user;
         this.href = `https://vk.com/id${this.stockUser.vkId}`;
         this.storeService.setStore({stockUser: this.stockUser});
+      }
+
+      if (user.body.error.code === 2) {
+        this.private = true;
+        this.privacyVisible = 2;
+      } else if (user.body.error.code === 3) {
+        this.private = true;
+        this.privacyVisible = 3;
       }
 
       this.stockUser.pixArray.forEach((pix) => {

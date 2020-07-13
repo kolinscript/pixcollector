@@ -19,13 +19,15 @@ const user = {
         if (token !== undefined) {
             const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
             const reqVkID = req.query.id;
+            console.log('tokenVkId:________', tokenVkId);
+            console.log('reqVkID:________', reqVkID);
             if (tokenVkId === reqVkID) {
                 // token, user req himself
                 // update user from vk - send user
                 Users.findOne({vkId: reqVkID}, (err, userDb) => {
                     if (err) { res.status(200).json({body: {error: err}}); }
                     if (userDb) { helpers.UserUpdateVkData(req, res, next, userDb.vkToken, reqVkID); }
-                    else { res.status(200).json({body: {error: 'found no user'}}); }
+                    else { res.status(200).json({body: {error: {text: 'found no user', code: 0}}}); }
                 });
             } else {
                 // token, user(2) req other user(1)
@@ -46,14 +48,14 @@ const user = {
                                     if ((userDbFromReq.privacyVisible === 1) || (userDbFromReq.privacyVisible === 2)) {
                                         helpers.UserUpdateVkData(req, res, next, userDbFromReq.vkToken, reqVkID);
                                     } else if (userDbFromReq.privacyVisible === 3) {
-                                        res.status(200).json({body: {error: 'Private page, sorry.'}});
+                                        res.status(200).json({body: {error: {text: 'Private page, sorry.', code: 3}}});
                                     }
                                 }
                             }
-                            else { res.status(200).json({body: {error: 'found no userDbFromReq'}}); }
+                            else { res.status(200).json({body: {error: {text: 'found no userDbFromReq', code: 0}}}); }
                         });
                     }
-                    else { res.status(200).json({body: {error: 'found no userDbFromToken'}}); }
+                    else { res.status(200).json({body: {error: {text: 'found no userDbFromToken', code: 0}}}); }
                 });
             }
         } else {
@@ -67,12 +69,12 @@ const user = {
                     if (userDb.privacyVisible === 1) {
                         helpers.UserUpdateVkData(req, res, next, userDb.vkToken, reqVkID);
                     } else if (userDb.privacyVisible === 2) {
-                        res.status(200).json({body: {error: 'Authorize to view this content.'}});
-                    } else if (userDb.privacyVisible === 3){
-                        res.status(200).json({body: {error: 'Private page, sorry.'}});
+                        res.status(200).json({body: {error: {text: 'Authorize to view this content.', code: 2}}});
+                    } else if (userDb.privacyVisible === 3) {
+                        res.status(200).json({body: {error: {text: 'Private page, sorry.', code: 3}}});
                     }
                 }
-                else { res.status(200).json({body: {error: 'found no user'}}); }
+                else { res.status(200).json({body: {error: {text: 'found no user', code: 0}}}); }
             });
         }
 
@@ -93,7 +95,7 @@ const user = {
                 users = users.filter(user => (user.privacyVisible !== 3));
                 res.status(200).json({body: {users: users}});
             } else {
-                res.status(200).json({body: {error: 'found no users'}});
+                res.status(200).json({body: {error: {text: 'found no user', code: 0}}});
             }
         });
     }),
