@@ -56,18 +56,18 @@ export class StockComponent implements OnInit, OnDestroy {
       this.selfStock = selfStockCheck.body.isSelfStock;
     });
     this.loader = true;
-    this.store = this.storeService.storeObservable.subscribe((store) => {
-      if (store && store.stockUser) {
-        this.user = store.user;
-        this.stockUser = store.stockUser;
-        this.stockUser.pixArray.forEach((pix) => {
-          pix.hovered = false;
-          pix.selected = false;
-        });
-        this.calculateLastPage();
-        this.calculateViewport();
-      }
-    });
+    // this.store = this.storeService.storeObservable.subscribe((store) => {
+    //   if (store && store.stockUser) {
+    //     this.user = store.user;
+    //     this.stockUser = store.stockUser;
+    //     this.stockUser.pixArray.forEach((pix) => {
+    //       pix.hovered = false;
+    //       pix.selected = false;
+    //     });
+    //     this.calculateLastPage();
+    //     this.calculateViewport();
+    //   }
+    // });
     this.userService.getUser(this.id).subscribe((user) => {
       this.loader = false;
       if (user.body.user) {
@@ -105,7 +105,7 @@ export class StockComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.unsubscribe();
+    // this.store.unsubscribe();
   }
 
   public pixHoveredStart(event, pix, i): void {

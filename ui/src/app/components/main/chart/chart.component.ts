@@ -9,6 +9,7 @@ import { UserService } from '../../../services/user.service';
 })
 export class ChartComponent implements OnInit {
   public users: any;
+  public loader: boolean;
 
   constructor(
     private router: Router,
@@ -16,7 +17,9 @@ export class ChartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loader = true;
     this.userService.getPublicUsers().subscribe((users) => {
+      this.loader = false;
       if (users.body.users) {
         this.users = users.body.users;
       }

@@ -40,7 +40,7 @@ export class AppComponent {
       console.log('Подключение к сети Интернет восстановлено');
     });
 
-    interval(3600).subscribe(() => {
+    interval(10000).subscribe(() => {
       this.swUpdate.checkForUpdate()
     })
 

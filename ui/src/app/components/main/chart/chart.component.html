@@ -1,4 +1,8 @@
 <div class="chart-wrapper">
+  <div class="loader" *ngIf="loader">
+    <span>Loading...</span>
+  </div>
+
   <div class="chart">
     <div class="chart-card" *ngFor="let user of users" (click)="goToStock(user.vkId)">
       <div class="cc-avatar"><img src="{{user.avatar}}" alt="{{user.name}}"/></div>
