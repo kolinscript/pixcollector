@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   responseData;
 
   constructor(
-    private sideBar: SideBarService,
+    public sideBar: SideBarService,
     private elRef: ElementRef
   ) { }
 
