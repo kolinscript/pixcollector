@@ -9,11 +9,12 @@ import { take } from 'rxjs/operators';
 export class SideBarService {
   public sideBars: Array<any>;
   public sideBarsObservable: BehaviorSubject<any[]>;
-  private sideBarResponseObj = new Subject<any>();
+  private sideBarResponseObj: Subject<any>;
 
   constructor() {
     this.sideBars = new Array<{}>();
     this.sideBarsObservable = new BehaviorSubject<any[]>(this.sideBars);
+    this.sideBarResponseObj = new Subject<any>();
   }
 
   public openSideBar(sideBar: SideBar) {
