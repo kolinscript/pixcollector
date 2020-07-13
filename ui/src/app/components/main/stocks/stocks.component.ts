@@ -9,6 +9,7 @@ import { StoreService } from '../../../services/store.service';
   styleUrls: ['./stocks.component.scss']
 })
 export class StocksComponent implements OnInit, OnDestroy {
+  public loader: boolean;
   public vkId: string = null;
   private store: Subscription;
 
@@ -18,7 +19,9 @@ export class StocksComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.loader = true;
     this.store = this.storeService.storeObservable.subscribe((store) => {
+      this.loader = false;
       if (store && store.user) {
         this.vkId = store.user.vkId;
       }

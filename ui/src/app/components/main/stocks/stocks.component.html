@@ -1,4 +1,7 @@
 <div class="stock-wrapper">
+  <div class="loader" *ngIf="loader">
+    <span>Loading...</span>
+  </div>
   <div class="title">Stocks</div>
   <div class="sub-title">The space that bring all of the pix together.</div>
   <div class="sub-title">Enjoy watching your collection or explore other users stocks - comment, like, save, download.</div>
@@ -9,7 +12,7 @@
     </div>
     <div class="stock-card users" (click)="goToStock('all')">
       <div class="logo"> </div>
-      <div class="subtitle">users stocks</div>
+      <div class="subtitle">users chart</div>
     </div>
   </div>
 </div>

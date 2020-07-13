@@ -56,35 +56,28 @@ export class StockComponent implements OnInit, OnDestroy {
       this.selfStock = selfStockCheck.body.isSelfStock;
     });
     this.loader = true;
-    // this.store = this.storeService.storeObservable.subscribe((store) => {
-    //   if (store && store.stockUser) {
-    //     this.user = store.user;
-    //     this.stockUser = store.stockUser;
-    //     this.stockUser.pixArray.forEach((pix) => {
-    //       pix.hovered = false;
-    //       pix.selected = false;
-    //     });
-    //     this.calculateLastPage();
-    //     this.calculateViewport();
-    //   }
-    // });
     this.userService.getUser(this.id).subscribe((user) => {
       this.loader = false;
       if (user.body.user) {
         this.stockUser = user.body.user;
         this.href = `https://vk.com/id${this.stockUser.vkId}`;
         this.storeService.setStore({stockUser: this.stockUser});
-        if (this.selfStock || (this.user.sysAccessRights === 1)) {
-          this.allowDownload = true;
-        } else if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
-          this.allowDownload = false;
-        } else if (this.stockUser.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
-          this.allowDownload = true;
-        } else if (this.stockUser.privacyDownloadable === 2 && !this.authorized) {
-          this.allowDownload = false;
-        } else if (this.stockUser.privacyDownloadable === 1) {
-          this.allowDownload = true;
-        }
+        this.store = this.storeService.storeObservable.subscribe((store) => {
+          if (store && store.user) {
+            this.user = store.user;
+            if (this.selfStock || (this.user.sysAccessRights === 1)) {
+              this.allowDownload = true;
+            } else if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
+              this.allowDownload = false;
+            } else if (this.stockUser.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
+              this.allowDownload = true;
+            } else if (this.stockUser.privacyDownloadable === 2 && !this.authorized) {
+              this.allowDownload = false;
+            } else if (this.stockUser.privacyDownloadable === 1) {
+              this.allowDownload = true;
+            }
+          }
+        });
       }
       if (user.body.error) {
         if (user.body.error.code === 2) {

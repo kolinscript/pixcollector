@@ -21,10 +21,28 @@
     }
   }
 
+  .title {
+    width: 100%;
+    padding: 0 20px;
+    font: 400 16px/20px $fontMain;
+    text-align: left;
+    color: $background;
+  }
+
+  .sub-title {
+    width: 100%;
+    padding: 0 20px;
+    margin-top: 20px;
+    font: 400 14px/20px $fontMain;
+    text-align: left;
+    color: $background;
+  }
+
   .chart {
-    cursor: pointer;
     width: 100%;
     height: 100%;
+    margin-top: 60px;
+    cursor: pointer;
     display: flex;
     justify-content: flex-start;
     align-items: center;
