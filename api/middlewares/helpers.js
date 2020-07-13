@@ -18,6 +18,7 @@ const helpers = {
 
         axios.get(userLink)
             .then(function (responseUser) {
+                console.log('responseUser:______', responseUser);
                 const name = `${responseUser.data.response[0].first_name} ${responseUser.data.response[0].last_name}`;
                 const avatar = responseUser.data.response[0].photo_100;
 
