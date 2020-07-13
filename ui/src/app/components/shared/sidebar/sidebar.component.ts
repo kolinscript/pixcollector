@@ -12,6 +12,7 @@ import { SlideRightLeft } from '../../../animations';
 export class SidebarComponent implements OnInit {
   SideBarTypes = SideBarTypes;
   sidebars: any[];
+  responseData;
 
   constructor(
     private sideBar: SideBarService,
@@ -27,6 +28,15 @@ export class SidebarComponent implements OnInit {
         this.elRef.nativeElement.ownerDocument.body.style.overflow = null;
       }
     });
+  }
+
+  public sbData(data) {
+    this.responseData = data;
+  }
+
+  public sideBarClose(): void {
+    this.sideBar.sideBarResponseData(this.responseData);
+    this.sideBar.closeSideBar();
   }
 
 }

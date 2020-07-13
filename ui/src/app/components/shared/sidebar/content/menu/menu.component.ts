@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SideBarService } from '../../../../../services/side-bar.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit, OnDestroy {
+  @Output() SbData = new EventEmitter()
   public form: FormGroup;
   public href: string;
   public user;
@@ -60,7 +61,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       this.userService.updUser(userUpdates).subscribe((user) => {
         if (user) {
           this.storeService.setStore({user: user.body.user});
-          this.sideBar.sideBarResponseData({reload: true});
+          this.SbData.emit({reload: true});
         }
       });
     });
@@ -74,7 +75,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       this.userService.updUser(userUpdates).subscribe((user) => {
         if (user) {
           this.storeService.setStore({user: user.body.user});
-          this.sideBar.sideBarResponseData({reload: true});
+          this.SbData.emit({reload: true});
         }
       });
     });

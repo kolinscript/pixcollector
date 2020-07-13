@@ -1,9 +1,15 @@
+<div class="no-interaction-screen"
+     *ngIf="sideBar.sideBars.length > 0"
+     (click)="sideBarClose()"
+     [@shadowInOut]
+>
+</div>
 <div class="sidebar-wrapper">
   <div class="sidebar-item"
        *ngFor="let sidebar of sidebars"
        [ngClass]="{'shadow': sidebars.length === 1}"
        [@slideRightLeft]
   >
-    <app-menu *ngIf="sidebar.type === SideBarTypes.MENU"></app-menu>
+    <app-menu *ngIf="sidebar.type === SideBarTypes.MENU" (SbData)="sbData($event)"></app-menu>
   </div>
 </div>
