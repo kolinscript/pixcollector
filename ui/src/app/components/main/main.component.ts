@@ -13,14 +13,7 @@ import { ShadowInOut } from '../../animations';
 export class MainComponent implements OnInit {
   windowWidth: number;
 
-
-  constructor(
-    public sideBar: SideBarService,
-    private authService: AuthService,
-    private router: Router
-  ) {
-    console.log(this.router.url);
-  }
+  constructor() {}
 
   ngOnInit() {
     this.windowWidth = window.innerWidth;
@@ -28,13 +21,6 @@ export class MainComponent implements OnInit {
 
   public onResize(event): void {
     this.windowWidth = event.target.innerWidth;
-  }
-
-  public sideBarClose(): void {
-    this.sideBar.closeSideBar();
-    // if (this.windowWidth > 1919) {
-    //   this.sideBar.closeSideBar();
-    // }
   }
 
 }

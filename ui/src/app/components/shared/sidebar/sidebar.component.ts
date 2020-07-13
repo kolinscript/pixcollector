@@ -21,7 +21,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.sideBar.sideBarsObservable.subscribe((sideBars) => {
       this.sidebars = sideBars;
-      console.log(sideBars);
       if (sideBars.length > 0) {
         this.elRef.nativeElement.ownerDocument.body.style.overflow = 'hidden';
       } else {
