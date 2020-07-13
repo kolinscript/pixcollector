@@ -20,7 +20,7 @@ export class SideBarService {
   public openSideBar(sideBar: SideBar) {
     this.sideBars.push(sideBar);
     this.sideBarsObservable.next(this.sideBars);
-    return this.sideBarResponseObj.pipe(take(1));
+    return this.sideBarResponseObj;
   }
 
   public closeSideBar() {

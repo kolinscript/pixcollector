@@ -31,7 +31,6 @@ export class SidebarComponent implements OnInit {
   }
 
   public sbData(data) {
-    console.log('sbData', data);
     this.responseData = data;
   }
 
