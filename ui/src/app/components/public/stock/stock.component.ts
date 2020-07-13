@@ -45,7 +45,8 @@ export class StockComponent implements OnInit, OnDestroy {
     private router: Router,
     private userService: UserService,
     private downloadService: DownloadService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.id = this.router.url.slice(7);
@@ -62,17 +63,13 @@ export class StockComponent implements OnInit, OnDestroy {
         this.stockUser = user.body.user;
         this.href = `https://vk.com/id${this.stockUser.vkId}`;
         this.storeService.setStore({stockUser: this.stockUser});
-        this.stockUser.pixArray.forEach((pix) => {
-          pix.hovered = false;
-          pix.selected = false;
-        });
         if (this.selfStock) {
           this.allowDownload = true;
         } else if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
           this.allowDownload = false;
         } else if (this.stockUser.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
           this.allowDownload = true;
-        } else if (this.stockUser.privacyDownloadable === 2  && !this.authorized) {
+        } else if (this.stockUser.privacyDownloadable === 2 && !this.authorized) {
           this.allowDownload = false;
         } else if (this.stockUser.privacyDownloadable === 1) {
           this.allowDownload = true;
@@ -87,9 +84,25 @@ export class StockComponent implements OnInit, OnDestroy {
           this.privacyVisible = 3;
         }
       }
+      this.stockUser.pixArray.forEach((pix) => {
+        pix.hovered = false;
+        pix.selected = false;
+      });
       this.calculateLastPage();
       this.calculateViewport();
     });
+
+    this.store = this.storeService.storeObservable.subscribe((store) => {
+      if (store && store.stockUser) {
+        this.stockUser = store.stockUser;
+        this.stockUser.pixArray.forEach((pix) => {
+          pix.hovered = false;
+          pix.selected = false;
+        });
+        this.calculateLastPage();
+        this.calculateViewport();
+      }
+    })
   }
 
   ngOnDestroy() {
@@ -258,7 +271,7 @@ export class StockComponent implements OnInit, OnDestroy {
   }
 
   private calculateLastPage(): void {
-    this.paginatorPageTotal =  Math.ceil(this.stockUser.pixArray.length / this.pixPerPage);
+    this.paginatorPageTotal = Math.ceil(this.stockUser.pixArray.length / this.pixPerPage);
   }
 
   private calculateViewport(): void {
