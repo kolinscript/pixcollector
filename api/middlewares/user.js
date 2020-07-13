@@ -2,6 +2,7 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Users = mongoose.model('Users');
+const helpers = require('./helpers')
 
 const user = {
     getUser: ((req, res, next) => {
@@ -20,272 +21,61 @@ const user = {
             const reqVkID = req.query.id;
             if (tokenVkId === reqVkID) {
                 // token, user req himself
-                // update user from vk (optional) - send user
+                // update user from vk - send user
+                Users.findOne({vkId: reqVkID}, (err, userDb) => {
+                    if (err) { res.status(200).json({body: {error: err}}); }
+                    if (userDb) { helpers.UserUpdateVkData(req, res, next, userDb.vkToken, reqVkID); }
+                    else { res.status(200).json({body: {error: 'found no user'}}); }
+                });
             } else {
                 // token, user(2) req other user(1)
                 // update user(1) from vk (optional)
-                // user(2) sysAccessRights 1 or 2 (admin/moderator) - send user
-                // // else if user(1) privacyVisible === 1 || 2 (public/authorized)
-                // // // else if user(1) privacyDownloadable === 1 || 2 (public/authorized) - send user with downloadable true
-
+                // user(2) sysAccessRights 1 or 2 (admin/moderator) - send user(1)
+                // user(2) sysAccessRights 3 (casual user)
+                // // if user(1) privacyVisible === 1 || 2 (public/authorized)
+                // // if user(1) privacyVisible === 3 (private)
+                Users.findOne({vkId: tokenVkId}, (err, userDbFromToken) => {
+                    if (err) { res.status(200).json({body: {error: err}}); }
+                    if (userDbFromToken) {
+                        Users.findOne({vkId: reqVkID}, (err, userDbFromReq) => {
+                            if (err) { res.status(200).json({body: {error: err}}); }
+                            if (userDbFromReq) {
+                                if ((userDbFromToken.sysAccessRights === 1) || (userDbFromToken.sysAccessRights === 2)) {
+                                    helpers.UserUpdateVkData(req, res, next, userDbFromReq.vkToken, reqVkID);
+                                } else if (userDbFromToken.sysAccessRights === 3) {
+                                    if ((userDbFromReq.privacyVisible === 1) || (userDbFromReq.privacyVisible === 2)) {
+                                        helpers.UserUpdateVkData(req, res, next, userDbFromReq.vkToken, reqVkID);
+                                    } else if (userDbFromReq.privacyVisible === 3) {
+                                        res.status(200).json({body: {error: 'Private page, sorry.'}});
+                                    }
+                                }
+                            }
+                            else { res.status(200).json({body: {error: 'found no userDbFromReq'}}); }
+                        });
+                    }
+                    else { res.status(200).json({body: {error: 'found no userDbFromToken'}}); }
+                });
             }
         } else {
             // no token, user(anonymous) req other user(1)
-            // if user(1) privacyVisible === 1 (public) - send user
+            // if user(1) privacyVisible === 1 [public] - update from vk send user
+            //    user(1) privacyVisible === 2 [authorized] - send err (private)
+            //    user(1) privacyVisible === 3 [nobody] - send err (private)
+            Users.findOne({vkId: reqVkID}, (err, userDb) => {
+                if (err) { res.status(200).json({body: {error: err}}); }
+                if (userDb) {
+                    if (userDb.privacyVisible === 1) {
+                        helpers.UserUpdateVkData(req, res, next, userDb.vkToken, reqVkID);
+                    } else if (userDb.privacyVisible === 2) {
+                        res.status(200).json({body: {error: 'Authorize to view this content.'}});
+                    } else if (userDb.privacyVisible === 3){
+                        res.status(200).json({body: {error: 'Private page, sorry.'}});
+                    }
+                }
+                else { res.status(200).json({body: {error: 'found no user'}}); }
+            });
         }
 
-        Users.findOne({vkId: reqVkID}, (err, userRoot) => {
-            if (err) {
-                res.status(200).json({body: {error: err}});
-                return console.error(err);
-            }
-            if (userRoot) {
-                if (token !== undefined) {
-                    if (tokenVkId === reqVkID) {
-                        const safeUser = ({vkToken, ...rest}) => rest;
-                        res.status(200).json({body: {user: safeUser(userRoot.toAuthJSON())}});
-                    } else {
-                        // watch on privacy rights
-
-                        const safeUser = ({vkToken, ...rest}) => rest;
-                        res.status(200).json({body: {user: safeUser(userRoot.toAuthJSON())}});
-                    }
-                } else {
-                    // watch on privacy rights
-
-                    const safeUser = ({vkToken, ...rest}) => rest;
-                    res.status(200).json({body: {user: safeUser(userRoot.toAuthJSON())}});
-                }
-
-
-                // const userLink = `https://api.vk.com/` +
-                //     `method/users.get` +
-                //     `?fields=photo_50` +
-                //     `&access_token=${userRoot.vkToken}` +
-                //     `&v=5.103`;
-                // const albumLink = `https://api.vk.com/` +
-                //     `method/photos.getAlbums` +
-                //     `?owner_id=${userRoot.vkId}` +
-                //     `&access_token=${userRoot.vkToken}` +
-                //     `&need_system=1` +
-                //     `&v=5.103`;
-                //
-                // axios.get(userLink)
-                //     .then(function (responseUser) {
-                //         console.log('responseUser: ', responseUser);
-                //         const name = `${responseUser.data.response[0].first_name} ${responseUser.data.response[0].last_name}`;
-                //         const avatar =  responseUser.data.response[0].photo_50;
-                //
-                //         axios.get(albumLink)
-                //             .then(function (responseAlbum) {
-                //                 const albumSize = responseAlbum.data.response.items.find(item => item.id === -15).size;
-                //
-                //                 const countFrom = 0;
-                //                 const countTo = albumSize;
-                //
-                //                 const countTotal = countTo - countFrom;
-                //                 const countTotalFloat = countTotal / 1000;
-                //                 const integerPart = Math.floor(countTotalFloat);
-                //                 const floatPart = integerPart === 0
-                //                     ? countTotal
-                //                     : (Math.abs(+(countTotalFloat - (Math.floor(countTotalFloat)).toFixed(3))) * 1000);
-                //
-                //                 const reqFloatPart = floatPart;
-                //                 const reqIntegerPart = integerPart * 1000;
-                //                 const reqOffset = countFrom;
-                //
-                //                 let pixArray = [];
-                //
-                //                 if (integerPart === 0) {
-                //                     // single request
-                //                     const link = `https://api.vk.com/` +
-                //                         `method/photos.get` +
-                //                         `?owner_id=${userRoot.vkId}` +
-                //                         `&access_token=${userRoot.vkToken}` +
-                //                         `&album_id=saved` +
-                //                         `&photo_sizes=1` +
-                //                         `&offset=${reqOffset}` +
-                //                         `&count=${reqFloatPart}` +
-                //                         `&v=5.103`;
-                //                     axios.get(link)
-                //                         .then(function (response) {
-                //                             const arr = [];
-                //                             if (response.data.response) {
-                //                                 response.data.response.items.forEach((item) => {
-                //                                     // ascending flow
-                //                                     // S -> M -> X -> Y -> Z -> W
-                //                                     const sizeW = item.sizes.find(size => size.type === 'w');
-                //                                     const sizeZ = item.sizes.find(size => size.type === 'z');
-                //                                     const sizeY = item.sizes.find(size => size.type === 'y');
-                //                                     const sizeX = item.sizes.find(size => size.type === 'x');
-                //                                     const sizeM = item.sizes.find(size => size.type === 'm');
-                //                                     const sizeS = item.sizes.find(size => size.type === 's');
-                //                                     if (sizeW) {
-                //                                         arr.push(sizeW);
-                //                                     } else if (sizeZ) {
-                //                                         arr.push(sizeZ);
-                //                                     } else if (sizeY) {
-                //                                         arr.push(sizeY);
-                //                                     } else if (sizeX) {
-                //                                         arr.push(sizeX);
-                //                                     } else if (sizeM) {
-                //                                         arr.push(sizeM);
-                //                                     } else if (sizeS) {
-                //                                         arr.push(sizeS);
-                //                                     }
-                //                                     pixArray = arr;
-                //                                 });
-                //                             }
-                //                             const userNew = new Users({
-                //                                 vkId: userRoot.vkId,
-                //                                 vkToken: userRoot.vkToken,
-                //                                 name: name,
-                //                                 avatar: avatar,
-                //                                 albumSize: albumSize,
-                //                                 pixArray: pixArray
-                //                             });
-                //
-                //                             // save new or update existed user to db
-                //                             userRoot.vkToken = userNew.vkToken;
-                //                             userRoot.name = userNew.name;
-                //                             userRoot.avatar = userNew.avatar;
-                //                             userRoot.albumSize = userNew.albumSize;
-                //                             userRoot.pixArray = userNew.pixArray;
-                //                             userRoot.markModified('vkToken');
-                //                             userRoot.markModified('name');
-                //                             userRoot.markModified('avatar');
-                //                             userRoot.markModified('albumSize');
-                //                             userRoot.markModified('pixArray');
-                //                             userRoot.save()
-                //                                 .then(() => {
-                //                                         const safeUser = ({ vkToken, ...rest }) => rest;
-                //                                         res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
-                //                                     }
-                //                                 );
-                //                         })
-                //                         .catch(function (error) {
-                //                             console.log(error);
-                //                         })
-                //                         .finally(function () {
-                //                             // always executed
-                //                         });
-                //                 }
-                //                 else if (integerPart > 0) {
-                //                     // multiple requests
-                //                     let offsetLast;
-                //                     let urlArray = [];
-                //                     for (let offset = reqOffset, count = 1000; offset < reqIntegerPart; offset = offset + 1000) {
-                //                         const link = `https://api.vk.com/` +
-                //                             `method/photos.get` +
-                //                             `?owner_id=${userRoot.vkId}` +
-                //                             `&access_token=${userRoot.vkToken}` +
-                //                             `&album_id=saved` +
-                //                             `&photo_sizes=1` +
-                //                             `&offset=${offset}` +
-                //                             `&count=${count}` +
-                //                             `&v=5.103`;
-                //                         urlArray.push(link);
-                //                         offsetLast = offset + 1000;
-                //                     }
-                //                     const linkLast = `https://api.vk.com/` +
-                //                         `method/photos.get` +
-                //                         `?owner_id=${userRoot.vkId}` +
-                //                         `&access_token=${userRoot.vkToken}` +
-                //                         `&album_id=saved` +
-                //                         `&photo_sizes=1` +
-                //                         `&offset=${offsetLast}` +
-                //                         `&count=${reqFloatPart}` +
-                //                         `&v=5.103`;
-                //
-                //                     urlArray.push(linkLast);
-                //
-                //                     const urlArrayPromises = urlArray.map((url) => {
-                //                         return axios.get(url);
-                //                     });
-                //
-                //                     async function photosFetcher() {
-                //                         try {
-                //                             const result = await axios.all(urlArrayPromises);
-                //                             const arrays = result.map(r => r.data).map(r => r.response).map(r => r.items);
-                //                             let photos = [];
-                //                             arrays.forEach((array) => {
-                //                                 photos = photos.concat(array)
-                //                             });
-                //                             const arr = [];
-                //                             if (photos) {
-                //                                 photos.forEach((item) => {
-                //                                     // ascending flow
-                //                                     // S -> M -> X -> Y -> Z -> W
-                //                                     const sizeW = item.sizes.find(size => size.type === 'w');
-                //                                     const sizeZ = item.sizes.find(size => size.type === 'z');
-                //                                     const sizeY = item.sizes.find(size => size.type === 'y');
-                //                                     const sizeX = item.sizes.find(size => size.type === 'x');
-                //                                     const sizeM = item.sizes.find(size => size.type === 'm');
-                //                                     const sizeS = item.sizes.find(size => size.type === 's');
-                //                                     if (sizeW) {
-                //                                         arr.push(sizeW);
-                //                                     } else if (sizeZ) {
-                //                                         arr.push(sizeZ);
-                //                                     } else if (sizeY) {
-                //                                         arr.push(sizeY);
-                //                                     } else if (sizeX) {
-                //                                         arr.push(sizeX);
-                //                                     } else if (sizeM) {
-                //                                         arr.push(sizeM);
-                //                                     } else if (sizeS) {
-                //                                         arr.push(sizeS);
-                //                                     }
-                //                                     pixArray = arr;
-                //                                 });
-                //                             }
-                //
-                //                             const userNew = new Users({
-                //                                 vkId: userRoot.vkId,
-                //                                 vkToken: userRoot.vkToken,
-                //                                 name: name,
-                //                                 avatar: avatar,
-                //                                 albumSize: albumSize,
-                //                                 pixArray: pixArray
-                //                             });
-                //
-                //                             // save new or update existed user to db
-                //                             userRoot.vkToken = userNew.vkToken;
-                //                             userRoot.name = userNew.name;
-                //                             userRoot.avatar = userNew.avatar;
-                //                             userRoot.albumSize = userNew.albumSize;
-                //                             userRoot.pixArray = userNew.pixArray;
-                //                             userRoot.markModified('vkToken');
-                //                             userRoot.markModified('name');
-                //                             userRoot.markModified('avatar');
-                //                             userRoot.markModified('albumSize');
-                //                             userRoot.markModified('pixArray');
-                //                             userRoot.save()
-                //                                 .then(() => {
-                //                                         const safeUser = ({ vkToken, ...rest }) => rest;
-                //                                         res.status(200).json( { body: { user: safeUser(userRoot.toAuthJSON()) } });
-                //                                     }
-                //                                 );
-                //
-                //                         } catch (error) {
-                //                             console.error(error);
-                //                         }
-                //                     }
-                //
-                //                     photosFetcher();
-                //                 }
-                //
-                //             })
-                //             .catch(function (error) {
-                //                 console.log(error);
-                //             });
-                //     })
-                //     .catch(function (error) {
-                //         console.log(error);
-                //     });
-            } else {
-                res.status(200).json({body: {error: 'found no user'}});
-            }
-        });
     }),
 
     getUsers: ((req, res, next) => {

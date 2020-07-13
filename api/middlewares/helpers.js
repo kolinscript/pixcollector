@@ -122,7 +122,7 @@ const helpers = {
                                                 .then(() => {
                                                         const safeUser = ({_id, vkToken, ...rest}) => rest;
                                                         req.session.user = safeUser(userNew.toAuthJSON());
-                                                        res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
+                                                        res.status(200).json({body: {user: safeUser(userNew.toAuthJSON())}});
                                                     }
                                                 );
                                         }
@@ -245,7 +245,7 @@ const helpers = {
                                                 .then(() => {
                                                         const safeUser = ({vkToken, ...rest}) => rest;
                                                         req.session.user = safeUser(userNew.toAuthJSON());
-                                                        res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
+                                                        res.status(200).json({body: {user: safeUser(userNew.toAuthJSON())}});
                                                     }
                                                 );
                                         }
