@@ -81,6 +81,13 @@ const user = {
     }),
 
     getUsers: ((req, res, next) => {
+        let token;
+        const {headers: {authorization}} = req;
+        if (authorization && authorization.split(' ')[0] === 'token') {
+            token = authorization.split(' ')[1];
+        }
+        const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
+
         Users.find((err, usersRaw) => {
             if (err) {
                 res.status(200).json({body: {error: err}});
@@ -91,9 +98,21 @@ const user = {
                     const safeUser = ({vkToken, ...rest}) => rest;
                     return safeUser(user.toAuthJSON());
                 });
-                // TODO rework for admin
-                users = users.filter(user => (user.privacyVisible !== 3));
-                res.status(200).json({body: {users: users}});
+                Users.findOne({vkId: tokenVkId}, (err, userDbFromToken) => {
+                    if (err) { res.status(200).json({body: {error: err}}); }
+                    if (userDbFromToken) {
+                        if ((userDbFromToken.sysAccessRights === 1) || (userDbFromToken.sysAccessRights === 2)) {
+                            res.status(200).json({body: {users: users}});
+                        }
+                        else if (userDbFromToken.sysAccessRights === 3) {
+                            users = users.filter(user => (user.privacyVisible !== 3));
+                            res.status(200).json({body: {users: users}});
+                        }
+                    }
+                    else { res.status(200).json({body: {error: {text: 'found no user', code: 0}}}); }
+                });
+
+
             } else {
                 res.status(200).json({body: {error: {text: 'found no user', code: 0}}});
             }

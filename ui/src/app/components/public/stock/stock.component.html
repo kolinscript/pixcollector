@@ -1,6 +1,10 @@
 <div class="stock-wrapper">
   <app-header></app-header>
 
+  <div class="main loader" *ngIf="loader">
+    <span>Loading...</span>
+  </div>
+
   <div class="main" *ngIf="stockUser && !private">
     <div class="user-info" *ngIf="stockUser">
       <div class="user-info-avatar">

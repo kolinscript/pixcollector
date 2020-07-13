@@ -17,6 +17,7 @@ import { AuthService } from '../../../services/auth.service';
 export class StockComponent implements OnInit, OnDestroy {
   public id;
   public stockUser;
+  public loader: boolean;
   public pixPerPage: number = 50;
   public pppMode: boolean = false;
   public selectMode: boolean = false;
@@ -54,10 +55,13 @@ export class StockComponent implements OnInit, OnDestroy {
       console.log(selfStockCheck);
       this.selfStock = selfStockCheck.body.isSelfStock;
     });
-    this.store = this.storeService.storeObservable.subscribe((store) => {
-      if (store && store.stockUser) {
-        this.stockUser = store.stockUser;
-
+    this.loader = true;
+    this.userService.getUser(this.id).subscribe((user) => {
+      this.loader = false;
+      if (user.body.user) {
+        this.stockUser = user.body.user;
+        this.href = `https://vk.com/id${this.stockUser.vkId}`;
+        this.storeService.setStore({stockUser: this.stockUser});
         if (this.selfStock) {
           this.allowDownload = true;
         } else if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
@@ -69,21 +73,6 @@ export class StockComponent implements OnInit, OnDestroy {
         } else if (this.stockUser.privacyDownloadable === 1) {
           this.allowDownload = true;
         }
-
-        this.stockUser.pixArray.forEach((pix) => {
-          pix.hovered = false;
-          pix.selected = false;
-        });
-        this.calculateLastPage();
-        this.calculateViewport();
-      }
-    })
-
-    this.userService.getUser(this.id).subscribe((user) => {
-      if (user.body.user) {
-        this.stockUser = user.body.user;
-        this.href = `https://vk.com/id${this.stockUser.vkId}`;
-        this.storeService.setStore({stockUser: this.stockUser});
       }
 
       if (user.body.error.code === 2) {
