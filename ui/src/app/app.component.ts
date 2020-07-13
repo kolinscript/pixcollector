@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { SideBarService } from './services/side-bar.service';
-import { ShadowInOut } from './animations';
 import { SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
 
@@ -9,7 +7,6 @@ import { interval } from 'rxjs';
   template:
     '<router-outlet></router-outlet>' +
     '<app-sidebar></app-sidebar>',
-  animations: [ShadowInOut.animationTrigger],
 })
 export class AppComponent {
 

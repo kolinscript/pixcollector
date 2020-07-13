@@ -1,13 +1,13 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { SideBarService } from '../../../services/side-bar.service';
 import { SideBarTypes } from 'src/app/models/side-bar.model';
-import { SlideRightLeft } from '../../../animations';
+import { ShadowInOut, SlideRightLeft } from '../../../animations';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  animations: [SlideRightLeft.animationTrigger]
+  animations: [ShadowInOut.animationTrigger, SlideRightLeft.animationTrigger]
 })
 export class SidebarComponent implements OnInit {
   SideBarTypes = SideBarTypes;

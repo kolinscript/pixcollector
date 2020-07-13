@@ -25,12 +25,12 @@ export class HeaderComponent implements OnInit {
     this.sideBar.openSideBar({type: type}).subscribe((sideBarRes) => {
       console.log('sideBarRes', sideBarRes);
     });
-    this.sideBar.sideBarsObservable.subscribe((sideBars) => {
-      console.log('sideBars', sideBars);
-      if (sideBars.length === 0) {
-        // this.init();
-      }
-    });
+    // this.sideBar.sideBarsObservable.subscribe((sideBars) => {
+    //   console.log('sideBars', sideBars);
+    //   if (sideBars.length === 0) {
+    //     // this.init();
+    //   }
+    // });
   }
 
 }
