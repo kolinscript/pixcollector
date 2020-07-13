@@ -62,6 +62,10 @@ export class StockComponent implements OnInit, OnDestroy {
         this.stockUser = user.body.user;
         this.href = `https://vk.com/id${this.stockUser.vkId}`;
         this.storeService.setStore({stockUser: this.stockUser});
+        this.stockUser.pixArray.forEach((pix) => {
+          pix.hovered = false;
+          pix.selected = false;
+        });
         if (this.selfStock) {
           this.allowDownload = true;
         } else if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
@@ -74,19 +78,15 @@ export class StockComponent implements OnInit, OnDestroy {
           this.allowDownload = true;
         }
       }
-
-      if (user.body.error.code === 2) {
-        this.private = true;
-        this.privacyVisible = 2;
-      } else if (user.body.error.code === 3) {
-        this.private = true;
-        this.privacyVisible = 3;
+      if (user.body.error) {
+        if (user.body.error.code === 2) {
+          this.private = true;
+          this.privacyVisible = 2;
+        } else if (user.body.error.code === 3) {
+          this.private = true;
+          this.privacyVisible = 3;
+        }
       }
-
-      this.stockUser.pixArray.forEach((pix) => {
-        pix.hovered = false;
-        pix.selected = false;
-      });
       this.calculateLastPage();
       this.calculateViewport();
     });
