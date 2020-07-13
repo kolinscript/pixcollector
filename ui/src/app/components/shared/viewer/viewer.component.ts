@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  HostListener,
   Input,
   OnChanges, OnDestroy,
   OnInit,
@@ -8,19 +9,33 @@ import {
   SimpleChanges
 } from '@angular/core';
 
+export enum KEY_CODE {
+  RIGHT_ARROW = 'AltRight',
+  LEFT_ARROW = 'ArrowLeft'
+}
+
 @Component({
   selector: 'app-viewer',
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() viewerPix;
-  @Output() close = new EventEmitter<boolean>();
-  @Output() slideTo = new EventEmitter<string>();
   href: string;
   controlsViewed: boolean = false;
   globalMousemoveListenFunc: Function;
   globalMousemoveStopInterval;
+  @Input() viewerPix;
+  @Output() close = new EventEmitter<boolean>();
+  @Output() slideTo = new EventEmitter<string>();
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.code === KEY_CODE.RIGHT_ARROW) {
+      this.slideHandler('right');
+    }
+    if (event.code === KEY_CODE.LEFT_ARROW) {
+      this.slideHandler('left');
+    }
+  }
 
   constructor(
     private renderer: Renderer2

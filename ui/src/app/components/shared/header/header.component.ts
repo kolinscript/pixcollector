@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { SideBarService } from '../../../services/side-bar.service';
 import { SideBarTypes } from 'src/app/models/side-bar.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +15,10 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private sideBar: SideBarService
-  ) { }
+    private sideBar: SideBarService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
     this.authorized = this.authService.isAuthorized();
@@ -23,14 +26,16 @@ export class HeaderComponent implements OnInit {
 
   public openMenu(type: SideBarTypes): void {
     this.sideBar.openSideBar({type: type}).subscribe((sideBarRes) => {
-      console.log('sideBarRes', sideBarRes);
+      if (sideBarRes && sideBarRes.reload) {
+        this.reloadRoute();
+      }
     });
-    // this.sideBar.sideBarsObservable.subscribe((sideBars) => {
-    //   console.log('sideBars', sideBars);
-    //   if (sideBars.length === 0) {
-    //     // this.init();
-    //   }
-    // });
+  }
+
+  private reloadRoute() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([`${this.router.url}`]);
   }
 
 }
