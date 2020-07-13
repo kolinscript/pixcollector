@@ -16,6 +16,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class StockComponent implements OnInit, OnDestroy {
   public id;
+  public user;
   public stockUser;
   public loader: boolean;
   public pixPerPage: number = 50;
@@ -51,19 +52,29 @@ export class StockComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.id = this.router.url.slice(7);
     this.authorized = this.authService.isAuthorized();
-    console.log('authorized: ', this.authorized);
     this.userService.isSelfStock(this.id).subscribe((selfStockCheck) => {
-      console.log(selfStockCheck);
       this.selfStock = selfStockCheck.body.isSelfStock;
     });
     this.loader = true;
+    this.store = this.storeService.storeObservable.subscribe((store) => {
+      if (store && store.stockUser) {
+        this.user = store.user;
+        this.stockUser = store.stockUser;
+        this.stockUser.pixArray.forEach((pix) => {
+          pix.hovered = false;
+          pix.selected = false;
+        });
+        this.calculateLastPage();
+        this.calculateViewport();
+      }
+    });
     this.userService.getUser(this.id).subscribe((user) => {
       this.loader = false;
       if (user.body.user) {
         this.stockUser = user.body.user;
         this.href = `https://vk.com/id${this.stockUser.vkId}`;
         this.storeService.setStore({stockUser: this.stockUser});
-        if (this.selfStock) {
+        if (this.selfStock || (this.user.sysAccessRights === 1)) {
           this.allowDownload = true;
         } else if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
           this.allowDownload = false;
@@ -91,18 +102,6 @@ export class StockComponent implements OnInit, OnDestroy {
       this.calculateLastPage();
       this.calculateViewport();
     });
-
-    this.store = this.storeService.storeObservable.subscribe((store) => {
-      if (store && store.stockUser) {
-        this.stockUser = store.stockUser;
-        this.stockUser.pixArray.forEach((pix) => {
-          pix.hovered = false;
-          pix.selected = false;
-        });
-        this.calculateLastPage();
-        this.calculateViewport();
-      }
-    })
   }
 
   ngOnDestroy() {
