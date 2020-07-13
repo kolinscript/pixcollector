@@ -3,10 +3,10 @@
     <span>Loading...</span>
   </div>
 
-  <div class="title">Users Chart</div>
-  <div class="sub-title">Dive into others collections!</div>
+  <div class="title" *ngIf="!loader">Users Chart</div>
+  <div class="sub-title" *ngIf="!loader">Dive into others collections!</div>
 
-  <div class="chart">
+  <div class="chart" *ngIf="!loader">
     <div class="chart-card" *ngFor="let user of users" (click)="goToStock(user.vkId)">
       <div class="cc-avatar"><img src="{{user.avatar}}" alt="{{user.name}}"/></div>
 

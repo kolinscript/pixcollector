@@ -60,6 +60,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       this.userService.updUser(userUpdates).subscribe((user) => {
         if (user) {
           this.storeService.setStore({user: user.body.user});
+          this.sideBar.sideBarResponseData({reload: true});
         }
       });
     });
@@ -73,6 +74,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       this.userService.updUser(userUpdates).subscribe((user) => {
         if (user) {
           this.storeService.setStore({user: user.body.user});
+          this.sideBar.sideBarResponseData({reload: true});
         }
       });
     });

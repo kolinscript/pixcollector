@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/index';
+import { BehaviorSubject, Subject } from 'rxjs/index';
 import { SideBar } from '../models/side-bar.model';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { SideBar } from '../models/side-bar.model';
 export class SideBarService {
   public sideBars: Array<any>;
   public sideBarsObservable: BehaviorSubject<any[]>;
+  private sideBarResponseObj = new Subject<any>();
 
   constructor() {
     this.sideBars = new Array<{}>();
@@ -17,7 +19,7 @@ export class SideBarService {
   public openSideBar(sideBar: SideBar) {
     this.sideBars.push(sideBar);
     this.sideBarsObservable.next(this.sideBars);
-    // return SideBarRef;
+    return this.sideBarResponseObj.pipe(take(1));
   }
 
   public closeSideBar() {
@@ -28,6 +30,10 @@ export class SideBarService {
   public closeSideAllBars() {
     this.sideBars = new Array<{}>();
     this.sideBarsObservable.next(this.sideBars);
+  }
+
+  public sideBarResponseData(data) {
+    this.sideBarResponseObj.next(data);
   }
 }
 

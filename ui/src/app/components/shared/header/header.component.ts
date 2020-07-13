@@ -22,10 +22,11 @@ export class HeaderComponent implements OnInit {
   }
 
   public openMenu(type): void {
-    this.sideBar.openSideBar({
-      type: type
+    this.sideBar.openSideBar({type: type}).subscribe((sideBarRes) => {
+      console.log('sideBarRes', sideBarRes);
     });
     this.sideBar.sideBarsObservable.subscribe((sideBars) => {
+      console.log('sideBars', sideBars);
       if (sideBars.length === 0) {
         // this.init();
       }

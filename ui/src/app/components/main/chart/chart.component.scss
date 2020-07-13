@@ -24,7 +24,8 @@
   .title {
     width: 100%;
     padding: 0 20px;
-    font: 400 16px/20px $fontMain;
+    margin-top: 20px;
+    font: 500 42px/44px $fontMain;
     text-align: left;
     color: $background;
   }
@@ -33,7 +34,7 @@
     width: 100%;
     padding: 0 20px;
     margin-top: 20px;
-    font: 400 14px/20px $fontMain;
+    font: 400 22px/24px $fontMain;
     text-align: left;
     color: $background;
   }
@@ -41,7 +42,7 @@
   .chart {
     width: 100%;
     height: 100%;
-    margin-top: 60px;
+    margin-top: 10px;
     cursor: pointer;
     display: flex;
     justify-content: flex-start;
@@ -55,7 +56,7 @@
       justify-content: flex-start;
       align-items: center;
       margin-top: 20px;
-      width: 94%;
+      width: 97%;
       height: 120px;
       border-radius: 14px;
       padding: 0 0 0 20px;
