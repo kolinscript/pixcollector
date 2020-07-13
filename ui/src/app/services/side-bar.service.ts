@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs/index';
 import { SideBar } from '../models/side-bar.model';
-import { last } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class SideBarService {
   public openSideBar(sideBar: SideBar) {
     this.sideBars.push(sideBar);
     this.sideBarsObservable.next(this.sideBars);
-    return this.sideBarResponseObj.pipe(last());
+    return this.sideBarResponseObj.pipe(take(1));
   }
 
   public closeSideBar() {

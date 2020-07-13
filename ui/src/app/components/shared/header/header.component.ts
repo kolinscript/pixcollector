@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     this.authorized = this.authService.isAuthorized();
   }
 
-  public openMenu(type): void {
+  public openMenu(type: SideBarTypes): void {
     this.sideBar.openSideBar({type: type}).subscribe((sideBarRes) => {
       console.log('sideBarRes', sideBarRes);
     });
