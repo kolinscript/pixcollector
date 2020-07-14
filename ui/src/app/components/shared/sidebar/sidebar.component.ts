@@ -12,7 +12,8 @@ import { ShadowInOut, SlideRightLeft } from '../../../animations';
 export class SidebarComponent implements OnInit {
   SideBarTypes = SideBarTypes;
   sidebars: any[];
-  responseData;
+  responseData: any;
+  loading: boolean;
 
   constructor(
     public sideBar: SideBarService,
@@ -31,12 +32,19 @@ export class SidebarComponent implements OnInit {
   }
 
   public sbData(data) {
+    if (data && data.loading) {
+      this.loading = data.loading;
+    } else {
+      this.loading = false;
+    }
     this.responseData = data;
   }
 
   public sideBarClose(): void {
-    this.sideBar.sideBarResponseData(this.responseData);
-    this.sideBar.closeSideBar();
+    if (!this.loading) {
+      this.sideBar.sideBarResponseData(this.responseData);
+      this.sideBar.closeSideBar();
+    }
   }
 
 }

@@ -52,6 +52,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       privacyVisible: [this.user.privacyVisible ? this.user.privacyVisible : null],
       privacyDownloadable: [this.user.privacyDownloadable ? this.user.privacyDownloadable : null]
     });
+    this.SbData.emit({loading: true});
     this.form.get('privacyVisible').valueChanges.subscribe((privacy) => {
       const userUpdates = {
         user: {
@@ -76,7 +77,6 @@ export class MenuComponent implements OnInit, OnDestroy {
       this.userService.updUser(userUpdates).subscribe((user) => {
         if (user) {
           this.storeService.setStore({user: user.body.user});
-          this.SbData.emit({reload: true});
         }
       });
     });
