@@ -19,8 +19,6 @@ const user = {
         if (token !== undefined) {
             const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
             const reqVkID = req.query.id;
-            console.log('tokenVkId:________', tokenVkId);
-            console.log('reqVkID:________', reqVkID);
             if (tokenVkId === reqVkID) {
                 // token, user req himself
                 // update user from vk - send user
@@ -111,8 +109,6 @@ const user = {
                     }
                     else { res.status(200).json({body: {error: {text: 'found no user', code: 0}}}); }
                 });
-
-
             } else {
                 res.status(200).json({body: {error: {text: 'found no user', code: 0}}});
             }
