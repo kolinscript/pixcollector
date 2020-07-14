@@ -34,6 +34,7 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.initForm();
       }
     });
+    this.SbData.emit({reload: false});
   }
 
   ngOnDestroy() {

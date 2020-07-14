@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 
 export enum KEY_CODE {
-  RIGHT_ARROW = 'AltRight',
+  RIGHT_ARROW = 'ArrowRight',
   LEFT_ARROW = 'ArrowLeft'
 }
 
