@@ -27,7 +27,9 @@ export class HeaderComponent implements OnInit {
   public openMenu(type: SideBarTypes): void {
     this.sideBar.openSideBar({type: type}).subscribe((sideBarRes) => {
       if (sideBarRes && sideBarRes.reload) {
-        this.reloadRoute();
+        if (this.router.url === '/chart') {
+          this.reloadRoute();
+        }
       }
     });
   }
