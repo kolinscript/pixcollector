@@ -2,7 +2,7 @@
   "name": "pixcollector",
   "version": "1.0.0",
   "main": "api/app.js",
-  "repository": "https://github.com/nkoshkarov/quadratic.git",
+  "repository": "https://github.com/kolinscript/pixcollector.git",
   "author": "nkoshkarov",
   "license": "MIT",
   "dependencies": {
