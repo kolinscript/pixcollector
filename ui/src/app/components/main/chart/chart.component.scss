@@ -60,35 +60,12 @@
       width: 100%;
       height: 120px;
       border-radius: 14px;
-      padding: 0 0 0 20px;
       background: radial-gradient(110.3% 95.84% at 56.25% 0%, #4C4C4C 0%, #333333 100%);
-
-      &:hover {
-        .cc-preview {
-          .arrow {
-            opacity: 1;
-            right: -54px;
-          }
-
-          span {
-            opacity: 1;
-
-            &.take {
-              top: calc(50% - 25px);
-              right: 166px;
-              font: 900 42px/50px Roboto, sans-serif;
-              font-style: italic;
-            }
-          }
-        }
-      }
 
       .cc-avatar {
         overflow: hidden;
-        width: 90px;
-        height: 90px;
-        border-radius: 8px;
-        border: 1px solid #525252;
+        width: 120px;
+        height: 120px;
 
         img {
           display: block;
@@ -102,8 +79,38 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        width: 260px;
+        position: relative;
         height: 100%;
+        flex: 1;
+
+        .cim-background, .cim-wrapper {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+        }
+
+        .cim-background {
+          filter: blur(69px);
+          position: absolute;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+
+          .preview-pix {
+            width: 20%;
+            height: 100%;
+            overflow: hidden;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              object-position: 50%;
+            }
+          }
+        }
 
         .row {
           width: 100%;
@@ -131,100 +138,6 @@
           }
         }
       }
-
-      .cc-preview {
-        position: relative;
-        flex: 1;
-        width: 100%;
-        height: 100%;
-
-        .preview-block {
-          filter: blur(69px);
-          position: absolute;
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-
-          .preview-pix {
-            width: 20%;
-            height: 100%;
-            overflow: hidden;
-
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              object-position: 50%;
-            }
-          }
-        }
-
-        .arrow {
-          opacity: 0;
-          position: absolute;
-          right: -20px;
-          top: 0;
-          width: 200px;
-          height: 100%;
-          transition: right 200ms ease, opacity 200ms ease;
-
-          span {
-            height: 40px;
-            display: block;
-            position: absolute;
-            border-radius: 20px;
-            background: #2f2f2f;
-
-            &:nth-child(1) {
-              width: 100%;
-              top: calc(50% - 20px);
-            }
-
-            &:nth-child(2) {
-              width: 142px;
-              right: -5px;
-              top: calc(50% - 56px);
-              transform: rotate(45deg);
-            }
-
-            &:nth-child(3) {
-              width: 142px;
-              right: -5px;
-              top: calc(50% + 18px);
-              transform: rotate(-45deg);
-            }
-          }
-        }
-
-        span {
-          opacity: 0;
-          display: block;
-          position: absolute;
-          font: 900 142px/166px $fontMain;
-          color: #2f2f2f;
-          transition: opacity 200ms ease;
-
-          &.take {
-            top: calc(50% - 25px);
-            right: 200px;
-            transition: right 200ms ease;
-            font: 900 42px/50px Roboto, sans-serif;
-            font-style: italic;
-          }
-
-          &.look {
-            top: calc(50% - 37px);
-            right: -2px;
-            font: 900 46px/50px $fontMain;
-            color: lighten($background, 25%);
-            font-style: italic;
-          }
-        }
-      }
     }
   }
 }
@@ -232,14 +145,24 @@
 
 @media screen and (max-width: 750px) {
   .chart-wrapper {
+    .title {
+      margin-top: 15px;
+      font: 500 22px/24px $fontMain;
+    }
+
+    .sub-title {
+      margin-top: 15px;
+      font: 400 16px/20px $fontMain;
+    }
+
     .chart {
+      margin-top: 0;
       .chart-card {
         height: 80px;
-        padding: 0 0 0 12px;
 
         .cc-avatar {
-          width: 60px;
-          height: 60px;
+          width: 80px;
+          height: 80px;
         }
 
         .cc-info-main {
@@ -254,29 +177,6 @@
             .album-size {
               bottom: -46px;
               font: 900 44px/100px $fontMain;
-            }
-          }
-        }
-
-        .cc-preview {
-          .arrow {
-            width: 120px;
-          }
-
-          span {
-            display: block;
-            position: absolute;
-            font: 900 142px/166px $fontMain;
-            color: #2f2f2f;
-
-            &.take {
-              right: 70px;
-              font: 900 22px/26px $fontMain;
-              color: #8e8e8e;
-            }
-
-            &.look {
-              font: 900 28px/30px $fontMain;
             }
           }
         }

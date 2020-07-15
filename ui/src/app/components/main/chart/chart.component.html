@@ -11,27 +11,19 @@
       <div class="cc-avatar"><img src="{{user.avatar}}" alt="{{user.name}}"/></div>
 
       <div class="cc-info-main">
-        <div class="row">
-          <div class="name">{{user.name}}</div>
-        </div>
-        <div class="row">
-          <div class="album-size">{{user.albumSize}}</div>
-        </div>
-      </div>
-
-      <div class="cc-preview">
-        <div class="preview-block">
+        <div class="cim-background">
           <div class="preview-pix" *ngFor="let pix of user.pixArray.slice(-5)">
             <img class="pix-img" src="{{pix.url}}" alt="{{pix.url}}"/>
           </div>
         </div>
-        <div class="arrow">
-          <span></span>
-          <span></span>
-          <span></span>
+        <div class="cim-wrapper">
+          <div class="row">
+            <div class="name">{{user.name}}</div>
+          </div>
+          <div class="row">
+            <div class="album-size">{{user.albumSize}}</div>
+          </div>
         </div>
-        <span class="take">take a</span>
-        <span class="look">look</span>
       </div>
     </div>
   </div>
