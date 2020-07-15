@@ -23,8 +23,6 @@ const user = {
                 // token, user req himself
                 // update user from vk - send user
                 Users.findOne({vkId: reqVkID}, (err, userDb) => {
-                    console.log('err_______', err);
-                    console.log('userDb______', userDb);
                     if (err) { res.status(200).json({body: {error: err}}); }
                     if (userDb) { helpers.UserUpdateVkData(req, res, next, userDb.vkToken, reqVkID); }
                     else { res.status(200).json({body: {error: {text: 'found no user', code: 0}}}); }
