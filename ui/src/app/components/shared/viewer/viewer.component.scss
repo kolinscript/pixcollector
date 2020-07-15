@@ -97,22 +97,33 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        padding: 20px;
+        height: 80px;
         .like {
-          width: 30px;
-          height: 30px;
+          position: absolute;
+          left: 50%;
+          margin-left: -25px;
+          width: 50px;
+          height: 50px;
           mask-image: url("../../../../assets/images/heart.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
-          box-shadow: inset 2px 2px 8px #101010;
+          background: $background;
         }
         .number, .add {
-          margin: 0 10px;
+          position: absolute;
+          left: 50%;
           padding: 5px 10px;
           background: $background;
           border-radius: 8px;
           font: 500 14px/20px $fontMain;
           color: #cacaca;
+        }
+        .number {
+          margin-left: -140px;
+        }
+
+        .add {
+          margin-left: 55px;
         }
       }
 
