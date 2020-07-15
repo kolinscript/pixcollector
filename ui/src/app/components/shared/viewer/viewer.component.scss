@@ -11,7 +11,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    //padding: 18px;
     background: #252525;
 
     .pix {
@@ -99,7 +98,16 @@
         bottom: 0;
         width: 100%;
         padding: 20px;
-        .number {
+        .like {
+          width: 30px;
+          height: 30px;
+          mask-image: url("../../../../assets/images/heart.svg");
+          mask-size: cover;
+          -webkit-mask-size: cover;
+          box-shadow: inset 2px 2px 8px #101010;
+        }
+        .number, .add {
+          margin: 0 10px;
           padding: 5px 10px;
           background: $background;
           border-radius: 8px;
