@@ -94,88 +94,12 @@
     </div>
   </div>
 
-  <div class="block admin">
+  <div class="block admin" *ngIf="user.sysAccessRights === 1">
     <div class="title">
-      <span>Admin</span>
+      <span>Administrator tools</span>
     </div>
-    <div class="box-col-double">
-      <div class="col col-one">
-        <div class="sub-title">
-          <span>Visible</span>
-        </div>
-        <div class="row">
-          <div class="radio">
-            <input [value]="1"
-              type="radio"
-              id="v-all"
-              name="privacyVisible"
-              formControlName="privacyVisible"
-            />
-            <label for="v-all">All</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="radio">
-            <input [value]="2"
-              type="radio"
-              id="v-authorized"
-              name="privacyVisible"
-              formControlName="privacyVisible"
-            />
-            <label for="v-authorized">Authorized</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="radio">
-            <input [value]="3"
-              type="radio"
-              id="v-nobody"
-              name="privacyVisible"
-              formControlName="privacyVisible"
-            />
-            <label for="v-nobody">Only me</label>
-          </div>
-        </div>
-      </div>
-      <div class="col col-two">
-        <div class="sub-title">
-          <span>Downloadable</span>
-        </div>
-        <div class="row">
-          <div class="radio">
-            <input [value]="1"
-              type="radio"
-              id="d-all"
-              value=0
-              name="privacyDownloadable"
-              formControlName="privacyDownloadable"
-            />
-            <label for="d-all">All</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="radio">
-            <input [value]="2"
-              type="radio"
-              id="d-authorized"
-              name="privacyDownloadable"
-              formControlName="privacyDownloadable"
-            />
-            <label for="d-authorized">Authorized</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="radio">
-            <input [value]="3"
-              type="radio"
-              id="d-nobody"
-              name="privacyDownloadable"
-              formControlName="privacyDownloadable"
-            />
-            <label for="d-nobody">Only me</label>
-          </div>
-        </div>
-      </div>
+    <div class="sub-title">
+      <span>Refresh users</span>
     </div>
   </div>
 
