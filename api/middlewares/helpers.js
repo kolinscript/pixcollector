@@ -7,7 +7,7 @@ const helpers = {
     UserUpdateVkData: (req, res, next, vkToken, vkId) => {
         const userLink = `https://api.vk.com/` +
             `method/users.get` +
-            `?fields=photo_100` +
+            `?fields=photo_200` +
             `&access_token=${vkToken}` +
             `&v=5.103`;
         const albumLink = `https://api.vk.com/` +
@@ -21,7 +21,7 @@ const helpers = {
             .then(function (responseUser) {
                 if (responseUser.data.response) {
                     const name = `${responseUser.data.response[0].first_name} ${responseUser.data.response[0].last_name}`;
-                    const avatar = responseUser.data.response[0].photo_100;
+                    const avatar = responseUser.data.response[0].photo_200;
 
                     axios.get(albumLink)
                         .then(function (responseAlbum) {
