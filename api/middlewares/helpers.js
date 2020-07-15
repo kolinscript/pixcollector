@@ -43,14 +43,15 @@ const helpers = {
 
                             let pixArray = [];
 
+                            // single request
                             if (integerPart === 0) {
-                                // single request
                                 const link = `https://api.vk.com/` +
                                     `method/photos.get` +
                                     `?owner_id=${vkId}` +
                                     `&access_token=${vkToken}` +
                                     `&album_id=saved` +
                                     `&photo_sizes=1` +
+                                    `&extended=1` +
                                     `&offset=${reqOffset}` +
                                     `&count=${reqFloatPart}` +
                                     `&v=5.103`;
@@ -137,8 +138,9 @@ const helpers = {
                                     .finally(function () {
                                         // always executed
                                     });
-                            } else if (integerPart > 0) {
-                                // multiple requests
+                            }
+                            // multiple requests
+                            else if (integerPart > 0) {
                                 let offsetLast;
                                 let urlArray = [];
                                 for (let offset = reqOffset, count = 1000; offset < reqIntegerPart; offset = offset + 1000) {
@@ -148,6 +150,7 @@ const helpers = {
                                         `&access_token=${vkToken}` +
                                         `&album_id=saved` +
                                         `&photo_sizes=1` +
+                                        `&extended=1` +
                                         `&offset=${offset}` +
                                         `&count=${count}` +
                                         `&v=5.103`;
@@ -160,6 +163,7 @@ const helpers = {
                                     `&access_token=${vkToken}` +
                                     `&album_id=saved` +
                                     `&photo_sizes=1` +
+                                    `&extended=1` +
                                     `&offset=${offsetLast}` +
                                     `&count=${reqFloatPart}` +
                                     `&v=5.103`;

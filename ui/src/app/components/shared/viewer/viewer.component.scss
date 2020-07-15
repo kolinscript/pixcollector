@@ -49,6 +49,7 @@
         top: 0;
         height: 100%;
         width: 200px;
+
         span {
           display: block;
           position: absolute;
@@ -58,36 +59,46 @@
           left: 50%;
           border-radius: 2px;
           background: lighten($dark, 10%);
+
           &:nth-child(1) {
             transform: rotate(45deg);
           }
+
           &:nth-child(2) {
             transform: rotate(-45deg);
           }
         }
+
         &.left {
           left: 0;
+
           span {
             &:nth-child(1) {
               top: calc(50% + 10px);
             }
+
             &:nth-child(2) {
               top: calc(50% - 10px);
             }
           }
         }
+
         &.right {
           right: 0;
+
           span {
             &:nth-child(1) {
               top: calc(50% - 10px);
             }
+
             &:nth-child(2) {
               top: calc(50% + 10px);
             }
           }
         }
-        &:hover {}
+
+        &:hover {
+        }
       }
 
       .panel-bot {
@@ -98,6 +109,33 @@
         bottom: 0;
         width: 100%;
         height: 80px;
+
+        .pb {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          width: 50%;
+          height: 100%;
+
+          &.left {
+            justify-content: flex-end;
+            padding-right: 30px;
+          }
+
+          &.right {
+            justify-content: flex-start;
+            padding-left: 30px;
+          }
+
+          .number, .add {
+            padding: 5px 10px;
+            background: $background;
+            border-radius: 8px;
+            font: 500 14px/20px $fontMain;
+            color: #cacaca;
+          }
+        }
+
         .like {
           position: absolute;
           left: 50%;
@@ -108,22 +146,6 @@
           mask-size: cover;
           -webkit-mask-size: cover;
           background: $background;
-        }
-        .number, .add {
-          position: absolute;
-          left: 50%;
-          padding: 5px 10px;
-          background: $background;
-          border-radius: 8px;
-          font: 500 14px/20px $fontMain;
-          color: #cacaca;
-        }
-        .number {
-          margin-left: -140px;
-        }
-
-        .add {
-          margin-left: 55px;
         }
       }
 
@@ -146,7 +168,8 @@
           width: 120px;
         }
 
-        .panel-bot {}
+        .panel-bot {
+        }
 
       }
     }

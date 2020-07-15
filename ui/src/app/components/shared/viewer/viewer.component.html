@@ -4,7 +4,7 @@
       <img src="{{href}}" alt=""/>
       <div class="slide left"
            *ngIf="controlsViewed"
-           (click)="slideHandler('left')"
+           (click)="slide('left')"
            (mouseenter) ="mouseEnter()"
            (mouseleave) ="mouseLeave()"
       >
@@ -13,7 +13,7 @@
       </div>
       <div class="slide right"
            *ngIf="controlsViewed"
-           (click)="slideHandler('right')"
+           (click)="slide('right')"
            (mouseenter) ="mouseEnter()"
            (mouseleave) ="mouseLeave()"
       >
@@ -22,14 +22,17 @@
       </div>
       <div class="close"
            *ngIf="controlsViewed"
-           (click)="closeHandler()"
+           (click)="closeViewer()"
       ></div>
       <div class="panel-bot"
            *ngIf="controlsViewed"
       >
-        <div class="number">{{viewerPix.num_current}} of {{viewerPix.num_total}}</div>
-        <div class="like"></div>
-        <div class="add">Steal PIX</div>
+        <div class="pb left">
+          <div class="number">{{viewerPix.num_current}} of {{viewerPix.num_total}}</div></div>
+        <div class="pb right">
+          <div class="add" (click)="stealPix()">Steal PIX</div>
+        </div>
+        <div class="like" (click)="likePix()"></div>
       </div>
     </div>
   </div>

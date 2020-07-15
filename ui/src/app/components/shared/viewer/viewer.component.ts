@@ -8,6 +8,7 @@ import {
   Output, Renderer2,
   SimpleChanges
 } from '@angular/core';
+import { PhotoService } from '../../../services/photo.service';
 
 export enum KEY_CODE {
   RIGHT_ARROW = 'ArrowRight',
@@ -30,15 +31,16 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.code === KEY_CODE.RIGHT_ARROW) {
-      this.slideHandler('right');
+      this.slide('right');
     }
     if (event.code === KEY_CODE.LEFT_ARROW) {
-      this.slideHandler('left');
+      this.slide('left');
     }
   }
 
   constructor(
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private photoService: PhotoService,
   ) { }
 
   ngOnInit(): void {
@@ -67,12 +69,20 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
     }, 2000);
   }
 
-  public slideHandler(direction: 'left' | 'right'): void {
+  public slide(direction: 'left' | 'right'): void {
     this.slideTo.emit(direction);
   }
 
-  public closeHandler(): void {
+  public closeViewer(): void {
     this.close.emit();
+  }
+
+  public likePix(): void {}
+
+  public stealPix(): void {
+    this.photoService.vkSave(this.viewerPix.owner_id, this.viewerPix.photo_id).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   private activateControlView() {
