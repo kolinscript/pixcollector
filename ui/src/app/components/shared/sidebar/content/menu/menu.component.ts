@@ -51,9 +51,11 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   private initForm(): void {
+    this.privacyLoader = true;
     this.userService.getUser(this.user.vkId).subscribe((user) => {
       if (user) {
         this.storeService.setStore({user: user.body.user});
+        this.privacyLoader = false;
       }
     });
     this.form = this.fb.group({
@@ -68,9 +70,11 @@ export class MenuComponent implements OnInit, OnDestroy {
         }
       };
       this.SbData.emit({loading: true});
+      this.privacyLoader = true;
       this.userService.updUser(userUpdates).subscribe((user) => {
         if (user) {
           this.storeService.setStore({user: user.body.user});
+          this.privacyLoader = false;
           this.SbData.emit({reload: true});
         }
       });
@@ -82,9 +86,11 @@ export class MenuComponent implements OnInit, OnDestroy {
           privacyDownloadable: +privacy,
         }
       };
+      this.privacyLoader = true;
       this.userService.updUser(userUpdates).subscribe((user) => {
         if (user) {
           this.storeService.setStore({user: user.body.user});
+          this.privacyLoader = false;
         }
       });
     });
