@@ -103,7 +103,6 @@
 
       .panel-bot {
         display: flex;
-        justify-content: center;
         align-items: center;
         position: absolute;
         bottom: 0;
@@ -117,14 +116,22 @@
           width: 50%;
           height: 100%;
 
+          &.self-stock {
+            width: 100%;
+            padding: 0;
+            justify-content: center;
+          }
+
           &.left {
+            left: 0;
             justify-content: flex-end;
-            padding-right: 30px;
+            padding-right: 50px;
           }
 
           &.right {
+            right: 0;
             justify-content: flex-start;
-            padding-left: 30px;
+            padding-left: 50px;
           }
 
           .number, .add {

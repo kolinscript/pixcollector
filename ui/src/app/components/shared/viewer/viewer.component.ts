@@ -26,6 +26,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   globalMousemoveListenFunc: Function;
   globalMousemoveStopInterval;
   @Input() viewerPix;
+  @Input() selfStock;
   @Output() close = new EventEmitter<boolean>();
   @Output() slideTo = new EventEmitter<string>();
   @HostListener('window:keydown', ['$event'])
@@ -80,7 +81,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   public likePix(): void {}
 
   public stealPix(): void {
-    this.photoService.vkSave(this.viewerPix.owner_id, this.viewerPix.photo_id).subscribe((res) => {
+    this.photoService.vkSave(this.viewerPix.owner_id, this.viewerPix.id).subscribe((res) => {
       console.log(res);
     });
   }
