@@ -28,13 +28,11 @@ export class MenuComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.privacyLoader = true;
     this.store = this.storeService.storeObservable.subscribe((store) => {
       if (store && store.user) {
         this.user = store.user;
         this.href = `https://vk.com/id${this.user.vkId}`;
         this.initForm();
-        this.privacyLoader = false;
       }
     });
     this.SbData.emit({reload: false});
