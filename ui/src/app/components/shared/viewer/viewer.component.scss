@@ -116,12 +116,6 @@
           width: 50%;
           height: 100%;
 
-          &.self-stock {
-            width: 100%;
-            padding: 0;
-            justify-content: center;
-          }
-
           &.left {
             left: 0;
             justify-content: flex-end;
@@ -132,6 +126,12 @@
             right: 0;
             justify-content: flex-start;
             padding-left: 50px;
+          }
+
+          &.self-stock {
+            width: 100%;
+            padding: 0;
+            justify-content: center;
           }
 
           .number, .add {
