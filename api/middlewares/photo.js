@@ -20,9 +20,9 @@ const photo = {
             if (userDbFromToken) {
                 const link = `https://api.vk.com/` +
                     `method/photos.copy` +
-                    `?owner_id=${owner_id}` +
+                    `?access_token=${userDbFromToken.vkToken}` +
+                    `&owner_id=${owner_id}` +
                     `&photo_id=${photo_id}` +
-                    `&access_token=${userDbFromToken.vkToken}` +
                     `&v=5.103`;
                 axios.get(link)
                     .then(function (response) {
