@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class MenuComponent implements OnInit, OnDestroy {
   @Output() SbData = new EventEmitter()
+  public privacyLoader: boolean;
   public form: FormGroup;
   public href: string;
   public user;
@@ -27,11 +28,13 @@ export class MenuComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.privacyLoader = true;
     this.store = this.storeService.storeObservable.subscribe((store) => {
       if (store && store.user) {
         this.user = store.user;
         this.href = `https://vk.com/id${this.user.vkId}`;
         this.initForm();
+        this.privacyLoader = false;
       }
     });
     this.SbData.emit({reload: false});
@@ -48,6 +51,11 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   private initForm(): void {
+    this.userService.getUser(this.user.vkId).subscribe((user) => {
+      if (user) {
+        this.storeService.setStore({user: user.body.user});
+      }
+    });
     this.form = this.fb.group({
       privacyVisible: [this.user.privacyVisible ? this.user.privacyVisible : null],
       privacyDownloadable: [this.user.privacyDownloadable ? this.user.privacyDownloadable : null]

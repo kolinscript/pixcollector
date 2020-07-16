@@ -135,6 +135,8 @@
           }
 
           .number, .add {
+            cursor: pointer;
+            user-select: none;
             padding: 5px 10px;
             background: $background;
             border-radius: 8px;
@@ -144,6 +146,8 @@
         }
 
         .like {
+          cursor: pointer;
+          user-select: none;
           position: absolute;
           left: 50%;
           margin-left: -25px;
@@ -152,7 +156,7 @@
           mask-image: url("../../../../assets/images/heart.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
-          background: $background;
+          background: $background
         }
       }
 
