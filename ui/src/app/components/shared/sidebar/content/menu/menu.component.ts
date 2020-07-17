@@ -32,9 +32,9 @@ export class MenuComponent implements OnInit, OnDestroy {
       if (store && store.user) {
         this.user = store.user;
         this.href = `https://vk.com/id${this.user.vkId}`;
-        this.initForm();
       }
     });
+    this.initForm();
     this.SbData.emit({reload: false});
   }
 
