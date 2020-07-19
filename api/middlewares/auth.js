@@ -12,10 +12,11 @@ const auth = {
 
         axios.get(authLink)
             .then(function (responseAuth) {
+                console.log('responseAuth', responseAuth);
                 helpers.UserUpdateVkData(req, res, next, responseAuth.data.access_token, responseAuth.data.user_id);
             })
             .catch(function (error) {
-                console.log(error);
+                console.log('errorAuth', error);
             });
     }),
 
