@@ -14,8 +14,8 @@
       <span>Privacy settings</span>
       <span class="loader" *ngIf="privacyLoader"></span>
     </div>
-    <div class="box-col-double">
-      <div class="col col-one">
+    <div class="box-col">
+      <div class="col col-50-per">
         <div class="sub-title">
           <span>Visible</span>
         </div>
@@ -53,7 +53,7 @@
           </div>
         </div>
       </div>
-      <div class="col col-two">
+      <div class="col col-50-per">
         <div class="sub-title">
           <span>Downloadable</span>
         </div>
@@ -108,18 +108,23 @@
     <div class="title">
       <span>Additional tools</span>
     </div>
-    <div class="row">
-      <div class="sub-title">
-        <span>Get extra tools</span>
-      </div>
-      <div class="button stroke login" (click)="logout()">
-        <div class="btn-label">Rights request</div>
-        <div class="btn-logo"> </div>
-      </div>
-    </div>
-    <div class="row" *ngIf="false">
-      <div class="sub-title">
-        <span>Save & Like</span>
+
+    <div class="box-col">
+      <div class="col col-100-per">
+        <div class="sub-title">
+          <span>Get extra tools</span>
+        </div>
+        <div class="row">
+          <div class="button stroke login" (click)="logout()">
+            <div class="btn-label">Rights request</div>
+            <div class="btn-logo"> </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="false">
+          <div class="sub-title">
+            <span>Save & Like</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

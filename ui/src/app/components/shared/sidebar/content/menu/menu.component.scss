@@ -74,6 +74,21 @@
       }
     }
 
+    .box-col {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .col {
+        &.col-100-per {
+          width: 100%;
+        }
+        &.col-50-per {
+          width: 50%;
+        }
+      }
+    }
+
     .sub-title {
       width: 100%;
       padding: 0 20px;
@@ -160,16 +175,6 @@
         }
       }
 
-    }
-
-    .box-col-double {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .col {
-        width: 50%;
-      }
     }
   }
 }
