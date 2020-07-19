@@ -140,6 +140,10 @@ const user = {
                         user.privacyDownloadable = reqUser.privacyDownloadable;
                         user.markModified('privacyDownloadable');
                     }
+                    if (reqUser.vkTokenIF) {
+                        user.vkTokenIF = reqUser.vkTokenIF;
+                        user.markModified('vkTokenIF');
+                    }
                     user.save()
                         .then(() => {
                                 const safeUser = ({_id, vkToken, ...rest}) => rest;

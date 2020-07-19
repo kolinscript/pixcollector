@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StoreService } from '../../../services/store.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-stocks',
@@ -11,12 +12,14 @@ import { StoreService } from '../../../services/store.service';
 export class StocksComponent implements OnInit, OnDestroy {
   public loader: boolean;
   public vkId: string = null;
+  private user;
+  private access_token: string = null;
   private store: Subscription;
 
   constructor(
     private storeService: StoreService,
-    private router: Router,
-    private route: ActivatedRoute
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -24,11 +27,28 @@ export class StocksComponent implements OnInit, OnDestroy {
     this.store = this.storeService.storeObservable.subscribe((store) => {
       this.loader = false;
       if (store && store.user) {
+        this.user = store.user;
         this.vkId = store.user.vkId;
+        if (this.router.url.slice(0, 20) === '/stocks#access_token') {
+          this.access_token = this.router.url.slice(21, this.router.url.slice(21).indexOf('expires_in'));
+          console.log('this.access_token: ', this.access_token);
+          const userUpdates = {
+            user: {
+              vkId: this.user.vkId,
+              vkTokenIF: this.access_token,
+            }
+          };
+          this.userService.updUser(userUpdates).subscribe((user) => {
+            if (user) {
+              this.storeService.setStore({user: user.body.user});
+            }
+          });
+        }
+        if (this.router.url.slice(0, 13) === '/stocks#error') {
+          console.log('ERROR: ', this.router.url.slice(14));
+        }
       }
-    })
-    console.log('this.router.url', this.router.url);
-    console.log('route', this.route);
+    });
   }
 
   ngOnDestroy() {

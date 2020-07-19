@@ -6,6 +6,7 @@ const { Schema }         = mongoose;
 const UsersSchema = new Schema({
     vkId: String,
     vkToken: String,
+    vkTokenIF: String, // Implicit Flow access_token for user-side requests
     name: String,
     avatar: String,
     albumSize: String,
