@@ -9,13 +9,13 @@ const helpers = {
             `method/users.get` +
             `?fields=photo_200` +
             `&access_token=${vkToken}` +
-            `&v=5.103`;
+            `&v=5.120`;
         const albumLink = `https://api.vk.com/` +
             `method/photos.getAlbums` +
             `?owner_id=${vkId}` +
             `&access_token=${vkToken}` +
             `&need_system=1` +
-            `&v=5.103`;
+            `&v=5.120`;
 
         axios.get(userLink)
             .then(function (responseUser) {
@@ -51,10 +51,9 @@ const helpers = {
                                     `&access_token=${vkToken}` +
                                     `&album_id=saved` +
                                     `&photo_sizes=1` +
-                                    `&extended=1` +
                                     `&offset=${reqOffset}` +
                                     `&count=${reqFloatPart}` +
-                                    `&v=5.103`;
+                                    `&v=5.120`;
                                 axios.get(link)
                                     .then(function (response) {
                                         const arr = [];
@@ -150,10 +149,9 @@ const helpers = {
                                         `&access_token=${vkToken}` +
                                         `&album_id=saved` +
                                         `&photo_sizes=1` +
-                                        `&extended=1` +
                                         `&offset=${offset}` +
                                         `&count=${count}` +
-                                        `&v=5.103`;
+                                        `&v=5.120`;
                                     urlArray.push(link);
                                     offsetLast = offset + 1000;
                                 }
@@ -163,10 +161,9 @@ const helpers = {
                                     `&access_token=${vkToken}` +
                                     `&album_id=saved` +
                                     `&photo_sizes=1` +
-                                    `&extended=1` +
                                     `&offset=${offsetLast}` +
                                     `&count=${reqFloatPart}` +
-                                    `&v=5.103`;
+                                    `&v=5.120`;
 
                                 urlArray.push(linkLast);
 
@@ -265,7 +262,6 @@ const helpers = {
 
                                 photosFetcher();
                             }
-
                         })
                         .catch(function (error) {
                             res.status(200).json({body: {error: {text: error, code: 5}}});

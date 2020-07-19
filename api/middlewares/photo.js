@@ -23,7 +23,7 @@ const photo = {
                     `?access_token=${userDbFromToken.vkToken}` +
                     `&owner_id=${owner_id}` +
                     `&photo_id=${photo_id}` +
-                    `&v=5.103`;
+                    `&v=5.120`;
                 axios.get(link)
                     .then(function (response) {
                         if (response.data) {
@@ -57,7 +57,7 @@ const photo = {
                     `&item_id=${photo_id}` +
                     `&type=photo` +
                     `&access_token=${userDbFromToken.vkToken}` +
-                    `&v=5.103`;
+                    `&v=5.120`;
                 axios.get(link)
                     .then(function (response) {
                         if (response.data) {

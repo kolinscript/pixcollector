@@ -1,4 +1,4 @@
 VK api call example
 
-api.vk.com/method/photos.get?owner_id=269767349&access_token=815572799afc76e4ca28f34410e9988fcae2070a07c0b0d0d1d8488cac55ae141c65c9a1d06aad7035691&album_id=saved&photo_sizes=1&offset=420&count=100&v=5.103
-api.vk.com/method/photos.copy?access_token=815572799afc76e4ca28f34410e9988fcae2070a07c0b0d0d1d8488cac55ae141c65c9a1d06aad7035691&owner_id=233090103&photo_id=379695917&v=5.103
+api.vk.com/method/photos.get?owner_id=269767349&access_token=815572799afc76e4ca28f34410e9988fcae2070a07c0b0d0d1d8488cac55ae141c65c9a1d06aad7035691&album_id=saved&photo_sizes=1&offset=420&count=100&v=5.120
+api.vk.com/method/photos.copy?access_token=815572799afc76e4ca28f34410e9988fcae2070a07c0b0d0d1d8488cac55ae141c65c9a1d06aad7035691&owner_id=233090103&photo_id=379695917&v=5.120

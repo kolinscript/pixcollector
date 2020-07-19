@@ -21,7 +21,8 @@ export class AppComponent {
       console.log('Подключение к сети Интернет восстановлено');
     });
 
-    interval(10000).subscribe(() => {
+    interval(60000).subscribe(() => {
+      console.log('Service Worker is checking for updates..');
       this.swUpdate.checkForUpdate()
     })
 
