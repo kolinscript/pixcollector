@@ -92,6 +92,7 @@ const helpers = {
                                         const userNew = new Users({
                                             vkId: vkId,
                                             vkToken: vkToken,
+                                            vkTokenIF: null,
                                             name: name,
                                             avatar: avatar,
                                             albumSize: albumSize,
@@ -216,6 +217,7 @@ const helpers = {
                                         const userNew = new Users({
                                             vkId: vkId,
                                             vkToken: vkToken,
+                                            vkTokenIF: null,
                                             name: name,
                                             avatar: avatar,
                                             albumSize: albumSize,

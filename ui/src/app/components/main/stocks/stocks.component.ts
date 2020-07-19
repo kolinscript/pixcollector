@@ -29,26 +29,27 @@ export class StocksComponent implements OnInit, OnDestroy {
       if (store && store.user) {
         this.user = store.user;
         this.vkId = store.user.vkId;
-        if (this.router.url.slice(0, 20) === '/stocks#access_token') {
-          this.access_token = this.router.url.slice(21, this.router.url.slice(21).indexOf('expires_in'));
-          console.log('this.access_token: ', this.access_token);
-          const userUpdates = {
-            user: {
-              vkId: this.user.vkId,
-              vkTokenIF: this.access_token,
-            }
-          };
-          this.userService.updUser(userUpdates).subscribe((user) => {
-            if (user) {
-              this.storeService.setStore({user: user.body.user});
-            }
-          });
-        }
-        if (this.router.url.slice(0, 13) === '/stocks#error') {
-          console.log('ERROR: ', this.router.url.slice(14));
-        }
       }
     });
+    if (this.router.url.slice(0, 20) === '/stocks#access_token') {
+      const tokenEndIndex = this.router.url.indexOf('expires_in');
+      this.access_token = this.router.url.slice(21, tokenEndIndex);
+      console.log('this.access_token: ', this.access_token);
+      const userUpdates = {
+        user: {
+          vkId: this.user.vkId,
+          vkTokenIF: this.access_token,
+        }
+      };
+      this.userService.updUser(userUpdates).subscribe((user) => {
+        if (user) {
+          this.storeService.setStore({user: user.body.user});
+        }
+      });
+    }
+    if (this.router.url.slice(0, 13) === '/stocks#error') {
+      console.log('ERROR: ', this.router.url.slice(14));
+    }
   }
 
   ngOnDestroy() {
