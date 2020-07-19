@@ -19,7 +19,6 @@ const helpers = {
 
         axios.get(userLink)
             .then(function (responseUser) {
-                console.log('responseUser::::::::::::::::::::::::::::', responseUser);
                 console.log('responseUser.data.response[0]::::::::::::::::::::::::::::', responseUser.data.response[0]);
                 if (responseUser.data.response) {
                     const name = `${responseUser.data.response[0].first_name} ${responseUser.data.response[0].last_name}`;
@@ -27,7 +26,9 @@ const helpers = {
 
                     axios.get(albumLink)
                         .then(function (responseAlbum) {
+                            console.log('responseAlbum.data.response::::::::::::::::::::::::::::', responseAlbum.data.response);
                             const albumSize = responseAlbum.data.response.items.find(item => item.id === -15).size;
+                            console.log('albumSize::::::::::::::::::::::::::::', albumSize);
 
                             const countFrom = 0;
                             const countTo = albumSize;

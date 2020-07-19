@@ -42,6 +42,18 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.store.unsubscribe();
   }
 
+  public requestRights(): void {
+    const EXTRA_RIGHTS_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
+      '?client_id=7372433' +
+      '&display=popup' +
+      '&redirect_uri=https://pixcollector.herokuapp.com/stocks' +
+      '&scope=photos,offline' +
+      '&response_type=token' +
+      '&v=5.120'+
+      '&state=123456';
+    window.open(EXTRA_RIGHTS_URL_AUTHORIZE, "_self")
+  }
+
   public logout(): void {
     localStorage.clear();
     this.router.navigate(['/auth']);

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StoreService } from '../../../services/store.service';
 
@@ -15,7 +15,8 @@ export class StocksComponent implements OnInit, OnDestroy {
 
   constructor(
     private storeService: StoreService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +27,8 @@ export class StocksComponent implements OnInit, OnDestroy {
         this.vkId = store.user.vkId;
       }
     })
+    console.log('this.router.url', this.router.url);
+    console.log('route', this.route);
   }
 
   ngOnDestroy() {
