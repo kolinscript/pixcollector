@@ -1,7 +1,6 @@
 import { Injectable, Sanitizer, SecurityContext } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SafePipe } from '../pipes/safe.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,6 @@ export class PhotoService {
   constructor(
     private http: HttpClient,
     private sanitizer: Sanitizer,
-    private safe: SafePipe
   ) {
   }
 
@@ -22,7 +20,9 @@ export class PhotoService {
       `&owner_id=${owner_id}` +
       `&photo_id=${photo_id}` +
       `&v=5.120`;
-    return this.http.get(this.sanitizer.sanitize(SecurityContext.URL, link), {
+    const sanitizedLink = this.sanitizer.sanitize(SecurityContext.URL, link);
+    console.log('sanitizedLink ', sanitizedLink);
+    return this.http.get(sanitizedLink, {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'skip_token': 'true',
@@ -38,7 +38,9 @@ export class PhotoService {
       `&item_id=${photo_id}` +
       `&type=photo` +
       `&v=5.120`;
-    return this.http.get(this.sanitizer.sanitize(SecurityContext.URL, link), {
+    const sanitizedLink = this.sanitizer.sanitize(SecurityContext.URL, link);
+    console.log('sanitizedLink ', sanitizedLink);
+    return this.http.get(sanitizedLink, {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'skip_token': 'true',
