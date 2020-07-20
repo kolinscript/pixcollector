@@ -1,4 +1,4 @@
-import { Injectable, SecurityContext } from '@angular/core';
+import { Injectable, Sanitizer } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SafePipe } from '../pipes/safe.pipe';
@@ -10,6 +10,7 @@ export class PhotoService {
 
   constructor(
     private http: HttpClient,
+    private sanitizer: Sanitizer,
     private safe: SafePipe
   ) {
   }
@@ -21,10 +22,10 @@ export class PhotoService {
       `&owner_id=${owner_id}` +
       `&photo_id=${photo_id}` +
       `&v=5.120`;
-    return this.http.get(this.safe.transform(link).toString(), {
+    return this.http.get(this.sanitizer.sanitize(SecurityContext.URL, link), {
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'skip': 'true',
+        'skip_token': 'true',
       }
     });
   }
@@ -37,10 +38,10 @@ export class PhotoService {
       `&item_id=${photo_id}` +
       `&type=photo` +
       `&v=5.120`;
-    return this.http.get(this.safe.transform(link).toString(), {
+    return this.http.get(this.sanitizer.sanitize(SecurityContext.URL, link), {
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'skip': 'true',
+        'skip_token': 'true',
       }
     });
   }
