@@ -113,8 +113,8 @@ export class StockComponent implements OnInit, OnDestroy {
 
   public openViewer(event, pix, i): void {
     this.viewerPix = {
-      ...this.user,
       ...this.stockUser.pixArray.find(el => el.url === pix.url),
+      user: this.user,
       num_current: this.stockUser.pixArray.indexOf(this.stockUser.pixArray.find(el => el.url === pix.url)) + 1,
       num_total: this.stockUser.pixArray.length
     };
@@ -132,8 +132,8 @@ export class StockComponent implements OnInit, OnDestroy {
       case 'left': {
         if (CUR_PIX_INDEX - 1 >= 0) {
           this.viewerPix = {
-            ...this.user,
             ...this.stockUser.pixArray[CUR_PIX_INDEX - 1],
+            user: this.user,
             num_current: CUR_PIX_INDEX,
             num_total: this.stockUser.pixArray.length,
           };
@@ -144,8 +144,8 @@ export class StockComponent implements OnInit, OnDestroy {
       case 'right': {
         if (CUR_PIX_INDEX + 1 < this.stockUser.pixArray.length) {
           this.viewerPix = {
-            ...this.user,
             ...this.stockUser.pixArray[CUR_PIX_INDEX + 1],
+            user: this.user,
             num_current: CUR_PIX_INDEX + 2,
             num_total: this.stockUser.pixArray.length,
           };

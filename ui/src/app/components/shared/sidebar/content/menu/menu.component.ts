@@ -42,6 +42,10 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.store.unsubscribe();
   }
 
+  public refreshUsers(): void {
+    //todo create api and ui
+  }
+
   public requestRights(): void {
     const EXTRA_RIGHTS_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
       '?client_id=7372433' +

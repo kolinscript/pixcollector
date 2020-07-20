@@ -26,6 +26,8 @@
       ></div>
       <div class="panel-bot"
            *ngIf="controlsViewed"
+           (mouseenter) ="mouseEnter()"
+           (mouseleave) ="mouseLeave()"
       >
         <div class="pb left" [ngClass]="{'self-stock': selfStock}">
           <div class="number">{{viewerPix.num_current}} of {{viewerPix.num_total}}</div></div>

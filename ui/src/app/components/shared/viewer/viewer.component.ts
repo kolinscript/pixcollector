@@ -93,7 +93,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   private activateControlView() {
     this.globalMousemoveStopInterval = setInterval(() => {
       this.controlsViewed = false;
-    }, 2000);
+    }, 4200);
     this.globalMousemoveListenFunc = this.renderer.listen('document', 'mousemove', e => {
       this.controlsViewed = true;
     });
