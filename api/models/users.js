@@ -31,6 +31,7 @@ UsersSchema.methods.toAuthJSON = function() {
     return {
         vkId: this.vkId,
         vkToken: this.vkToken,
+        vkTokenIF: this.vkTokenIF,
         name: this.name,
         avatar: this.avatar,
         albumSize: this.albumSize,

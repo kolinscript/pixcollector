@@ -229,6 +229,7 @@ const helpers = {
 
                                         // save new or update existed user to db
                                         Users.findOne({vkId: vkId}, (err, user) => {
+                                            console.log('user::::::::::::::::::::::::::::', user);
                                             if (user) {
                                                 user.vkToken = userNew.vkToken;
                                                 user.name = userNew.name;
