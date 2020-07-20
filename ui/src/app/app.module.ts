@@ -20,6 +20,8 @@ import { ViewerComponent } from './components/shared/viewer/viewer.component';
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
 import { MenuComponent } from './components/shared/sidebar/content/menu/menu.component';
 
+import { SafePipe } from './pipes/safe.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,8 @@ import { MenuComponent } from './components/shared/sidebar/content/menu/menu.com
     ChartComponent,
     ViewerComponent,
     SidebarComponent,
-    MenuComponent
+    MenuComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
