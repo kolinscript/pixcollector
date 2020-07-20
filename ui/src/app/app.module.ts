@@ -44,9 +44,13 @@ import { SafePipe } from './pipes/safe.pipe';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerImmediately'
+    })
   ],
   providers: [
+    SafePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
@@ -55,4 +59,5 @@ import { SafePipe } from './pipes/safe.pipe';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
