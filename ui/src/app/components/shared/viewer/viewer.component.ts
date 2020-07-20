@@ -79,13 +79,13 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public likePix(): void {
-    this.photoService.vkLike(this.viewerPix.owner_id, this.viewerPix.id).subscribe((res) => {
+    this.photoService.vkLike(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.user.vkTokenIF).subscribe((res) => {
       console.log(res);
     });
   }
 
   public stealPix(): void {
-    this.photoService.vkSave(this.viewerPix.owner_id, this.viewerPix.id).subscribe((res) => {
+    this.photoService.vkSave(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.user.vkTokenIF).subscribe((res) => {
       console.log(res);
     });
   }

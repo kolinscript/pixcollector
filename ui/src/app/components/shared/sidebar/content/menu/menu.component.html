@@ -99,8 +99,20 @@
     <div class="title">
       <span>Administrator tools</span>
     </div>
-    <div class="sub-title">
-      <span>Refresh users</span>
+    <div class="box-col">
+      <div class="col col-100-per">
+        <div class="row">
+          <div class="button stroke login" (click)="requestRights()">
+            <div class="btn-label">Refresh users</div>
+            <div class="btn-logo logo-reload"> </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="false">
+          <div class="sub-title">
+            <span>Save & Like</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -108,21 +120,16 @@
     <div class="title">
       <span>Additional tools</span>
     </div>
-
     <div class="box-col">
       <div class="col col-100-per">
         <div class="sub-title">
           <span>Save and like</span>
+          <span class="done" *ngIf="user.vkTokenIF"></span>
         </div>
         <div class="row">
           <div class="button stroke login" (click)="requestRights()">
             <div class="btn-label">Rights request</div>
-            <div class="btn-logo"> </div>
-          </div>
-        </div>
-        <div class="row" *ngIf="false">
-          <div class="sub-title">
-            <span>Save & Like</span>
+            <div class="btn-logo logo-key"> </div>
           </div>
         </div>
       </div>

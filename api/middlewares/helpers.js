@@ -18,19 +18,16 @@ const helpers = {
             `&v=5.120`;
 
         axios.get(userLink)
-            .then(function (responseUser) {
+            .then((responseUser) => {
                 if (responseUser.data.response) {
                     const name = `${responseUser.data.response[0].first_name} ${responseUser.data.response[0].last_name}`;
                     const avatar = responseUser.data.response[0].photo_200;
 
                     axios.get(albumLink)
-                        .then(function (responseAlbum) {
+                        .then((responseAlbum) => {
                             const albumSize = responseAlbum.data.response.items.find(item => item.id === -15).size;
-                            console.log('albumSize::::::::::::::::::::::::::::', albumSize);
-
                             const countFrom = 0;
                             const countTo = albumSize;
-
                             const countTotal = countTo - countFrom;
                             const countTotalFloat = countTotal / 1000;
                             const integerPart = Math.floor(countTotalFloat);
@@ -56,7 +53,7 @@ const helpers = {
                                     `&count=${reqFloatPart}` +
                                     `&v=5.120`;
                                 axios.get(link)
-                                    .then(function (response) {
+                                    .then((response) => {
                                         const arr = [];
                                         if (response.data.response) {
                                             response.data.response.items.forEach((item) => {
@@ -133,8 +130,8 @@ const helpers = {
                                             if (err) return console.error(err);
                                         });
                                     })
-                                    .catch(function (error) {
-                                        console.log(error);
+                                    .catch((error) => {
+                                        res.status(200).json({body: {error: {text: error, code: 5}}});
                                     })
                                     .finally(function () {
                                         // always executed
@@ -260,7 +257,8 @@ const helpers = {
                                             if (err) return console.error(err);
                                         });
 
-                                    } catch (error) {
+                                    }
+                                    catch (error) {
                                         console.error(error);
                                     }
                                 }
@@ -268,7 +266,7 @@ const helpers = {
                                 photosFetcher();
                             }
                         })
-                        .catch(function (error) {
+                        .catch((error) => {
                             res.status(200).json({body: {error: {text: error, code: 5}}});
                         });
                 }
@@ -283,7 +281,7 @@ const helpers = {
                     });
                 }
             })
-            .catch(function (error) {
+            .catch((error) => {
                 res.status(200).json({body: {error: {text: error, code: 5}}});
             });
     }

@@ -84,6 +84,26 @@ body {
       -webkit-mask-size: cover;
       transition: background 100ms ease;
     }
+
+    &.logo-reload {
+      margin-left: 10px;
+      width: 18px;
+      height: 18px;
+      mask-image: url("/assets/images/refresh.svg");
+      mask-size: cover;
+      -webkit-mask-size: cover;
+      transition: background 100ms ease;
+    }
+
+    &.logo-key {
+      margin-left: 10px;
+      width: 18px;
+      height: 18px;
+      mask-image: url("/assets/images/key.svg");
+      mask-size: cover;
+      -webkit-mask-size: cover;
+      transition: background 100ms ease;
+    }
   }
 
   .btn-label {
