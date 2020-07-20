@@ -18,7 +18,7 @@ export class PhotoService {
       `&owner_id=${owner_id}` +
       `&photo_id=${photo_id}` +
       `&v=5.120`;
-    return this.http.get(link);
+    return this.http.get(link,{headers:{skip:"true"}});
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
@@ -29,6 +29,6 @@ export class PhotoService {
       `&item_id=${photo_id}` +
       `&type=photo` +
       `&v=5.120`;
-    return this.http.get(link);
+    return this.http.get(link,{headers:{skip:"true"}});
   }
 }

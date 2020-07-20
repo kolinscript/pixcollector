@@ -12,6 +12,7 @@ import { UserService } from '../../../services/user.service';
 export class StocksComponent implements OnInit, OnDestroy {
   public loader: boolean;
   public vkId: string = null;
+  public adTools: boolean;
   private user;
   private access_token: string = null;
   private store: Subscription;
@@ -34,6 +35,7 @@ export class StocksComponent implements OnInit, OnDestroy {
     if (this.router.url.slice(0, 20) === '/stocks#access_token') {
       const tokenEndIndex = this.router.url.indexOf('&expires_in');
       this.access_token = this.router.url.slice(21, tokenEndIndex);
+      this.adTools = true;
       const userUpdates = {
         user: {
           vkId: this.user.vkId,

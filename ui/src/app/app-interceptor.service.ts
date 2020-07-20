@@ -19,6 +19,9 @@ export class InterceptorService implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (req.headers.get('skip')) {
+      return next.handle(req);
+    }
     const url = req.url;
     const request = req.clone({ url: url, headers: this.withAuthorization(req.headers) });
     return next.handle(request).pipe(
