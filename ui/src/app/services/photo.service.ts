@@ -16,7 +16,7 @@ export class PhotoService {
 
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
     return this.http
-      .get(`/vk/photos.copy?access_token=${vkTokenIF}&owner_id=${owner_id}&photo_id=${photo_id}&v=5.120`,
+      .get(`https://api.vk.com/method/photos.copy?access_token=${vkTokenIF}&owner_id=${owner_id}&photo_id=${photo_id}&v=5.120`,
         {
           headers: {
             'Access-Control-Allow-Origin': '*',
@@ -27,14 +27,6 @@ export class PhotoService {
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
-    return this.http
-      .get(`/vk/likes.add?access_token=${vkTokenIF}&owner_id=${owner_id}&item_id=${photo_id}&type=photo&v=5.120`,
-        {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Skip-Token': 'true',
-          }
-        }
-      );
+    return this.http.post(`/vk-photo/like`, {owner_id: owner_id, photo_id: photo_id, vkTokenIF: vkTokenIF});
   }
 }
