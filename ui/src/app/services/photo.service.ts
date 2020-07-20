@@ -27,6 +27,6 @@ export class PhotoService {
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
-    return this.http.post(`/vk-photo/like`, {owner_id: owner_id, photo_id: photo_id, vkTokenIF: vkTokenIF});
+    return this.http.post(`/api/v1/vk-photo/like`, {owner_id: owner_id, photo_id: photo_id, vkTokenIF: vkTokenIF});
   }
 }
