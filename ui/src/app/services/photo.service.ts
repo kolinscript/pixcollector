@@ -21,13 +21,11 @@ export class PhotoService {
       `&owner_id=${owner_id}` +
       `&photo_id=${photo_id}` +
       `&v=5.120`;
-    const sanitizedLink = this.sanitizer.bypassSecurityTrustResourceUrl(link);
-    console.log('sanitizedLink ', sanitizedLink);
-    console.log('sanitizedLink2STR ', sanitizedLink.toString());
+    console.log('link ', link);
     return this.http.get(link, {
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'skip_token': 'true',
+        'Access-Control-Allow-Origin': 'api.vk.com',
+        'Skip-Token': 'true',
       }
     });
   }
@@ -40,12 +38,11 @@ export class PhotoService {
       `&item_id=${photo_id}` +
       `&type=photo` +
       `&v=5.120`;
-    const sanitizedLink = this.sanitizer.sanitize(SecurityContext.URL, link);
-    console.log('sanitizedLink ', sanitizedLink);
+    console.log('link ', link);
     return this.http.get(link, {
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'skip_token': 'true',
+        'Access-Control-Allow-Origin': 'api.vk.com',
+        'Skip-Token': 'true',
       }
     });
   }

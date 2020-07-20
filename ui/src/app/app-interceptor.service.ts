@@ -19,7 +19,7 @@ export class InterceptorService implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.headers.get('skip_token')) {
+    if (req.headers.get('Skip-Token')) {
       return next.handle(req);
     }
     const url = req.url;
