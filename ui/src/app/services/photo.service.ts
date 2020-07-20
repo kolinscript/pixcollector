@@ -24,7 +24,7 @@ export class PhotoService {
     const sanitizedLink = this.sanitizer.bypassSecurityTrustResourceUrl(link);
     console.log('sanitizedLink ', sanitizedLink);
     console.log('sanitizedLink2STR ', sanitizedLink.toString());
-    return this.http.get(sanitizedLink, {
+    return this.http.get(sanitizedLink.toString(), {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'skip_token': 'true',
@@ -42,7 +42,7 @@ export class PhotoService {
       `&v=5.120`;
     const sanitizedLink = this.sanitizer.bypassSecurityTrustResourceUrl(link);
     console.log('sanitizedLink ', sanitizedLink);
-    return this.http.get(sanitizedLink, {
+    return this.http.get(sanitizedLink.toString(), {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'skip_token': 'true',
