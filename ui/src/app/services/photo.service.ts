@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable, SecurityContext } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import { Observable } from 'rxjs';
 export class PhotoService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private sanitizer: DomSanitizer
   ) { }
 
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
@@ -18,7 +20,7 @@ export class PhotoService {
       `&owner_id=${owner_id}` +
       `&photo_id=${photo_id}` +
       `&v=5.120`;
-    return this.http.get(link,{headers:{skip:"true"}});
+    return this.http.get(this.sanitizer.sanitize(SecurityContext.URL, link),{headers:{skip:"true"}});
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
@@ -29,6 +31,6 @@ export class PhotoService {
       `&item_id=${photo_id}` +
       `&type=photo` +
       `&v=5.120`;
-    return this.http.get(link,{headers:{skip:"true"}});
+    return this.http.get(this.sanitizer.sanitize(SecurityContext.URL, link),{headers:{skip:"true"}});
   }
 }
