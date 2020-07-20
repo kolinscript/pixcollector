@@ -1,4 +1,4 @@
-import { Injectable, Sanitizer } from '@angular/core';
+import { Injectable, Sanitizer, SecurityContext } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SafePipe } from '../pipes/safe.pipe';
