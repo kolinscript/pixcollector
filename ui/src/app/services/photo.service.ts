@@ -11,7 +11,8 @@ export class PhotoService {
   constructor(
     private http: HttpClient,
     private safe: SafePipe
-  ) { }
+  ) {
+  }
 
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
     const link = `https://api.vk.com/` +
@@ -20,7 +21,12 @@ export class PhotoService {
       `&owner_id=${owner_id}` +
       `&photo_id=${photo_id}` +
       `&v=5.120`;
-    return this.http.get(this.safe.transform(link).toString(),{headers:{skip:"true"}});
+    return this.http.get(this.safe.transform(link).toString(), {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'skip': 'true',
+      }
+    });
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
@@ -31,6 +37,11 @@ export class PhotoService {
       `&item_id=${photo_id}` +
       `&type=photo` +
       `&v=5.120`;
-    return this.http.get(this.safe.transform(link).toString(),{headers:{skip:"true"}});
+    return this.http.get(this.safe.transform(link).toString(), {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'skip': 'true',
+      }
+    });
   }
 }
