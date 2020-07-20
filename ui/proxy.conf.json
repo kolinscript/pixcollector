@@ -1,0 +1,10 @@
+{
+  "/vk": {
+    "target": "https://api.vk.com/method",
+    "secure": true,
+    "pathRewrite": {
+      "^/vk": ""
+    },
+    "changeOrigin": true
+  }
+}
