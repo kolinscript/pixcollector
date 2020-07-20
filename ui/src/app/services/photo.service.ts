@@ -1,6 +1,7 @@
-import { Injectable, Sanitizer, SecurityContext } from '@angular/core';
+import { Injectable, SecurityContext } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class PhotoService {
 
   constructor(
     private http: HttpClient,
-    private sanitizer: Sanitizer,
+    private sanitizer: DomSanitizer,
   ) {
   }
 
@@ -20,8 +21,9 @@ export class PhotoService {
       `&owner_id=${owner_id}` +
       `&photo_id=${photo_id}` +
       `&v=5.120`;
-    const sanitizedLink = this.sanitizer.sanitize(SecurityContext.URL, link);
+    const sanitizedLink = this.sanitizer.bypassSecurityTrustResourceUrl(link);
     console.log('sanitizedLink ', sanitizedLink);
+    console.log('sanitizedLink2STR ', sanitizedLink.toString());
     return this.http.get(sanitizedLink, {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -38,7 +40,7 @@ export class PhotoService {
       `&item_id=${photo_id}` +
       `&type=photo` +
       `&v=5.120`;
-    const sanitizedLink = this.sanitizer.sanitize(SecurityContext.URL, link);
+    const sanitizedLink = this.sanitizer.bypassSecurityTrustResourceUrl(link);
     console.log('sanitizedLink ', sanitizedLink);
     return this.http.get(sanitizedLink, {
       headers: {
