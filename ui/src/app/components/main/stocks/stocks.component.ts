@@ -32,7 +32,7 @@ export class StocksComponent implements OnInit, OnDestroy {
       }
     });
     if (this.router.url.slice(0, 20) === '/stocks#access_token') {
-      const tokenEndIndex = this.router.url.indexOf('expires_in');
+      const tokenEndIndex = this.router.url.indexOf('&expires_in');
       this.access_token = this.router.url.slice(21, tokenEndIndex);
       console.log('this.access_token: ', this.access_token);
       const userUpdates = {

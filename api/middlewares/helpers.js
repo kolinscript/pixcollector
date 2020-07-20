@@ -19,14 +19,12 @@ const helpers = {
 
         axios.get(userLink)
             .then(function (responseUser) {
-                console.log('responseUser.data.response[0]::::::::::::::::::::::::::::', responseUser.data.response[0]);
                 if (responseUser.data.response) {
                     const name = `${responseUser.data.response[0].first_name} ${responseUser.data.response[0].last_name}`;
                     const avatar = responseUser.data.response[0].photo_200;
 
                     axios.get(albumLink)
                         .then(function (responseAlbum) {
-                            console.log('responseAlbum.data.response::::::::::::::::::::::::::::', responseAlbum.data.response);
                             const albumSize = responseAlbum.data.response.items.find(item => item.id === -15).size;
                             console.log('albumSize::::::::::::::::::::::::::::', albumSize);
 
@@ -229,7 +227,6 @@ const helpers = {
 
                                         // save new or update existed user to db
                                         Users.findOne({vkId: vkId}, (err, user) => {
-                                            console.log('user::::::::::::::::::::::::::::', user);
                                             if (user) {
                                                 user.vkToken = userNew.vkToken;
                                                 user.name = userNew.name;
@@ -246,8 +243,10 @@ const helpers = {
                                                             const safeUser = ({vkToken, ...rest}) => rest;
                                                             req.session.user = safeUser(user.toAuthJSON());
                                                             res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
-                                                        }
-                                                    );
+                                                        })
+                                                    .catch((error) => {
+                                                        res.status(200).json({body: {error: {text: error, code: 5}}});
+                                                    });
                                             }
                                             if (!user) {
                                                 userNew.save()
