@@ -58,14 +58,13 @@
         .pix {
           width: 20%;
           height: 25%;
-          padding: 4px;
+          padding: 1px;
 
           .pix-container {
             position: relative;
             cursor: pointer;
             width: 100%;
             height: 100%;
-            border-radius: 8px;
             overflow: hidden;
 
             .pix-img {

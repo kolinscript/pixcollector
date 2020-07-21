@@ -1,10 +1,4 @@
 <div class="auth-wrapper">
-  <div class="main" *ngIf="state === StateEnum.loading">
-    <div class="loader">
-      <span>Loading...</span>
-    </div>
-  </div>
-
   <div class="main" *ngIf="state === StateEnum.auth">
     <div class="logo">
       <div class="svg"></div>
@@ -16,32 +10,24 @@
       <div class="juice six"></div>
       <h1 class="title">PIXcollector</h1>
     </div>
-    <h2 class="subtitle">
-      #PIXcollector provide to VK users ability to view their pictures from the saved folder and
-      download it all like one ZIP file
-    </h2>
-    <div class="button login" (click)="loginVk()">
-      <div class="btn-label">Login with</div>
-      <div class="btn-logo logo-vk"> </div>
-    </div>
-    <h3 class="made-by"><span class="code" role="img" aria-label="Made">👨‍💻</span> by Nikolai Koshkarov with <span class="love" role="img" aria-label="love">❤</span></h3>
-    <app-footer></app-footer>
-  </div>
 
-  <div class="main" *ngIf="state === StateEnum.success">
-    <div class="logo">
-      <div class="svg"></div>
-      <div class="juice one"></div>
-      <div class="juice two"></div>
-      <div class="juice three"></div>
-      <div class="juice four"></div>
-      <div class="juice five"></div>
-      <div class="juice six"></div>
-      <h1 class="title">PIXcollector</h1>
+    <h2 class="subtitle">
+      <span *ngIf="state === StateEnum.auth">#PIXcollector provide to VK users ability to view their pictures from the saved folder and
+      download it all like one ZIP file</span>
+      <span *ngIf="state === StateEnum.success">Successfully authorized! <br>Transition to stocks...</span>
+      <span *ngIf="state === StateEnum.loading">Loading...</span>
+    </h2>
+
+    <div class="button login" *ngIf="state === StateEnum.auth" (click)="loginVk()">
+      <div class="btn-label">Login with</div>
+      <div class="btn-logo logo-vk"></div>
     </div>
-    <div class="description">
-      <span>Successfully authorized! <br>Transition to stocks...</span>
-    </div>
-    <div class="bottom"> </div>
+
+    <h3 class="made-by">
+      <span class="code" role="img" aria-label="Made">👨‍💻</span>
+      by Nikolai Koshkarov with
+      <span class="love" role="img" aria-label="love">❤</span>
+    </h3>
+    <app-footer></app-footer>
   </div>
 </div>
