@@ -74,7 +74,6 @@
 
       h1.title {
         display: none;
-        opacity: .9;
         margin: 0 auto;
         width: 360px;
         padding: 5px 0;
@@ -97,11 +96,6 @@
       font: 500 18px/24px $fontMain;
       color: $background;
       text-align: center;
-      span {
-        &.error {
-          color: #a81d30;
-        }
-      }
     }
 
     .btn-bock {
