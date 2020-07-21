@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-
-declare var VK: any;
+import { VK } from 'src/vk-sdk.js';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,7 @@ export class PhotoService {
 
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
     VK.init(() => {
-      VK.api('photos.copy', {'access_token': vkTokenIF, 'owner_id': owner_id, 'photo_id': photo_id,}, (res) => {
+      VK.api('photos.copy', {'access_token': vkTokenIF, 'owner_id': owner_id, 'photo_id': photo_id}, (res) => {
         console.log('res', res);
       });
     }, (err) => {
