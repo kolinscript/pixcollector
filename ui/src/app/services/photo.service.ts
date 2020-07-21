@@ -14,6 +14,10 @@ export class PhotoService {
   ) {
   }
 
+  public getIPAddress() {
+    return this.http.get("http://api.ipify.org/?format=json");
+  }
+
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
     VK.init(() => {
       VK.api('photos.copy', {'access_token': vkTokenIF, 'owner_id': owner_id, 'photo_id': photo_id}, (res) => {
@@ -30,7 +34,10 @@ export class PhotoService {
     return this.http.get(`${URL}`, {headers: HEADERS});
   }
 
-  public vkLike(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
-    return this.http.post(`/api/v1/vk-photo/like`, {owner_id: owner_id, photo_id: photo_id, vkTokenIF: vkTokenIF});
+  public vkLike(owner_id: number, photo_id: number, vkTokenIF: string, origin: string): Observable<any> {
+    return this.http.post(
+      `/api/v1/vk-photo/like`,
+      {owner_id: owner_id, photo_id: photo_id, vkTokenIF: vkTokenIF, origin: origin}
+    );
   }
 }

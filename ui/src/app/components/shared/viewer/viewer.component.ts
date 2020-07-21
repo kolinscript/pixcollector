@@ -21,6 +21,7 @@ export enum KEY_CODE {
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
+  origin: string;
   href: string;
   controlsViewed: boolean = false;
   globalMousemoveListenFunc: Function;
@@ -46,6 +47,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.href = this.viewerPix.url;
+    this.photoService.getIPAddress().subscribe((ip: any) => this.origin = ip.ip);
     this.activateControlView();
   }
 
@@ -79,7 +81,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public likePix(): void {
-    this.photoService.vkLike(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF).subscribe((res) => {
+    this.photoService.vkLike(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF, this.origin).subscribe((res) => {
       console.log(res);
     });
   }
