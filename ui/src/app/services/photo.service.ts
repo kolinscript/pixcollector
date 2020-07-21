@@ -15,19 +15,18 @@ export class PhotoService {
   }
 
   public getIPAddress() {
-    return this.http.get("http://api.ipify.org/?format=json");
+    return this.http.get("https://api.ipify.org/?format=json");
   }
 
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
-    VK.init(() => {
-      VK.api('photos.copy', {'access_token': vkTokenIF, 'owner_id': owner_id, 'photo_id': photo_id}, (res) => {
-        console.log('res', res);
-      });
-    }, (err) => {
-      console.log('err', err);
-    }, '5.120');
+    // VK.init(() => {
+    //   VK.api('photos.copy', {'access_token': vkTokenIF, 'owner_id': owner_id, 'photo_id': photo_id}, (res) => {
+    //     console.log('res', res);
+    //   });
+    // }, (err) => {
+    //   console.log('err', err);
+    // }, '5.120');
     const HEADERS = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', '*')
       .set('Origin', 'https://pixcollector.herokuapp.com')
       .set('Skip-Token', 'true');
     const URL = `https://api.vk.com/method/photos.copy?access_token=${vkTokenIF}&owner_id=${owner_id}&photo_id=${photo_id}&v=5.120`;
