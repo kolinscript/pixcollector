@@ -15,7 +15,7 @@ enum State {
 
 export class AuthComponent implements OnInit, OnDestroy {
   public StateEnum = State;
-  public state: State = State.auth;
+  public state: State;
   private code: string;
   private transitionInterval;
 
@@ -26,6 +26,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.state = State.auth;
     if (this.router.url.slice(0, 10) === '/auth?code') {
       this.state = State.loading;
       this.code = this.router.url.slice(11);
