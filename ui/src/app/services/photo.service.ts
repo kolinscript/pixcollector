@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
 import { vkSDK } from 'src/assets/scripts/vk-sdk.js';
 
 @Injectable({
