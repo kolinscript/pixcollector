@@ -113,7 +113,6 @@ const helpers = {
                                                 user.save()
                                                     .then(() => {
                                                             const safeUser = ({_id, vkToken, ...rest}) => rest;
-                                                            req.session.user = safeUser(user.toAuthJSON());
                                                             res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
                                                         }
                                                     );
@@ -122,7 +121,6 @@ const helpers = {
                                                 userNew.save()
                                                     .then(() => {
                                                             const safeUser = ({_id, vkToken, ...rest}) => rest;
-                                                            req.session.user = safeUser(userNew.toAuthJSON());
                                                             res.status(200).json({body: {user: safeUser(userNew.toAuthJSON())}});
                                                         }
                                                     );
@@ -238,7 +236,6 @@ const helpers = {
                                                 user.save()
                                                     .then(() => {
                                                             const safeUser = ({vkToken, ...rest}) => rest;
-                                                            req.session.user = safeUser(user.toAuthJSON());
                                                             res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
                                                         })
                                                     .catch((error) => {
@@ -249,7 +246,6 @@ const helpers = {
                                                 userNew.save()
                                                     .then(() => {
                                                             const safeUser = ({vkToken, ...rest}) => rest;
-                                                            req.session.user = safeUser(userNew.toAuthJSON());
                                                             res.status(200).json({body: {user: safeUser(userNew.toAuthJSON())}});
                                                         }
                                                     );

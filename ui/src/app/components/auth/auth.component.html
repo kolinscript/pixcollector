@@ -1,4 +1,10 @@
 <div class="auth-wrapper">
+  <div class="main" *ngIf="state === StateEnum.loading">
+    <div class="loader">
+      <span>Loading...</span>
+    </div>
+  </div>
+
   <div class="main" *ngIf="state === StateEnum.auth">
     <div class="logo">
       <div class="svg"></div>

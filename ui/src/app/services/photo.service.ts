@@ -17,7 +17,7 @@ export class PhotoService {
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
     const myHeaders = new HttpHeaders()
       .set('Access-Control-Allow-Origin', '*')
-      .set('Origin', 'pixcollector.herokuapp.com')
+      .set('Origin', 'https://pixcollector.herokuapp.com')
       .set('Skip-Token', 'true');
     const url = `https://api.vk.com/method/photos.copy
     ?access_token=${vkTokenIF}

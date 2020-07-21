@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { StoreService } from '../../services/store.service';
 
 enum State {
-  auth, success,
+  auth, success, loading, error
 }
 
 @Component({
@@ -27,28 +27,36 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.router.url.slice(0, 10) === '/auth?code') {
+      this.state = State.loading;
       this.code = this.router.url.slice(11);
       this.authService.code(this.code).subscribe(user => {
         if (user.body.user) {
-          this.storeService.setStore({user: user.body.user});
-          localStorage.setItem('token', user.body.user.token);
-          this.router.navigate(['/auth/success']);
-        }
-      });
-    } else if (this.router.url === '/auth/success') {
-      this.state = State.success;
-      this.authService.success().subscribe(user => {
-        if (user.body.user) {
+          this.state = State.success;
           this.storeService.setStore({user: user.body.user});
           localStorage.setItem('token', user.body.user.token);
           this.transitionInterval = setInterval(() => { this.router.navigate(['/stocks']); }, 3000);
-        } else if (!user.body.user) {
-          // this.router.navigate(['/auth']);
+        } else {
+          // err
+          this.state = State.error;
         }
       });
     } else if (this.router.url.slice(0, 11) === '/auth?error') {
-      console.log('ERROR: ', this.router.url)
+      this.state = State.error;
+      console.log('ERROR: ', this.router.url);
     }
+    // else if (this.router.url === '/auth/success') {
+    //   this.state = State.success;
+    //   this.authService.success().subscribe(user => {
+    //     if (user.body.user) {
+    //       this.storeService.setStore({user: user.body.user});
+    //       localStorage.setItem('token', user.body.user.token);
+    //       this.transitionInterval = setInterval(() => { this.router.navigate(['/stocks']); }, 3000);
+    //     } else if (!user.body.user) {
+    //       // this.router.navigate(['/auth']);
+    //     }
+    //   });
+    // }
+
     // if (this.authService.isAuthorized) {
     //   this.router.navigate(['/stocks']);
     // }
