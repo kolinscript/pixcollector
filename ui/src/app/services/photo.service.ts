@@ -2,6 +2,7 @@ import { Injectable, SecurityContext } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as vkSDK from 'vk-sdk';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,13 @@ export class PhotoService {
   }
 
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
+    vkSDK.VK.init(() => {
+      vkSDK.VK.api('photos.copy', {'access_token': vkTokenIF, 'owner_id': owner_id, 'photo_id': photo_id,}, (res) => {
+        console.log('res', res);
+      });
+    }, (err) => {
+      console.log('err', err);
+    }, '5.120');
     const HEADERS = new HttpHeaders()
       .set('Access-Control-Allow-Origin', '*')
       .set('Origin', 'https://pixcollector.herokuapp.com')
