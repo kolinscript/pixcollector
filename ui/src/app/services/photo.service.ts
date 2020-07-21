@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { VK } from 'src/assets/scripts/vk-sdk.js';
+
+declare const VK;
 
 @Injectable({
   providedIn: 'root'

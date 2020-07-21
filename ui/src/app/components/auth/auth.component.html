@@ -16,12 +16,16 @@
       download it all like one ZIP file</span>
       <span *ngIf="state === StateEnum.success">Successfully authorized! <br>Transition to stocks...</span>
       <span *ngIf="state === StateEnum.loading">Loading...</span>
+      <span *ngIf="state === StateEnum.error" class="error">ERROR</span>
     </h2>
 
     <div class="btn-bock">
       <div class="button login" *ngIf="state === StateEnum.auth" (click)="loginVk()">
         <div class="btn-label">Login with</div>
         <div class="btn-logo logo-vk"></div>
+      </div>
+      <div class="button show-login" *ngIf="state === StateEnum.error" (click)="showLogin()">
+        <div class="btn-label">Go to auth</div>
       </div>
     </div>
 

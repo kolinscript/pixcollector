@@ -37,13 +37,11 @@ export class AuthComponent implements OnInit, OnDestroy {
           localStorage.setItem('token', user.body.user.token);
           this.transitionInterval = setInterval(() => { this.router.navigate(['/stocks']); }, 3000);
         } else {
-          // err
           this.state = State.error;
         }
       });
     } else if (this.router.url.slice(0, 11) === '/auth?error') {
       this.state = State.error;
-      console.log('ERROR: ', this.router.url);
     } else if (this.authService.isAuthorized) {
       this.router.navigate(['/stocks']);
     }
@@ -62,6 +60,10 @@ export class AuthComponent implements OnInit, OnDestroy {
       '&response_type=code' +
       '&v=5.120';
     window.open(AUTH_URL_AUTHORIZE, "_self")
+  }
+
+  public showLogin(): void {
+    this.state = State.auth;
   }
 
 }
