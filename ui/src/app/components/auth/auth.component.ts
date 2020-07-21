@@ -46,6 +46,8 @@ export class AuthComponent implements OnInit, OnDestroy {
           // this.router.navigate(['/auth']);
         }
       });
+    } else if (this.router.url.slice(0, 11) === '/auth?error') {
+      console.log('ERROR: ', this.router.url)
     }
     // if (this.authService.isAuthorized) {
     //   this.router.navigate(['/stocks']);
