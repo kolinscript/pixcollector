@@ -1,8 +1,9 @@
-import { Injectable, SecurityContext } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-import * as vkSDK from 'vk-sdk';
+
+declare const vkSDK: any;
 
 @Injectable({
   providedIn: 'root'
