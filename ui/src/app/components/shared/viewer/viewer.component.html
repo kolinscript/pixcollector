@@ -31,10 +31,10 @@
       >
         <div class="pb left" [ngClass]="{'self-stock': selfStock}">
           <div class="number">{{viewerPix.num_current}} of {{viewerPix.num_total}}</div></div>
-        <div class="pb right" *ngIf="!selfStock || !viewerPix.vkTokenIF">
+        <div class="pb right" *ngIf="!selfStock && viewerPix.vkTokenIF">
           <div class="add"(click)="stealPix()">Steal PIX</div>
         </div>
-        <div class="like" *ngIf="!selfStock || !viewerPix.vkTokenIF" (click)="likePix()"></div>
+        <div class="like" *ngIf="!selfStock && viewerPix.vkTokenIF" (click)="likePix()"></div>
       </div>
     </div>
   </div>

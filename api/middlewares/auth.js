@@ -12,19 +12,11 @@ const auth = {
 
         axios.get(authLink)
             .then((responseAuth) => {
-                helpers.UserUpdateVkData(req, res, next, responseAuth.data.access_token, responseAuth.data.user_id);
+                helpers.UserGetVkData(req, res, next, responseAuth.data.access_token, responseAuth.data.user_id);
             })
             .catch((error) => {
                 res.status(200).json({body: {error: {text: error, code: 5}}});
             });
-    }),
-
-    success: ((req, res, next) => {
-        if (req.session.user) {
-            res.status(200).json({body: {user: req.session.user}});
-        } else {
-            res.status(200).json({body: {error: 'unauthorized'}});
-        }
     }),
 };
 

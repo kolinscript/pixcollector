@@ -33,8 +33,8 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.authService.code(this.code).subscribe(user => {
         if (user.body.user) {
           this.state = State.success;
-          this.storeService.setStore({user: user.body.user});
           localStorage.setItem('token', user.body.user.token);
+          this.storeService.setStore({user: user.body.user});
           this.transitionInterval = setInterval(() => { this.router.navigate(['/stocks']); }, 3000);
         } else {
           this.state = State.error;

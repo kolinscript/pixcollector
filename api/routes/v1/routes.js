@@ -8,8 +8,6 @@ const download           = require('../../middlewares/download');
 
 router.get('/auth', secure.optional, auth.login);
 
-router.get('/auth/success', secure.optional, auth.success);
-
 router.get('/user', secure.optional, user.getUser);
 
 router.get('/user/is_self_stock', secure.optional, user.isSelfStock);
