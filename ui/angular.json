@@ -32,7 +32,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/vk-sdk.js"
+              "src/assets/scripts/vk-sdk.js"
             ]
           },
           "configurations": {

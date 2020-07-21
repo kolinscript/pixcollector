@@ -18,9 +18,11 @@
       <span *ngIf="state === StateEnum.loading">Loading...</span>
     </h2>
 
-    <div class="button login" *ngIf="state === StateEnum.auth" (click)="loginVk()">
-      <div class="btn-label">Login with</div>
-      <div class="btn-logo logo-vk"></div>
+    <div class="btn-bock">
+      <div class="button login" *ngIf="state === StateEnum.auth" (click)="loginVk()">
+        <div class="btn-label">Login with</div>
+        <div class="btn-logo logo-vk"></div>
+      </div>
     </div>
 
     <h3 class="made-by">
