@@ -31,12 +31,12 @@
           font: 500 22px/24px $fontMain;
           color: $background;
         }
-        .album-size {
-          font: 500 100px/0px $fontMain;
-          color: $background;
-          margin-left: 15px;
-          margin-top: -50px;
-        }
+      }
+      .user-info-album-size {
+        font: 500 100px/80px $fontMain;
+        color: #4d4d4d;
+        margin-left: 15px;
+        margin-top: -50px;
       }
     }
     .gallery {
@@ -400,10 +400,12 @@
           .name {
             font: 500 16px/18px $fontMain;
           }
-          .album-size {
-            font: 500 54px/60px Roboto,sans-serif;
-            margin-top: 5px;
-          }
+        }
+        .user-info-album-size {
+          flex: 1;
+          margin-top: 5px;
+          font: 500 54px/60px Roboto,sans-serif;
+          text-align: right;
         }
       }
       .gallery {

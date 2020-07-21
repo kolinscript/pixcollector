@@ -20,6 +20,7 @@ export class PhotoService {
         {
           headers: {
             'Access-Control-Allow-Origin': '*',
+            'Origin': 'pixcollector.herokuapp.com',
             'Skip-Token': 'true',
           }
         }
