@@ -56,7 +56,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       '?client_id=7372433' +
       '&display=popup' +
       '&redirect_uri=https://pixcollector.herokuapp.com/auth' +
-      '&scope=photos,offline' +
+      '&scope=wall,photos,offline' +
       '&response_type=code' +
       '&v=5.120';
     window.open(AUTH_URL_AUTHORIZE, "_self")

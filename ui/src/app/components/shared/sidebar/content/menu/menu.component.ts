@@ -51,7 +51,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       '?client_id=7372433' +
       '&display=popup' +
       '&redirect_uri=https://pixcollector.herokuapp.com/stocks' +
-      '&scope=photos,offline' +
+      '&scope=wall,photos,offline' +
       '&response_type=token' +
       '&v=5.120'+
       '&state=123456';
