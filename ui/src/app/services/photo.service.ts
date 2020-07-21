@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 
-declare const VK: any;
+declare var VK: any;
 
 @Injectable({
   providedIn: 'root'

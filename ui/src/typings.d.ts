@@ -1,1 +1,1 @@
-declare module 'vk-sdk';
+declare var VK: any;
