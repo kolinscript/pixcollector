@@ -31,9 +31,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [
-              "src/assets/scripts/vk-sdk.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
