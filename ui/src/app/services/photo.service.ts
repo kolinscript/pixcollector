@@ -15,16 +15,12 @@ export class PhotoService {
   }
 
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
-    const myHeaders = new HttpHeaders()
+    const HEADERS = new HttpHeaders()
       .set('Access-Control-Allow-Origin', '*')
       .set('Origin', 'https://pixcollector.herokuapp.com')
       .set('Skip-Token', 'true');
-    const url = `https://api.vk.com/method/photos.copy
-    ?access_token=${vkTokenIF}
-    &owner_id=${owner_id}
-    &photo_id=${photo_id}
-    &v=5.120`;
-    return this.http.get(`${url}`, {headers: myHeaders});
+    const URL = `https://api.vk.com/method/photos.copy?access_token=${vkTokenIF}&owner_id=${owner_id}&photo_id=${photo_id}&v=5.120`;
+    return this.http.get(`${URL}`, {headers: HEADERS});
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {

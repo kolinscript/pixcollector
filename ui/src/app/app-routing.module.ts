@@ -11,7 +11,6 @@ import { ChartComponent } from './components/main/chart/chart.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
-  { path: 'auth/success', component: AuthComponent },
   { path: 'stock/:id', component: StockComponent },
   { path: '', canActivate: [AuthService], component: MainComponent,
     children: [

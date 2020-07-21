@@ -20,12 +20,6 @@ export class AuthService implements CanActivate {
       .pipe(map(res => res as any));
   }
 
-  success(): Observable<any> {
-    return this.http
-      .get('/api/v1/auth/success')
-      .pipe(map(res => res as any));
-  }
-
   isAuthorized(): boolean {
     return !!localStorage.getItem('token');
   }

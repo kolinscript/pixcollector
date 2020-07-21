@@ -43,23 +43,9 @@ export class AuthComponent implements OnInit, OnDestroy {
     } else if (this.router.url.slice(0, 11) === '/auth?error') {
       this.state = State.error;
       console.log('ERROR: ', this.router.url);
+    } else if (this.authService.isAuthorized) {
+      this.router.navigate(['/stocks']);
     }
-    // else if (this.router.url === '/auth/success') {
-    //   this.state = State.success;
-    //   this.authService.success().subscribe(user => {
-    //     if (user.body.user) {
-    //       this.storeService.setStore({user: user.body.user});
-    //       localStorage.setItem('token', user.body.user.token);
-    //       this.transitionInterval = setInterval(() => { this.router.navigate(['/stocks']); }, 3000);
-    //     } else if (!user.body.user) {
-    //       // this.router.navigate(['/auth']);
-    //     }
-    //   });
-    // }
-
-    // if (this.authService.isAuthorized) {
-    //   this.router.navigate(['/stocks']);
-    // }
   }
 
   ngOnDestroy() {
