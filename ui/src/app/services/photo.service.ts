@@ -1,5 +1,5 @@
 import { Injectable, SecurityContext } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -15,16 +15,16 @@ export class PhotoService {
   }
 
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
-    return this.http
-      .get(`https://api.vk.com/method/photos.copy?access_token=${vkTokenIF}&owner_id=${owner_id}&photo_id=${photo_id}&v=5.120`,
-        {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Origin': 'pixcollector.herokuapp.com',
-            'Skip-Token': 'true',
-          }
-        }
-      );
+    const myHeaders = new HttpHeaders()
+      .set('Access-Control-Allow-Origin', '*')
+      .set('Origin', 'pixcollector.herokuapp.com')
+      .set('Skip-Token', 'true');
+    const url = `https://api.vk.com/method/photos.copy
+    ?access_token=${vkTokenIF}
+    &owner_id=${owner_id}
+    &photo_id=${photo_id}
+    &v=5.120`;
+    return this.http.get(`${url}`, {headers: myHeaders});
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
