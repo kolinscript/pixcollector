@@ -48,13 +48,13 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   public requestRights(): void {
     const EXTRA_RIGHTS_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
-      '?client_id=7372433' +
+      '?client_id=7545732' +
       '&display=popup' +
       '&redirect_uri=https://pixcollector.herokuapp.com/stocks' +
       '&scope=wall,photos,offline' +
       '&response_type=token' +
       '&v=5.120'+
-      '&state=123456';
+      '&state=pixcollector';
     window.open(EXTRA_RIGHTS_URL_AUTHORIZE, "_self")
   }
 
