@@ -59,7 +59,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   public loginVk(): void {
     const AUTH_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
       '?client_id=7372433' +
-      '&display=page' +
+      '&display=popup' +
       '&redirect_uri=https://pixcollector.herokuapp.com/auth' +
       '&scope=photos,offline' +
       '&response_type=code' +
