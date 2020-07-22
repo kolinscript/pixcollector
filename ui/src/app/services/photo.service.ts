@@ -20,13 +20,17 @@ export class PhotoService {
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string,): Observable<any> {
-    const link = `https://api.vk.com/` +
+    const URL = `https://api.vk.com/` +
       `method/likes.add` +
       `?owner_id=${owner_id}` +
       `&item_id=${photo_id}` +
       `&type=photo` +
       `&access_token=${vkTokenIF}` +
       `&v=5.120`;
-    return this.http.get(`${link}`);
+    const HEADERS = new HttpHeaders()
+      .set('Access-Control-Allow-Origin', 'pixcollector.herokuapp.com')
+      .set('Origin', 'https://pixcollector.herokuapp.com')
+      .set('Skip-Token', 'true');
+    return this.http.get(`${URL}`, {headers: HEADERS});
   }
 }
