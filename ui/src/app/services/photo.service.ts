@@ -20,7 +20,8 @@ export class PhotoService {
       `&photo_id=${photo_id}` +
       `&v=5.120`;
     const HEADERS = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', '*')
+      .set('Access-Control-Allow-Origin', 'pixcollector.herokuapp.com')
+      .set('Origin', 'https://pixcollector.herokuapp.com')
       .set('Skip-Token', 'true');
     return this.http.get(`${URL}`, {headers: HEADERS, withCredentials: true});
   }
