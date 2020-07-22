@@ -20,9 +20,8 @@ export class PhotoService {
       `&photo_id=${photo_id}` +
       `&v=5.120`;
     const HEADERS = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', '*')
       .set('Skip-Token', 'true');
-    return this.http.get(`${URL}`, {headers: HEADERS, withCredentials: true, params: {mode: 'no-cors'}});
+    return this.http.get(`${URL}`, {headers: HEADERS, withCredentials: true});
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string,): Observable<any> {
@@ -35,6 +34,6 @@ export class PhotoService {
       `&v=5.120`;
     const HEADERS = new HttpHeaders()
       .set('Skip-Token', 'true');
-    return this.http.get(`${URL}`, {headers: HEADERS, withCredentials: true, params: {mode: 'no-cors'}});
+    return this.http.get(`${URL}`, {headers: HEADERS});
   }
 }
