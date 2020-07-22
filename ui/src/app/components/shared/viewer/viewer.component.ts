@@ -79,9 +79,16 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public likePix(): void {
-    this.photoService.vkLike(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF).subscribe((res) => {
-      console.log(res);
-    });
+    const SCRIPT = document.createElement('script');
+    SCRIPT.src = `https://api.vk.com/method/likes.add?owner_id=${this.viewerPix.owner_id}&item_id=${this.viewerPix.id}&type=photo&access_token=${this.viewerPix.vkTokenIF}&v=5.120&callback=callbackFunc`;
+    SCRIPT.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(SCRIPT);
+    function callbackFunc(result) {
+      console.log('result', result);
+    }
+    // this.photoService.vkLike(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF).subscribe((res) => {
+    //   console.log(res);
+    // });
   }
 
   public stealPix(): void {

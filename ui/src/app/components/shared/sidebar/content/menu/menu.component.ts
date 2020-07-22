@@ -50,7 +50,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     const EXTRA_RIGHTS_URL_AUTHORIZE = 'https://oauth.vk.com/authorize' +
       '?client_id=7545732' +
       '&display=popup' +
-      '&redirect_uri=https://oauth.vk.com/blank.html' +
+      '&redirect_uri=https://pixcollector.herokuapp.com/stocks' +
       '&scope=wall,photos,offline' +
       '&response_type=token' +
       '&v=5.120'+
