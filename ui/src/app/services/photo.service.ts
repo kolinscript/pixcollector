@@ -20,10 +20,9 @@ export class PhotoService {
       `&photo_id=${photo_id}` +
       `&v=5.120`;
     const HEADERS = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', 'pixcollector.herokuapp.com')
-      .set('Origin', 'pixcollector.herokuapp.com')
+      .set('Access-Control-Allow-Origin', 'https://pixcollector.herokuapp.com')
       .set('Skip-Token', 'true');
-    return this.http.get(`${URL}`, {headers: HEADERS, withCredentials: true});
+    return this.http.get(`${URL}`, {headers: HEADERS, withCredentials: true, params: {mode: 'no-cors'}});
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string,): Observable<any> {
@@ -35,8 +34,7 @@ export class PhotoService {
       `&access_token=${vkTokenIF}` +
       `&v=5.120`;
     const HEADERS = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', '*')
-      .set('Origin', 'pixcollector.herokuapp.com')
+      .set('Access-Control-Allow-Origin', 'https://pixcollector.herokuapp.com')
       .set('Skip-Token', 'true');
     return this.http.get(`${URL}`, {headers: HEADERS, withCredentials: true});
   }
