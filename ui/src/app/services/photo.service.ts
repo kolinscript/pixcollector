@@ -13,10 +13,17 @@ export class PhotoService {
   }
 
   public vkSave(owner_id: number, photo_id: number, vkTokenIF: string): Observable<any> {
-    return this.http.post(
-      `/api/v1/vk-photo/save`,
-      {owner_id: owner_id, photo_id: photo_id, vkTokenIF: vkTokenIF}
-    );
+    const URL = `https://api.vk.com/` +
+      `method/photos.copy` +
+      `?access_token=${vkTokenIF}` +
+      `&owner_id=${owner_id}` +
+      `&photo_id=${photo_id}` +
+      `&v=5.120`;
+    const HEADERS = new HttpHeaders()
+      .set('Access-Control-Allow-Origin', 'pixcollector.herokuapp.com')
+      .set('Origin', 'pixcollector.herokuapp.com')
+      .set('Skip-Token', 'true');
+    return this.http.get(`${URL}`, {headers: HEADERS, withCredentials: true});
   }
 
   public vkLike(owner_id: number, photo_id: number, vkTokenIF: string,): Observable<any> {
@@ -28,9 +35,9 @@ export class PhotoService {
       `&access_token=${vkTokenIF}` +
       `&v=5.120`;
     const HEADERS = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', 'pixcollector.herokuapp.com')
-      .set('Origin', 'https://pixcollector.herokuapp.com')
+      .set('Access-Control-Allow-Origin', '*')
+      .set('Origin', 'pixcollector.herokuapp.com')
       .set('Skip-Token', 'true');
-    return this.http.get(`${URL}`, {headers: HEADERS});
+    return this.http.get(`${URL}`, {headers: HEADERS, withCredentials: true});
   }
 }
