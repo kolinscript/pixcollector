@@ -79,33 +79,33 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public likePix(): void {
-    const SCRIPT = document.createElement('script');
-    SCRIPT.src = `https://api.vk.com/method/likes.add?owner_id=${this.viewerPix.owner_id}&item_id=${this.viewerPix.id}&type=photo&access_token=${this.viewerPix.vkTokenIF}&v=5.120&callback=callbackLike`;
-    SCRIPT.type = 'text/javascript';
-    document.getElementsByTagName('head')[0].appendChild(SCRIPT);
-    window.onload = function() {
-      function callbackLike(result) {
-        console.log('result', result);
-      }
-    };
-    // this.photoService.vkLike(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF).subscribe((res) => {
-    //   console.log(res);
-    // });
+    // const SCRIPT = document.createElement('script');
+    // SCRIPT.src = `https://api.vk.com/method/likes.add?owner_id=${this.viewerPix.owner_id}&item_id=${this.viewerPix.id}&type=photo&access_token=${this.viewerPix.vkTokenIF}&v=5.120&callback=callbackLike`;
+    // SCRIPT.type = 'text/javascript';
+    // document.getElementsByTagName('head')[0].appendChild(SCRIPT);
+    // window.onload = function() {
+    //   function callbackLike(result) {
+    //     console.log('result', result);
+    //   }
+    // };
+    this.photoService.vkLike(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   public stealPix(): void {
-    // this.photoService.vkSave(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF).subscribe((res) => {
-    //   console.log(res);
-    // });
-    const SCRIPT = document.createElement('script');
-    SCRIPT.src = `https://api.vk.com/method/photos.copy?owner_id=${this.viewerPix.owner_id}&photo_id=${this.viewerPix.id}&access_token=${this.viewerPix.vkTokenIF}&v=5.120&callback=callbackSteal`;
-    SCRIPT.type = 'text/javascript';
-    document.getElementsByTagName('head')[0].appendChild(SCRIPT);
-    window.onload = function() {
-      function callbackSteal(result) {
-        console.log('result', result);
-      }
-    };
+    this.photoService.vkSave(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF).subscribe((res) => {
+      console.log(res);
+    });
+    // const SCRIPT = document.createElement('script');
+    // SCRIPT.src = `https://api.vk.com/method/photos.copy?owner_id=${this.viewerPix.owner_id}&photo_id=${this.viewerPix.id}&access_token=${this.viewerPix.vkTokenIF}&v=5.120&callback=callbackSteal`;
+    // SCRIPT.type = 'text/javascript';
+    // document.getElementsByTagName('head')[0].appendChild(SCRIPT);
+    // window.onload = function() {
+    //   function callbackSteal(result) {
+    //     console.log('result', result);
+    //   }
+    // };
   }
 
   private activateControlView() {

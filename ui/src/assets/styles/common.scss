@@ -104,6 +104,16 @@ body {
       -webkit-mask-size: cover;
       transition: background 100ms ease;
     }
+
+    &.logo-twin {
+      margin-left: 10px;
+      width: 18px;
+      height: 18px;
+      mask-image: url("/assets/images/twin-directions.svg");
+      mask-size: cover;
+      -webkit-mask-size: cover;
+      transition: background 100ms ease;
+    }
   }
 
   .btn-label {

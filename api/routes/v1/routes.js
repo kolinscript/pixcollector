@@ -15,6 +15,10 @@ router.put('/user/update', secure.required, user.updateUser);
 
 router.get('/users', secure.required, user.getUsers);
 
+router.post('/vk-photo/save', secure.required, photo.vkSave);
+
+router.post('/vk-photo/like', secure.required, photo.vkLike);
+
 router.post('/download/pixcollector.zip', download.download);
 
 module.exports = router;

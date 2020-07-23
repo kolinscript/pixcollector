@@ -20,7 +20,7 @@
           <span>Visible</span>
         </div>
         <div class="row">
-          <div class="radio">
+          <div class="input radio">
             <input [value]="1"
               type="radio"
               id="v-all"
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="radio">
+          <div class="input radio">
             <input [value]="2"
               type="radio"
               id="v-authorized"
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="radio">
+          <div class="input radio">
             <input [value]="3"
               type="radio"
               id="v-nobody"
@@ -58,7 +58,7 @@
           <span>Downloadable</span>
         </div>
         <div class="row">
-          <div class="radio">
+          <div class="input radio">
             <input [value]="1"
               type="radio"
               id="d-all"
@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="radio">
+          <div class="input radio">
             <input [value]="2"
               type="radio"
               id="d-authorized"
@@ -81,7 +81,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="radio">
+          <div class="input radio">
             <input [value]="3"
               type="radio"
               id="d-nobody"
@@ -104,7 +104,7 @@
         <div class="row">
           <div class="button stroke login" (click)="refreshUsers()">
             <div class="btn-label">Refresh users</div>
-            <div class="btn-logo logo-reload"> </div>
+            <div class="btn-logo logo-reload"></div>
           </div>
         </div>
         <div class="row" *ngIf="false">
@@ -122,15 +122,29 @@
     </div>
     <div class="box-col">
       <div class="col col-100-per">
-        <div class="sub-title">
+        <div class="sub-title" *ngIf="user.vkTokenIF">
           <span>Save and like</span>
-          <span class="done" *ngIf="user.vkTokenIF"></span>
+          <span class="done"></span>
+        </div>
+        <div class="sub-title" *ngIf="!user.vkTokenIF">
+          <span>Push the button, copy URL from the browser address bar,
+            return back to this page and paste at the form below.
+          </span>
         </div>
         <div class="row">
-          <div class="button stroke login" (click)="requestRights()">
+          <div class="button stroke" (click)="requestRights()">
             <div class="btn-label">Rights request</div>
-            <div class="btn-logo logo-key"> </div>
+            <div class="btn-logo logo-key"></div>
           </div>
+        </div>
+        <div class="row">
+          <div class="input text">
+            <input [(ngModel)]="rawAccessUrl" type="text" (ngModelChange)="fetchToken()" placeholder="Paste full URL here"/>
+          </div>
+          <!--          <div class="button stroke" (click)="fetchToken()">-->
+          <!--            <div class="btn-label">Authorize</div>-->
+          <!--            <div class="btn-logo logo-twin"> </div>-->
+          <!--          </div>-->
         </div>
       </div>
     </div>
@@ -139,7 +153,7 @@
   <div class="block logout">
     <div class="button stroke login" (click)="logout()">
       <div class="btn-label">Logout</div>
-      <div class="btn-logo logo-logout"> </div>
+      <div class="btn-logo logo-logout"></div>
     </div>
   </div>
 </div>

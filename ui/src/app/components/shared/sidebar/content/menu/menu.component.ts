@@ -17,6 +17,8 @@ export class MenuComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public href: string;
   public user;
+  public rawAccessUrl: string;
+  private accessToken: string;
   private store: Subscription
 
   constructor(
@@ -56,6 +58,26 @@ export class MenuComponent implements OnInit, OnDestroy {
       '&v=5.120'+
       '&state=pixcollector';
     window.open(EXTRA_RIGHTS_URL_AUTHORIZE, "_self")
+  }
+
+  public fetchToken(): void {
+    console.log('rawAccessUrl ', this.rawAccessUrl);
+    if (this.rawAccessUrl.slice(0, 40) === 'https://oauth.vk.com/blank.html#access_token=') {
+      const tokenEndIndex = this.rawAccessUrl.indexOf('&expires_in');
+      this.accessToken = this.router.url.slice(41, tokenEndIndex);
+      console.log('accessToken ', this.accessToken);
+      const userUpdates = {
+        user: {
+          vkId: this.user.vkId,
+          vkTokenIF: this.accessToken,
+        }
+      };
+      this.userService.updUser(userUpdates).subscribe((user) => {
+        if (user) {
+          this.storeService.setStore({user: user.body.user});
+        }
+      });
+    }
   }
 
   public logout(): void {
