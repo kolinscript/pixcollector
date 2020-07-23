@@ -64,7 +64,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     console.log('rawAccessUrl ', this.rawAccessUrl);
     if (this.rawAccessUrl.slice(0, 45) === 'https://oauth.vk.com/blank.html#access_token=') {
       const tokenEndIndex = this.rawAccessUrl.indexOf('&expires_in');
-      this.accessToken = this.rawAccessUrl.slice(46, tokenEndIndex);
+      this.accessToken = this.rawAccessUrl.slice(45, tokenEndIndex);
       console.log('accessToken ', this.accessToken);
       const userUpdates = {
         user: {

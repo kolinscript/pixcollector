@@ -114,14 +114,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
     let script = this.renderer.createElement('script');
     script.type = `text/javascript`;
     script.src = `https://api.vk.com/method/photos.copy?owner_id=${this.viewerPix.owner_id}&photo_id=${this.viewerPix.id}&access_token=${this.viewerPix.vkTokenIF}&v=5.120&callback=callbackSteal`;
-    script.text = `
-            {
-
-                  function callbackSteal(result) {
-                      console.log('result', result);
-              }
-            }
-        `;
+    script.innerHTML = `function callbackSteal(result) {console.log('result', result)}`;
     this.renderer.appendChild(this.document.body, script);
   }
 
