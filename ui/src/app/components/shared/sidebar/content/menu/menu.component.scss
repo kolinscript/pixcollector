@@ -213,12 +213,12 @@
             height: 44px;
             margin: 0;
             padding: 8px;
-            background: $background;
+            background: transparent;
             outline: none;
             font: 500 16px/18px $fontMain;
             text-decoration: none;
             text-align: center;
-            color: $dark;
+            color: $background;
             border: 2px solid $background;
             border-radius: 8px;
             box-shadow: 2px 2px 0 0 #1d1d1d;
