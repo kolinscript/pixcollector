@@ -137,7 +137,7 @@
       }
 
       .input {
-        .radio {
+        &.radio {
           position: relative;
           height: 20px;
           width: 100%;
@@ -203,7 +203,7 @@
           }
         }
 
-        .text {
+        &.text {
           width: 100%;
           input[type=text] {
             overflow: hidden;

@@ -139,7 +139,10 @@
         </div>
         <div class="row">
           <div class="input text">
-            <input [(ngModel)]="rawAccessUrl" type="text" (ngModelChange)="fetchToken()" placeholder="Paste full URL here"/>
+            <input type="text"
+              [(ngModel)]="rawAccessUrl"
+              [ngModelOptions]="{standalone: true}"
+              (ngModelChange)="fetchToken()" placeholder="Paste full URL here"/>
           </div>
           <!--          <div class="button stroke" (click)="fetchToken()">-->
           <!--            <div class="btn-label">Authorize</div>-->
