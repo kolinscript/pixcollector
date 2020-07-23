@@ -1,7 +1,7 @@
 import {
   Component,
   EventEmitter,
-  HostListener,
+  HostListener, Inject,
   Input,
   OnChanges, OnDestroy,
   OnInit,
@@ -9,6 +9,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { PhotoService } from '../../../services/photo.service';
+import { DOCUMENT } from '@angular/common';
 
 export enum KEY_CODE {
   RIGHT_ARROW = 'ArrowRight',
@@ -29,6 +30,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   @Input() selfStock;
   @Output() close = new EventEmitter<boolean>();
   @Output() slideTo = new EventEmitter<string>();
+
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.code === KEY_CODE.RIGHT_ARROW) {
@@ -42,7 +44,9 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private renderer: Renderer2,
     private photoService: PhotoService,
-  ) { }
+    @Inject(DOCUMENT) private document: Document
+  ) {
+  }
 
   ngOnInit(): void {
     this.href = this.viewerPix.url;
@@ -57,7 +61,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-   this.deactivateControlView();
+    this.deactivateControlView();
   }
 
   public mouseEnter(): void {
@@ -94,18 +98,31 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public stealPix(): void {
-    this.photoService.vkSave(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF).subscribe((res) => {
-      console.log(res);
-    });
+    // this.photoService.vkSave(this.viewerPix.owner_id, this.viewerPix.id, this.viewerPix.vkTokenIF).subscribe((res) => {
+    //   console.log(res);
+    // });
     // const SCRIPT = document.createElement('script');
     // SCRIPT.src = `https://api.vk.com/method/photos.copy?owner_id=${this.viewerPix.owner_id}&photo_id=${this.viewerPix.id}&access_token=${this.viewerPix.vkTokenIF}&v=5.120&callback=callbackSteal`;
     // SCRIPT.type = 'text/javascript';
-    // document.getElementsByTagName('head')[0].appendChild(SCRIPT);
     // window.onload = function() {
     //   function callbackSteal(result) {
     //     console.log('result', result);
     //   }
     // };
+    // document.getElementsByTagName('head')[0].appendChild(SCRIPT);
+
+    let script = this.renderer.createElement('script');
+    script.type = `text/javascript`;
+    script.src = `https://api.vk.com/method/photos.copy?owner_id=${this.viewerPix.owner_id}&photo_id=${this.viewerPix.id}&access_token=${this.viewerPix.vkTokenIF}&v=5.120&callback=callbackSteal`;
+    script.text = `
+            {
+
+                  function callbackSteal(result) {
+                      console.log('result', result);
+              }
+            }
+        `;
+    this.renderer.appendChild(this.document.body, script);
   }
 
   private activateControlView() {

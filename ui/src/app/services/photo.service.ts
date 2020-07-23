@@ -33,7 +33,7 @@ export class PhotoService {
     //   .set('Skip-Token', 'true');
     // return this.http.get(`${URL}`, {headers: HEADERS});
     return this.http.post(
-      `/api/v1/vk-photo/save`,
+      `/api/v1/vk-photo/like`,
       {owner_id: owner_id, photo_id: photo_id, vkTokenIF: vkTokenIF}
     );
   }
