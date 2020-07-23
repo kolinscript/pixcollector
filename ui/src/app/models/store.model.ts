@@ -1,7 +1,7 @@
 export interface Store {
   user?: {
     vkId?: string,
-    vkTokenIF?: string,
+    VKTIFSAExists?: string,
     name?: string,
     avatar?: string,
     albumSize?: string,

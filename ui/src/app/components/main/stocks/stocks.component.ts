@@ -14,7 +14,6 @@ export class StocksComponent implements OnInit, OnDestroy {
   public vkId: string = null;
   public adTools: boolean;
   private user;
-  // private access_token: string = null;
   private store: Subscription;
 
   constructor(
@@ -32,25 +31,6 @@ export class StocksComponent implements OnInit, OnDestroy {
         this.vkId = store.user.vkId;
       }
     });
-    // if (this.router.url.slice(0, 20) === '/stocks#access_token') {
-    //   const tokenEndIndex = this.router.url.indexOf('&expires_in');
-    //   this.access_token = this.router.url.slice(21, tokenEndIndex);
-    //   this.adTools = true;
-    //   const userUpdates = {
-    //     user: {
-    //       vkId: this.user.vkId,
-    //       vkTokenIF: this.access_token,
-    //     }
-    //   };
-    //   this.userService.updUser(userUpdates).subscribe((user) => {
-    //     if (user) {
-    //       this.storeService.setStore({user: user.body.user});
-    //     }
-    //   });
-    // }
-    // if (this.router.url.slice(0, 13) === '/stocks#error') {
-    //   console.log('ERROR: ', this.router.url.slice(14));
-    // }
   }
 
   ngOnDestroy() {

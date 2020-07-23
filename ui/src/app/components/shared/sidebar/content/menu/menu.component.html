@@ -122,14 +122,15 @@
     </div>
     <div class="box-col">
       <div class="col col-100-per">
-        <div class="sub-title" *ngIf="user.vkTokenIF">
+        <div class="sub-title">
           <span>Save and like</span>
-          <span class="done"></span>
+          <span class="done" *ngIf="user.VKTIFSAExists"></span>
         </div>
-        <div class="sub-title" *ngIf="!user.vkTokenIF">
+        <div class="sub-title" *ngIf="!user.VKTIFSAExists">
           <span>
             Push the button, copy URL from the browser's address bar,
-            return back to this page and paste at the form below.
+            return back to this page and paste at the form below
+            (New features will appear in the viewer).
           </span>
         </div>
         <div class="row">
@@ -145,10 +146,6 @@
               [ngModelOptions]="{standalone: true}"
               (ngModelChange)="fetchToken()" placeholder="Paste full URL here"/>
           </div>
-          <!--          <div class="button stroke" (click)="fetchToken()">-->
-          <!--            <div class="btn-label">Authorize</div>-->
-          <!--            <div class="btn-logo logo-twin"> </div>-->
-          <!--          </div>-->
         </div>
       </div>
     </div>

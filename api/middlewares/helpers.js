@@ -87,7 +87,7 @@ const helpers = {
                                         const userNew = new Users({
                                             vkId: vkId,
                                             vkToken: vkToken,
-                                            vkTokenIF: null,
+                                            vkTokenIFSA: null,
                                             name: name,
                                             avatar: avatar,
                                             albumSize: albumSize,
@@ -112,18 +112,20 @@ const helpers = {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
-                                                            const safeUser = ({_id, vkToken, token, ...rest}) => rest;
-                                                            res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
-                                                        }
-                                                    );
+                                                        res.status(200).json({body: {user: user.toResponseJSON()}});
+                                                    })
+                                                    .catch((error) => {
+                                                        res.status(200).json({body: {error: {text: error, code: 5}}});
+                                                    });
                                             }
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            const safeUser = ({_id, vkToken, token, ...rest}) => rest;
-                                                            res.status(200).json({body: {user: safeUser(userNew.toAuthJSON())}});
-                                                        }
-                                                    );
+                                                        res.status(200).json({body: {user: userNew.toResponseJSON()}});
+                                                    })
+                                                    .catch((error) => {
+                                                        res.status(200).json({body: {error: {text: error, code: 5}}});
+                                                    });
                                             }
                                             if (err) return console.error(err);
                                         });
@@ -210,7 +212,7 @@ const helpers = {
                                         const userNew = new Users({
                                             vkId: vkId,
                                             vkToken: vkToken,
-                                            vkTokenIF: null,
+                                            vkTokenIFSA: null,
                                             name: name,
                                             avatar: avatar,
                                             albumSize: albumSize,
@@ -235,8 +237,7 @@ const helpers = {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
-                                                        const safeUser = ({vkToken, token, ...rest}) => rest;
-                                                        res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
+                                                        res.status(200).json({body: {user: user.toResponseJSON()}});
                                                     })
                                                     .catch((error) => {
                                                         res.status(200).json({body: {error: {text: error, code: 5}}});
@@ -245,10 +246,11 @@ const helpers = {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            const safeUser = ({vkToken, token, ...rest}) => rest;
-                                                            res.status(200).json({body: {user: safeUser(userNew.toAuthJSON())}});
-                                                        }
-                                                    );
+                                                        res.status(200).json({body: {user: userNew.toResponseJSON()}});
+                                                    })
+                                                    .catch((error) => {
+                                                        res.status(200).json({body: {error: {text: error, code: 5}}});
+                                                    });
                                             }
                                             if (err) return console.error(err);
                                         });
@@ -270,8 +272,7 @@ const helpers = {
                             res.status(200).json({body: {error: err}});
                         }
                         if (userDb) {
-                            const safeUser = ({vkToken, token, ...rest}) => rest;
-                            res.status(200).json({body: {user: safeUser(userDb.toAuthJSON())}});
+                            res.status(200).json({body: {user: userDb.toResponseJSON()}});
                         } else {
                             res.status(200).json({body: {error: {text: 'found no user', code: 0}}});
                         }
@@ -367,7 +368,8 @@ const helpers = {
                                         const userNew = new Users({
                                             vkId: vkId,
                                             vkToken: vkToken,
-                                            vkTokenIF: null,
+                                            vkTokenIFSA: null,
+                                            VKTIFSAExists: false,
                                             name: name,
                                             avatar: avatar,
                                             albumSize: albumSize,
@@ -392,18 +394,20 @@ const helpers = {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
-                                                            const safeUser = ({_id, vkToken, ...rest}) => rest;
-                                                            res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
-                                                        }
-                                                    );
+                                                        res.status(200).json({body: {user: user.toAuthJSON()}});
+                                                    })
+                                                    .catch((error) => {
+                                                        res.status(200).json({body: {error: {text: error, code: 5}}});
+                                                    });
                                             }
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            const safeUser = ({_id, vkToken, ...rest}) => rest;
-                                                            res.status(200).json({body: {user: safeUser(userNew.toAuthJSON())}});
-                                                        }
-                                                    );
+                                                        res.status(200).json({body: {user: userNew.toAuthJSON()}});
+                                                    })
+                                                    .catch((error) => {
+                                                        res.status(200).json({body: {error: {text: error, code: 5}}});
+                                                    });
                                             }
                                             if (err) return console.error(err);
                                         });
@@ -490,7 +494,8 @@ const helpers = {
                                         const userNew = new Users({
                                             vkId: vkId,
                                             vkToken: vkToken,
-                                            vkTokenIF: null,
+                                            vkTokenIFSA: null,
+                                            VKTIFSAExists: false,
                                             name: name,
                                             avatar: avatar,
                                             albumSize: albumSize,
@@ -515,8 +520,7 @@ const helpers = {
                                                 user.markModified('pixArray');
                                                 user.save()
                                                     .then(() => {
-                                                        const safeUser = ({vkToken, ...rest}) => rest;
-                                                        res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
+                                                        res.status(200).json({body: {user: user.toAuthJSON()}});
                                                     })
                                                     .catch((error) => {
                                                         res.status(200).json({body: {error: {text: error, code: 5}}});
@@ -525,10 +529,12 @@ const helpers = {
                                             if (!user) {
                                                 userNew.save()
                                                     .then(() => {
-                                                            const safeUser = ({vkToken, ...rest}) => rest;
-                                                            res.status(200).json({body: {user: safeUser(userNew.toAuthJSON())}});
+                                                            res.status(200).json({body: {user: userNew.toAuthJSON()}});
                                                         }
-                                                    );
+                                                    )
+                                                    .catch((error) => {
+                                                        res.status(200).json({body: {error: {text: error, code: 5}}});
+                                                    });
                                             }
                                             if (err) return console.error(err);
                                         });
@@ -550,8 +556,7 @@ const helpers = {
                             res.status(200).json({body: {error: err}});
                         }
                         if (userDb) {
-                            const safeUser = ({vkToken, ...rest}) => rest;
-                            res.status(200).json({body: {user: safeUser(userDb.toAuthJSON())}});
+                            res.status(200).json({body: {user: userDb.toAuthJSON()}});
                         } else {
                             res.status(200).json({body: {error: {text: 'found no user', code: 0}}});
                         }

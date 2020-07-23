@@ -6,7 +6,8 @@ const { Schema }         = mongoose;
 const UsersSchema = new Schema({
     vkId: String,
     vkToken: String,
-    vkTokenIF: String, // Implicit Flow access_token for user-side requests
+    vkTokenIFSA: String, // Implicit Flow Standalone app access_token
+    VKTIFSAExists: Boolean, // Implicit Flow Standalone app access_token exist
     name: String,
     avatar: String,
     albumSize: String,
@@ -30,8 +31,7 @@ UsersSchema.methods.generateJWT = function() {
 UsersSchema.methods.toAuthJSON = function() {
     return {
         vkId: this.vkId,
-        vkToken: this.vkToken,
-        vkTokenIF: this.vkTokenIF,
+        VKTIFSAExists: this.VKTIFSAExists,
         name: this.name,
         avatar: this.avatar,
         albumSize: this.albumSize,
@@ -40,6 +40,20 @@ UsersSchema.methods.toAuthJSON = function() {
         privacyDownloadable: this.privacyDownloadable,
         sysAccessRights: this.sysAccessRights,
         token: this.generateJWT(),
+    };
+};
+
+UsersSchema.methods.toResponseJSON = function() {
+    return {
+        vkId: this.vkId,
+        VKTIFSAExists: this.VKTIFSAExists,
+        name: this.name,
+        avatar: this.avatar,
+        albumSize: this.albumSize,
+        pixArray: this.pixArray,
+        privacyVisible: this.privacyVisible,
+        privacyDownloadable: this.privacyDownloadable,
+        sysAccessRights: this.sysAccessRights
     };
 };
 

@@ -17,15 +17,19 @@ const user = {
         }
 
         if (token !== undefined) {
-            const tokenVkId = jwt.verify(token, 'collector_secret').vkId;
             const reqVkID = req.query.id;
             if (tokenVkId === reqVkID) {
                 // token, user req himself
                 // update user from vk - send user
                 Users.findOne({vkId: reqVkID}, (err, userDb) => {
-                    if (err) { res.status(200).json({body: {error: err}}); }
-                    if (userDb) { helpers.UserUpdateVkData(req, res, next, userDb.vkToken, reqVkID); }
-                    else { res.status(200).json({body: {error: {text: 'found no user', code: 0}}}); }
+                    if (err) {
+                        res.status(200).json({body: {error: err}});
+                    }
+                    if (userDb) {
+                        helpers.UserUpdateVkData(req, res, next, userDb.vkToken, reqVkID);
+                    } else {
+                        res.status(200).json({body: {error: {text: 'found no user', code: 0}}});
+                    }
                 });
             } else {
                 // token, user(2) req other user(1)
@@ -35,10 +39,14 @@ const user = {
                 // // if user(1) privacyVisible === 1 || 2 (public/authorized)
                 // // if user(1) privacyVisible === 3 (private)
                 Users.findOne({vkId: tokenVkId}, (err, userDbFromToken) => {
-                    if (err) { res.status(200).json({body: {error: err}}); }
+                    if (err) {
+                        res.status(200).json({body: {error: err}});
+                    }
                     if (userDbFromToken) {
                         Users.findOne({vkId: reqVkID}, (err, userDbFromReq) => {
-                            if (err) { res.status(200).json({body: {error: err}}); }
+                            if (err) {
+                                res.status(200).json({body: {error: err}});
+                            }
                             if (userDbFromReq) {
                                 if ((userDbFromToken.sysAccessRights === 1) || (userDbFromToken.sysAccessRights === 2)) {
                                     helpers.UserUpdateVkData(req, res, next, userDbFromReq.vkToken, reqVkID);
@@ -49,11 +57,13 @@ const user = {
                                         res.status(200).json({body: {error: {text: 'Private page, sorry.', code: 3}}});
                                     }
                                 }
+                            } else {
+                                res.status(200).json({body: {error: {text: 'found no userDbFromReq', code: 0}}});
                             }
-                            else { res.status(200).json({body: {error: {text: 'found no userDbFromReq', code: 0}}}); }
                         });
+                    } else {
+                        res.status(200).json({body: {error: {text: 'found no userDbFromToken', code: 0}}});
                     }
-                    else { res.status(200).json({body: {error: {text: 'found no userDbFromToken', code: 0}}}); }
                 });
             }
         } else {
@@ -62,7 +72,9 @@ const user = {
             //    user(1) privacyVisible === 2 [authorized] - send err (private)
             //    user(1) privacyVisible === 3 [nobody] - send err (private)
             Users.findOne({vkId: reqVkID}, (err, userDb) => {
-                if (err) { res.status(200).json({body: {error: err}}); }
+                if (err) {
+                    res.status(200).json({body: {error: err}});
+                }
                 if (userDb) {
                     if (userDb.privacyVisible === 1) {
                         helpers.UserUpdateVkData(req, res, next, userDb.vkToken, reqVkID);
@@ -71,8 +83,9 @@ const user = {
                     } else if (userDb.privacyVisible === 3) {
                         res.status(200).json({body: {error: {text: 'Private page, sorry.', code: 3}}});
                     }
+                } else {
+                    res.status(200).json({body: {error: {text: 'found no user', code: 0}}});
                 }
-                else { res.status(200).json({body: {error: {text: 'found no user', code: 0}}}); }
             });
         }
 
@@ -94,20 +107,22 @@ const user = {
             if (usersRaw) {
                 let users = usersRaw.map((user) => {
                     const safeUser = ({vkToken, ...rest}) => rest;
-                    return safeUser(user.toAuthJSON());
+                    return safeUser(user.toResponseJSON());
                 });
                 Users.findOne({vkId: tokenVkId}, (err, userDbFromToken) => {
-                    if (err) { res.status(200).json({body: {error: err}}); }
+                    if (err) {
+                        res.status(200).json({body: {error: err}});
+                    }
                     if (userDbFromToken) {
                         if ((userDbFromToken.sysAccessRights === 1) || (userDbFromToken.sysAccessRights === 2)) {
                             res.status(200).json({body: {users: users}});
-                        }
-                        else if (userDbFromToken.sysAccessRights === 3) {
+                        } else if (userDbFromToken.sysAccessRights === 3) {
                             users = users.filter(user => (user.privacyVisible !== 3));
                             res.status(200).json({body: {users: users}});
                         }
+                    } else {
+                        res.status(200).json({body: {error: {text: 'found no user', code: 0}}});
                     }
-                    else { res.status(200).json({body: {error: {text: 'found no user', code: 0}}}); }
                 });
             } else {
                 res.status(200).json({body: {error: {text: 'found no user', code: 0}}});
@@ -140,16 +155,21 @@ const user = {
                         user.privacyDownloadable = reqUser.privacyDownloadable;
                         user.markModified('privacyDownloadable');
                     }
-                    if (reqUser.vkTokenIF) {
-                        user.vkTokenIF = reqUser.vkTokenIF;
-                        user.markModified('vkTokenIF');
+                    if (reqUser.vkTokenIFSA) {
+                        user.vkTokenIFSA = reqUser.vkTokenIFSA;
+                        user.markModified('vkTokenIFSA');
+                    }
+                    if (reqUser.VKTIFSAExists) {
+                        user.VKTIFSAExists = reqUser.VKTIFSAExists;
+                        user.markModified('VKTIFSAExists');
                     }
                     user.save()
                         .then(() => {
-                                const safeUser = ({_id, vkToken, ...rest}) => rest;
-                                res.status(200).json({body: {user: safeUser(user.toAuthJSON())}});
-                            }
-                        );
+                            res.status(200).json({body: {user: user.toResponseJSON()}});
+                        })
+                        .catch((error) => {
+                            res.status(200).json({body: {error: {text: error, code: 5}}});
+                        });
                 } else {
                 }
             });
