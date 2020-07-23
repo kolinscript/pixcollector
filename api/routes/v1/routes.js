@@ -3,6 +3,7 @@ const router             = express.Router();
 const secure             = require('../../middlewares/secure');
 const auth               = require('../../middlewares/auth');
 const user               = require('../../middlewares/user');
+const photo              = require('../../middlewares/photo');
 const download           = require('../../middlewares/download');
 
 router.get('/auth', secure.optional, auth.login);
