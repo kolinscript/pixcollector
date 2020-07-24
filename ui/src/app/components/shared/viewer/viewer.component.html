@@ -2,7 +2,9 @@
   <div class="fullScreen">
     <div class="pix">
       <img src="{{href}}" alt=""/>
-      <div class="message" *ngIf="message">{{messageText}}</div>
+      <div class="panel-top">
+        <div class="message" *ngIf="message">{{messageText}}</div>
+      </div>
       <div class="slide left"
            *ngIf="controlsViewed"
            (click)="slide('left')"

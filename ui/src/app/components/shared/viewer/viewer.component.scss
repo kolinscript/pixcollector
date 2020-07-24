@@ -27,19 +27,26 @@
         object-position: 50%;
       }
 
-      .message {
+      .panel-top {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
-        user-select: none;
-        width: 280px;
+        width: 100%;
         top: 20px;
-        left: 50%;
-        margin-left: -140px;
-        padding: 5px 10px;
-        background: $background;
-        border-radius: 8px;
-        font: 500 14px/20px $fontMain;
-        text-align: center;
-        color: #cacaca;
+
+        .message {
+          user-select: none;
+          max-width: 280px;
+          width: auto;
+          margin: 0 auto;
+          padding: 5px 10px;
+          background: $background;
+          border-radius: 8px;
+          font: 500 14px/20px $fontMain;
+          text-align: center;
+          color: #cacaca;
+        }
       }
 
       .close {
