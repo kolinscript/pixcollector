@@ -23,6 +23,8 @@ export enum KEY_CODE {
 })
 export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   href: string;
+  message: boolean = false;
+  messageText: String = '';
   controlsViewed: boolean = false;
   globalMousemoveListenFunc: Function;
   globalMousemoveStopInterval;
@@ -83,14 +85,32 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public likePix(): void {
+    this.message = false;
+    this.messageText = '';
     this.photoService.vkLike(this.viewerPix.owner_id, this.viewerPix.id).subscribe((res) => {
-      console.log(res);
+      if (res.body.data.error && res.body.data.error.error_msg) {
+        this.message = true;
+        this.messageText = res.body.data.error.error_msg;
+      }
+      if (res.body.data.likes) {
+        this.message = true;
+        this.messageText = 'Success!';
+      }
     });
   }
 
   public stealPix(): void {
+    this.message = false;
+    this.messageText = '';
     this.photoService.vkSteal(this.viewerPix.owner_id, this.viewerPix.id).subscribe((res) => {
-      console.log(res);
+      if (res.body.data.error && res.body.data.error.error_msg) {
+        this.message = true;
+        this.messageText = res.body.data.error.error_msg;
+      }
+      if (res.body.data.response) {
+        this.message = true;
+        this.messageText = 'Success!';
+      }
     });
   }
 
