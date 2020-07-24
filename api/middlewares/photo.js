@@ -19,7 +19,7 @@ const photo = {
             if (user && user.vkTokenIFSA) {
                 const link = `https://api.vk.com/` +
                     `method/photos.copy` +
-                    `?access_token=${userDbFromToken.vkTokenIFSA}` +
+                    `?access_token=${user.vkTokenIFSA}` +
                     `&owner_id=${owner_id}` +
                     `&photo_id=${photo_id}` +
                     `&v=5.120`;

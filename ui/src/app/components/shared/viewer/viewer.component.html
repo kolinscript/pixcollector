@@ -29,7 +29,7 @@
            (mouseenter) ="mouseEnter()"
            (mouseleave) ="mouseLeave()"
       >
-        <div class="pb left" [ngClass]="{'self-stock': selfStock}">
+        <div class="pb left" [ngClass]="{'self-stock': selfStock || !viewerPix.VKTIFSAExists}">
           <div class="number">{{viewerPix.num_current}} of {{viewerPix.num_total}}</div></div>
         <div class="pb right" *ngIf="!selfStock && viewerPix.VKTIFSAExists">
           <div class="add"(click)="stealPix()">Steal PIX</div>
