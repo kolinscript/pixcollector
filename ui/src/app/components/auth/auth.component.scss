@@ -13,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    padding: 60px 0 40px;
+    padding: 0 0 40px;
     height: 100%;
     width: 100%;
 
@@ -98,27 +98,12 @@
       text-align: center;
     }
 
-    .btn-bock {
+    .btn-block {
       width: 100%;
       height: 44px;
       margin: 40px auto;
       .button {
         margin: 0 auto;
-        background: #1d1d1d;
-        border: none;
-        box-shadow: 2px 2px 6px 0 #1d1d1d;
-        .btn-label {
-          color: $background;
-        }
-        .log-vk {
-          color: $background;
-        }
-        &:hover, &.active {
-          background: lighten($background, 10%);
-          .logo-vk {
-            background-color: lighten(#1d1d1d, 10%);
-          }
-        }
       }
     }
 
@@ -176,7 +161,7 @@
   .auth-wrapper {
     .main {
       .logo {
-        height: 200px;
+        height: 260px;
 
         .pulsar {
           width: 156px;

@@ -19,7 +19,7 @@
       <span *ngIf="state === StateEnum.error">ERROR</span>
     </h2>
 
-    <div class="btn-bock">
+    <div class="btn-block">
       <div class="button login" *ngIf="(state === StateEnum.auth) || (state === StateEnum.error)" (click)="loginVk()">
         <div class="btn-label" *ngIf="state === StateEnum.auth">Login with</div>
         <div class="btn-label" *ngIf="state === StateEnum.error">Login again</div>
