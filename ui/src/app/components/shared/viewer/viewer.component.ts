@@ -56,9 +56,9 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes ', changes);
     if ('viewerPix' in changes) {
       this.href = this.viewerPix.url;
+      this.message = false;
     }
   }
 
