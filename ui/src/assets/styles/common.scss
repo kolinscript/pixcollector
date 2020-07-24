@@ -63,7 +63,7 @@ body {
   }
 
   .btn-logo {
-    background-color: $dark;
+    background-color: $background;
     &.logo-vk {
       margin-left: 10px;
       width: 34px;
@@ -71,7 +71,7 @@ body {
       mask-image: url("/assets/images/vk-login.svg");
       mask-size: cover;
       -webkit-mask-size: cover;
-      box-shadow: inset 2px 2px 8px #101010;
+      //box-shadow: inset 2px 2px 8px #101010;
       transition: background 100ms ease;
     }
 

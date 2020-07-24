@@ -92,7 +92,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
         this.message = true;
         this.messageText = res.body.data.error.error_msg;
       }
-      if (res.body.data.likes) {
+      if (res.body.data.response.likes) {
         this.message = true;
         this.messageText = 'Success!';
       }
