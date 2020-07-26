@@ -67,13 +67,17 @@ export class StockComponent implements OnInit, OnDestroy {
             this.user = store.user;
             if (this.selfStock || (this.user.sysAccessRights === 1)) {
               this.allowDownload = true;
-            } else if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
+            }
+            if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
               this.allowDownload = false;
-            } else if (this.stockUser.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
+            }
+            if (this.stockUser.privacyDownloadable === 2 && !this.selfStock && this.authorized) {
               this.allowDownload = true;
-            } else if (this.stockUser.privacyDownloadable === 2 && !this.authorized) {
+            }
+            if (this.stockUser.privacyDownloadable === 2 && !this.authorized) {
               this.allowDownload = false;
-            } else if (this.stockUser.privacyDownloadable === 1) {
+            }
+            if (this.stockUser.privacyDownloadable === 1) {
               this.allowDownload = true;
             }
           }
