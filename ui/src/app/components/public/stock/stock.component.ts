@@ -117,7 +117,7 @@ export class StockComponent implements OnInit, OnDestroy {
   public openViewer(event, pix, i): void {
     this.viewerPix = {
       ...this.stockUser.pixArray.find(el => el.url === pix.url),
-      VKTIFSAExists: this.user.VKTIFSAExists,
+      VKTIFSAExists: this.user ? this.user.VKTIFSAExists : false,
       num_current: this.stockUser.pixArray.indexOf(this.stockUser.pixArray.find(el => el.url === pix.url)) + 1,
       num_total: this.stockUser.pixArray.length
     };
@@ -136,7 +136,7 @@ export class StockComponent implements OnInit, OnDestroy {
         if (CUR_PIX_INDEX - 1 >= 0) {
           this.viewerPix = {
             ...this.stockUser.pixArray[CUR_PIX_INDEX - 1],
-            VKTIFSAExists: this.user.VKTIFSAExists,
+            VKTIFSAExists: this.user ? this.user.VKTIFSAExists : false,
             num_current: CUR_PIX_INDEX,
             num_total: this.stockUser.pixArray.length,
           };
@@ -148,7 +148,7 @@ export class StockComponent implements OnInit, OnDestroy {
         if (CUR_PIX_INDEX + 1 < this.stockUser.pixArray.length) {
           this.viewerPix = {
             ...this.stockUser.pixArray[CUR_PIX_INDEX + 1],
-            VKTIFSAExists: this.user.VKTIFSAExists,
+            VKTIFSAExists: this.user ? this.user.VKTIFSAExists : false,
             num_current: CUR_PIX_INDEX + 2,
             num_total: this.stockUser.pixArray.length,
           };
