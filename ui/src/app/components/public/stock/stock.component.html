@@ -108,6 +108,7 @@
           <div class="download" *ngIf="allowDownload">
             <a class="select" [ngClass]="{active:selectMode}" (click)="selectClickHandler()"></a>
           </div>
+          <div *ngIf="!allowDownload"> </div>
         </div>
       </div>
     </div>
