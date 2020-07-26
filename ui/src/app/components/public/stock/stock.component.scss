@@ -2,7 +2,13 @@
 
 .stock-wrapper {
   .main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     padding-top: 52px;
+
     .user-info {
       z-index: 99;
       position: relative;
@@ -11,27 +17,32 @@
       align-items: center;
       width: 100%;
       padding: 15px;
+
       .user-info-avatar {
         width: 36px;
         height: 36px;
         border-radius: 20px;
         overflow: hidden;
+
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
       }
+
       .user-info-main {
         margin-left: 15px;
         display: flex;
         justify-content: flex-start;
         align-items: center;
+
         .name {
           font: 500 22px/24px $fontMain;
           color: $background;
         }
       }
+
       .user-info-album-size {
         font: 500 100px/80px $fontMain;
         color: #4d4d4d;
@@ -39,6 +50,7 @@
         margin-top: -50px;
       }
     }
+
     .gallery {
       position: absolute;
       top: 0;
@@ -123,6 +135,7 @@
         height: 60px;
         bottom: 0;
         left: 0;
+
         .bottom-panel-popup {
           background: lighten(#2a2a2af2, 3%);
           position: absolute;
@@ -134,41 +147,50 @@
           height: 60px;
           padding: 5px 20px;
           border-radius: 12px 12px 0 0;
+
           &.items-per-page {
             justify-content: flex-start;
+
             .button {
               margin: 0 10px 0 0;
               height: 30px;
               width: 40px;
-              box-shadow: none;
+
               .label {
                 font-size: 12px;
               }
+
               &:last-child {
                 margin: 0;
               }
             }
           }
+
           &.downloads {
             justify-content: flex-end;
+
             .button {
               margin: 0 0 0 10px;
               height: 30px;
               width: 105px;
-              box-shadow: none;
               padding: 8px;
+
               .label {
                 font-size: 12px;
               }
+
               &:first-child {
                 margin: 0;
               }
+
               &.selected {
                 pointer-events: none;
                 width: auto;
+
                 .label {
                   font-size: 14px;
                 }
+
                 .deselect {
                   pointer-events: all;
                   position: absolute;
@@ -178,6 +200,7 @@
                   top: -10px;
                   border-radius: 10px;
                   background: $dark;
+
                   span {
                     position: absolute;
                     width: 12px;
@@ -186,17 +209,21 @@
                     top: 50%;
                     margin-top: -1px;
                     background: $background;
+
                     &:nth-child(1) {
                       transform: rotate(45deg);
                     }
+
                     &:nth-child(2) {
                       transform: rotate(-45deg);
                     }
                   }
                 }
               }
+
               &.download {
                 &.no-one-selected {
+                  box-shadow: none;
                   pointer-events: none;
                   background: darken($background, 10%);
                 }
@@ -204,6 +231,7 @@
             }
           }
         }
+
         .bottom-panel-wrapper {
           position: relative;
           display: flex;
@@ -213,17 +241,20 @@
           height: 100%;
           padding: 0 20px;
           background: #2a2a2af2;
+
           .pix-per-page {
             .button {
               padding: 0;
               margin: 0;
               height: 40px;
               width: 40px;
+
               .label {
                 font-size: 14px;
               }
             }
           }
+
           .paginator {
             display: flex;
             justify-content: center;
@@ -232,6 +263,7 @@
             font: 500 14px/18px $fontMain;
             text-shadow: 1px 1px 2px #1d1d1d;
             color: $background;
+
             .btn-page {
               position: relative;
               display: flex;
@@ -253,14 +285,17 @@
               box-shadow: 2px 2px 6px 0 #1d1d1d;
               font: 500 14px/18px $fontMain;
               text-align: center;
+
               &:hover, &.active {
                 background: #212121;
               }
+
               span.icon {
                 display: block;
                 position: relative;
                 height: 100%;
                 width: 10px;
+
                 span {
                   position: absolute;
                   width: 10px;
@@ -269,55 +304,69 @@
                   left: calc(50% - 5px);
                   border-radius: 2px;
                   background: $background;
+
                   &:nth-child(1) {
                     transform: rotate(45deg);
                   }
+
                   &:nth-child(2) {
                     transform: rotate(-45deg);
                   }
                 }
               }
+
               &.backward {
                 left: 0;
+
                 .icon {
                   span {
                     &:nth-child(1) {
                       top: calc(50% + 2px);
                     }
+
                     &:nth-child(2) {
                       top: calc(50% - 4px);
                     }
                   }
                 }
               }
+
               &.forward {
                 right: 0;
+
                 .icon {
                   span {
                     &:nth-child(1) {
                       top: calc(50% - 4px);
                     }
+
                     &:nth-child(2) {
                       top: calc(50% + 2px);
                     }
                   }
                 }
               }
+
               &:hover {
                 background: lighten($dark, 10%);
               }
             }
+
             .pages {
               padding: 0 10px;
               user-select: none;
-              .page-total {}
+
+              .page-total {
+              }
             }
           }
+
           .download {
             width: 50px;
             display: flex;
             align-items: center;
             justify-content: flex-end;
+
             .select {
               position: relative;
               right: -5px;
@@ -330,7 +379,7 @@
               mask-image: url("../../../../assets/images/save.svg");
               mask-size: cover;
               background: #1d1d1d;
-              box-shadow: 2px 2px 6px 0 #1d1d1d;
+              //box-shadow: 2px 2px 6px 0 #1d1d1d;
               &:hover, &.active {
                 background: #212121;
               }
@@ -340,13 +389,14 @@
       }
     }
 
-    &.loader  {
+    &.loader {
       position: absolute;
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+
       span {
         font: 500 22px/24px $fontMain;
         text-align: center;
@@ -361,6 +411,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
       .pr {
         position: relative;
         width: 100%;
@@ -369,8 +420,12 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        &.pr-nobody {}
-        &.pr-authorized {}
+
+        &.pr-nobody {
+        }
+
+        &.pr-authorized {
+        }
 
         .icon-lock {
           cursor: pointer;
@@ -380,6 +435,7 @@
           mask-size: 100%;
           background: $background;
         }
+
         .alert {
           margin-top: 40px;
           font: 500 22px/24px $fontMain;
@@ -397,20 +453,26 @@
     .main {
       .user-info {
         padding: 0 16px;
-        .user-info-avatar {}
+
+        .user-info-avatar {
+        }
+
         .user-info-main {
           margin-left: 15px;
+
           .name {
             font: 500 16px/18px $fontMain;
           }
         }
+
         .user-info-album-size {
           flex: 1;
           margin-top: 5px;
-          font: 500 54px/60px Roboto,sans-serif;
+          font: 500 54px/60px Roboto, sans-serif;
           text-align: right;
         }
       }
+
       .gallery {
         .pixies {
           .pix {
@@ -421,6 +483,7 @@
 
         .bottom-panel {
           font: 500 14px/20px $fontMain;
+
           .paginator {
             .btn-page {
               width: 30px;
