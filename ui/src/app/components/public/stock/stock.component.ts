@@ -68,6 +68,8 @@ export class StockComponent implements OnInit, OnDestroy {
             if (this.selfStock || (this.user.sysAccessRights === 1)) {
               this.allowDownload = true;
             }
+          }
+          if (store && store.stockUser) {
             if (this.stockUser.privacyDownloadable === 3 && !this.selfStock) {
               this.allowDownload = false;
             }
