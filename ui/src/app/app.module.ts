@@ -1,8 +1,10 @@
-import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { SafePipe } from './pipes/safe.pipe';
+import { CustomHammerConfig } from './app-hummerjs.config';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from './app-interceptor.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -19,8 +21,6 @@ import { ChartComponent } from './components/main/chart/chart.component';
 import { ViewerComponent } from './components/shared/viewer/viewer.component';
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
 import { MenuComponent } from './components/shared/sidebar/content/menu/menu.component';
-
-import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -52,6 +52,10 @@ import { SafePipe } from './pipes/safe.pipe';
   ],
   providers: [
     SafePipe,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: CustomHammerConfig,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
