@@ -20,14 +20,15 @@
     </h2>
 
     <div class="btn-block">
-      <div class="button login"
-           [ngClass]="{'off-first-child': state === StateEnum.error}"
-           *ngIf="state === StateEnum.auth"
-      >
+      <div class="button login" *ngIf="state === StateEnum.auth">
         <div class="btn-label">Group</div>
         <a href="https://vk.com/pixcollector" target="_blank" rel="noopener noreferrer"> </a>
       </div>
-      <div class="button login" *ngIf="(state === StateEnum.auth) || (state === StateEnum.error)" (click)="loginVk()">
+      <div class="button login"
+           *ngIf="(state === StateEnum.auth) || (state === StateEnum.error)"
+           [ngClass]="{'off-first-child': state === StateEnum.error}"
+           (click)="loginVk()"
+      >
         <div class="btn-label" *ngIf="state === StateEnum.auth">Login with</div>
         <div class="btn-label" *ngIf="state === StateEnum.error">Login again</div>
         <div class="btn-logo logo-vk"></div>
