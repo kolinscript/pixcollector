@@ -22,6 +22,7 @@ export enum KEY_CODE {
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
+  touchDevise: boolean;
   href: string;
   message: boolean = false;
   messageText: String = '';
@@ -52,6 +53,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.href = this.viewerPix.url;
+    this.touchDevise = this.isTouchDevice();
     this.activateControlView();
   }
 
@@ -78,6 +80,10 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
 
   public slide(direction: 'left' | 'right'): void {
     this.slideTo.emit(direction);
+  }
+
+  public swipe(direction): void {
+    console.log('SWIPE DIRECTION: ', direction);
   }
 
   public closeViewer(): void {
@@ -112,6 +118,15 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
         this.messageText = 'Success!';
       }
     });
+  }
+
+  private isTouchDevice(): boolean {
+    try {
+      document.createEvent("TouchEvent");
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   private activateControlView() {

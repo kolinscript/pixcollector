@@ -23,6 +23,12 @@
         <span></span>
         <span></span>
       </div>
+      <div class="touch-ui"
+           *ngIf="touchDevise"
+           (swipeleft)="swipe($event.type)"
+           (swiperight)="swipe($event.type)"
+      >
+      </div>
       <div class="close"
            *ngIf="controlsViewed"
            (click)="closeViewer()"
