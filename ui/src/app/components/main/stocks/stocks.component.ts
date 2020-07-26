@@ -23,28 +23,17 @@ export class StocksComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loader = true;
-    this.userService.getUser(this.vkId).subscribe(user => {
-      if (user.body.user) {
-        this.storeService.setStore({user: this.user});
-        this.store = this.storeService.storeObservable.subscribe((store) => {
-          if (store && store.user) {
-            this.user = store.user;
-          }
-        });
+    this.store = this.storeService.storeObservable.subscribe((store) => {
+      this.loader = false;
+      if (store && store.user) {
+        this.user = store.user;
+        this.vkId = store.user.vkId;
       }
-      if (user.body.error) {
-        if (user.body.error.code === 0) {
-          localStorage.clear();
-          this.router.navigate(['/auth']);
-        }
-      }
-    })
+    });
   }
 
   ngOnDestroy() {
-    if (this.store) {
-      this.store.unsubscribe();
-    }
+    this.store.unsubscribe();
   }
 
   public goToStock(dest): void {
