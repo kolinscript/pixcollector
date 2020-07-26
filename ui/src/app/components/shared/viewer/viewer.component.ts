@@ -89,12 +89,12 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
     this.slideTo.emit(direction);
   }
 
-  public swipe(action: string): void {
-    console.log('SWIPE DIRECTION: ', action);
-    if (action === SWIPE_ACTION.RIGHT) {
+  public swipe(event: string): void {
+    console.log('SWIPE event: ', event);
+    if (event['type'] === SWIPE_ACTION.RIGHT) {
       this.slide('right');
     }
-    if (action === SWIPE_ACTION.LEFT) {
+    if (event['type'] === SWIPE_ACTION.LEFT) {
       this.slide('left');
     }
   }
