@@ -78,6 +78,10 @@ export class StockComponent implements OnInit, OnDestroy {
             }
           }
         });
+        this.stockUser.pixArray.forEach((pix) => {
+          pix.hovered = false;
+          pix.selected = false;
+        });
       }
       if (user.body.error) {
         if (user.body.error.code === 2) {
@@ -91,10 +95,6 @@ export class StockComponent implements OnInit, OnDestroy {
           this.privacyVisible = 0;
         }
       }
-      this.stockUser.pixArray.forEach((pix) => {
-        pix.hovered = false;
-        pix.selected = false;
-      });
       this.calculateLastPage();
       this.calculateViewport();
     });

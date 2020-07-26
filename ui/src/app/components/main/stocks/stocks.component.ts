@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { StoreService } from '../../../services/store.service';
 import { UserService } from '../../../services/user.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-stocks',
@@ -13,7 +12,6 @@ import { map } from 'rxjs/operators';
 export class StocksComponent implements OnInit, OnDestroy {
   public loader: boolean;
   public vkId: string = null;
-  public adTools: boolean;
   private user;
   private store: Subscription;
 
@@ -44,7 +42,9 @@ export class StocksComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.unsubscribe();
+    if (this.store) {
+      this.store.unsubscribe();
+    }
   }
 
   public goToStock(dest): void {

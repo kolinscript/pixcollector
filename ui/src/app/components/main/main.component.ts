@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { SideBarService } from '../../services/side-bar.service';
 import { ShadowInOut } from '../../animations';
 
 @Component({
