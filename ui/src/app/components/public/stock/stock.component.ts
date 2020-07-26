@@ -86,6 +86,9 @@ export class StockComponent implements OnInit, OnDestroy {
         } else if (user.body.error.code === 3) {
           this.private = true;
           this.privacyVisible = 3;
+        } else if (user.body.error.code === 0) {
+          this.private = true;
+          this.privacyVisible = 0;
         }
       }
       this.stockUser.pixArray.forEach((pix) => {

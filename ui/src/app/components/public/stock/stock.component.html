@@ -126,6 +126,14 @@
         <div class="btn-label">Authorize</div>
       </div>
     </div>
+
+    <div class="pr pr-authorized" *ngIf="privacyVisible === 0">
+      <div class="icon-lock"></div>
+      <div class="alert">User does not exist.</div>
+      <div class="button login" [routerLink]="['/auth']">
+        <div class="btn-label">Go to auth</div>
+      </div>
+    </div>
   </div>
 
 <!--  <div class="loader"></div>-->

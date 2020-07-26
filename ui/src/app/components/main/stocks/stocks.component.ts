@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { StoreService } from '../../../services/store.service';
 import { UserService } from '../../../services/user.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-stocks',
@@ -24,13 +25,22 @@ export class StocksComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loader = true;
-    this.store = this.storeService.storeObservable.subscribe((store) => {
-      this.loader = false;
-      if (store && store.user) {
-        this.user = store.user;
-        this.vkId = store.user.vkId;
+    this.userService.getUser(this.vkId).subscribe(user => {
+      if (user.body.user) {
+        this.storeService.setStore({user: this.user});
+        this.store = this.storeService.storeObservable.subscribe((store) => {
+          if (store && store.user) {
+            this.user = store.user;
+          }
+        });
       }
-    });
+      if (user.body.error) {
+        if (user.body.error.code === 0) {
+          localStorage.clear();
+          this.router.navigate(['/auth']);
+        }
+      }
+    })
   }
 
   ngOnDestroy() {
