@@ -20,7 +20,10 @@
     </h2>
 
     <div class="btn-block">
-      <div class="button login" *ngIf="state === StateEnum.auth">
+      <div class="button login"
+           [ngClass]="{'off-first-child': state === StateEnum.error}"
+           *ngIf="state === StateEnum.auth"
+      >
         <div class="btn-label">Group</div>
         <a href="https://vk.com/pixcollector" target="_blank" rel="noopener noreferrer"> </a>
       </div>

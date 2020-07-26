@@ -110,6 +110,12 @@
           margin-right: 20px;
           width: 80px;
         }
+        &.off-first-child {
+          &:first-child {
+            margin-right: 0;
+            width: 180px;
+          }
+        }
       }
     }
 
