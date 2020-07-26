@@ -41,11 +41,12 @@
           width: auto;
           margin: 0 auto;
           padding: 5px 10px;
-          background: $background;
           border-radius: 8px;
           font: 500 14px/20px $fontMain;
           text-align: center;
-          color: #cacaca;
+          color: #adadad;
+          background: #1d1d1d;
+          box-shadow: 2px 2px 6px 0 #1d1d1d;
         }
       }
 
@@ -59,10 +60,12 @@
         mask-image: url('../../../../assets/images/close.svg');
         mask-size: 100%;
         transition: background 200ms;
-        background: $background;
+        color: #adadad;
+        background: #1d1d1d;
+        box-shadow: 2px 2px 6px 0 #1d1d1d;
 
         &:hover {
-          background: lighten($dark, 10%);
+          background: #212121;
         }
       }
 
@@ -171,10 +174,11 @@
             cursor: pointer;
             user-select: none;
             padding: 5px 10px;
-            background: $background;
             border-radius: 8px;
             font: 500 14px/20px $fontMain;
-            color: #cacaca;
+            color: #adadad;
+            background: #1d1d1d;
+            box-shadow: 2px 2px 6px 0 #1d1d1d;
           }
         }
 
@@ -189,7 +193,8 @@
           mask-image: url("../../../../assets/images/heart.svg");
           mask-size: cover;
           -webkit-mask-size: cover;
-          background: $background
+          background: #1d1d1d;
+          box-shadow: 2px 2px 6px 0 #1d1d1d;
         }
       }
 
