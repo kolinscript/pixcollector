@@ -25,7 +25,8 @@
       </div>
       <div class="touch-ui"
            *ngIf="touchDevise"
-           (swipe)="swipe($event)"
+           (swipeleft)="swipe($event)"
+           (swiperight)="swipe($event)"
       >
       </div>
       <div class="close"
