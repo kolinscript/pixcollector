@@ -6,7 +6,7 @@
         <div class="message" *ngIf="message">{{messageText}}</div>
       </div>
       <div class="slide left"
-           *ngIf="controlsViewed"
+           *ngIf="controlsViewed && !touchDevise"
            (click)="slide('left')"
            (mouseenter) ="mouseEnter()"
            (mouseleave) ="mouseLeave()"
@@ -15,7 +15,7 @@
         <span></span>
       </div>
       <div class="slide right"
-           *ngIf="controlsViewed"
+           *ngIf="controlsViewed && !touchDevise"
            (click)="slide('right')"
            (mouseenter) ="mouseEnter()"
            (mouseleave) ="mouseLeave()"

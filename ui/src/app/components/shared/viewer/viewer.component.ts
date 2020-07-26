@@ -18,7 +18,8 @@ export enum KEY_CODE {
 
 export enum SWIPE_ACTION {
   LEFT = 'swipeleft',
-  RIGHT = 'swiperight'
+  RIGHT = 'swiperight',
+  UP = 'swipeup'
 }
 
 @Component({
@@ -90,10 +91,13 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   public swipe(event: string): void {
     console.log('SWIPE event: ', event);
     if (event['type'] === SWIPE_ACTION.RIGHT) {
-      this.slide('right');
+      this.slide('left');
     }
     if (event['type'] === SWIPE_ACTION.LEFT) {
-      this.slide('left');
+      this.slide('right');
+    }
+    if (event['type'] === SWIPE_ACTION.UP) {
+      this.closeViewer();
     }
   }
 
@@ -108,10 +112,12 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
       if (res.body.data.error && res.body.data.error.error_msg) {
         this.message = true;
         this.messageText = res.body.data.error.error_msg;
+        setTimeout(() => (this.message = false), 4200);
       }
       if (res.body.data.response.likes) {
         this.message = true;
         this.messageText = 'Success!';
+        setTimeout(() => (this.message = false), 4200);
       }
     });
   }
@@ -123,10 +129,12 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
       if (res.body.data.error && res.body.data.error.error_msg) {
         this.message = true;
         this.messageText = res.body.data.error.error_msg;
+        setTimeout(() => (this.message = false), 4200);
       }
       if (res.body.data.response) {
         this.message = true;
         this.messageText = 'Success!';
+        setTimeout(() => (this.message = false), 4200);
       }
     });
   }
