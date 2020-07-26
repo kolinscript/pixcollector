@@ -20,7 +20,7 @@
     </h2>
 
     <div class="btn-block">
-      <div class="button login">
+      <div class="button login" *ngIf="state === StateEnum.auth">
         <div class="btn-label">Group</div>
         <a href="https://vk.com/pixcollector" target="_blank" rel="noopener noreferrer"> </a>
       </div>
@@ -31,11 +31,11 @@
       </div>
     </div>
 
-    <h3 class="made-by">
-      <span class="code" role="img" aria-label="Made">👨‍💻</span>
-      by Nikolai Koshkarov with
-      <span class="love" role="img" aria-label="love">❤</span>
-    </h3>
+<!--    <h3 class="made-by">-->
+<!--      <span class="code" role="img" aria-label="Made">👨‍💻</span>-->
+<!--      by Nikolai Koshkarov with-->
+<!--      <span class="love" role="img" aria-label="love">❤</span>-->
+<!--    </h3>-->
     <app-footer></app-footer>
   </div>
 </div>

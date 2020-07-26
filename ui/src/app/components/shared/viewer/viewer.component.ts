@@ -16,6 +16,11 @@ export enum KEY_CODE {
   LEFT_ARROW = 'ArrowLeft'
 }
 
+export enum SWIPE_ACTION {
+  LEFT = 'swipeleft',
+  RIGHT = 'swiperight'
+}
+
 @Component({
   selector: 'app-viewer',
   templateUrl: './viewer.component.html',
@@ -54,6 +59,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.href = this.viewerPix.url;
     this.touchDevise = this.isTouchDevice();
+    console.log('touchDevise? ', this.touchDevise);
     this.activateControlView();
   }
 
@@ -82,8 +88,14 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
     this.slideTo.emit(direction);
   }
 
-  public swipe(direction): void {
-    console.log('SWIPE DIRECTION: ', direction);
+  public swipe(action: string): void {
+    console.log('SWIPE DIRECTION: ', action);
+    if (action === SWIPE_ACTION.RIGHT) {
+      this.slide('right');
+    }
+    if (action === SWIPE_ACTION.LEFT) {
+      this.slide('left');
+    }
   }
 
   public closeViewer(): void {
@@ -121,12 +133,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private isTouchDevice(): boolean {
-    try {
-      document.createEvent("TouchEvent");
-      return true;
-    } catch (e) {
-      return false;
-    }
+    return 'ontouchstart' in window || !!navigator.msMaxTouchPoints;
   }
 
   private activateControlView() {
