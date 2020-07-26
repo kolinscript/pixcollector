@@ -46,7 +46,7 @@
         </div>
         <div class="bottom-panel-popup downloads" *ngIf="selectMode" [@slideUpDown]>
           <a class="button select-all" (click)="selectAll()">
-            <div class="btn-label"><span *ngIf="!selectAllPix">Select all</span><span *ngIf="selectAllPix">Unselect</span></div>
+            <div class="btn-label"><span *ngIf="!selectAllPix">Select all</span><span *ngIf="selectAllPix">Deselect</span></div>
           </a>
           <a class="button selected">
             <div class="deselect" *ngIf="selectedAmount > 0" (click)="deselectClickHandler()">
