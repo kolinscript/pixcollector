@@ -253,7 +253,9 @@
               box-shadow: 2px 2px 6px 0 #1d1d1d;
               font: 500 14px/18px $fontMain;
               text-align: center;
-              color: $background;
+              &:hover, &.active {
+                background: #212121;
+              }
               span.icon {
                 display: block;
                 position: relative;
@@ -266,7 +268,7 @@
                   top: 50%;
                   left: calc(50% - 5px);
                   border-radius: 2px;
-                  background: $dark;
+                  background: $background;
                   &:nth-child(1) {
                     transform: rotate(45deg);
                   }
@@ -316,8 +318,6 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            background: #1d1d1d;
-            box-shadow: 2px 2px 6px 0 #1d1d1d;
             .select {
               position: relative;
               right: -5px;
@@ -329,9 +329,10 @@
               height: 48px;
               mask-image: url("../../../../assets/images/save.svg");
               mask-size: cover;
-              background: $background;
+              background: #1d1d1d;
+              box-shadow: 2px 2px 6px 0 #1d1d1d;
               &:hover, &.active {
-                background: lighten($dark, 10%);
+                background: #212121;
               }
             }
           }

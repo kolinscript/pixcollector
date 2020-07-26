@@ -59,7 +59,8 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.href = this.viewerPix.url;
     this.touchDevise = this.isTouchDevice();
-    console.log('touchDevise? ', this.touchDevise);
+    this.message = true;
+    this.messageText = `touchDevise - ${this.touchDevise}`;
     this.activateControlView();
   }
 
