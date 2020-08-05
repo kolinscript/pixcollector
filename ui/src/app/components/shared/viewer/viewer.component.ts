@@ -19,7 +19,8 @@ export enum KEY_CODE {
 export enum SWIPE_ACTION {
   LEFT = 'swipeleft',
   RIGHT = 'swiperight',
-  UP = 'swipeup'
+  UP = 'swipeup',
+  DOWN = 'swipedown'
 }
 
 @Component({
@@ -97,6 +98,9 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
       this.slide('right');
     }
     if (event['type'] === SWIPE_ACTION.UP) {
+      this.closeViewer();
+    }
+    if (event['type'] === SWIPE_ACTION.DOWN) {
       this.closeViewer();
     }
   }
